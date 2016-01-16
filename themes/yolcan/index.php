@@ -20,7 +20,7 @@
 
 			<div class="[ row ][ visible-xs ]">
 				<!-- banner	movil-->
-				<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('img/IMG_1023.jpg');">
+				<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/IMG_1023.jpg');">
 					<h2 class="[ no-margin ]">Canastas de verduras y frutas organicas a domicilio</h2>
 					<div class="[ btn-absolute-bottom ]">
 						<div class="[ text-center ]" >
@@ -29,7 +29,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('img/_DSC0010.jpg');">
+				<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/_DSC0010.jpg');">
 					<h2 class="[ no-margin ]">Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 					<div class="[ text-center ]" >
 						<div class="[ btn-absolute-bottom ]">
@@ -41,7 +41,7 @@
 			<div class="[ row ][ hidden-xs ]">
 				<!-- banner	desktop -->
 				<div class="[ col-sm-6 ]">
-					<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('img/IMG_1023.jpg');">
+					<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/IMG_1023.jpg');">
 						<h2>Canastas de verduras y frutas organicas a domicilio</h2>
 						<div class="[ btn-absolute-bottom ]">
 							<div class="[ text-center ]" >
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div class="[ col-sm-6 ]">
-					<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('img/_DSC0010.jpg');">
+					<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/_DSC0010.jpg');">
 						<h2>Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 						<div class="[ text-center ]" >
 							<div class="[ btn-absolute-bottom ]">
@@ -66,21 +66,21 @@
 			<div class="[ row ][ margin-top ]">
 				<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 					<a href="#">
-						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('img/IMG_3547.jpg');">
+						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/IMG_3547.jpg');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]">Una entrada</h2>
 						</div>
 					</a>
 				</div>
 				<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 					<a href="#">
-						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('img/IMG_4932.jpg');">
+						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/IMG_4932.jpg');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]">Una receta</h2>
 						</div>
 					</a>
 				</div>
 				<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 					<a href="#">
-						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('img/cilantro.jpg');">
+						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>/images/cilantro.jpg');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]">Un sabor</h2>
 						</div>
 					</a>
@@ -360,8 +360,5 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
-
-
-
 
 <?php get_footer(); ?>
