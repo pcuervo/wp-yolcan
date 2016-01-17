@@ -8,7 +8,7 @@
 		/**
 		 * home
 		**/
-		if (is_home == 1) {
+		if (is_home == 1 || is_conocenos == 1) {
 			/**
 			 * On ready
 			**/
@@ -63,6 +63,8 @@
 			var piechart = new Chart(ctx).Pie(data);
 
 		};
+
+		init_masonry();
 
 		
 

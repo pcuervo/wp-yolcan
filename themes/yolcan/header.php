@@ -25,11 +25,11 @@
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
 
-		<!-- Typekit -->
-		<script src="https://use.typekit.net/upn0scl.js"></script> 
-		<script>try{Typekit.load({ async: true });}catch(e){}</script>
-
 		<?php wp_head(); ?>
+
+		<!-- Typekit -->
+		<script src="https://use.typekit.net/upn0scl.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
 	</head>
 
 	<body>
@@ -38,7 +38,7 @@
 				<div class="[ row ]">
 					<div class="[ col-xs-6 ]">
 						<h1 class="[ no-margin-top-bottom ]">
-							<a title="Yolcan" href="index.html" id="logo">
+							<a title="Yolcan" href="<?php echo site_url('/'); ?>" id="logo">
 								<span class="[ hidden ]">Yolcan</span>
 								<img class="[ width-logo ]" alt="Yolcan" src="<?php echo THEMEPATH; ?>images/logo.svg">
 							</a>
@@ -85,8 +85,8 @@
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ padding ]">
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--orange ]" href="nuestros-productos.html"><strong>Productos</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="conocenos.html"><strong>Conócenos</strong></a></li>
+												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--orange ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><strong>Productos</strong></a></li>
+												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="<?php echo site_url('/conocenos/'); ?>"><strong>Conócenos</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="recetas.html"><strong>Recetas</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--pink ]" href="visitanos.html"><strong>Visitas</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="contactanos.html"><strong>Contáctanos</strong></a></li>
@@ -109,8 +109,8 @@
 				<!-- menu desktop -->
 				<nav class="[ row ][ hidden-xs ]" >
 					<div class="[ col-sm-12 ]">
-						<a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][  ][ inline-block ]" href="nuestros-productos.html"><div class="[ border-bottom--orange ]">Productos</div>
-						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="conocenos.html"><div class="[ border-bottom--green ]">Conócenos</div>
+						<a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][  ][ inline-block ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><div class="[ border-bottom--orange ]">Productos</div>
+						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/conocenos/'); ?>"><div class="[ border-bottom--green ]">Conócenos</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="recetas.html"><div class="[ border-bottom--blue ]">Recetas</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="visitanos.html"><div class="[ border-bottom--pink ]">Visitas</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="contactanos.html"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>

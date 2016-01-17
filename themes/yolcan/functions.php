@@ -25,7 +25,7 @@
 
 		// scripts
 		wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
-		wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.jss', array('jquery'), '1.0', true );
+		wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 		wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
 		
@@ -33,6 +33,8 @@
 		// localize scripts
 		wp_localize_script( 'functions', 'ajax_url', admin_url('admin-ajax.php') );
 		wp_localize_script( 'functions', 'is_home', (string)is_home() );
+		wp_localize_script( 'functions', 'is_conocenos', (string)is_page('conocenos') );
+
 
 
 		
@@ -60,24 +62,6 @@
 
 
 
-// FRONT PAGE DISPLAYS A STATIC PAGE /////////////////////////////////////////////////
-
-
-
-	/*add_action( 'after_setup_theme', function () {
-		
-		$frontPage = get_page_by_path('home', OBJECT);
-		$blogPage  = get_page_by_path('blog', OBJECT);
-		
-		if ( $frontPage AND $blogPage ){
-			update_option('show_on_front', 'page');
-			update_option('page_on_front', $frontPage->ID);
-			update_option('page_for_posts', $blogPage->ID);
-		}
-	});*/
-
-
-
 // REMOVE ADMIN BAR FOR NON ADMINS ///////////////////////////////////////////////////
 
 
@@ -93,7 +77,7 @@
 
 
 	add_filter( 'admin_footer_text', function() {
-		echo 'Creado por <a href="http://hacemoscodigo.com">Los Maquiladores</a>. ';
+		echo 'Creado por <a href="http://pcuervo.com">Pequeño cuervo</a>. ';
 		echo 'Powered by <a href="http://www.wordpress.org">WordPress</a>';
 	});
 
@@ -109,14 +93,18 @@
 
 	if ( function_exists('add_image_size') ){
 		
-		// add_image_size( 'size_name', 200, 200, true );
+		add_image_size( 'img_blog', 305, 182, true );
 		
 		// cambiar el tamaño del thumbnail
-		/*
-		update_option( 'thumbnail_size_h', 100 );
-		update_option( 'thumbnail_size_w', 200 );
-		update_option( 'thumbnail_crop', false );
-		*/
+		
+		update_option( 'medium_size_h', 400 );
+		update_option( 'medium_size_w', 400 );
+		update_option( 'medium_crop', true );
+
+		update_option( 'large_size_h', 800 );
+		update_option( 'large_size_w', 450 );
+		update_option( 'large_crop', true );
+		
 	}
 
 
@@ -228,7 +216,7 @@
 	function attachment_image_url($post_id, $size){
 		$image_id   = get_post_thumbnail_id($post_id);
 		$image_data = wp_get_attachment_image_src($image_id, $size, true);
-		echo isset($image_data[0]) ? $image_data[0] : '';
+		return isset($image_data[0]) ? $image_data[0] : '';
 	}
 
 
