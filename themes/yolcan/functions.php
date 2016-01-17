@@ -32,6 +32,8 @@
 
 		// localize scripts
 		wp_localize_script( 'functions', 'ajax_url', admin_url('admin-ajax.php') );
+		wp_localize_script( 'functions', 'is_home', (string)is_home() );
+
 
 		
 

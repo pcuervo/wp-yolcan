@@ -8,59 +8,63 @@
 		/**
 		 * home
 		**/
+		if (is_home == 1) {
+			/**
+			 * On ready
+			**/
+			imgToSvg();
+			$('.js-video-wrapper').fitVids();
+			/**
+			 * Triggered events
+			**/
 
-		/**
-		 * On ready
-		**/
-		imgToSvg();
-		$('.js-video-wrapper').fitVids();
-		/**
-		 * Triggered events
-		**/
+			//Chart.js
 
-		//Chart.js
+			//#mycanvas
+			var ctx = $("#mycanvas").get(0).getContext("2d");
+			//pie chart data
+			//sum of values = 360
+			var data = [
+				{
+					value: 46,
+					color: "#f99134",
+					highlight: "#f96234",
+					label: "Local"
+				},
+				{
+					value: 54,
+					color: "#fff",
+					highlight: "#fff",
+					label: ""
+				}
+			];
+			//draw
+			var piechart = new Chart(ctx).Pie(data);
 
-		//#mycanvas
-		var ctx = $("#mycanvas").get(0).getContext("2d");
-		//pie chart data
-		//sum of values = 360
-		var data = [
-			{
-				value: 46,
-				color: "#f99134",
-				highlight: "#f96234",
-				label: "Local"
-			},
-			{
-				value: 54,
-				color: "#fff",
-				highlight: "#fff",
-				label: ""
-			}
-		];
-		//draw
-		var piechart = new Chart(ctx).Pie(data);
+			//#mycanvas1
+			var ctx = $("#mycanvas1").get(0).getContext("2d");
+			//pie chart data
+			//sum of values = 360
+			var data = [
+				{
+					value: 14,
+					color: "#c4681c",
+					highlight: "#c4681c",
+					label: "Macrotiendas"
+				},
+				{
+					value: 54,
+					color: "#fff",
+					highlight: "#fff",
+					label: ""
+				}
+			];
+			//draw
+			var piechart = new Chart(ctx).Pie(data);
 
-		//#mycanvas1
-		var ctx = $("#mycanvas1").get(0).getContext("2d");
-		//pie chart data
-		//sum of values = 360
-		var data = [
-			{
-				value: 14,
-				color: "#c4681c",
-				highlight: "#c4681c",
-				label: "Macrotiendas"
-			},
-			{
-				value: 54,
-				color: "#fff",
-				highlight: "#fff",
-				label: ""
-			}
-		];
-		//draw
-		var piechart = new Chart(ctx).Pie(data);
+		};
+
+		
 
 
 		function imgToSvg(){
