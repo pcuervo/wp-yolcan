@@ -35,6 +35,7 @@
 		wp_localize_script( 'functions', 'is_home', (string)is_home() );
 		wp_localize_script( 'functions', 'is_conocenos', (string)is_page('conocenos') );
 		wp_localize_script( 'functions', 'is_recetas', (string)is_post_type_archive('recetas') );
+		wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
 
 	});
 
@@ -98,8 +99,8 @@
 		update_option( 'medium_size_w', 400 );
 		update_option( 'medium_crop', true );
 
-		update_option( 'large_size_h', 800 );
-		update_option( 'large_size_w', 450 );
+		update_option( 'large_size_h', 450 );
+		update_option( 'large_size_w', 800 );
 		update_option( 'large_crop', true );
 		
 	}

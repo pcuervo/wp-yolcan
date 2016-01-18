@@ -5,6 +5,8 @@
 	$(function(){
 
 		imgToSvg();
+		init_masonry();
+		
 		/**
 		 * home
 		**/
@@ -64,7 +66,7 @@
 
 		};
 
-		init_masonry();
+		
 
 		if (is_recetas == 1) {
 			/*------------------------------------*\

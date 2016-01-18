@@ -212,10 +212,10 @@
 <div id="content">
 	<?php if ( have_posts() ) : 
 		while( have_posts() ) : the_post(); 
-		 	$url_img = attachment_image_url($post->ID, 'medium');?>
+		 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
 			<div class="[ box-content ]">
-				<a href="recetas-single.html">
+				<a href="<?php the_permalink() ?>">
 					<img alt="" src="<?php echo $url_img; ?>">
 					<p class=""><?php the_title(); ?></p>
 				</a>
@@ -230,9 +230,9 @@
 <section class="[ bg-gray ][ text-center ]">
 		<?php
 
-		if(has_previous_posts()): ?><div class="left"><?php previous_posts_link( '< Anteriores' ); ?></div><?php endif;
-		if(get_next_post()): ?><div class="right"><?php next_posts_link( 'Siguientes >' ); ?></div> <?php endif; ?>
-		
+		if(has_previous_posts()): ?><div class="left"><?php previous_posts_link( '< Anteriores' ); ?> </div><?php endif;
+		if(get_next_post()): ?><div class="right"> <?php next_posts_link( 'Siguientes >' ); ?></div> <?php endif; ?>
+
 		<!-- <ul class="[ pagination ][ no-margin ]">
 
 		<li>
