@@ -87,7 +87,7 @@
 											<ul class="[ padding ]">
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--orange ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><strong>Productos</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="<?php echo site_url('/conocenos/'); ?>"><strong>Conócenos</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="recetas.html"><strong>Recetas</strong></a></li>
+												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="<?php echo site_url('/recetas/'); ?>"><strong>Recetas</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--pink ]" href="visitanos.html"><strong>Visitas</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="contactanos.html"><strong>Contáctanos</strong></a></li>
 											</ul>
@@ -111,7 +111,7 @@
 					<div class="[ col-sm-12 ]">
 						<a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][  ][ inline-block ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><div class="[ border-bottom--orange ]">Productos</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/conocenos/'); ?>"><div class="[ border-bottom--green ]">Conócenos</div>
-						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="recetas.html"><div class="[ border-bottom--blue ]">Recetas</div>
+						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/recetas/'); ?>"><div class="[ border-bottom--blue ]">Recetas</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="visitanos.html"><div class="[ border-bottom--pink ]">Visitas</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="contactanos.html"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>
 					</div>

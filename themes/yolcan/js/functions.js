@@ -4,7 +4,7 @@
 
 	$(function(){
 
-
+		imgToSvg();
 		/**
 		 * home
 		**/
@@ -12,7 +12,7 @@
 			/**
 			 * On ready
 			**/
-			imgToSvg();
+			
 			$('.js-video-wrapper').fitVids();
 			/**
 			 * Triggered events
@@ -65,6 +65,41 @@
 		};
 
 		init_masonry();
+
+		if (is_recetas == 1) {
+			/*------------------------------------*\
+				#ON LOAD
+			\*------------------------------------*/
+			runMasonry('.results', '.result' );
+			setHeaderHeightPadding('.main-wrapper', 'top');
+
+			/*------------------------------------*\
+				#Triggered events
+			\*------------------------------------*/
+			$('.tab-filter').on('click', function(){
+				showFilters( this );
+			});
+
+			$('.filters__content .filter').on('click', function(){
+				addFilter( this );
+			});
+
+			$('.filters__results .filter').on('click', function(){
+				removeFilter( this );
+			});
+
+			$('.content-wrapper').scroll(function(){
+				fixedHeader();
+			});
+
+			/*------------------------------------*\
+				#RESPONSIVE
+			\*------------------------------------*/
+			$(window).resize(function(){
+				setHeaderHeightPadding('.main-wrapper', 'top');
+				setHeaderHeightPadding('.footer-wrapper', 'bottom');
+			});
+		};
 
 		
 
