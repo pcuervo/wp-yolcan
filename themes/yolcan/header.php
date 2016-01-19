@@ -63,7 +63,7 @@
 												<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
 												<li><a href="perfil.html">tu perfil</a></li>
 												<li><a href="cuenta.html">tu suscripción</a></li>
-												<li><a href="faq.html">faq</a></li>
+												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
 												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
 											</ul>
 										</div>
@@ -102,7 +102,7 @@
 						<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="perfil.html">tu perfil</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="cuenta.html">tu suscripción</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="faq.html">faq</a>
+						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
 					</div>
 				</div>

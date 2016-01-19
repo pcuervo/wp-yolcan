@@ -81,4 +81,35 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 		);
 		register_post_type( 'recetas', $args );
 
+		// RECETAS
+		$labels = array(
+			'name'          => 'Faq',
+			'singular_name' => 'Faq',
+			'add_new'       => 'Nueva faq',
+			'add_new_item'  => 'Nueva faq',
+			'edit_item'     => 'Editar faq',
+			'new_item'      => 'Nueva faq',
+			'all_items'     => 'Todas',
+			'view_item'     => 'Ver faq',
+			'search_items'  => 'Buscar faq',
+			'not_found'     => 'No se encontro',
+			'menu_name'     => 'Faq'
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'faq' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 6,
+			'supports'           => array( 'title', 'editor' )
+		);
+		register_post_type( 'faq', $args );
+
 	});
