@@ -278,3 +278,16 @@
 		$result = strlen(ob_get_contents());
 		ob_end_clean();
 	}
+
+	/**
+	 * EDITA EL FORMATO DE LA FECHA
+	 */
+	function getDateTransform($post_date){
+		$dia = substr($post_date, 8, 2);
+		$mes = substr($post_date, 5, 2);
+		$ano = substr($post_date, 0, 4);
+
+		$meses = array('01' => 'Enero', '02' => 'febrero', '03' => 'Marzo', '04' => 'abril', '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
+
+		return $meses[$mes].' '.$dia.', '.$ano;
+	}

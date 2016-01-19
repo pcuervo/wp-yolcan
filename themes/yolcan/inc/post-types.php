@@ -1,4 +1,16 @@
 <?php
+// RENAME THE DEFAULT POST TYPE
+
+function change_post_menu_label() {
+    global $menu, $submenu;
+
+    $menu[5][0] = 'Blog';
+    $submenu['edit.php'][5][0] = 'Blog';
+    $submenu['edit.php'][10][0] = 'Nueva Nota';
+    $submenu['edit.php'][16][0] = 'Blog Tags';
+    echo '';
+}
+add_action( 'admin_menu', 'change_post_menu_label' );
 
 
 // CUSTOM POST TYPES /////////////////////////////////////////////////////////////////
