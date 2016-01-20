@@ -33,7 +33,7 @@
 			<h2 class="[ no-margin ]">Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 			<div class="[ text-center ]" >
 				<div class="[ btn-absolute-bottom ]">
-					<a href="visitanos.html" ><button class="[ btn btn-secondary ]">visítanos</button></a>
+					<a href="<?php echo site_url('/visitanos/'); ?>" ><button class="[ btn btn-secondary ]">visítanos</button></a>
 				</div>
 			</div>
 		</div>

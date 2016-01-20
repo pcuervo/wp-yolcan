@@ -1,4 +1,6 @@
 <?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
+if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
+
 
 global $result;
 
@@ -324,6 +326,32 @@ global $result;
 				'%s'	
 			)
 		);
+
+		$result['success'] = 'Se envío el mensaje con exito';
+
+		return true;
+	}
+
+	/**
+	 * NUEVO CONTACTO
+	 * @param [type] $data [description]
+	 */
+	function setContacto($data){
+		global $result;
+
+		$content = '<p><strong>Teléfono: </strong>'.$data['correo_contacto'].'<p>';
+		$content .= '<p><strong>Correo: </strong>'.$data['telefono_contacto'].'<p>';
+		$content .= '<p><strong>Mensaje: </strong>'.$data['mensaje_contacto'].'<p>';
+	
+		$contact_new = array(
+		  'post_title'    => $data['nombre_contacto'],
+		  'post_content'  => $content,
+		  'post_status'   => 'publish',
+		  'post_type'     => 'contactos',
+		  'post_author'   => 1,
+		);
+
+		wp_insert_post( $contact_new );
 
 		$result['success'] = 'Se envío el mensaje con exito';
 

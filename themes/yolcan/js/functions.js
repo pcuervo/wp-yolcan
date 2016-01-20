@@ -370,12 +370,30 @@
 			var telefono = $('#telefono_visita').val();
 			var personas = $('#n_personas_visita').val();
 			var fecha = $('#fecha_visita').val();
-			
+
 
 			if (nombre == '' || email == '' || telefono == '' || personas == '' || fecha == '') {
 				alert('Favor de llenar todos los campos');
 			}else{
 				document.agendavisita.submit();
+			};
+
+		});
+
+
+		$('#formcontacto').on('submit', function(event){
+			event.preventDefault();
+
+			var nombre = $('#nombre_contacto').val();
+			var email = $('#correo_contacto').val();
+			var telefono = $('#telefono_contacto').val();
+			var mensaje = $('#mensaje_contacto').val();
+			
+
+			if (nombre == '' || email == '' || telefono == '' || mensaje == '' ) {
+				alert('Favor de llenar todos los campos');
+			}else{
+				document.formcontacto.submit();
 			};
 
 		});

@@ -89,7 +89,7 @@
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="<?php echo site_url('/conocenos/'); ?>"><strong>Conócenos</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="<?php echo site_url('/recetas/'); ?>"><strong>Recetas</strong></a></li>
 												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--pink ]" href="<?php echo site_url('/visitanos/'); ?>"><strong>Visitas</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="contactanos.html"><strong>Contáctanos</strong></a></li>
+												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="<?php echo site_url('/contactanos/'); ?>"><strong>Contáctanos</strong></a></li>
 											</ul>
 										</div>
 									</div>
@@ -113,7 +113,7 @@
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/conocenos/'); ?>"><div class="[ border-bottom--green ]">Conócenos</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/recetas/'); ?>"><div class="[ border-bottom--blue ]">Recetas</div>
 						</a><a class="[ color-primary-darken ][ width-20 ][ padding--right--xsmall ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/visitanos/'); ?>"><div class="[ border-bottom--pink ]">Visitas</div>
-						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="contactanos.html"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>
+						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/contactanos/'); ?>"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>
 					</div>
 				</nav>
 			</div> <!-- /container -->

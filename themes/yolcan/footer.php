@@ -33,7 +33,7 @@
 							<h3><em>Únete</em></h3>
 							<div class="[ margin-bottom ]">
 								<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
-								<a href="visitanos.html#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
+								<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 							</div>
 						</div>
 						<div class="[ col-sm-2 col-md-3 ]">
