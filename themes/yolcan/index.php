@@ -46,7 +46,7 @@
 				<div class="[ btn-absolute-bottom ]">
 					<div class="[ text-center ]" >
 						<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
-						<a href="conocenos.html" ><button class="[ btn btn-primary-darken ]">¿cómo funciona?</button></a>
+						<a href="<?php echo site_url('/conocenos/') ?>" ><button class="[ btn btn-primary-darken ]">¿cómo funciona?</button></a>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 				<h2>Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 				<div class="[ text-center ]" >
 					<div class="[ btn-absolute-bottom ]">
-						<a href="visitanos.html" ><button class="[ btn btn-secondary ]">visítanos</button></a>
+						<a href="<?php echo site_url('/visitanos/') ?>" ><button class="[ btn btn-secondary ]">visítanos</button></a>
 					</div>
 				</div>
 			</div>

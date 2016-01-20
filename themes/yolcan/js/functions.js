@@ -6,7 +6,7 @@
 
 		imgToSvg();
 		init_masonry();
-		
+
 		/**
 		 * home
 		**/
@@ -361,10 +361,24 @@
 		}
 
 
-		/*------------------------------------*\
-		    #RESPONSIVE
-		\*------------------------------------*/
 
+		$('#agenda-visita').on('submit', function(event){
+			event.preventDefault();
+
+			var nombre = $('#nombre_visita').val();
+			var email = $('#email_visita').val();
+			var telefono = $('#telefono_visita').val();
+			var personas = $('#n_personas_visita').val();
+			var fecha = $('#fecha_visita').val();
+			
+
+			if (nombre == '' || email == '' || telefono == '' || personas == '' || fecha == '') {
+				alert('Favor de llenar todos los campos');
+			}else{
+				document.agendavisita.submit();
+			};
+
+		});
 
 
 	});

@@ -1,5 +1,6 @@
-<?php
+<?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 
+global $result;
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
 
@@ -110,7 +111,7 @@
 // POST TYPES, METABOXES, TAXONOMIES AND CUSTOM PAGES ////////////////////////////////
 
 
-
+	
 	require_once('inc/post-types.php');
 
 
@@ -121,6 +122,9 @@
 
 
 	require_once('inc/pages.php');
+
+	require_once('inc/queries.php');
+
 	
 	
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
@@ -130,6 +134,10 @@
 	add_action( 'pre_get_posts', function($query){
 
 		if ( $query->is_main_query() and ! is_admin() ) {
+
+			if ( is_post_type_archive('faq') ) {
+				$query->set( 'posts_per_page', -1 );
+			}
 
 		}
 		return $query;
@@ -290,4 +298,34 @@
 		$meses = array('01' => 'Enero', '02' => 'febrero', '03' => 'Marzo', '04' => 'abril', '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
 
 		return $meses[$mes].' '.$dia.', '.$ano;
+	}
+
+	/**	
+	 * AGENDA VISITA
+	 */
+	function setAgendaVisita($data){
+		global $result;
+		global $wpdb;
+
+		$wpdb->insert(
+			$wpdb->prefix.'sitas_agendadas',
+			array(
+				'nombre'   => $data['nombre_visita'],
+				'correo'   => $data['email_visita'],
+				'telefono' => $data['telefono_visita'],
+				'numero_personas'  => $data['n_personas_visita'],
+				'fecha' => $data['fecha_visita']
+			),
+			array(
+				'%s',
+				'%s',
+				'%s',
+				'%d',
+				'%s'	
+			)
+		);
+
+		$result['success'] = 'Se envío el mensaje con exito';
+
+		return true;
 	}
