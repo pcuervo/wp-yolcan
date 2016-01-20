@@ -57,7 +57,7 @@ the_post(); ?>
 			<img class="[ svg icon--iconed--xxxlarge icon--thickness-1 icon--stoke ][ color-secondary ]" src="<?php echo THEMEPATH; ?>images/icons/chinampa.svg">
 			<p class="[ text-left ]">Ofrecemos canastas con productos orgánicos de temporada. son frutas y verduras orgánicas, producidos por Yolcan y su red de pequeños productores.</p>
 			<div class="[ col-xs-12 ]">
-				<a href="visitanos-html" class="[ btn btn-secondary ][ margin-bottom ]">visítanos</a>
+				<a href="<?php echo site_url('/visitanos/') ?>" class="[ btn btn-secondary ][ margin-bottom ]">visítanos</a>
 			</div>
 		</div>
 	</div>
