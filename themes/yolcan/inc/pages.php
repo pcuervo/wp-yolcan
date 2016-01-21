@@ -77,5 +77,37 @@
 			wp_insert_post( $page, true );
 		}
 
+		if( ! get_page_by_path('mi-carrito') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'Mi Carrito',
+				'post_name'   => 'mi-carrito',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
+
+		if( ! get_page_by_path('mi-cuenta') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'Mi Cuenta',
+				'post_name'   => 'mi-cuenta',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
+
+		if( ! get_page_by_path('checkout') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'Checkout',
+				'post_name'   => 'checkout',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
 
 	});
