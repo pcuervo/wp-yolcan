@@ -99,11 +99,20 @@
 			
 		</div>
 		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
-			<a href="#">
-				<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/cilantro.jpg');">
-					<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]">Un sabor</h2>
-				</div>
-			</a>
+			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'ingredientes' ), 'orderby' => 'rand' ) );
+
+			if ( $entrada->have_posts() ) :
+				while ( $entrada->have_posts() ) : 
+					$entrada->the_post();
+					$url_img = attachment_image_url($post->ID, 'large'); ?>
+					
+					<a href="<?php the_permalink() ?>">
+						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo $url_img; ?>');">
+							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]"><?php the_title(); ?></h2>
+						</div>
+					</a>
+				<?php endwhile;
+			endif; ?>
 		</div>
 	</div>
 </div> <!--/container-->

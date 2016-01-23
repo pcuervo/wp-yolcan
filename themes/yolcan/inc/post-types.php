@@ -13,6 +13,7 @@ function change_post_menu_label() {
 add_action( 'admin_menu', 'change_post_menu_label' );
 
 
+
 // CUSTOM POST TYPES /////////////////////////////////////////////////////////////////
 
 
@@ -144,3 +145,62 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 		register_post_type( 'contactos', $args );
 
 	});
+
+
+
+/**	
+ * SUBMENU EN INGREDIENTES
+ */
+add_action('admin_menu', 'register_submenu_page_ingredients');
+
+function register_submenu_page_ingredients() {
+	add_submenu_page( 'edit.php?post_type=ingredientes', 'Ingredientes de temporada', 'Ingredientes de temporada', 'manage_options', 'ingredientes-de-temporada', 'ingresients_submenu_page_callback' );
+}
+
+function ingresients_submenu_page_callback() {
+	if (isset($_POST['action']) AND $_POST['action'] == 'ingredientes-temporada') saveSeasonalIngredients($_POST);
+
+	$html = '<div class="wrap"><div id="icon-tools" class="icon32"></div>';
+		$html .= '<h2>Ingredientes de temporada</h2>';
+	$html .= '</div><br>';
+
+	$html .= '<div class="container-ingredients">';
+		$html .= '<form action="" method="POST">';
+
+			$ingredientes = new WP_Query( ['post_type' => 'ingredientes', 'posts_per_page' => -1] );
+				
+			if ( ! empty($ingredientes->posts) ) :
+				$activitisShip = orderIndexObject(getIngredientsShip(0));
+				
+			 	foreach ($ingredientes->posts as $ingrediente):
+			 		$checked = isset( $activitisShip[$ingrediente->ID] ) ? 'checked' : '';
+			 		$html .= '<div class="container-ingredient">';
+			 			$html .= '<input type="checkbox" name="ingredientesTemporada[]" id="ingredientesTemporada[]" value="'.$ingrediente->ID.'" '.$checked.' /> '.$ingrediente->post_name.' <br><br>';
+					$html .= '</div>';
+			 	endforeach;
+			endif;
+
+			$html .= '<input type="hidden" value="ingredientes-temporada" name="action" >';
+			$html .= '<input type="submit" value="Guardar" class="button-primary button-large button-clear" >';
+		$html .= '</form>';
+	$html .= '</div>';
+
+	echo $html;
+}
+
+
+/**	
+ * ACTUALIZA LOS INGREDIENTES DE TEMPORADA
+ * @param  [array] $data [description]
+ * @return [type]       [description]
+ */
+function saveSeasonalIngredients($data){
+	$ingredientes = isset($data['ingredientesTemporada']) ? $data['ingredientesTemporada'] : array();
+
+	if (!empty($ingredientes)):
+		destroyShipIngredients(0);
+		foreach ($ingredientes as $ingrediente):
+			storeShipIngredients(0, $ingrediente);
+		endforeach;
+	endif;
+}

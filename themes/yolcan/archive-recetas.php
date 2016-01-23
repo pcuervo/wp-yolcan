@@ -30,7 +30,19 @@
 <div class="[ container ]">
 	<div class="[ row ][ margin-bottom ]">
 		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<p>Esta temporada cocinamos con: <a href="#" class="[ color-secondary ][ underline ]">kale</a>, <a href="#" class="[ color-secondary ][ underline ]">nabo</a>, <a href="#" class="[ color-secondary ][ underline ]">jitomate</a>, <a href="#" class="[ color-secondary ][ underline ]">acelgas</a>, <a href="#" class="[ color-secondary ][ underline ]">durazno</a></p>
+			<?php $ingrTemporada = getIngredientsShip(0); ?>
+			<p>
+				Esta temporada cocinamos con: 
+				<?php if (! empty($ingrTemporada)): 
+					$TotIng = count($ingrTemporada) - 1;
+					foreach ($ingrTemporada as $key => $ingrediente):
+						$post_data = get_post($ingrediente->ingrediente_id);
+						$coma = $TotIng != $key ? ',' : ''; ?>
+						<a href="<?php echo site_url('recetas/?ingrediente=').$post_data->post_name; ?>" class="[ color-secondary ][ underline ]"><?php echo $post_data->post_title; ?></a><?php echo $coma; ?>
+					<?php endforeach; ?>
+					 
+				<?php endif; ?>
+			</p>
 		</div>
 	</div>
 </div>
@@ -203,7 +215,7 @@
 <section class="[ container ][ margin-bottom ]">
 	<div class="[ row ]">
 		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<h4 class="[ inline-block ]">Recetas con con:
+			<h4 class="[ inline-block ]">Recetas con:
 				<span class="[ inline-block ][ color-primary ]">Kale</span>
 			</h4>
 		</div>

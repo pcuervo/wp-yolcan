@@ -8,6 +8,8 @@
 	add_action('add_meta_boxes', function(){
 
 		add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
+		add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
+
 
 	});
 
@@ -41,6 +43,40 @@
 	}
 
 
+	function show_metabox_ingredientes_receta($post){
+		wp_nonce_field(__FILE__, 'ingredientes_nonce');
+
+		$ingredientes = new WP_Query( ['post_type' => 'ingredientes', 'posts_per_page' => -1] );
+		
+		if ( ! empty($ingredientes->posts) ) :
+			$activitisShip = orderIndexObject(getIngredientsShip($post->ID));
+			
+		 	foreach ($ingredientes->posts as $ingrediente):
+		 		$checked = isset( $activitisShip[$ingrediente->ID] ) ? 'checked' : '';?>
+
+		 		<input type="checkbox" name="ingredientes[]" id="ingredientes[]" value="<?php echo $ingrediente->ID ?>" <?php echo $checked; ?> /> <?php echo $ingrediente->post_name; ?><br><br>
+				
+		 	<?php endforeach;
+		endif;
+	}
+
+	/**
+	 * CAMBIAR INDEX DEL OBJETO POR EL ID DEL INGREDIENTE
+	 * @param  [type] $activities [description]
+	 * @return [type]             [description]
+	 */
+	function orderIndexObject($ingredients){
+		$array = array();
+		if(! empty($ingredients)):
+			foreach ($ingredients as $key => $ingredient) :
+				$array[$ingredient->ingrediente_id] = $ingredient;
+			endforeach;
+		endif;
+
+		return $array;
+	}
+
+
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
 
@@ -48,6 +84,7 @@
 
 	add_action('save_post', function($post_id){
 
+		if (isset($_POST['post_type']) AND $_POST['post_type'] == 'recetas') destroyShipIngredients($post_id);
 
 		if ( ! current_user_can('edit_page', $post_id)) 
 			return $post_id;
@@ -67,6 +104,15 @@
 			update_post_meta($post_id, 'nivel_de_preparacion', $_POST['nivel_de_preparacion']);
 			update_post_meta($post_id, 'pasos_preparacion', $_POST['pasos_preparacion']);
 			
+		}
+
+		if ( isset($_POST['ingredientes']) and check_admin_referer(__FILE__, 'ingredientes_nonce') ){
+		
+			if ( ! empty($_POST['ingredientes']) ){
+				foreach ($_POST['ingredientes'] as $ingredientes):
+					storeShipIngredients($post_id, $ingredientes);
+				endforeach;
+			}
 		}
 
 
