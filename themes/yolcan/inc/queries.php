@@ -68,3 +68,14 @@ function storeShipIngredients($post_id, $ingredient){
 
 	return $wpdb->insert_id;
 }
+
+
+function recipesByIngredient($ingrediente_id){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT p.* FROM {$wpdb->prefix}ingredients_relationships as ir
+			INNER JOIN {$wpdb->prefix}posts as p
+			ON ir.receta_id = p.ID
+			WHERE ingrediente_id = $ingrediente_id;", OBJECT );
+
+}

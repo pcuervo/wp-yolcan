@@ -211,60 +211,11 @@
 	</div><!-- /pusher -->
 </div><!-- /container -->
 
+<?php 
+if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
+	get_template_part('templates/recetas', 'ingrediente');
+else:
+	get_template_part('templates/recetas', 'archive');
+endif;
 
-<section class="[ container ][ margin-bottom ]">
-	<div class="[ row ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<h4 class="[ inline-block ]">Recetas con:
-				<span class="[ inline-block ][ color-primary ]">Kale</span>
-			</h4>
-		</div>
-	</div>
-</section>
-<div id="content">
-	<?php if ( have_posts() ) : 
-		while( have_posts() ) : the_post(); 
-		 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
-
-			<div class="[ box-content ]">
-				<a href="<?php the_permalink() ?>">
-					<img alt="" src="<?php echo $url_img; ?>">
-					<p class=""><?php the_title(); ?></p>
-				</a>
-			</div>
-
-		<?php endwhile;
-	endif; ?>
-	
-</div>
-
-<!-- pagination -->
-<section class="[ bg-gray ][ text-center ]">
-		<?php
-
-		if(has_previous_posts()): ?><div class="left"><?php previous_posts_link( '< Anteriores' ); ?> </div><?php endif;
-		if(get_next_post()): ?><div class="right"> <?php next_posts_link( 'Siguientes >' ); ?></div> <?php endif; ?>
-
-		<!-- <ul class="[ pagination ][ no-margin ]">
-
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-left-12.svg">
-			</a>
-		</li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">...</a></li>
-		<li><a href="#">11</a></li>
-		<li><a href="#">12</a></li>
-		<li><a href="#">13</a></li>
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-right-12.svg">
-			</a>
-		</li>
-	</ul> -->
-</section>
-
-<?php get_footer(); ?>
+get_footer(); ?>
