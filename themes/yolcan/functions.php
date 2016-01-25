@@ -30,6 +30,7 @@ global $result;
 		// scripts
 		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
+		wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js?sensor=false', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 		wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
@@ -41,6 +42,14 @@ global $result;
 		wp_localize_script( 'functions', 'is_conocenos', (string)is_page('conocenos') );
 		wp_localize_script( 'functions', 'is_recetas', (string)is_post_type_archive('recetas') );
 		wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
+
+		if ( is_home() ) {
+			$cc = get_page_by_path('clubes-de-consumo');
+			$clubes = get_post_meta($cc->ID, 'direcciones-clubes', true);
+			$direc_club = unserialize( $clubes );
+			wp_localize_script( 'functions', 'clubes', $direc_club );
+
+		}
 
 	});
 

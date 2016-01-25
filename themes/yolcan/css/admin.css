@@ -1,6 +1,7 @@
 .container-ingredient{position: relative;overflow: hidden;width: 16%;height: 30px;float: left; font-size: 14px;padding-top: 5px; margin-bottom: 5px;}
 .wp-core-ui .button-primary.button-clear{display: block; clear: both; float: none; margin-top: 10px;}
-
+.cont-direccion-clube{position: relative;overflow: hidden;width: 100%; min-height: 30px; line-height: 26px;}
+.eliminar-club{color: red; cursor: pointer; }
 @media (max-width: 1400px) {
 	.container-ingredient{width: 20%;}
 }

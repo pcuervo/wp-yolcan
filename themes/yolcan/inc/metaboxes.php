@@ -18,6 +18,10 @@
 		if ($post->post_name == 'contactanos'){
 			add_meta_box( 'meta-box-ubicacion', 'Ubicación', 'show_metabox_ubicacion', 'page', 'side', 'high');
 		}
+
+		if ($post->post_name == 'clubes-de-consumo'){
+			add_meta_box( 'meta-box-ubicaciones', 'Ubicaciones', 'show_metabox_ubicaciones', 'page');
+		}
 	});
 
 
@@ -133,6 +137,40 @@
 		echo '</div>';
 	}
 
+	function show_metabox_ubicaciones($post){
+		wp_nonce_field(__FILE__, '_ubicaciones_clubes_nonce');
+
+		$clubes = get_post_meta($post->ID, 'direcciones-clubes', true);
+		$direc_club = unserialize( $clubes );
+		$total = ! empty($direc_club) ? count($direc_club) + 1 : 1;
+
+		echo "<label for='ubicaciones_clubes' class='label-paquetes'>Ingresa la dirección: </label>";
+		echo "<input type='text' class='widefat' id='ubicaciones_clubes' name='ubicaciones_clubes' value=''/>";
+
+		echo "<input type='hidden' id='clube_n' name='clube_n' value='".$total."' >";
+		echo "<input type='hidden' id='clubes_d' name='clubes_d' value='' >";
+
+
+		echo '<br><br><div class="cont-ubicaciones">';
+			$html = '';
+			if ( ! empty($direc_club) ):
+				$count = 1;
+				foreach ($direc_club as $club):
+					$html = '<div class="cont-direccion-clube"><strong>Dirección:</strong> '.$club['name'];
+					$html .= '<input type="hidden" name="direcciones['.$count.'][name]" value="'.$club['name'].'">';
+					$html .= '<input type="hidden" name="direcciones['.$count.'][lat]" value="'.$club['lat'].'">';
+					$html .= '<input type="hidden" name="direcciones['.$count.'][long]" value="'.$club['long'].'">';
+					$html .= ' - <span class="eliminar-club">Eliminar</span>';
+					$html .= '</div>';
+					echo $html;
+					$count = $count + 1;
+				endforeach;
+			endif;
+
+			
+		echo '</div>';
+	}
+
 
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
@@ -140,7 +178,7 @@
 
 
 	add_action('save_post', function($post_id){
-
+	
 		if (isset($_POST['post_type']) AND $_POST['post_type'] == 'recetas') destroyShipIngredients($post_id);
 
 		if ( ! current_user_can('edit_page', $post_id)) 
@@ -182,6 +220,12 @@
 		if ( isset($_POST['latitud_contacto']) and check_admin_referer(__FILE__, '_latlong_nonce') ){
 			update_post_meta($post_id, 'latitud_contacto', $_POST['latitud_contacto']);
 			update_post_meta($post_id, 'longitud_contacto', $_POST['longitud_contacto']);
+		}
+
+
+
+		if ( isset($_POST['clubes_d']) and check_admin_referer(__FILE__, '_ubicaciones_clubes_nonce') ){
+			update_post_meta( $post_id, 'direcciones-clubes', serialize($_POST['direcciones']) );
 		}
 
 		

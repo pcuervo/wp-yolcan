@@ -22,11 +22,43 @@
 
 		};
 
+
+		if (document.getElementById("ubicaciones_clubes")) {
+			var autocomplete = new google.maps.places.Autocomplete($("#ubicaciones_clubes")[0], {});
+
+	        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+	        	var clube = $('#clube_n').val();
+	        	console.log(clube);
+
+	       	 	var place = autocomplete.getPlace();
+	       	 	var name  = $('#ubicaciones_clubes').val();
+	       	 	var lat   = place.geometry.location.lat();
+	       	 	var lng   = place.geometry.location.lng();
+
+	       	 	var html = '<div class="cont-direccion-clube"><strong>Dirección:</strong> '+name+
+	       	 			'<input type="hidden" name="direcciones['+clube+'][name]" value="'+name+'">'+
+	       	 			'<input type="hidden" name="direcciones['+clube+'][lat]" value="'+lat+'"> '+
+	       	 			'<input type="hidden" name="direcciones['+clube+'][long]" value="'+lng+'">'+
+	       	 			' - <span class="eliminar-club">Eliminar</span>'+
+	       	 		'</div>';
+
+	       	 	$('.cont-ubicaciones').append(html);
+
+	       	 	var coun = parseInt(clube) + parseInt(1);
+	       	 	$('#ubicaciones_clubes').val('');
+	       	 	clube = $('#clube_n').val(coun);
+
+	        });
+
+		};
+
+
+		$(document).on('click', '.eliminar-club', function(){
+			$(this).parent().remove();
+		});
+
+
 		
-
-		console.log('hola');
-
-
 	});
 
 })(jQuery);
