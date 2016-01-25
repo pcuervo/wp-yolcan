@@ -17,15 +17,13 @@ if( $my_posts ) :
 	
 	<div id="content">
 		<?php if (! empty($recetas) ): 
-			foreach ($recetas as $post): 
-				setup_postdata($post);
-   				the_post();
+			foreach ($recetas as $post):
 			 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
 				<div class="[ box-content ]">
-					<a href="<?php the_permalink() ?>">
+					<a href="<?php echo get_permalink($post->ID) ?>">
 						<img alt="" src="<?php echo $url_img; ?>">
-						<p class=""><?php the_title(); ?></p>
+						<p class=""><?php echo get_the_title($post->ID); ?></p>
 					</a>
 				</div>
 

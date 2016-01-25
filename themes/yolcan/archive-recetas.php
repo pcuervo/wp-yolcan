@@ -12,14 +12,17 @@
 	<div class="[ container ]">
 		<div class="[ row  ]">
 			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-				<div class="input-group">
-					<input type="text" class="[ form-control ][ input-search ][  ]">
-					<span class="[ input-group-btn ][  ]">
-						<button class="[ input-search--button ][ btn-secondary ][ no-margin padding--small ]" type="submit">
-							<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/search.svg">
-						</button>
-					</span>
-				</div>
+				<form>
+					<div class="input-group">
+						<input type="text" name="search" class="[ form-control ][ input-search ][  ]">
+						<span class="[ input-group-btn ][  ]">
+							<button class="[ input-search--button ][ btn-secondary ][ no-margin padding--small ]" type="submit">
+								<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/search.svg">
+							</button>
+						</span>
+						
+					</div>
+				</form>
 			</div>
 		</div>
 
@@ -214,6 +217,8 @@
 <?php 
 if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
 	get_template_part('templates/recetas', 'ingrediente');
+elseif(isset($_GET['search']) AND $_GET['search'] != ''):
+	get_template_part('templates/recetas', 'search');
 else:
 	get_template_part('templates/recetas', 'archive');
 endif;

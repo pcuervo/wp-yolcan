@@ -73,9 +73,14 @@ function storeShipIngredients($post_id, $ingredient){
 function recipesByIngredient($ingrediente_id){
 	global $wpdb;
 
-	return $wpdb->get_results( "SELECT p.* FROM {$wpdb->prefix}ingredients_relationships as ir
-			INNER JOIN {$wpdb->prefix}posts as p
-			ON ir.receta_id = p.ID
-			WHERE ingrediente_id = $ingrediente_id;", OBJECT );
+	return $wpdb->get_results( "SELECT receta_id as ID FROM sy_ingredients_relationships WHERE ingrediente_id = $ingrediente_id AND receta_id != 0;", OBJECT );
+
+}
+
+function recipesBySearch($search){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT ID FROM {$wpdb->prefix}posts 
+		WHERE post_type = 'recetas' AND post_status = 'publish' AND (post_title LIKE '%$search%' || post_content LIKE '%$search%');", OBJECT );
 
 }
