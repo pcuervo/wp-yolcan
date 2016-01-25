@@ -25,8 +25,10 @@ global $result;
 	add_action( 'wp_enqueue_scripts', function(){
 		// styles
 		wp_enqueue_style( 'styles', get_stylesheet_uri() );
+		wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
 
 		// scripts
+		wp_enqueue_script('jquery-ui-datepicker');
 		wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
@@ -51,10 +53,16 @@ global $result;
 	add_action( 'admin_enqueue_scripts', function(){
 
 		// scripts
+		wp_enqueue_script( 'api-google', 'http://maps.google.com/maps/api/js?sensor=false&libraries=places&language=en-AU', array('jquery'), '1.0', true );
 		wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
+
+		wp_enqueue_script( 'google-function', JSPATH.'google-autocomplete.js', array('api-google'), '1.0', true );
+		
 
 		// localize scripts
 		wp_localize_script( 'admin-js', 'ajax_url', admin_url('admin-ajax.php') );
+
+
 
 		// styles
 		wp_enqueue_style( 'admin-css', CSSPATH.'admin.css' );

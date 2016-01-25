@@ -4,6 +4,10 @@
 
 	$(function(){
 
+		jQuery('#fecha_visita').datepicker({
+	        dateFormat : 'yy-mm-dd'
+	    });
+
 		imgToSvg();
 		init_masonry();
 

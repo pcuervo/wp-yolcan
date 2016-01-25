@@ -44,7 +44,10 @@ if( isset( $result['success'] ) ): ?>
 		<div class="[ col-sm-6 ]">
 			<p class="[ lead ]">Aquí nos ubicamos</p>
 			<div class="[ width-100 ][ margin-bottom ] ">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen></iframe>
+				<?php $latitud_contacto = get_post_meta($post->ID, 'latitud_contacto', true);
+				$longitud_contacto = get_post_meta($post->ID, 'longitud_contacto', true); ?>
+				<iframe width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen src="https://maps.google.com/maps?q=<?php echo $latitud_contacto ?>,<?php echo $longitud_contacto ?>&hl=es;z=14&amp;output=embed"></iframe>
+				<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" ></iframe> -->
 			</div>
 		</div>
 	</section>
