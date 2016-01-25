@@ -153,7 +153,8 @@
 		</div>
 		<div class="[ col-xs-12 col-sm-5 ]">
 			<div class="[ margin-bottom ]">
-				<p> Texto explicativo Qua enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum mellius?</p>
+				<?php $cc = get_page_by_path('clubes-de-consumo');
+				echo wpautop($cc->post_content); ?>
 			</div>
 			<div class="[  ][ hidden-xs ]">
 				<div class="[ text-center ]">
