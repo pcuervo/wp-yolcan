@@ -185,34 +185,25 @@
 			<div class="[ col-xs-12 ]">
 				<h2>Beneficios</h2>
 			</div>
-			<div class="[ col-xs-12  col-sm-3 ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/apple-1.svg">
-					<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i>Productos frescos</i></h3>
-				</div>
-				<p>Contamos con una frescura inigualable ya que nuestros productos pasan menos de 24 horas desde que se cosechan, hasta que llegan a su destino final.</p>
-			</div>
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/salt-pepper-.svg">
-					<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i>Sabor</i></h3>
-				</div>
-				<p>El sabor auténtico es la calidad de primera debido a que utilizamos una muestra de sistemas tradicionales de cultivo, con técnicas de agricultura orgánica moderna.</p>
-			</div>
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/color-contrast-off.svg">
-					<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i>Libres de químicos</i></h3>
-				</div>
-				<p>Contamos con una frescura inigualable ya que nuestros productos pasan menos de 24 horas desde que se cosechan, hasta que llegan a su destino final.</p>
-			</div>
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]"src="<?php echo THEMEPATH; ?>images/icons/dining-set.svg">
-					<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i>Nutrición y Salud</i></h3>
-				</div>
-				<p>Los alimentos naturales tienen un mayor valor nutritivo (mayores porcentajes de vitaminas y minerales) ya que se producen respetando los tiempos de crecimiento, lo cual permite sintetizar los nutrientes des suelo y los azúcares.</p>
-			</div>
+			<?php $entrada = new WP_Query( array('posts_per_page' => 4, 'post_type' => array( 'beneficios' ) ) );
+
+			if ( $entrada->have_posts() ) :
+				while ( $entrada->have_posts() ) : 
+					$entrada->the_post();
+					$url_img = attachment_image_url($post->ID, 'full'); ?>
+					
+					<div class="[ col-xs-12 col-sm-3 ][ margin-bottom ]">
+						<div class="[ text-center ]">
+							<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>">
+							<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i><?php the_title(); ?></i></h3>
+						</div>
+						<?php the_content(); ?>
+					</div>
+				<?php endwhile;
+			endif; ?>
+			
+			
+			
 		</div>
 	</div>
 </div>

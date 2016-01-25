@@ -31,16 +31,16 @@ if( isset( $result['success'] ) ): ?>
 			<div class="[ row ][ text-center ]">
 				<div class="[ col-xs-3 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Costo</strong></p>
-					<p class="[ fz-16 ]">$2,000</p>
+					<p class="[ fz-16 ]"><?php echo get_post_meta($post->ID, 'costo_visita', true); ?></p>
 				</div>
 				<div class="[ col-xs-4 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Capacidad</strong></p>
-					<p class="[ fz-16 ]">10 personas</p>
+					<p class="[ fz-16 ]"><?php echo get_post_meta($post->ID, 'capasidad_visita', true); ?></p>
 				</div>
 				<div class="[ col-xs-5 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Persona extra</strong></p>
-					<p class="[ fz-16 ][ no-margin ]">$100 por niño</p>
-					<p class="[ fz-16 ]">$200 por adulto</p>
+					<p class="[ fz-16 ][ no-margin ]"><?php echo get_post_meta($post->ID, 'persona_extra_visita', true); ?></p>
+					<p class="[ fz-16 ]"><?php echo get_post_meta($post->ID, 'persona_extra_visita_2', true); ?></p>
 				</div>
 				<div class="[ visible-sm ][ margin-bottom ]"></div>
 			</div>

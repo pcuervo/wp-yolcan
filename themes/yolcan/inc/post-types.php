@@ -144,6 +144,37 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 		);
 		register_post_type( 'contactos', $args );
 
+		// BENEFICIOS
+		$labels = array(
+			'name'          => 'Beneficios',
+			'singular_name' => 'Beneficios',
+			'add_new'       => 'Nuevo Beneficio',
+			'add_new_item'  => 'Nuevo Beneficio',
+			'edit_item'     => 'Editar Beneficio',
+			'new_item'      => 'Nuevo Beneficio',
+			'all_items'     => 'Todos',
+			'view_item'     => 'Ver Beneficio',
+			'search_items'  => 'Buscar Beneficio',
+			'not_found'     => 'No se encontro',
+			'menu_name'     => 'Beneficios'
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'beneficios' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 6,
+			'supports'           => array( 'title', 'editor', 'thumbnail' )
+		);
+		register_post_type( 'beneficios', $args );
+
 	});
 
 

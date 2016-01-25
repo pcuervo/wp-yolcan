@@ -6,11 +6,14 @@
 
 
 	add_action('add_meta_boxes', function(){
+		global $post;
 
 		add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 		add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
 
-
+		if ($post->post_name == 'visitanos'){
+			add_meta_box( 'meta-box-datos_visita', 'Datos visitas', 'show_metabox_datos_visita', 'page', 'side', 'high');
+		}
 	});
 
 
@@ -76,6 +79,31 @@
 		return $array;
 	}
 
+	/**
+	 * METABOX VISITANOS
+	 */
+	function show_metabox_datos_visita($post){
+		$costo_visita = get_post_meta($post->ID, 'costo_visita', true);
+		$capasidad_visita = get_post_meta($post->ID, 'capasidad_visita', true);
+		$persona_extra_visita = get_post_meta($post->ID, 'persona_extra_visita', true);
+		$persona_extra_visita_2 = get_post_meta($post->ID, 'persona_extra_visita_2', true);
+
+
+		wp_nonce_field(__FILE__, '_datos_visitas_nonce');
+
+		echo "<label for='costo_visita' class='label-paquetes'>Costo: </label>";
+		echo "<input type='text' class='widefat' id='costo_visita' name='costo_visita' value='$costo_visita'/>";
+
+		echo "<br><br><label for='capasidad_visita' class='label-paquetes'>Capasidad: </label>";
+		echo "<input type='text' class='widefat' id='capasidad_visita' name='capasidad_visita' value='$capasidad_visita'/>";
+
+		echo "<br><br><label for='persona_extra_visita' class='label-paquetes'>Personas extra 1: </label>";
+		echo "<input type='text' class='widefat' id='persona_extra_visita' name='persona_extra_visita' value='$persona_extra_visita'/>";
+
+		echo "<br><br><label for='persona_extra_visita_2' class='label-paquetes'>Personas extra 2: </label>";
+		echo "<input type='text' class='widefat' id='persona_extra_visita_2' name='persona_extra_visita_2' value='$persona_extra_visita_2'/>";
+	}
+
 
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
@@ -114,6 +142,17 @@
 				endforeach;
 			}
 		}
+
+		if ( isset($_POST['costo_visita']) and check_admin_referer(__FILE__, '_datos_visitas_nonce') ){
+			update_post_meta($post_id, 'costo_visita', $_POST['costo_visita']);
+			update_post_meta($post_id, 'capasidad_visita', $_POST['capasidad_visita']);
+			update_post_meta($post_id, 'persona_extra_visita', $_POST['persona_extra_visita']);
+			update_post_meta($post_id, 'persona_extra_visita_2', $_POST['persona_extra_visita_2']);
+
+			
+		}
+
+		
 
 
 		// Guardar correctamente los checkboxes
