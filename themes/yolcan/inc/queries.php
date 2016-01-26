@@ -70,17 +70,55 @@ function storeShipIngredients($post_id, $ingredient){
 }
 
 
-function recipesByIngredient($ingrediente_id){
+function recipesByIngredient($ingrediente_id, $post_page, $offset ){
 	global $wpdb;
 
-	return $wpdb->get_results( "SELECT receta_id as ID FROM sy_ingredients_relationships WHERE ingrediente_id = $ingrediente_id AND receta_id != 0;", OBJECT );
+	return $wpdb->get_results( "SELECT receta_id as ID FROM {$wpdb->prefix}ingredients_relationships WHERE ingrediente_id = $ingrediente_id AND receta_id != 0 LIMIT $offset, $post_page;", OBJECT );
 
 }
 
-function recipesBySearch($search){
+
+/**	
+ * REGRESA EL NUMERO DE PAGINAS DE RECETAS POR INGREDIENTES
+ * @return [type]                 [description]
+ */
+function recipesByIngredientCount($ingrediente_id, $post_page){
+	global $wpdb;
+
+	$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}ingredients_relationships WHERE ingrediente_id = $ingrediente_id AND receta_id != 0;");
+	
+	$pages = $count / $post_page;
+
+	return ceil($pages);
+
+}
+
+
+/**	
+ * REGRESA LOS RESULTADOS DE BUSQUEDA
+ * @return [type]            [description]
+ */
+function recipesBySearch($search, $post_page, $offset){
 	global $wpdb;
 
 	return $wpdb->get_results( "SELECT ID FROM {$wpdb->prefix}posts 
-		WHERE post_type = 'recetas' AND post_status = 'publish' AND (post_title LIKE '%$search%' || post_content LIKE '%$search%');", OBJECT );
+		WHERE post_type = 'recetas' AND post_status = 'publish' AND (post_title LIKE '%$search%' || post_content LIKE '%$search%') LIMIT $offset, $post_page;", OBJECT );
+
+}
+
+
+/**	
+ * REGRESA EL NUMERO DE PAGINAS DE RECETAS POR BUSQUEDA
+ * @return [type]                 [description]
+ */
+function recipesBySearchCount($search, $post_page){
+	global $wpdb;
+
+	$count = $wpdb->get_var( "SELECT count(*) FROM {$wpdb->prefix}posts 
+		WHERE post_type = 'recetas' AND post_status = 'publish' AND (post_title LIKE '%$search%' || post_content LIKE '%$search%');");
+	
+	$pages = $count / $post_page;
+
+	return ceil($pages);
 
 }

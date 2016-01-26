@@ -1,9 +1,13 @@
 <?php $args = array('name' => $_GET['ingrediente'], 'post_type' => 'ingredientes', 'post_status' => 'publish', 'numberposts' => 1);
 
 $my_posts = get_posts($args);
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
 if( $my_posts ) :
-	$recetas = recipesByIngredient($my_posts[0]->ID); ?>
-
+	$post_page = 10;
+	$offset = ($pagina - 1) * $post_page;
+	$max_num_pages = recipesByIngredientCount($my_posts[0]->ID, $post_page);
+	$recetas = recipesByIngredient($my_posts[0]->ID, $post_page, $offset ); ?>
+	
 	<section class="[ container ][ margin-bottom ]">
 		<div class="[ row ]">
 			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
@@ -37,26 +41,13 @@ if( $my_posts ) :
 
 	<!-- pagination -->
 	<section class="[ bg-gray ][ text-center ]">
-		<ul class="[ pagination ][ no-margin ]">
+		<?php if($max_num_pages > 1):
+			$url = site_url('/recetas/?ingrediente='.$_GET['ingrediente']);
+			pagenavi($pagina, $max_num_pages, $url, true, '&', 'pagina'); 
+		else: ?>
+			<div class="no-pagination">pag 1 de 1</div>
+		<?php endif; ?>
 
-			<li>
-				<a href="#">
-					<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-left-12.svg">
-				</a>
-			</li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">...</a></li>
-			<li><a href="#">11</a></li>
-			<li><a href="#">12</a></li>
-			<li><a href="#">13</a></li>
-			<li>
-				<a href="#">
-					<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-right-12.svg">
-				</a>
-			</li>
-		</ul>
 	</section>
 <?php else:
 	echo '<p>No se encontraron recetas con ese ingrediente</p>';

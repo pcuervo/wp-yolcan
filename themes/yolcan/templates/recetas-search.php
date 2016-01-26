@@ -1,4 +1,9 @@
-<?php $recetas = recipesBySearch($_GET['search']); ?>
+<?php $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+$post_page = 10;
+$offset = ($pagina - 1) * $post_page;
+$max_num_pages = recipesBySearchCount($_GET['search'], $post_page);
+
+$recetas = recipesBySearch($_GET['search'], $post_page, $offset); ?>
 
 <section class="[ container ][ margin-bottom ]">
 	<div class="[ row ]">
@@ -34,24 +39,11 @@
 
 <!-- pagination -->
 <section class="[ bg-gray ][ text-center ]">
-	<ul class="[ pagination ][ no-margin ]">
+	<?php if($max_num_pages > 1):
+		$url = site_url('/recetas/?search='.$_GET['search']);
+		pagenavi($pagina, $max_num_pages, $url, true, '&', 'pagina'); 
+	else: ?>
+		<div class="no-pagination">pag 1 de 1</div>
+	<?php endif; ?>
 
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-left-12.svg">
-			</a>
-		</li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">...</a></li>
-		<li><a href="#">11</a></li>
-		<li><a href="#">12</a></li>
-		<li><a href="#">13</a></li>
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-right-12.svg">
-			</a>
-		</li>
-	</ul>
 </section>
