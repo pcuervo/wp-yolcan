@@ -1,4 +1,8 @@
-<?php get_header();  ?>
+<?php get_header(); 
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1; 
+$post_page = 8;
+$offset = $post_page * ($pagina - 1);
+$blog = new WP_Query( array('posts_per_page' => $post_page, 'post_type' => array( 'post' ), 'offset' => $offset ) );?>
 
 <div class="[ container ]">
 	<div class="[ row ]">
@@ -9,8 +13,7 @@
 	<div class="[ row ][ margin-bottom--large ]">
 		<!--  Entradas Blog -->
 
-		<?php $blog = new WP_Query( array('posts_per_page' => 8, 'post_type' => array( 'post' )) );
-
+		<?php 
 		if ( $blog->have_posts() ) :
 			while ( $blog->have_posts() ) : 
 				$blog->the_post();
@@ -41,25 +44,13 @@
 
 <!-- pagination -->
 <section class="[ bg-gray ][ text-center ]">
-	<ul class="[ pagination ][ no-margin ]">
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-left-12.svg">
-			</a>
-		</li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">...</a></li>
-		<li><a href="#">11</a></li>
-		<li><a href="#">12</a></li>
-		<li><a href="#">13</a></li>
-		<li>
-			<a href="#">
-				<img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="<?php echo THEMEPATH; ?>images/icons/arrow-right-12.svg">
-			</a>
-		</li>
-	</ul>
+	<?php if($blog->max_num_pages > 1):
+		$url = site_url('/blog/');
+		pagenavi($pagina,$blog->max_num_pages, $url, true, '?', 'pagina'); 
+		
+	else: ?>
+		<div class="no-pagination">pag 1 de 1</div>
+	<?php endif; ?>
 </section>
 
 <?php get_footer(); ?>

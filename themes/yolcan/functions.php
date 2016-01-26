@@ -487,7 +487,8 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             if ($start_page >= 2 && $pages_to_show < $max_page) {
                 $first_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), $pagenavi_options['first_text']);
                 
-                echo '<li><a href="'.esc_url(get_pagenum_link()).'" class="first" title="'.$first_page_text.'">1</a></li>';
+                $url = $especial == true ? $siteUrl.$simbol_url.$variable_page.'=1' : esc_url(get_pagenum_link());
+                echo '<li><a href="'.$url.'" class="first" title="'.$first_page_text.'">1</a></li>';
                 if(!empty($pagenavi_options['dotleft_text'])) {
                     echo '<li><span class="expand">'.$pagenavi_options['dotleft_text'].'</span></li>';
                 }
@@ -516,7 +517,8 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
                     echo '<li><span class="expand">'.$pagenavi_options['dotright_text'].'</span></li>';
                 }
                 $last_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), $pagenavi_options['last_text']);
-                echo '<li><a href="'.esc_url(get_pagenum_link($max_page)).'" class="last" title="'.$last_page_text.'">'.$max_page.'</a></li>';
+               	$url = $especial == true ? $siteUrl.$simbol_url.$variable_page.'='.$max_page : esc_url(get_pagenum_link($max_page));
+                echo '<li><a href="'.$url.'" class="last" title="'.$last_page_text.'">'.$max_page.'</a></li>';
             }
             echo '<li class="pag-siguiente">';
             	if ($especial == true) {
