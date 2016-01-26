@@ -402,6 +402,59 @@
 
 		});
 
+		/**	
+		 * NEWSLETTER
+		 */
+		$('.form-news').on('submit', function(event){
+			event.preventDefault();
+			var email = $(this).children('div').children('input.mail-news').val();
+
+			sendAjaxNews(email);
+
+			$(this).children('div').children('input.mail-news').val('');
+		});
+
+		/**	
+		 * NEWSLETTER 2
+		 */
+		$('.form-news-2').on('submit', function(event){
+			event.preventDefault();
+			var email = $(this).children('input.mail-news').val();
+
+			sendAjaxNews(email);
+
+			$(this).children('input.mail-news').val('');
+		});
+
+		/**	
+		 * ENVIA EL MAIL POR AJAX PAR AEL NEWSLETTER
+		 */
+		function sendAjaxNews(email){
+			if( ! validateEmail(email)){
+				alert('El mail '+email+' no es valido');
+			}else{
+				$.post(ajax_url,{
+					email    : email,
+					action   : 'ajax_mail_send_newsletter'
+				}, 'json')
+				.done(function (data){
+					if (data == 1){
+						alert('Gracias por subscribirte al newsletter');
+					}else{
+						alert(data);
+					};
+				});
+			}
+		}
+
+		/**
+		 * Validación de emails
+		 */
+		window.validateEmail = function (email) {
+			var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return regExp.test(email);
+		};
+
 
 		/**	
 		 * MAPS
@@ -412,7 +465,6 @@
 		};
 		
 		
-
 		function initialize() {
 			
 			var data_clubs = [];

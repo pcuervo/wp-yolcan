@@ -48,21 +48,19 @@
 							<h3><em>Newsletter</em></h3>
 							<div class="[ text-left ]">
 								<p>Recibe las últimas noticias y ofertas antes que nadie, déjanos tu correo.</p>
-								<form class="[ margin-bottom ][ hidden-xs ]">
+								<form class="[ margin-bottom ][ hidden-xs ] form-news">
 									<div class="[ form-group ]">
-										<input type="text" class="[ form-control ][ no-border-radius ][ margin-bottom--small ]">
-										<button type="submit" href="#" class="[ btn btn-secondary ][ no-margin ]">suscribirme</button>
+										<input type="text" class="[ form-control ][ no-border-radius ][ margin-bottom--small ] mail-news">
+										<input class="[ btn btn-secondary ][ no-margin ]" type="submit" value="suscribirme">
 									</div>
 								</form>
 							</div>
 							<!-- input inline -->
 							<div class="[ visible-xs ]">
-								<form class="[ input-group ]">
-									<input type="text" class="[ form-control ][ no-border-radius ]">
+								<form class="[ input-group ] form-news-2">
+									<input type="text" class="[ form-control ][ no-border-radius ] mail-news">
 									<span class="[ input-group-btn ]">
-										<button class="[ input-search--button ][ btn btn-secondary ]" type="submit">
-											suscribirme
-										</button>
+										<input class="[ input-search--button ][ btn btn-secondary ]" type="submit" value="suscribirme">
 									</span>
 								</form>
 							</div>

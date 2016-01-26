@@ -133,16 +133,15 @@ global $result;
 	
 	require_once('inc/post-types.php');
 
-
 	require_once('inc/metaboxes.php');
 
-
 	require_once('inc/taxonomies.php');
-
 
 	require_once('inc/pages.php');
 
 	require_once('inc/queries.php');
+
+	require_once('inc/functions-newsletter.php');
 
 	
 	
