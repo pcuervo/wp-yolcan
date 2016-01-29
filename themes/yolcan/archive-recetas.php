@@ -20,7 +20,7 @@
 								<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/search.svg">
 							</button>
 						</span>
-						
+
 					</div>
 				</form>
 			</div>
@@ -35,15 +35,15 @@
 		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
 			<?php $ingrTemporada = getIngredientsShip(0); ?>
 			<p>
-				Esta temporada cocinamos con: 
-				<?php if (! empty($ingrTemporada)): 
+				Esta temporada cocinamos con:
+				<?php if (! empty($ingrTemporada)):
 					$TotIng = count($ingrTemporada) - 1;
 					foreach ($ingrTemporada as $key => $ingrediente):
 						$post_data = get_post($ingrediente->ingrediente_id);
 						$coma = $TotIng != $key ? ',' : ''; ?>
 						<a href="<?php echo site_url('recetas/?ingrediente=').$post_data->post_name; ?>" class="[ color-secondary ][ underline ]"><?php echo $post_data->post_title; ?></a><?php echo $coma; ?>
 					<?php endforeach; ?>
-					 
+
 				<?php endif; ?>
 			</p>
 		</div>
@@ -52,7 +52,7 @@
 
 <div>
 	<!-- Push Wrapper -->
-	<div id="mp-pusher" class="[ mp-pusher ]">
+	<div id="mp-pusher" class="[ mp-pusher ][ container ]">
 		<!-- mp-menu -->
 
 		<div class="[ content-wrapper ]"><!-- this is for emulating position fixed of the nav -->
@@ -214,7 +214,7 @@
 	</div><!-- /pusher -->
 </div><!-- /container -->
 
-<?php 
+<?php
 if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
 	get_template_part('templates/recetas', 'ingrediente');
 elseif(isset($_GET['search']) AND $_GET['search'] != ''):
