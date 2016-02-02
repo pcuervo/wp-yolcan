@@ -1,5 +1,5 @@
-<?php get_header(); 
-the_post(); 
+<?php get_header();
+the_post();
 
 $no_id = $post->ID; ?>
 
@@ -38,12 +38,16 @@ $no_id = $post->ID; ?>
 	<div class="[ row ]">
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Ingredientes</strong></em></p>
-			<?php the_content(); ?>
+			<div class="[ list list-point ]">
+				<p><?php the_content(); ?></p>
+			</div>
 		</div>
 
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Preparación</strong></em></p>
-			<?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?>
+			<div class="[ list list-number ]">
+				<p><?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?></p>
+			</div>
 		</div>
 	</div>
 
@@ -55,7 +59,7 @@ $no_id = $post->ID; ?>
 				<?php $recetas = new WP_Query( array('posts_per_page' => 5, 'post_type' => array( 'recetas' ), 'post__not_in' => array($no_id),'orderby' => 'rand' ) );
 
 				if ( $recetas->have_posts() ) :
-					while ( $recetas->have_posts() ) : 
+					while ( $recetas->have_posts() ) :
 						$recetas->the_post();
 						$url_img = attachment_image_url($post->ID, 'medium');?>
 						<div class="[ box-content ]">
@@ -67,7 +71,7 @@ $no_id = $post->ID; ?>
 
 					<?php endwhile;
 				endif; ?>
-				
+
 			</div>
 		</div>
 	</div>

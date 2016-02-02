@@ -1,4 +1,4 @@
-<?php get_header(); 
+<?php get_header();
 the_post();
 global $result;
 
@@ -12,7 +12,7 @@ if( isset( $result['success'] ) ): ?>
 <section class="[ user-content--visitas ]" >
 	<h2>Visitanos</h2>
 	<p>Vive la experiencia chinampera</p>
-	<?php the_content(); 
+	<?php the_content();
 	$url_img = attachment_image_url($post->ID, 'large'); ?>
 	<img src="<?php echo $url_img; ?>">
 	<h4>Duración aproximada: 2 horas 30 minutos</h4>
@@ -27,7 +27,7 @@ if( isset( $result['success'] ) ): ?>
 <article class="[ container ]">
 
 		<div class="[ row ]">
-			<section class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-1 col-lg-5 col-lg-offset-2 ][ margin-top  ]">
+			<section class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-1 col-lg-8 col-lg-offset-2 ][ margin-top  ]">
 			<div class="[ row ][ text-center ]">
 				<div class="[ col-xs-3 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Costo</strong></p>
@@ -80,11 +80,11 @@ if( isset( $result['success'] ) ): ?>
 				<div class="[ visible-sm ][ margin-bottom--large ]"></div>
 			</div>
 		</section>
-		<section class="[ user-content--visitas ]">
+		<section class="[ inline-block ][ user-content--visitas ]">
 			<h2>Xochimilco</h2>
 			<?php $xochimilco = get_page_by_path('xochimilco');
 			echo $xochimilco->post_content; ?>
-			
+
 		</section>
 
 	</div>
