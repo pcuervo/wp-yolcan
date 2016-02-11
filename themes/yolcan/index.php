@@ -105,7 +105,7 @@
 					$entrada->the_post();
 					$url_img = attachment_image_url($post->ID, 'large'); ?>
 					
-					<a href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name;; ?>">
+					<a href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name; ?>">
 						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo $url_img; ?>');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]"><?php the_title(); ?></h2>
 						</div>

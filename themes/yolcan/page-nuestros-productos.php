@@ -53,11 +53,11 @@ the_post(); ?>
 		if ( $ingredientes->have_posts() ) :
 			while ( $ingredientes->have_posts() ) : 
 				$ingredientes->the_post();?>
-				<div class="[ box-content ]">
+				<a class="[ box-content ]" href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name; ?>">
 					<?php $url_img = attachment_image_url($post->ID, 'medium'); ?>
 					<img alt="" src="<?php echo $url_img; ?>">
 					<p class=""><?php the_title(); ?></p>
-				</div>
+				</a>
 			<?php endwhile;
 		endif; ?>
 	</div>

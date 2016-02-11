@@ -17,6 +17,7 @@
 
 		if ($post->post_name == 'contactanos'){
 			add_meta_box( 'meta-box-ubicacion', 'Ubicación', 'show_metabox_ubicacion', 'page', 'side', 'high');
+			add_meta_box( 'meta-box-info', 'Información extra', 'show_metabox_info', 'page', 'side', 'high');
 		}
 
 		if ($post->post_name == 'clubes-de-consumo'){
@@ -61,7 +62,6 @@
 		
 		if ( ! empty($ingredientes->posts) ) :
 			$activitisShip = orderIndexObject(getIngredientsShip($post->ID));
-			
 		 	foreach ($ingredientes->posts as $ingrediente):
 		 		$checked = isset( $activitisShip[$ingrediente->ID] ) ? 'checked' : '';?>
 
@@ -135,6 +135,19 @@
 			}
 
 		echo '</div>';
+	}
+
+	function show_metabox_info($post){
+		$telefono_c = get_post_meta($post->ID, 'telefono_c', true);
+		$whatsapp_c = get_post_meta($post->ID, 'whatsapp_c', true);
+
+		wp_nonce_field(__FILE__, '_info_cont_nonce');
+
+		echo "<label for='telefono_c' class='label-paquetes'>Telefóno: </label>";
+		echo "<input type='text' class='widefat' id='telefono_c' name='telefono_c' value='$telefono_c'/>";
+
+		echo "<br><br><label for='whatsapp_c' class='label-paquetes'>Whatsapp: </label>";
+		echo "<input type='text' class='widefat' id='whatsapp_c' name='whatsapp_c' value='$whatsapp_c'/>";
 	}
 
 	function show_metabox_ubicaciones($post){
@@ -227,6 +240,12 @@
 		if ( isset($_POST['clubes_d']) and check_admin_referer(__FILE__, '_ubicaciones_clubes_nonce') ){
 			update_post_meta( $post_id, 'direcciones-clubes', serialize($_POST['direcciones']) );
 		}
+
+		if ( isset($_POST['telefono_c']) and check_admin_referer(__FILE__, '_info_cont_nonce') ){
+			update_post_meta($post_id, 'telefono_c', $_POST['telefono_c']);
+			update_post_meta($post_id, 'whatsapp_c', $_POST['whatsapp_c']);
+		}
+
 
 		
 

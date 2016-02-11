@@ -1614,6 +1614,17 @@ body,
 .list-style-none {
   list-style-type: none;
 }
+.list {
+    display:list-item;
+    margin-bottom: 0px;
+    font-size: 14px;
+  }
+.list-point {
+  list-style:disc outside none;
+}
+.list-number {
+  list-style:decimal outside none;
+}
 code,
 kbd,
 pre,
