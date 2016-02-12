@@ -7750,6 +7750,21 @@ a:hover {
     margin-left: 0;
   }
 }
+.info .active > a {
+  color: #3ac6b1;
+}
+.wc-tab h2 {
+  font-size: 20px;
+  color: #498D42;
+  text-align: center;
+}
+.wc-tab .commentlist {
+  padding-left: 10px;
+  list-style-type: none;
+}
+.price span {
+  margin-right: 20px;
+}
 @-ms-viewport {
   width: device-width;
 }

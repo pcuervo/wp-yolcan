@@ -461,3 +461,22 @@ a:hover {
 .hr-secondary{ border-top: 2px solid @secondary; }
 
 #main{ .container }
+
+.info .active{
+  & > a {color: @secondary;}
+}
+.wc-tab{
+  & h2{
+    font-size: 20px;
+    color: @primary;
+    text-align: center;
+  }
+  & .commentlist{
+    padding-left: 10px;
+    list-style-type: none;
+
+  }
+}
+.price {
+  & span{ margin-right: @margin-base; }
+}
