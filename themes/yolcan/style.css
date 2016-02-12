@@ -1,12 +1,3 @@
-/*
-Theme Name: Pequeño Cuervo
-Theme URI: http://pquervo.com
-Author: Pequeño Cuervo (alejandro cervantes)
-Author URI: http://pquervo.com
-Description: Tema de WordPress Personalizado
-Version: 1.0
-*/
-
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -1587,6 +1578,9 @@ address {
 .word-spacing {
   word-spacing: 5px;
 }
+.fz-14 {
+  font-size: 14px;
+}
 .fz-16 {
   font-size: 16px;
 }
@@ -1614,16 +1608,22 @@ body,
 .list-style-none {
   list-style-type: none;
 }
-.list {
-    display:list-item;
-    margin-bottom: 0px;
-    font-size: 14px;
-  }
-.list-point {
-  list-style:disc outside none;
+.list p {
+  display: list-item;
+  margin-bottom: 0px;
+  font-size: 14px;
 }
-.list-number {
-  list-style:decimal outside none;
+.list-point p {
+  list-style: disc outside none;
+}
+.list-number p {
+  list-style: decimal outside none;
+}
+.text-collapse:hover,
+.text-collapse:active,
+.text-collapse .active,
+.text-collapse:focus {
+  color: #498D42;
 }
 code,
 kbd,
@@ -3101,6 +3101,23 @@ select[multiple].input-lg {
 }
 .checkbox-secondary input {
   border: 1px solid #3ac6b1;
+}
+.select {
+  width: 100%;
+  height: 45px;
+  background-color: #d9d9d9;
+  display: block;
+  font-size: 14px;
+  line-height: 1.42;
+}
+.select select {
+  padding: 6px 12px;
+  width: 100%;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  appearance: none;
 }
 .btn {
   font-family: "proxima-nova", sans-serif;
@@ -7116,6 +7133,9 @@ a:hover {
 .width-60 {
   width: 60%;
 }
+.width-40 {
+  width: 40%;
+}
 .width-30 {
   width: 30%;
 }
@@ -7124,6 +7144,9 @@ a:hover {
 }
 .width-19 {
   width: 19%;
+}
+.width-80 {
+  width: 80px;
 }
 .width-bg {
   width: 280px;
@@ -7148,6 +7171,9 @@ a:hover {
 .height-30 {
   height: 30px;
 }
+.height-35 {
+  height: 35px;
+}
 .no-padding {
   padding: 0 !important;
 }
@@ -7162,6 +7188,9 @@ a:hover {
 }
 .padding--xsmall {
   padding: 6px;
+}
+.padding--xxsmall {
+  padding: 3px;
 }
 .padding--top {
   padding-top: 12px;
@@ -7242,6 +7271,18 @@ a:hover {
 .padding--sides--large {
   padding-left: 48px;
   padding-right: 48px;
+}
+@media (min-width: 480px) and (max-width: 767px) {
+  .padding--sides--xsm {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+  .padding--sides--xsm--large {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
 }
 .padding--sides--modal {
   padding-left: 24px;
@@ -7662,6 +7703,17 @@ a:hover {
     width: 83.33333%;
   }
 }
+.ingredientes ul > li {
+  padding-left: 0px;
+  list-style-position: inside;
+  list-style-type: none;
+}
+.hr-primary--dark {
+  border-top: 2px solid #272c28;
+}
+.hr-secondary {
+  border-top: 2px solid #3ac6b1;
+}
 @-ms-viewport {
   width: device-width;
 }
@@ -8070,5 +8122,4 @@ footer h3 {
     margin-top: 10px;
   }
 }
-
 /*# sourceMappingURL=bootstrap.css.map */

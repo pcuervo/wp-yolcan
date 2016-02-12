@@ -1,0 +1,63 @@
+.icon{
+  display: inline-block; vertical-align: middle;
+  margin-right: .2em; margin-left: .2em;
+  .transition;
+}
+
+/*------------------------------------*\
+    #SIZES
+\*------------------------------------*/
+
+.icon--responsive{ width: 100%; height: auto; }
+
+.icon--iconed--small{width: 10px !important; height: 10px;}
+.icon--iconed--normal{width: 15px !important; height: 15px;}
+.icon--iconed{width: 20px !important; height: 20px;}
+.icon--iconed--medium{width: 24px !important;  height: 24px;}
+.icon--iconed--large{width: 28px !important;  height: 28px;}
+.icon--iconed--xlarge{
+	width: 32px !important;  height: 32px;
+	@media (min-width: @screen-sm){
+		footer & { width: 20px !important;  height: 20px; }
+	}
+}
+.icon--iconed--xxlarge{width: 50px !important;  height: 50px;}
+.icon--iconed--xxxlarge{width: 70px !important;  height: 70px;}
+
+
+/*------------------------------------*\
+  #COLOR
+
+
+
+\*------------------------------------*/
+
+/**
+ * Fill
+**/
+.icon--fill path,
+.icon--fill line,
+.icon--fill rect,
+.icon--fill circle,
+.icon--fill ellipse,
+.icon--fill polyline,
+.icon--fill polygon{ fill: currentColor; }
+
+
+/**
+ * Stroke
+**/
+.icon--stroke{ stroke-width: 1.5; }
+
+.icon--thickness-05{ stroke-width: 0.5; }
+.icon--thickness-1{ stroke-width: 1; }
+.icon--thickness-2{ stroke-width: 2; }
+.icon--thickness-3{ stroke-width: 3; }
+
+.icon--stroke path,
+.icon--stroke line,
+.icon--stroke rect,
+.icon--stroke circle,
+.icon--stroke ellipse,
+.icon--stroke polyline,
+.icon--stroke polygon{ stroke: currentColor; }
