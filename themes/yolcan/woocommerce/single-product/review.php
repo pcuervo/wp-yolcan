@@ -27,11 +27,13 @@ $verified = wc_review_is_from_verified_owner( $comment->comment_ID );
 ?>
 <li itemprop="review" itemscope itemtype="http://schema.org/Review" <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
 
-	<div id="comment-<?php comment_ID(); ?>" class="comment_container">
+	<div id="comment-<?php comment_ID(); ?>" class="comment_container [ row ]">
 
+				<div class="[ col-xs-12 col-sm-offset-2 col-sm-2 ]">
 					<?php echo get_avatar( $comment, apply_filters( 'woocommerce_review_gravatar_size', '60' ), '' ); ?>
+				</div>
 
-				<div class="comment-text">
+				<div class="comment-text [ col-xs-12 col-sm-6 ]">
 
 					<?php if ( $rating && get_option( 'woocommerce_enable_review_rating' ) === 'yes' ) : ?>
 

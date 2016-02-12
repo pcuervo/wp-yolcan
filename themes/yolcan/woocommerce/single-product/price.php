@@ -23,7 +23,7 @@ global $product;
 
 ?>
 <div class="[ row ][ margin-bottom ]"> <!-- end in tabs.php -->
-	<div class="[ col-xs-12 col-sm-6 col-md-8 col-md-offset-2 ]">
+	<div class="[ col-xs-12 col-sm-6 ]">
 		<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 
 			<p class="price"><?php echo $product->get_price_html(); ?></p>
