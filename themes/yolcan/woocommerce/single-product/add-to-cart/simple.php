@@ -52,9 +52,9 @@ if ( ! $product->is_purchasable() ) {
 	 		}
 	 	?>
 
-	 	<input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
+	 	<input class="[ inline-block ][ align-middle ]" type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
 
-	 	<button type="submit" class="[ btn btn-secondary width-auto inline-block no-margin ] single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+	 	<button type="submit" class="[ inline-block ][ align-middle ][ btn btn-secondary width-auto inline-block margin-sides--small ] single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>

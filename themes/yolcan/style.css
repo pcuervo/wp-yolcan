@@ -1643,6 +1643,20 @@ body,
 p > .stars {
   display: inline-block;
 }
+.product-name a {
+  text-transform: capitalize;
+  font-weight: 700;
+  color: #498D42;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+@media (min-width: 768px) {
+  .product-name a {
+    font-size: 23.8px;
+  }
+}
 code,
 kbd,
 pre,
@@ -3666,7 +3680,8 @@ input[type="button"].btn-block {
 .btn-box-shadow {
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.45);
 }
-.input-btn-secondary {
+.input-btn-secondary,
+.a-btn-secondary {
   background-color: #3ac6b1 !important;
   color: #fff !important;
   border-radius: 3px !important;
@@ -3677,8 +3692,11 @@ input[type="button"].btn-block {
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.45) !important;
 }
 .input-btn-secondary:hover,
+.a-btn-secondary:hover,
 .input-btn-secondary:focus,
-.input-btn-secondary.focus {
+.a-btn-secondary:focus,
+.input-btn-secondary.focus,
+.a-btn-secondary.focus {
   color: #fff !important;
   background-color: #2e9f8e !important;
   text-decoration: none !important;
@@ -6190,6 +6208,10 @@ button.close {
   border: 0;
   -webkit-appearance: none;
 }
+.close-table {
+  color: #498D42 !important;
+  font-size: 2em!important;
+}
 /*------------------------------------*\
     #FILTERS
 \*------------------------------------*/
@@ -7168,7 +7190,7 @@ a:hover {
   background-color: #8c8c8c;
 }
 .width-auto {
-  width: auto;
+  width: auto!important;
 }
 .width-100 {
   width: 100%;
@@ -7197,8 +7219,16 @@ a:hover {
 .width-19 {
   width: 19%;
 }
+.width-150 {
+  width: 150px!important;
+}
 .width-80 {
   width: 80px;
+}
+@media (min-width: 768px) {
+  .width-60--sm {
+    width: 60%!important;
+  }
 }
 .width-bg {
   width: 280px;
@@ -7225,6 +7255,9 @@ a:hover {
 }
 .height-35 {
   height: 35px;
+}
+.height-200 {
+  height: 200px;
 }
 .no-padding {
   padding: 0 !important;
@@ -7526,7 +7559,7 @@ a:hover {
   margin-bottom: 40px;
 }
 .no-border {
-  border: none;
+  border: none!important;
 }
 .no-border-radius {
   border-radius: 0px;

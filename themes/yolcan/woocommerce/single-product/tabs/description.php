@@ -28,7 +28,7 @@ $heading = esc_html( apply_filters( 'woocommerce_product_description_heading', _
 	<?php if ( $heading ): ?>
 	  <h2><?php echo $heading; ?></h2>
 	<?php endif; ?>
-	<div class="col-xs-12 padding--sides--xsm col-lg-10 col-lg-offset-1">
+	<div class="col-xs-12 col-lg-10 col-lg-offset-1">
 		<?php the_content(); ?>
 	</div>
 </div>
