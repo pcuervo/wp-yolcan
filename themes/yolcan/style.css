@@ -6905,7 +6905,9 @@ button.close {
 .modal-header:before,
 .modal-header:after,
 .modal-footer:before,
-.modal-footer:after {
+.modal-footer:after,
+#main:before,
+#main:after {
   content: " ";
   display: table;
 }
@@ -6924,7 +6926,8 @@ button.close {
 .pager:after,
 .panel-body:after,
 .modal-header:after,
-.modal-footer:after {
+.modal-footer:after,
+#main:after {
   clear: both;
 }
 .center-block {
@@ -7713,6 +7716,39 @@ a:hover {
 }
 .hr-secondary {
   border-top: 2px solid #3ac6b1;
+}
+#main {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  #main {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  #main {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  #main {
+    width: 1170px;
+  }
+}
+#main > .navbar-header,
+#main > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  #main > .navbar-header,
+  #main > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
 @-ms-viewport {
   width: device-width;
