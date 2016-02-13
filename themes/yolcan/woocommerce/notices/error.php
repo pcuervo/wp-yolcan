@@ -1,8 +1,8 @@
 <?php
 /**
- * Show messages
+ * Show error messages
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/notices/notice.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/notices/error.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
  * will need to copy the new files to your theme to maintain compatibility. We try to do this.
@@ -24,12 +24,12 @@ if ( ! $messages ){
 }
 
 ?>
+<div class="[ clearfix ]"></div>
+<div class="[ container ]">
+	<ul class="woocommerce-error [ no-border ][ bg-light ]">
+		<?php foreach ( $messages as $message ) : ?>
+			<li><?php echo wp_kses_post( $message ); ?></li>
+		<?php endforeach; ?>
+	</ul>
+</div>
 
-<?php foreach ( $messages as $message ) : ?>
-	<div class=" [ container ]">
-		<div class="woocommerce-info [ no-padding fz-16 align-top no-border bg-light ][ no-margin ]">
-			<img class="[ inline-block align-middle ][ svg ][ icon icon--iconed--large icon--fill ][ color-secondary ][ margin-right ]" src="<?php echo THEMEPATH; ?>icons/coupon-discount.svg">
-			<div class="[ inline-block align-middle ]"><?php echo wp_kses_post( $message ); ?></div>
-		</div>
-	</div>
-<?php endforeach; ?>

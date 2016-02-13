@@ -1657,6 +1657,11 @@ p > .stars {
     font-size: 23.8px;
   }
 }
+.woocommerce .woocommerce-error:before,
+.woocommerce .woocommerce-info:before,
+.woocommerce .woocommerce-message:before {
+  content: no-close-quote;
+}
 code,
 kbd,
 pre,
