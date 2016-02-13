@@ -25,7 +25,7 @@ if ( ! comments_open() ) {
 }
 
 ?>
-<div id="reviews">
+<div id="reviews" class="[ hide ]"> <!-- Oculta comentarios -->
 	<div id="comments">
 		<h2><?php
 			if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' && ( $count = $product->get_review_count() ) )
