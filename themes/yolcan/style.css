@@ -7203,6 +7203,9 @@ a:hover {
 .color-secondary {
   color: #3ac6b1;
 }
+.color-secondary-hover:hover {
+  color: #3ac6b1;
+}
 .color-tertiary {
   color: #f99134;
 }

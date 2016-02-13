@@ -21,15 +21,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 wc_print_notices(); ?>
 
+<div class="[ clearfix ]"></div>
+<div class="[ container ][ margin-top-bottom--large ]"><!-- end in my-address -->
 <p class="myaccount_user">
 	<?php
 	printf(
-		__( 'Hello <strong>%1$s</strong> (not %1$s? <a href="%2$s">Sign out</a>).', 'woocommerce' ) . ' ',
+		__( 'Hello <strong class="[ color-primary ]">%1$s</strong> (not %1$s? <a class="[ color-secondary ][ underline ]" href="%2$s">Sign out</a>).', 'woocommerce' ) . ' ',
 		$current_user->display_name,
 		wc_get_endpoint_url( 'customer-logout', '', wc_get_page_permalink( 'myaccount' ) )
 	);
 
-	printf( __( 'From your account dashboard you can view your recent orders, manage your shipping and billing addresses and <a href="%s">edit your password and account details</a>.', 'woocommerce' ),
+	printf( __( '<p>Desde su cuenta podrá ver sus pedidos recientes, administrar sus direcciones de envío y facturación y <a class="[ color-secondary ][ underline ]" href="%s">editar su contraseña y los detalles de su cuenta</a>.<p>', 'woocommerce' ),
 		wc_customer_edit_account_url()
 	);
 	?>
