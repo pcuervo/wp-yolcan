@@ -134,6 +134,8 @@ a:hover {
 .bg-gray-lighter { background-color: @gray-lighter; }
 .bg-gray { background-color: @gray-xxlight; }
 .bg-gray-dark { background-color: @gray-xlight; }
+.bg-transparent{ background-color: transparent;}
+.bg-light{ background-color: @light!important;}
 
 //Box model
 //-----------
@@ -483,4 +485,7 @@ a .active{
 }
 .price {
   & span{ margin-right: @margin-base; }
+}
+.woocommerce-info:before{
+  content: none;
 }

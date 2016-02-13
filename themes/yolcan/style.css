@@ -3151,6 +3151,62 @@ select[multiple].input-lg {
   background-image: none;
   appearance: none;
 }
+.input-text {
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -ms-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  background-color: #d9d9d9;
+  border-radius: 0px;
+  color: #8c8c8c;
+}
+.input-text:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.input-text::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.input-text:-ms-input-placeholder {
+  color: #999;
+}
+.input-text::-webkit-input-placeholder {
+  color: #999;
+}
+.input-text::-ms-expand {
+  border: 0;
+  background-color: transparent;
+}
+.input-text[disabled],
+.input-text[readonly],
+fieldset[disabled] .input-text {
+  background-color: #e9e9e9;
+  opacity: 1;
+}
+.input-text[disabled],
+fieldset[disabled] .input-text {
+  cursor: not-allowed;
+}
+textarea.input-text {
+  height: auto;
+}
 .btn {
   font-family: "proxima-nova", sans-serif;
   font-style: normal;
@@ -7189,6 +7245,12 @@ a:hover {
 .bg-gray-dark {
   background-color: #8c8c8c;
 }
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-light {
+  background-color: #fff !important;
+}
 .width-auto {
   width: auto!important;
 }
@@ -7846,6 +7908,9 @@ a .active {
 }
 .price span {
   margin-right: 20px;
+}
+.woocommerce-info:before {
+  content: none;
 }
 @-ms-viewport {
   width: device-width;
