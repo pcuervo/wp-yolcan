@@ -48,9 +48,9 @@ $col = 1;
 <?php foreach ( $get_addresses as $name => $title ) : ?>
 
 	<div class="col-<?php echo ( ( $col = $col * -1 ) < 0 ) ? 1 : 2; ?> address">
-		<header class="title">
-			<h3><?php echo $title; ?></h3>
-			<a href="<?php echo wc_get_endpoint_url( 'edit-address', $name ); ?>" class="edit"><?php _e( 'Edit', 'woocommerce' ); ?></a>
+		<header class="title [ no-border ][ margin-bottom ]">
+			<h3 class="[ border-bottom ]"><?php echo $title; ?></h3>
+			<a class="[ color-secondary ][ underline ]" href="<?php echo wc_get_endpoint_url( 'edit-address', $name ); ?>" class="edit"><?php _e( 'Edit', 'woocommerce' ); ?></a>
 		</header>
 		<address>
 			<?php
@@ -75,6 +75,7 @@ $col = 1;
 			?>
 		</address>
 	</div>
+</div><!-- end container my-account -->
 
 <?php endforeach; ?>
 
