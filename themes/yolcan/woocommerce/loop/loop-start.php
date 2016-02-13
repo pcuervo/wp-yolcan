@@ -15,4 +15,4 @@
  * @version     2.0.0
  */
 ?>
-<ul class="products [ list-style-none ][ no-padding ][ margin-bottom--large ]">
+<ul class="products [ list-style-none ][ no-padding ][ margin-bottom--large ]"><!-- [ row padding--sides--xsm ] -->

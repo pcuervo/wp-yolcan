@@ -28,16 +28,21 @@ if ( ! WC()->cart->applied_coupons ) {
     wc_print_notice( $info_message, 'notice' );
 }
 ?>
+<div class="[ container padding--sides--xsm ]">
+	<div class="[ row ]">
+		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
+			<form class="checkout_coupon" method="post" style="display:none">
 
-	<form class="checkout_coupon" method="post" style="display:none">
+				<p class="form-row form-row-first">
+					<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
+				</p>
 
-		<p class="form-row form-row-first">
-			<input type="text" name="coupon_code" class="input-text" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" id="coupon_code" value="" />
-		</p>
+				<p class="form-row form-row-last">
+					<input type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply Coupon', 'woocommerce' ); ?>" />
+				</p>
 
-		<p class="form-row form-row-last">
-			<input type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply Coupon', 'woocommerce' ); ?>" />
-		</p>
-
-		<div class="clear"></div>
-	</form>
+				<div class="clear"></div>
+			</form>
+		</div>
+	</div>
+</div>

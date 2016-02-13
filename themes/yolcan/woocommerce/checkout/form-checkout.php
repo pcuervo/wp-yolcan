@@ -32,27 +32,29 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 ?>
 
 <div class="[ container padding--sides--xsm ]">
-	<div class="[ row ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<form name="checkout" method="post" class="checkout woocommerce-checkout [ container ]" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
-				<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
+	<form name="checkout" method="post" class="checkout woocommerce-checkout [ container ]" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
 
-					<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+		<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
 
-					<div class="col2-set" id="customer_details">
-						<div class="col-1">
-							<?php do_action( 'woocommerce_checkout_billing' ); ?>
-						</div>
+			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-						<div class="col-2">
-							<?php do_action( 'woocommerce_checkout_shipping' ); ?>
-						</div>
-					</div>
+			<div class="col2-set" id="customer_details">
+				<div class="col-1">
+					<?php do_action( 'woocommerce_checkout_billing' ); ?>
+				</div>
 
-					<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+				<div class="col-2">
+					<?php do_action( 'woocommerce_checkout_shipping' ); ?>
+				</div>
+			</div>
 
-				<?php endif; ?>
+			<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+
+		<?php endif; ?>
+
+		<div class="[ row ]">
+			<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 ]">
 
 				<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
 
@@ -64,9 +66,11 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 
 				<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
 
-			</form>
+			</div>
 		</div>
-	</div>
+
+	</form>
+
 </div>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>

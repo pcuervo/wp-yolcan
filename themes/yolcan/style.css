@@ -7292,6 +7292,9 @@ a:hover {
 .width-150 {
   width: 150px!important;
 }
+.width-200 {
+  width: 200px!important;
+}
 .width-80 {
   width: 80px;
 }
@@ -7569,6 +7572,10 @@ a:hover {
 .margin-top-bottom--xxlarge {
   margin-top: 160px;
   margin-bottom: 160px;
+}
+.no-margin-sides {
+  margin-left: 0px!important;
+  margin-right: 0px!important;
 }
 .margin-sides {
   margin-left: 20px;
