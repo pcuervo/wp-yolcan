@@ -22,27 +22,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 wc_print_notices(); ?>
 
 <div class="[ clearfix ]"></div>
-<div class="[ container ][ margin-top-bottom--large ]"><!-- end in my-address -->
-<p class="myaccount_user">
-	<?php
-	printf(
-		__( 'Hello <strong class="[ color-primary ]">%1$s</strong> (not %1$s? <a class="[ color-secondary ][ underline ]" href="%2$s">Sign out</a>).', 'woocommerce' ) . ' ',
-		$current_user->display_name,
-		wc_get_endpoint_url( 'customer-logout', '', wc_get_page_permalink( 'myaccount' ) )
-	);
+<div class="[ container padding--sides--xsm ][ margin-top-bottom--large ]"><!-- end in my-address -->
+	<div class="[ row ]">
+		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
+			<p class="myaccount_user">
+				<?php
+				printf(
+					__( 'Hello <strong class="[ color-primary ]">%1$s</strong> (not %1$s? <a class="[ color-secondary ][ underline ]" href="%2$s">Sign out</a>).', 'woocommerce' ) . ' ',
+					$current_user->display_name,
+					wc_get_endpoint_url( 'customer-logout', '', wc_get_page_permalink( 'myaccount' ) )
+				);
 
-	printf( __( '<p>Desde su cuenta podrá ver sus pedidos recientes, administrar sus direcciones de envío y facturación y <a class="[ color-secondary ][ underline ]" href="%s">editar su contraseña y los detalles de su cuenta</a>.<p>', 'woocommerce' ),
-		wc_customer_edit_account_url()
-	);
-	?>
-</p>
+				printf( __( '<p>Desde su cuenta podrá ver sus pedidos recientes, administrar sus direcciones de envío y facturación y <a class="[ color-secondary ][ underline ]" href="%s">editar su contraseña y los detalles de su cuenta</a>.<p>', 'woocommerce' ),
+					wc_customer_edit_account_url()
+				);
+				?>
+			</p>
 
-<?php do_action( 'woocommerce_before_my_account' ); ?>
+			<?php do_action( 'woocommerce_before_my_account' ); ?>
 
-<?php wc_get_template( 'myaccount/my-downloads.php' ); ?>
+			<?php wc_get_template( 'myaccount/my-downloads.php' ); ?>
 
-<?php wc_get_template( 'myaccount/my-orders.php', array( 'order_count' => $order_count ) ); ?>
+			<?php wc_get_template( 'myaccount/my-orders.php', array( 'order_count' => $order_count ) ); ?>
 
-<?php wc_get_template( 'myaccount/my-address.php' ); ?>
+			<?php wc_get_template( 'myaccount/my-address.php' ); ?>
 
-<?php do_action( 'woocommerce_after_my_account' ); ?>
+			<?php do_action( 'woocommerce_after_my_account' ); ?>

@@ -75,6 +75,8 @@ $col = 1;
 			?>
 		</address>
 	</div>
+</div><!-- end col -->
+</div><!-- end row -->
 </div><!-- end container my-account -->
 
 <?php endforeach; ?>
