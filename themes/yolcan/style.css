@@ -7226,6 +7226,9 @@ a:hover {
 .color-dark {
   color: #000;
 }
+.color-danger {
+  color: #b14464;
+}
 .color-primary-darken--hover:hover {
   color: #272c28;
 }

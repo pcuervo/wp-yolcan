@@ -28,7 +28,7 @@ if ( ! $messages ){
 <div class="[ container ]">
 	<ul class="woocommerce-error [ no-border ][ bg-light ]">
 		<?php foreach ( $messages as $message ) : ?>
-			<li><?php echo wp_kses_post( $message ); ?></li>
+			<li class="[ color-danger ]"><?php echo wp_kses_post( $message ); ?></li>
 		<?php endforeach; ?>
 	</ul>
 </div>
