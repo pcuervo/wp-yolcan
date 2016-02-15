@@ -3751,6 +3751,9 @@ input[type="button"].btn-block {
   margin-right: 5px !important;
   font-size: 18px !important;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.45) !important;
+  font-family: "proxima-nova", sans-serif;
+  text-transform: lowercase;
+  font-weight: normal;
 }
 .input-btn-secondary:hover,
 .a-btn-secondary:hover,
