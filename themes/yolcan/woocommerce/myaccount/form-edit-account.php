@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 
-		<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 ]">
+		<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 ][ margin-top ]">
 			<fieldset>
 				<legend><?php _e( 'Password Change', 'woocommerce' ); ?></legend>
 
