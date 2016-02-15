@@ -7209,7 +7209,7 @@ a:hover {
   color: #fff;
 }
 .color-secondary {
-  color: #3ac6b1;
+  color: #3ac6b1 !important;
 }
 .color-secondary-hover:hover {
   color: #3ac6b1;
