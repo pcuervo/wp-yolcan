@@ -1786,7 +1786,7 @@ if ( ! function_exists( 'woocommerce_form_field' ) ) {
 
 				} elseif ( is_array( $states ) ) {
 
-					$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="state_select [ select ]' . esc_attr( implode( ' ', $args['input_class'] ) ) .'" ' . implode( ' ', $custom_attributes ) . ' data-placeholder="' . esc_attr( $args['placeholder'] ) . '">
+					$field .= '<select name="' . esc_attr( $key ) . '" id="' . esc_attr( $args['id'] ) . '" class="state_select [ select no-border ]' . esc_attr( implode( ' ', $args['input_class'] ) ) .'" ' . implode( ' ', $custom_attributes ) . ' data-placeholder="' . esc_attr( $args['placeholder'] ) . '">
 						<option value="">'.__( 'Select a state&hellip;', 'woocommerce' ) .'</option>';
 
 					foreach ( $states as $ckey => $cvalue ) {
