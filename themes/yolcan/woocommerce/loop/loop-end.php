@@ -1,8 +1,8 @@
 <?php
 /**
- * Product Loop Start
+ * Product Loop End
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/loop/loop-start.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/loop/loop-end.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
  * will need to copy the new files to your theme to maintain compatibility. We try to do this.
@@ -15,5 +15,5 @@
  * @version     2.0.0
  */
 ?>
-<ul class="products [ list-style-none ][ no-padding ][ margin-bottom--large ]"><!-- [ row padding--sides--xsm ] -->
-	<!-- <div id="content"> -->
+	<!-- </div> --><!-- end id=content -->
+</ul>

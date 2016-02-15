@@ -7933,6 +7933,9 @@ a .active {
 .woocommerce-info:before {
   content: none;
 }
+.reviews_tab {
+  display: none !important;
+}
 @-ms-viewport {
   width: device-width;
 }
