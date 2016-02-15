@@ -1,0 +1,87 @@
+//
+// Header classes
+// --------------------------------------------------
+
+
+header{
+	font-family: "proxima-nova",sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	height: 75px;
+	position: relative;
+	border-bottom: solid 3px @primary-darken;
+	padding-top: (@padding-base-vertical*2); padding-bottom: (@padding-base-vertical*2);
+}
+
+.width-logo{
+	width: 180px;
+	// @media (min-width: @screen-sm){
+	// 	width: 200px;
+	// }
+ }
+
+#logo {
+	display: block;
+	height: 47px; width: 180px;
+	// margin: 14px 0 7px;
+	overflow: hidden;
+	position: relative;
+}
+#logo img {
+	border: none;
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+// Style menu-info desktop
+
+.info-menu{
+	.padding--sides--small;
+	border-right: solid 1px;
+	font-size: 1em;
+	line-height: 4em;
+	&:hover,
+    &:focus {
+    	color: @primary;
+        text-decoration: none;
+        .transition;
+      }
+}
+a.info-menu:last-child{
+	border-right: none
+}
+
+
+.grid-item:hover .grid-item__info{
+  top: 100px;
+}
+
+.grid-item__info{
+  position: absolute; top: 180%; right: 10px; top: -300px; left: 10px;
+  .transition(all 0.4s ease);
+}
+
+
+
+// Style content modal-menu movil
+
+#menu-info div > div > ul > li > a,
+#main-menu div > div > ul > li > a, {
+   display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-family: "proxima-nova",sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    white-space: nowrap;
+    text-decoration: none;
+    .color-primary-darken;
+    &:hover,
+    &:focus {
+    	color: @primary;
+        text-decoration: none;
+        .transition;
+      }
+}

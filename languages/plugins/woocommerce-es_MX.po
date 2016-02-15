@@ -2,13 +2,25 @@
 # This file is distributed under the same license as the Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-01-25 15:58:22+0000\n"
+"PO-Revision-Date: 2016-02-02 02:20:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/1.0-alpha-1100\n"
 "Project-Id-Version: Stable (latest release)\n"
+
+#: includes/wc-core-functions.php:314
+msgid "Saudi Riyal"
+msgstr "Saudi Riyal"
+
+#: includes/class-wc-frontend-scripts.php:345
+msgid "Please enter a stronger password."
+msgstr "Por favor usa una contraseña más fuerte."
+
+#: includes/class-wc-frontend-scripts.php:346
+msgid "The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &amp; )."
+msgstr "La contraseña debe tener por lo menos 7 caracteres. Para hacerla más fuerte, usa mayúsculas, minúsculas, números y símbolos como ! \" ? $ % ^ &amp; )."
 
 #: includes/abstracts/abstract-wc-order.php:2533
 #: includes/class-wc-ajax.php:1370
@@ -52,10 +64,6 @@ msgstr "El pago para el pedido #%d de %s falló. El pedido era el siguiente:"
 msgid "estimated for %s"
 msgstr "estimado para %s"
 
-#: includes/wc-cart-functions.php:265
-msgid "(includes %s%s)"
-msgstr "(incluye %s%s)"
-
 #: includes/wc-core-functions.php:299
 msgid "Kenyan shilling"
 msgstr "Chelín Kenyano"
@@ -98,7 +106,7 @@ msgstr "Pedido fallado"
 msgid "Refund Failed: No transaction ID"
 msgstr "Falló el reembolso: No hay ID de transacción"
 
-#: includes/class-wc-countries.php:850
+#: includes/class-wc-countries.php:852
 msgid "ZIP"
 msgstr "CP"
 
@@ -160,7 +168,7 @@ msgstr "No se pudo eliminar la tarifa de impuesto"
 msgid "Standard Rate"
 msgstr "Tarifa estándar"
 
-#: includes/class-wc-countries.php:779
+#: includes/class-wc-countries.php:781
 msgid "State / Zone"
 msgstr "Estado / Zona"
 
@@ -951,10 +959,6 @@ msgstr "Revisa tu email para el enlace de confirmación."
 msgid "Invalid key"
 msgstr "Clave no válida"
 
-#: includes/shortcodes/class-wc-shortcode-my-account.php:354
-msgid "Add a new payment method."
-msgstr "Añadir una nueva forma de pago."
-
 #: includes/shortcodes/class-wc-shortcode-order-tracking.php:48
 msgid "Please enter a valid order ID"
 msgstr "Por favor, introduce un ID de pedido válido"
@@ -1105,11 +1109,11 @@ msgstr "Shekel Israelí"
 msgid "Japanese Yen"
 msgstr "Yen Japonés"
 
-#: includes/wc-core-functions.php:300
+#: includes/wc-core-functions.php:301
 msgid "Lao Kip"
 msgstr "Lao Kip"
 
-#: includes/wc-core-functions.php:301
+#: includes/wc-core-functions.php:300
 msgid "South Korean Won"
 msgstr "Won de Corea del Sur"
 
@@ -1157,15 +1161,15 @@ msgstr "Leu Rumano"
 msgid "Russian Ruble"
 msgstr "Rublo Ruso"
 
-#: includes/wc-core-functions.php:315
+#: includes/wc-core-functions.php:316
 msgid "Singapore Dollar"
 msgstr "Dolar de Singapúr"
 
-#: includes/wc-core-functions.php:322
+#: includes/wc-core-functions.php:323
 msgid "South African rand"
 msgstr "Rand Sudafricano"
 
-#: includes/wc-core-functions.php:314
+#: includes/wc-core-functions.php:315
 msgid "Swedish Krona"
 msgstr "Corona Sueca"
 
@@ -1173,27 +1177,27 @@ msgstr "Corona Sueca"
 msgid "Swiss Franc"
 msgstr "Franco Suizo"
 
-#: includes/wc-core-functions.php:318
+#: includes/wc-core-functions.php:319
 msgid "Taiwan New Dollars"
 msgstr "Nuevo Dólar Taiwanés"
 
-#: includes/wc-core-functions.php:316
+#: includes/wc-core-functions.php:317
 msgid "Thai Baht"
 msgstr "Baht Tailandés"
 
-#: includes/wc-core-functions.php:317
+#: includes/wc-core-functions.php:318
 msgid "Turkish Lira"
 msgstr "Lira de Turkía"
 
-#: includes/wc-core-functions.php:319
+#: includes/wc-core-functions.php:320
 msgid "Ukrainian Hryvnia"
 msgstr "Ukrainian Hryvnia"
 
-#: includes/wc-core-functions.php:320
+#: includes/wc-core-functions.php:321
 msgid "US Dollars"
 msgstr "Dolar Americano"
 
-#: includes/wc-core-functions.php:321
+#: includes/wc-core-functions.php:322
 msgid "Vietnamese Dong"
 msgstr "Dong Vietnamita"
 
@@ -3624,83 +3628,83 @@ msgstr "Método de pago no válido."
 msgid "Please rate the product."
 msgstr "Por favor califica el producto."
 
-#: includes/class-wc-countries.php:270
+#: includes/class-wc-countries.php:272
 msgid "to the"
 msgstr "al"
 
-#: includes/class-wc-countries.php:270
+#: includes/class-wc-countries.php:272
 msgid "to"
 msgstr "a"
 
-#: includes/class-wc-countries.php:282
+#: includes/class-wc-countries.php:284
 msgid "the"
 msgstr "el/la/los"
 
-#: includes/class-wc-countries.php:292
+#: includes/class-wc-countries.php:294
 msgid "VAT"
 msgstr "IVA"
 
-#: includes/class-wc-countries.php:302
+#: includes/class-wc-countries.php:304
 msgid "(incl. VAT)"
 msgstr "(IVA incluído)"
 
-#: includes/class-wc-countries.php:302
+#: includes/class-wc-countries.php:304
 msgid "(incl. tax)"
 msgstr "(impuesto incluido)"
 
-#: includes/class-wc-countries.php:312
+#: includes/class-wc-countries.php:314
 msgid "(ex. VAT)"
 msgstr "(IVA no incluído)"
 
-#: includes/class-wc-countries.php:312
+#: includes/class-wc-countries.php:314
 msgid "(ex. tax)"
 msgstr "(sin impuestos)"
 
-#: includes/class-wc-countries.php:506
+#: includes/class-wc-countries.php:508
 msgid "Company Name"
 msgstr "Empresa (opcional)"
 
-#: includes/class-wc-countries.php:527
+#: includes/class-wc-countries.php:529
 msgid "Town / City"
 msgstr "Ciudad / Población"
 
-#: includes/class-wc-countries.php:594
+#: includes/class-wc-countries.php:596
 msgid "Suburb"
 msgstr "Barrio residencial"
 
-#: includes/class-wc-countries.php:614
+#: includes/class-wc-countries.php:616
 msgid "District"
 msgstr "Barrio"
 
-#: includes/class-wc-countries.php:621 includes/class-wc-countries.php:643
-#: includes/class-wc-countries.php:666 includes/class-wc-countries.php:727
-#: includes/class-wc-countries.php:746 includes/class-wc-countries.php:763
-#: includes/class-wc-countries.php:821 includes/class-wc-countries.php:845
-#: includes/class-wc-countries.php:887
+#: includes/class-wc-countries.php:623 includes/class-wc-countries.php:645
+#: includes/class-wc-countries.php:668 includes/class-wc-countries.php:729
+#: includes/class-wc-countries.php:748 includes/class-wc-countries.php:765
+#: includes/class-wc-countries.php:823 includes/class-wc-countries.php:847
+#: includes/class-wc-countries.php:889
 msgid "Province"
 msgstr "Provincia"
 
-#: includes/class-wc-countries.php:649
+#: includes/class-wc-countries.php:651
 msgid "Canton"
 msgstr "Cantón"
 
-#: includes/class-wc-countries.php:661 includes/class-wc-countries.php:717
+#: includes/class-wc-countries.php:663 includes/class-wc-countries.php:719
 msgid "Region"
 msgstr "Región"
 
-#: includes/class-wc-countries.php:714
+#: includes/class-wc-countries.php:716
 msgid "Town / District"
 msgstr "Localidad / Distrito"
 
-#: includes/class-wc-countries.php:751
+#: includes/class-wc-countries.php:753
 msgid "Prefecture"
 msgstr "Prefectura"
 
-#: includes/class-wc-countries.php:827
+#: includes/class-wc-countries.php:829
 msgid "Municipality"
 msgstr "Municipio"
 
-#: includes/class-wc-countries.php:944
+#: includes/class-wc-countries.php:946
 msgid "Email Address"
 msgstr "Dirección de email"
 
@@ -4508,11 +4512,11 @@ msgctxt "Order status"
 msgid "Failed"
 msgstr "Falló"
 
-#: includes/class-wc-countries.php:533
+#: includes/class-wc-countries.php:535
 msgid "State / County"
 msgstr "Estado"
 
-#: includes/class-wc-countries.php:722 includes/class-wc-countries.php:861
+#: includes/class-wc-countries.php:724 includes/class-wc-countries.php:863
 msgid "County"
 msgstr "Estado"
 
@@ -4596,17 +4600,17 @@ msgstr "¡No tienes permisos para accesar a esta página!"
 msgid "Access Denied"
 msgstr "Acceso Denegado"
 
-#: includes/class-wc-countries.php:522
+#: includes/class-wc-countries.php:524
 msgctxt "placeholder"
 msgid "Apartment, suite, unit etc. (optional)"
 msgstr "Dirección 2 (Colonia)"
 
-#: includes/class-wc-countries.php:517
+#: includes/class-wc-countries.php:519
 msgctxt "placeholder"
 msgid "Street address"
 msgstr "Dirección 1 (Calle, Número, Interior)"
 
-#: includes/class-wc-ajax.php:2594
+#: includes/class-wc-ajax.php:2589
 msgid "Dismiss this notice."
 msgstr "Ocultar esta notificación."
 
@@ -4642,7 +4646,7 @@ msgstr "Ocurrió un problema al procesar el pago. Por favor intenta nuevamente."
 msgid "Account password"
 msgstr "Contraseña para tu cuenta"
 
-#: includes/class-wc-countries.php:539
+#: includes/class-wc-countries.php:541
 #: templates/cart/shipping-calculator.php:90
 msgid "Postcode / ZIP"
 msgstr "Código Postal"
@@ -5482,7 +5486,7 @@ msgstr "El SKU ya existe en otro producto"
 #: includes/cli/class-wc-cli-product.php:914
 #: includes/cli/class-wc-cli-product.php:915
 #: includes/wc-product-functions.php:293
-#: templates/single-product/product-image.php:50
+#: templates/single-product/product-image.php:46
 msgid "Placeholder"
 msgstr "Marcador de posición"
 
@@ -7585,7 +7589,7 @@ msgstr "Cant."
 #: includes/admin/meta-boxes/views/html-order-items.php:64
 #: includes/admin/reports/class-wc-report-taxes-by-code.php:149
 #: includes/admin/settings/class-wc-settings-tax.php:33
-#: includes/class-wc-countries.php:292 includes/class-wc-tax.php:649
+#: includes/class-wc-countries.php:294 includes/class-wc-tax.php:649
 msgid "Tax"
 msgstr "Impuestos"
 
@@ -9096,18 +9100,18 @@ msgstr "Guardar/Actualizar el %s"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:43
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:92
-#: includes/class-wc-countries.php:495 includes/class-wc-form-handler.php:177
+#: includes/class-wc-countries.php:497 includes/class-wc-form-handler.php:177
 msgid "First Name"
 msgstr "Nombre"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:47
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:96
-#: includes/class-wc-countries.php:500 includes/class-wc-form-handler.php:178
+#: includes/class-wc-countries.php:502 includes/class-wc-form-handler.php:178
 msgid "Last Name"
 msgstr "Apellido"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:86
-#: includes/class-wc-countries.php:951
+#: includes/class-wc-countries.php:953
 msgid "Phone"
 msgstr "Teléfono"
 
@@ -9147,7 +9151,7 @@ msgstr "Cargar dirección de facturación"
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:254
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:337
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:339
-#: includes/class-wc-countries.php:516
+#: includes/class-wc-countries.php:518
 msgid "Address"
 msgstr "Dirección"
 
@@ -10397,7 +10401,7 @@ msgstr "Ciudad"
 #: includes/admin/class-wc-admin-profile.php:121
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:67
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:116
-#: includes/class-wc-countries.php:597 includes/class-wc-countries.php:858
+#: includes/class-wc-countries.php:599 includes/class-wc-countries.php:860
 msgid "Postcode"
 msgstr "Código postal"
 
@@ -10408,7 +10412,7 @@ msgstr "Código postal"
 #: includes/admin/class-wc-admin-setup-wizard.php:499
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:71
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:120
-#: includes/class-wc-countries.php:511
+#: includes/class-wc-countries.php:513
 msgid "Country"
 msgstr "País"
 
@@ -10616,7 +10620,7 @@ msgid "yd"
 msgstr "Yd"
 
 #: includes/admin/class-wc-admin-setup-wizard.php:500
-#: includes/class-wc-countries.php:600 includes/class-wc-countries.php:853
+#: includes/class-wc-countries.php:602 includes/class-wc-countries.php:855
 msgid "State"
 msgstr "Estado / Región"
 
@@ -11084,7 +11088,7 @@ msgstr "Leer/Escribir"
 msgid "Action failed. Please refresh the page and retry."
 msgstr "Error en la acción. Por favor, actualice la página y vuelva a intentarlo."
 
-#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.5.1)  #-#-#-#-#
+#. #-#-#-#-#  tmp-woocommerce.pot (WooCommerce 2.5.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: includes/abstracts/abstract-wc-order.php:2229
 #: includes/abstracts/abstract-wc-order.php:2230
@@ -11935,7 +11939,7 @@ msgstr "etiqueta-producto"
 #: includes/admin/class-wc-admin-permalink-settings.php:196
 #: includes/class-wc-post-types.php:233
 #: includes/updates/woocommerce-update-2.0.php:55
-#: includes/wc-core-functions.php:559 includes/wc-core-functions.php:594
+#: includes/wc-core-functions.php:561 includes/wc-core-functions.php:596
 msgctxt "slug"
 msgid "product"
 msgstr "producto"
