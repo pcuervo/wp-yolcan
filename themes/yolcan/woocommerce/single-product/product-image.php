@@ -24,7 +24,7 @@ global $post, $woocommerce, $product;
 ?>
  <div class="[ row ][ margin-bottom ]">
  	<div class="[ col-xs-12 padding--sides--xsm col-sm-4 col-sm-offset-4 ]">
-	 	<div class="images">
+	 	<div class="images [ padding--sides--xsm ]">
 	 <!-- 		<div class=" img-responsive"> -->
 				<?php
 					if ( has_post_thumbnail() ) {

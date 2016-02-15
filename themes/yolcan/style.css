@@ -7922,6 +7922,7 @@ a .active {
   font-size: 20px;
   color: #498D42;
   text-align: center;
+  margin-top: 0px;
 }
 .wc-tab .commentlist {
   padding-left: 10px;
@@ -7933,6 +7934,7 @@ a .active {
 .woocommerce-info:before {
   content: none;
 }
+.description_tab,
 .reviews_tab {
   display: none !important;
 }

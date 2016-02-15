@@ -31,7 +31,7 @@ if ( ! empty( $tabs ) ) : ?>
 
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<div class="woocommerce-tabs wc-tabs-wrapper">
-				<ul class="tabs wc-tabs [ list-style-none no-padding ]">
+				<ul class="tabs wc-tabs [ list-style-none no-padding no-margin ]">
 					<?php foreach ( $tabs as $key => $tab ) : ?>
 						<li class="<?php echo esc_attr( $key ); ?>_tab [ info ]">
 							<a href="#tab-<?php echo esc_attr( $key ); ?>"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></a>
