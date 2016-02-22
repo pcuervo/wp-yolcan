@@ -6276,6 +6276,10 @@ button.close {
   color: #498D42 !important;
   font-size: 2em!important;
 }
+.close-table:hover {
+  color: red!important;
+  background-color: #fff !important;
+}
 /*------------------------------------*\
     #FILTERS
 \*------------------------------------*/
