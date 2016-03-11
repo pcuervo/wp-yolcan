@@ -30,7 +30,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	// scripts
 	wp_enqueue_script('jquery-ui-datepicker');
 	wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
-	wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js?sensor=false', array('jquery'), '1.0', true );
+	wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
@@ -44,9 +44,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
 
 	if ( is_home() ) {
-		$cc = get_page_by_path('clubes-de-consumo');
-		$clubes = get_post_meta($cc->ID, 'direcciones-clubes', true);
-		$direc_club = unserialize( $clubes );
+		$direc_club = getLocationClubs();
 		wp_localize_script( 'functions', 'clubes', $direc_club );
 
 	}
@@ -62,9 +60,9 @@ add_action( 'wp_enqueue_scripts', function(){
 add_action( 'admin_enqueue_scripts', function(){
 
 	// scripts
+	wp_enqueue_script('jquery-ui-datepicker');
 	wp_enqueue_script( 'api-google', 'http://maps.google.com/maps/api/js?sensor=false&libraries=places&language=en-AU', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
-
 	wp_enqueue_script( 'google-function', JSPATH.'google-autocomplete.js', array('api-google'), '1.0', true );
 	
 
@@ -75,6 +73,7 @@ add_action( 'admin_enqueue_scripts', function(){
 
 	// styles
 	wp_enqueue_style( 'admin-css', CSSPATH.'admin.css' );
+	wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
 
 });
 
@@ -337,6 +336,38 @@ function setAgendaVisita($data){
 	$result['success'] = 'Se envío el mensaje con exito';
 
 	return true;
+}
+
+/**
+ * REGRESA LAS LOCALIZACIONES DE LOS CLUBS DE CONSUMO PARA MOSTRAR EN EL MAPA -- HOME
+ * @return [array] [localización cada club]
+ */
+function getLocationClubs(){
+	$clubes_consumo = new WP_Query(array(
+			'post_type'      => 'clubes-de-consumo',
+			'posts_per_page' => -1,
+		));
+	$new_arr = array();
+	if ( $clubes_consumo->have_posts() ) :
+
+		$count = 1;
+		while ( $clubes_consumo->have_posts() ) : $clubes_consumo->the_post();
+
+			$latitud_club = get_post_meta(get_the_ID(), 'latitud-club', true);
+			$longitud_club = get_post_meta(get_the_ID(), 'longitud-club', true);
+
+			if ($latitud_club != '' AND $longitud_club != '') {
+				$new_arr[$count]['latitud'] = $latitud_club;
+				$new_arr[$count]['longitud'] = $longitud_club;
+				$new_arr[$count]['nombre'] = get_the_title();
+			}
+
+			$count++;
+		endwhile;
+	endif;
+	wp_reset_postdata();
+
+	return $new_arr;
 }
 
 /**
