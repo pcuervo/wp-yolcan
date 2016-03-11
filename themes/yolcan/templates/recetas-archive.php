@@ -1,21 +1,24 @@
 <?php global $wp_query;
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;?>
-<div id="content" class="[ container ]">
-	<?php if ( have_posts() ) :
-		while( have_posts() ) : the_post();
-		 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
+<div class="[ container ]">
+	<div id="content">
+		<?php if ( have_posts() ) :
+			while( have_posts() ) : the_post();
+			 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
-			<div class="[ box-content ]">
-				<a href="<?php the_permalink() ?>">
-					<img alt="" src="<?php echo $url_img; ?>">
-					<p class=""><?php the_title(); ?></p>
-				</a>
-			</div>
+				<div class="[ box-content ]">
+					<a href="<?php the_permalink() ?>">
+						<img alt="" src="<?php echo $url_img; ?>">
+						<p class=""><?php the_title(); ?></p>
+					</a>
+				</div>
 
-		<?php endwhile;
-	endif; ?>
+			<?php endwhile;
+		endif; ?>
 
+	</div>
 </div>
+
 
 <!-- pagination -->
 <section class="[ bg-gray ][ text-center ]">
