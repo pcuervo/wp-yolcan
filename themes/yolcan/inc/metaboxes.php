@@ -10,6 +10,7 @@
 
 		add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 		add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
+		add_meta_box( 'meta-box-informacion_ingrediente', 'Ingredientes', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
 		add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
 
@@ -64,7 +65,7 @@
 		 	foreach ($ingredientes->posts as $ingrediente):
 		 		$checked = isset( $activitisShip[$ingrediente->ID] ) ? 'checked' : '';?>
 
-		 		<input type="checkbox" name="ingredientes[]" id="ingredientes[]" value="<?php echo $ingrediente->ID ?>" <?php echo $checked; ?> /> <?php echo $ingrediente->post_name; ?><br><br>
+		 		<input type="checkbox" name="ingredientes[]" id="ingredientes[]" value="<?php echo $ingrediente->ID ?>" <?php echo $checked; ?> /> <?php echo $ingrediente->post_title; ?><br><br>
 				
 		 	<?php endforeach;
 		endif;
@@ -203,6 +204,19 @@
 
 	}
 
+	function show_metabox_informacion_ingrediente($post){
+		wp_nonce_field(__FILE__, '_info_ingrediente_nonce');
+
+		$adicional_canasta = get_post_meta($post->ID, 'adicional_canasta', true);
+		$valor_en_puntos = get_post_meta($post->ID, 'valor_en_puntos', true);
+
+		$checked = $adicional_canasta == 'si' ? 'checked' : '';
+		echo '<input type="radio" name="adicional_canasta" value="si" '.$checked.'> Adicional en canasta<br><br>';
+
+		echo "<label for='valor_en_puntos' class='label-paquetes'>Valor en puntos: </label>";
+		echo "<input type='text' class='widefat' id='valor_en_puntos' name='valor_en_puntos' value='$valor_en_puntos'/><br><br>";
+	}
+
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
 
@@ -272,16 +286,18 @@
 			update_post_meta($post_id, 'dias-de-recoleccion-a', $_POST['dias_de_recoleccion_a']);
 		}
 
-
+		if ( isset($_POST['valor_en_puntos']) and check_admin_referer(__FILE__, '_info_ingrediente_nonce') ){
+			update_post_meta($post_id, 'valor_en_puntos', $_POST['valor_en_puntos']);
+		}	
 		
 
 
 		// Guardar correctamente los checkboxes
-		/*if ( isset($_POST['_checkbox_meta']) and check_admin_referer(__FILE__, '_checkbox_nonce') ){
-			update_post_meta($post_id, '_checkbox_meta', $_POST['_checkbox_meta']);
+		if ( isset($_POST['adicional_canasta']) and check_admin_referer(__FILE__, '_info_ingrediente_nonce') ){
+			update_post_meta($post_id, 'adicional_canasta', $_POST['adicional_canasta']);
 		} else if ( ! defined('DOING_AJAX') ){
-			delete_post_meta($post_id, '_checkbox_meta');
-		}*/
+			delete_post_meta($post_id, 'adicional_canasta');
+		}
 
 
 	});
@@ -289,3 +305,53 @@
 
 
 // OTHER METABOXES ELEMENTS //////////////////////////////////////////////////////////
+
+add_action( 'restrict_manage_posts', 'admin_ingredientes_filtro_adicional_en_canasta' );
+
+function admin_ingredientes_filtro_adicional_en_canasta(){
+    $type = 'ingredientes';
+    if (isset($_GET['post_type'])) {
+        $type = $_GET['post_type'];
+    }
+
+    if ('ingredientes' == $type){
+        $values = array(
+            'Adicional en canasta' => 'si'
+        );
+        ?>
+        <select name="ADMIN_FILTER_FIELD_VALUE">
+        <option value=""><?php _e('Filtrar por ', 'wose45436'); ?></option>
+        <?php
+            $current_v = isset($_GET['ADMIN_FILTER_FIELD_VALUE'])? $_GET['ADMIN_FILTER_FIELD_VALUE']:'';
+            foreach ($values as $label => $value) {
+                printf
+                    (
+                        '<option value="%s"%s>%s</option>',
+                        $value,
+                        $value == $current_v? ' selected="selected"':'',
+                        $label
+                    );
+                }
+        ?>
+        </select>
+        <?php
+    }
+}
+
+
+/**
+ * MUESTRA LOS INGRETIENTES FILTRADOS COMO ADICIONALES A LA CANASTA
+ */
+add_filter( 'parse_query', 'filtrar_ingredientes_adicionales_canasta' );
+
+function filtrar_ingredientes_adicionales_canasta( $query ){
+    global $pagenow;
+    $type = 'ingredientes';
+    if (isset($_GET['post_type'])) {
+        $type = $_GET['post_type'];
+    }
+    if ( 'ingredientes' == $type && is_admin() && $pagenow=='edit.php' && isset($_GET['ADMIN_FILTER_FIELD_VALUE']) && $_GET['ADMIN_FILTER_FIELD_VALUE'] != '') {
+        $query->query_vars['meta_key'] = 'adicional_canasta';
+        $query->query_vars['meta_value'] = $_GET['ADMIN_FILTER_FIELD_VALUE'];
+    }
+}
