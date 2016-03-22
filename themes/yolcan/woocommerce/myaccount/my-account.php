@@ -1,4 +1,4 @@
-<?php $saldo = 3700;
+<?php $saldo = 6700;
 /**
  * My Account page
  *
