@@ -30,7 +30,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	// scripts
 	wp_enqueue_script('jquery-ui-datepicker');
 	wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
-	wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js?sensor=false', array('jquery'), '1.0', true );
+	wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
@@ -62,7 +62,7 @@ add_action( 'wp_enqueue_scripts', function(){
 add_action( 'admin_enqueue_scripts', function(){
 
 	// scripts
-	wp_enqueue_script( 'api-google', 'http://maps.google.com/maps/api/js?sensor=false&libraries=places&language=en-AU', array('jquery'), '1.0', true );
+	wp_enqueue_script( 'api-google', 'http://maps.google.com/maps/api/js?libraries=places&language=en-AU', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
 
 	wp_enqueue_script( 'google-function', JSPATH.'google-autocomplete.js', array('api-google'), '1.0', true );
@@ -559,4 +559,68 @@ function my_theme_wrapper_end() {
 add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
     add_theme_support( 'woocommerce' );
+}
+
+add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
+function redirect_to_checkout() {
+	wc_clear_notices();
+    return WC()->cart->get_checkout_url();
+}
+
+/*
+ * Quitar a los datos de Facturación innecesarios
+ * con la excepción del nombre, apellido y correo. 
+ */
+add_filter( 'woocommerce_checkout_fields', 'remove_unnecessary_fields', 10 );
+function remove_unnecessary_fields( $fields ){
+	foreach ( $fields['billing'] as $key => $field ) {
+		if( 'billing_first_name' === $key || 'billing_last_name' === $key || 'billing_email' == $key ) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
+		$fields['billing'][$key]['required'] = false;
+		array_push( $fields['billing'][$key]['class'], '[ hidden ]');
+	}
+
+	return $fields;
+}
+
+add_filter( 'woocommerce_checkout_fields', 'add_billing_consumer_club_field', 20 );
+function add_billing_consumer_club_field( $fields ){
+	$fields['billing']['billing_consumer_club'] = array(
+		'type'			=> 'select',
+        'label'     	=> 'Clubes de consumo',
+	    'required'  	=> true,
+	    'class'			=> array( 'form-row-wide' ),
+	    'options'		=> array(
+		    				'1' => 'Club 1',
+		    				'2' => 'Club 2',
+		    			)
+     );
+
+     return $fields;
+}
+
+add_filter( 'woocommerce_checkout_fields', 'order_fields', 30 );
+function order_fields($fields) {
+    $order = array(
+        "billing_first_name", 
+        "billing_last_name", 
+        "billing_email", 
+        "billing_consumer_club"
+    );
+    foreach($order as $field)
+    {
+        $ordered_fields[$field] = $fields["billing"][$field];
+    }
+    $fields["billing"] = $ordered_fields;
+    return $fields;
+}
+
+add_filter( 'woocommerce_form_field_args', 'style_fields', 5 );
+function style_fields( $args ){
+	// echo '<pre>';
+	// var_dump( $args );
+	// echo '</pre>';
+	return $args;
 }
