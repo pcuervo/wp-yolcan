@@ -1,5 +1,5 @@
-<?php $completa = isset($actualizacion->valor_puntos_completa) ? $actualizacion->valor_puntos_completa : 0;
-$mitad = isset($actualizacion->valor_puntos_mitad) ? $actualizacion->valor_puntos_mitad : 0; ?>
+<?php $completa = isset($actualizacion_canasta->valor_puntos_completa) ? $actualizacion_canasta->valor_puntos_completa : 0;
+$mitad = isset($actualizacion_canasta->valor_puntos_mitad) ? $actualizacion_canasta->valor_puntos_mitad : 0; ?>
 <div class="wrap">
 	<h1>Editar Canasta</h1>
 	<hr>
@@ -23,10 +23,10 @@ $mitad = isset($actualizacion->valor_puntos_mitad) ? $actualizacion->valor_punto
 	      	<tbody>
 				<?php if(! empty($ingredientes) ):
 					foreach ($ingredientes as $key => $ingrediente) :
-						$status = $ultimos_ingredientes[$key]; 
-						$check_a = $status->canasta_completa == 1 ? 'checked' : '';
-						$check_b = $status->media_canasta == 1 ? 'checked' : '';
-						$check_c = $status->adicional == 1 ? 'checked' : ''; ?>
+						$status = isset($ingredientes_canasta[$key]) ? $ingredientes_canasta[$key] : ['canasta_completa' => '']; 
+						$check_a = (isset($status->canasta_completa) AND $status->canasta_completa) == 1 ? 'checked' : '';
+						$check_b = (isset($status->media_canasta) AND $status->media_canasta == 1) ? 'checked' : '';
+						$check_c = (isset($status->adicional) AND $status->adicional == 1) ? 'checked' : ''; ?>
 			      	  	<tr>
 			      	  	  	<td class="ingrediente"><?php echo $ingrediente['nombre']; ?></td>
 			      	  	  	<td><input type="checkbox" name="ingredientes_canasta[<?php echo $key ?>][canasta_completa]" value="1" <?php echo $check_a; ?> ></td>
@@ -39,6 +39,6 @@ $mitad = isset($actualizacion->valor_puntos_mitad) ? $actualizacion->valor_punto
 		      	endif; ?>
 	      	</tbody>
 	    </table>
-	    <input class="button button-primary" type="submit" name="" id="" value="Enviar">
+	    <input class="button button-primary" type="submit" name="" id="" value="Actualizar canasta">
      </form>
 </div>

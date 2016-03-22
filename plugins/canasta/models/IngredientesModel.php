@@ -110,11 +110,24 @@ class IngredientesModel {
 		", OBJECT );
     }
 
-
-    public function getIngredientesActuales($id_actualizacion, $tipo = 'all')
+    /**
+     * REGRESA LOS INGREDIENTES DE LA ACTUALIZACION INDICADA
+     * @param  [integer] $id_actualizacion [id de la actualizacion]
+     * @param  string $tipo             [tipo de canasta]
+     * @return [object]                   [ingredientes]
+     */
+    public function getIngredientesCanasta($id_actualizacion, $tipo = 'all')
     {
-    	return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}canasta_relationships
-    		WHERE canasta_id = $id_actualizacion;
+        $query_extra = ' ';
+        if ($tipo == 'completa') $query_extra .= 'AND canasta_completa = 1';
+        if ($tipo == 'media') $query_extra .= 'AND media_canasta = 1';
+        if ($tipo == 'adicionales') $query_extra .= 'AND adicional = 1';
+
+
+    	return $this->_wpdb->get_results( "SELECT cr.*, p.post_title as nombre_ingrediente FROM {$this->_prefix}canasta_relationships as cr
+            INNER JOIN {$this->_prefix}posts as p
+            ON cr.ingrediente_id = p.ID
+    		WHERE canasta_id = $id_actualizacion {$query_extra};
 		", OBJECT );
     }
 
