@@ -13,8 +13,6 @@
 		<meta http-equiv="cleartype" content="on">
 		<!-- Favicon - generated with http://www.favicomatic.com/ -->
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<!-- Google font(s) -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
 		<!-- Font awesome -->
@@ -62,10 +60,11 @@
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ no-padding ]">
 												<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
-												<li><a href="perfil.html">tu perfil</a></li>
-												<li><a href="cuenta.html">tu suscripción</a></li>
+												<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
+												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
 												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
+												<li><a href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a></li>
 											</ul>
 										</div>
 									</div>
@@ -101,10 +100,11 @@
 					<!-- info-menu desktop -->
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
 						<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="perfil.html">tu perfil</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="cuenta.html">tu suscripción</a>
+						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
+						<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
+						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a>
 					</div>
 				</div>
 				<!-- menu desktop -->
@@ -117,5 +117,6 @@
 						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/contactanos/'); ?>"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>
 					</div>
 				</nav>
+				<div class="[ clear ]"></div>
 			</div> <!-- /container -->
 		</header>
