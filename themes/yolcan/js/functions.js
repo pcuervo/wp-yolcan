@@ -471,8 +471,8 @@
 			var infoWindowContent = [];
 
 			$.each( clubes, function( key, value ) {
-				var cada_uno = [value.name, value.lat, value.long];
-				var data_uno = ['<div class="info_content"><h3>'+value.name+'</h3></div>'];
+				var cada_uno = [value.nombre, value.latitud, value.longitud];
+				var data_uno = ['<div class="info_content"><h3>'+value.nombre+'</h3></div>'];
 			 	data_clubs.push(cada_uno);
 			 	infoWindowContent.push(data_uno);
 

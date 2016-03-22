@@ -149,11 +149,11 @@
 <div class="[ container ]">
 	<div class="row">
 		<div class="[ col-xs-12 ]">
-			<h2> Clubes de consumo</h2>
+			<h2>Clubes de consumo</h2>
 		</div>
 		<div class="[ col-xs-12 col-sm-5 ]">
 			<div class="[ margin-bottom ]">
-				<?php $cc = get_page_by_path('clubes-de-consumo');
+				<?php $cc = get_page_by_path('informacion-clubes-de-consumo');
 				echo wpautop($cc->post_content); ?>
 			</div>
 			<div class="[  ][ hidden-xs ]">

@@ -175,6 +175,39 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 		);
 		register_post_type( 'beneficios', $args );
 
+		/**
+		 * CLUBS DE CONSUMO
+		 */
+		$labels = array(
+			'name'          => 'Clubes de consumo',
+			'singular_name' => 'Clubes de consumo',
+			'add_new'       => 'Nuevo Club',
+			'add_new_item'  => 'Nuevo Club',
+			'edit_item'     => 'Editar Club',
+			'new_item'      => 'Nuevo Club',
+			'all_items'     => 'Todos',
+			'view_item'     => 'Ver Club',
+			'search_items'  => 'Buscar Club',
+			'not_found'     => 'No se encontro',
+			'menu_name'     => 'Clubes de consumo'
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'clubes-de-consumo' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => 6,
+			'supports'           => array( 'title', 'editor', 'thumbnail' )
+		);
+		register_post_type( 'clubes-de-consumo', $args );
+
 	});
 
 

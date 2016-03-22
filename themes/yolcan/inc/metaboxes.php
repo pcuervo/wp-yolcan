@@ -10,6 +10,8 @@
 
 		add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 		add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
+		add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
+
 
 		if ($post->post_name == 'visitanos'){
 			add_meta_box( 'meta-box-datos_visita', 'Datos visitas', 'show_metabox_datos_visita', 'page', 'side', 'high');
@@ -20,9 +22,6 @@
 			add_meta_box( 'meta-box-info', 'Información extra', 'show_metabox_info', 'page', 'side', 'high');
 		}
 
-		if ($post->post_name == 'clubes-de-consumo'){
-			add_meta_box( 'meta-box-ubicaciones', 'Ubicaciones', 'show_metabox_ubicaciones', 'page');
-		}
 	});
 
 
@@ -150,40 +149,59 @@
 		echo "<input type='text' class='widefat' id='whatsapp_c' name='whatsapp_c' value='$whatsapp_c'/>";
 	}
 
-	function show_metabox_ubicaciones($post){
-		wp_nonce_field(__FILE__, '_ubicaciones_clubes_nonce');
 
-		$clubes = get_post_meta($post->ID, 'direcciones-clubes', true);
-		$direc_club = unserialize( $clubes );
-		$total = ! empty($direc_club) ? count($direc_club) + 1 : 1;
+	function show_metabox_info_extra($post){
+		wp_nonce_field(__FILE__, '_info_extra_nonce');
 
-		echo "<label for='ubicaciones_clubes' class='label-paquetes'>Ingresa la dirección: </label>";
-		echo "<input type='text' class='widefat' id='ubicaciones_clubes' name='ubicaciones_clubes' value=''/>";
+		$club = get_post_meta($post->ID, 'ubicacion-club', true);
+		$latitud_club = get_post_meta($post->ID, 'latitud-club', true);
+		$longitud_club = get_post_meta($post->ID, 'longitud-club', true);
 
-		echo "<input type='hidden' id='clube_n' name='clube_n' value='".$total."' >";
-		echo "<input type='hidden' id='clubes_d' name='clubes_d' value='' >";
+		$nombre_encargado_club = get_post_meta($post->ID, 'nombre-encargado-club', true);
+		$telefono_encargado_club = get_post_meta($post->ID, 'telefono-encargado-club', true);
+		$dias_de_recoleccion = get_post_meta($post->ID, 'dias-de-recoleccion', true);
+		$dias_de_recoleccion_a = get_post_meta($post->ID, 'dias-de-recoleccion-a', true);
 
+		$horarios_de_recoleccion = get_post_meta($post->ID, 'horarios-de-recoleccion', true);
+		$capacidad_del_club = get_post_meta($post->ID, 'capacidad-del-club', true);
+		$puede_dejar_efectivo = get_post_meta( $post->ID, 'puede-dejar-efectivo', true );
 
-		echo '<br><br><div class="cont-ubicaciones">';
-			$html = '';
-			if ( ! empty($direc_club) ):
-				$count = 1;
-				foreach ($direc_club as $club):
-					$html = '<div class="cont-direccion-clube"><strong>Dirección:</strong> '.$club['name'];
-					$html .= '<input type="hidden" name="direcciones['.$count.'][name]" value="'.$club['name'].'">';
-					$html .= '<input type="hidden" name="direcciones['.$count.'][lat]" value="'.$club['lat'].'">';
-					$html .= '<input type="hidden" name="direcciones['.$count.'][long]" value="'.$club['long'].'">';
-					$html .= ' - <span class="eliminar-club">Eliminar</span>';
-					$html .= '</div>';
-					echo $html;
-					$count = $count + 1;
-				endforeach;
-			endif;
+		echo "<label for='ubicacion_club' class='label-paquetes'>Ingresa la dirección: </label><br><br>";
+		echo "<input type='text' class='widefat' id='ubicacion_club' name='ubicacion_club' value='$club'/>";
+		echo "<input type='hidden' class='widefat' id='latitud_club' name='latitud_club' value='$latitud_club'/>";
+		echo "<input type='hidden' class='widefat' id='longitud_club' name='longitud_club' value='$longitud_club'/>";
 
-			
-		echo '</div>';
+		echo '<br><br><div class="iframe-cont">';
+			if ($latitud_club != '') {
+				echo '<iframe width="100%" height="170" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q='.$latitud_club.','.$longitud_club.'&hl=es;z=14&amp;output=embed"></iframe>';
+			}
+		echo '</div><br>';
+
+		echo "<label for='nombre_encargado_club' class='label-paquetes'>Nombre del encargado del club: </label>";
+		echo "<input type='text' class='widefat' id='nombre_encargado_club' name='nombre_encargado_club' value='$nombre_encargado_club'/><br><br>";
+
+		echo "<label for='telefono_encargado_club' class='label-paquetes'>Teléfono del encargado del club: </label>";
+		echo "<input type='text' class='widefat' id='telefono_encargado_club' name='telefono_encargado_club' value='$telefono_encargado_club'/><br><br>";
+
+		echo "<label for='dias_de_recoleccion' class='label-paquetes'>Días de recolección: </label><br>";
+		echo "de: <input type='text' class='date-picker' id='dias_de_recoleccion' name='dias_de_recoleccion' value='$dias_de_recoleccion'/>";
+		echo " a: <input type='text' class='date-picker' id='dias_de_recoleccion_a' name='dias_de_recoleccion_a' value='$dias_de_recoleccion_a'/><br><br>";
+
+		echo "<label for='horarios_de_recoleccion' class='label-paquetes'>Horarios de recolección: </label>";
+		echo "<input type='text' class='widefat' id='horarios_de_recoleccion' name='horarios_de_recoleccion' value='$horarios_de_recoleccion'/><br><br>";
+
+		echo "<label for='capacidad_del_club' class='label-paquetes'>Capacidad del club de consumo: </label>";
+		echo "<input type='text' class='widefat' id='capacidad_del_club' name='capacidad_del_club' value='$capacidad_del_club'/><br><br>";
+
+		$checked_1 = $puede_dejar_efectivo == 'si' ? 'checked' : '';
+		$checked_2 = $puede_dejar_efectivo == 'no' ? 'checked' : ''; 
+		$default = ($checked_1 == '' AND $checked_2 == '') ? 'checked' : '';
+
+		echo "<label for='puede_dejar_efectivo' class='label-paquetes'>¿Se puede dejar efectivo? </label><br><br> ";
+		echo '<input type="radio" name="puede_dejar_efectivo" value="si" '.$checked_1.' '.$default.'> Si<br>';
+  		echo '<input type="radio" name="puede_dejar_efectivo" value="no" '.$checked_2.' > No<br>';
+
 	}
-
 
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
@@ -236,14 +254,22 @@
 		}
 
 
-
-		if ( isset($_POST['clubes_d']) and check_admin_referer(__FILE__, '_ubicaciones_clubes_nonce') ){
-			update_post_meta( $post_id, 'direcciones-clubes', serialize($_POST['direcciones']) );
-		}
-
 		if ( isset($_POST['telefono_c']) and check_admin_referer(__FILE__, '_info_cont_nonce') ){
 			update_post_meta($post_id, 'telefono_c', $_POST['telefono_c']);
 			update_post_meta($post_id, 'whatsapp_c', $_POST['whatsapp_c']);
+		}
+
+		if ( isset($_POST['ubicacion_club']) and check_admin_referer(__FILE__, '_info_extra_nonce') ){
+			update_post_meta($post_id, 'ubicacion-club', $_POST['ubicacion_club']);
+			update_post_meta($post_id, 'latitud-club', $_POST['latitud_club']);
+			update_post_meta($post_id, 'longitud-club', $_POST['longitud_club']);
+			update_post_meta($post_id, 'nombre-encargado-club', $_POST['nombre_encargado_club']);
+			update_post_meta($post_id, 'telefono-encargado-club', $_POST['telefono_encargado_club']);
+			update_post_meta($post_id, 'dias-de-recoleccion', $_POST['dias_de_recoleccion']);
+			update_post_meta($post_id, 'horarios-de-recoleccion', $_POST['horarios_de_recoleccion']);
+			update_post_meta($post_id, 'capacidad-del-club', $_POST['capacidad_del_club']);
+			update_post_meta($post_id, 'puede-dejar-efectivo', $_POST['puede_dejar_efectivo']);
+			update_post_meta($post_id, 'dias-de-recoleccion-a', $_POST['dias_de_recoleccion_a']);
 		}
 
 
