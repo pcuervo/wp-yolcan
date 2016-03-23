@@ -137,22 +137,31 @@
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa en tu cuenta de <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ]">Usuario</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ]">Contraseña</label>
-											<input type="password" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ text-center ][ margin-bottom ]">
-											<button type="submit" href="#" class="[ btn btn-secondary padding--top-bottom--xsmall ]">ingresa</button>
-										</div>
-										<p class="[ text-center ][ margin-bottom ][ small sans-serif ]">¿Olvidaste tu contraseña?</p>
-										<div class="[ text-center ]">
-											<button type="submit" href="#" class="[ btn btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">crear cuenta</button>
-										</div>
+									<form method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
+										<?php do_action( 'woocommerce_login_form_start' ); ?>
+
+										<p class="form-row form-row-wide">
+											<label class="[ sans-serif ]" for="username"><?php _e( 'Username or email address', 'woocommerce' ); ?> <span class="required">*</span></label>
+											<input type="text" class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ] " name="username" id="username" value="<?php if ( ! empty( $_POST['username'] ) ) echo esc_attr( $_POST['username'] ); ?>" />
+										</p>
+										<p class="form-row form-row-wide">
+											<label class="[ sans-serif ]" for="password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
+											<input class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ]" type="password" name="password" id="password" />
+										</p>
+
+										<?php do_action( 'woocommerce_login_form' ); ?>
+										<p class="form-row [ text-center ]">
+											<?php wp_nonce_field( 'woocommerce-login' ); ?>
+											<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
+											<label for="rememberme" class="inline [ margin-bottom ]">
+												<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
+											</label>
+										</p>
+										<p class="lost_password [ text-center ]">
+											<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+										</p>
+
+										<?php do_action( 'woocommerce_login_form_end' ); ?>
 									</form>
 									<div class="[ text-center ]">
 										<a href="https://www.facebook.com">
