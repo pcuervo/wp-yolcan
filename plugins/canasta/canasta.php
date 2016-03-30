@@ -28,8 +28,13 @@ require(PATH_CANASTA."/controller/CanastaController.php");
 require(PATH_CANASTA."/models/CanastaModel.php");
 
 register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
-// register_deactivation_hook( PATH_CANASTA, array( 'CanastaModel', 'uninstall' ) );
 
 add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canasta", "canasta");' ) );
 
-add_action( 'admin_menu', create_function( '', 'CanastaController::index("edit", "Editar canasta", "editar-canasta");' ) );
+$productos = CanastaModel::productos();
+
+if ( ! empty($productos) ) {
+	foreach ($productos as $key => $producto) {
+		add_action( 'admin_menu', create_function( '', 'CanastaController::index("edit", "Editar '.$producto->post_title.'", "editar-'.$producto->post_name.'");' ) );
+	}
+}
