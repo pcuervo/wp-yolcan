@@ -48,7 +48,8 @@ class CanastaModel {
     /**
      * PRODUCTOS
      */
-    static function productos(){
+    static function productos()
+    {
     	global $wpdb;
 		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
 			WHERE post_status = 'publish' AND post_type = 'product';
@@ -58,7 +59,8 @@ class CanastaModel {
 	/**
 	 * CLUBES DE CONSUMO 
 	 */
-	static function clubes(){
+	static function clubes()
+	{
 		global $wpdb;
 		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
 			WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo';

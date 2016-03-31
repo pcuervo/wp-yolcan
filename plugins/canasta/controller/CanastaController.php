@@ -44,7 +44,6 @@ class CanastaController {
 	public function edit()
 	{
 		$page = getClubeProductoPage($_GET['page']);
-		
 
 		if (! empty($_POST)) $this->model_ingredientes->setIngredientesCanasta($_POST);
 
