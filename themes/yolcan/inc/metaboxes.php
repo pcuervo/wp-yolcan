@@ -207,11 +207,7 @@
 	function show_metabox_informacion_ingrediente($post){
 		wp_nonce_field(__FILE__, '_info_ingrediente_nonce');
 
-		$adicional_canasta = get_post_meta($post->ID, 'adicional_canasta', true);
 		$valor_en_puntos = get_post_meta($post->ID, 'valor_en_puntos', true);
-
-		$checked = $adicional_canasta == 'si' ? 'checked' : '';
-		echo '<input type="radio" name="adicional_canasta" value="si" '.$checked.'> Adicional en canasta<br><br>';
 
 		echo "<label for='valor_en_puntos' class='label-paquetes'>Valor en puntos: </label>";
 		echo "<input type='text' class='widefat' id='valor_en_puntos' name='valor_en_puntos' value='$valor_en_puntos'/><br><br>";
@@ -305,53 +301,3 @@
 
 
 // OTHER METABOXES ELEMENTS //////////////////////////////////////////////////////////
-
-add_action( 'restrict_manage_posts', 'admin_ingredientes_filtro_adicional_en_canasta' );
-
-function admin_ingredientes_filtro_adicional_en_canasta(){
-    $type = 'ingredientes';
-    if (isset($_GET['post_type'])) {
-        $type = $_GET['post_type'];
-    }
-
-    if ('ingredientes' == $type){
-        $values = array(
-            'Adicional en canasta' => 'si'
-        );
-        ?>
-        <select name="ADMIN_FILTER_FIELD_VALUE">
-        <option value=""><?php _e('Filtrar por ', 'wose45436'); ?></option>
-        <?php
-            $current_v = isset($_GET['ADMIN_FILTER_FIELD_VALUE'])? $_GET['ADMIN_FILTER_FIELD_VALUE']:'';
-            foreach ($values as $label => $value) {
-                printf
-                    (
-                        '<option value="%s"%s>%s</option>',
-                        $value,
-                        $value == $current_v? ' selected="selected"':'',
-                        $label
-                    );
-                }
-        ?>
-        </select>
-        <?php
-    }
-}
-
-
-/**
- * MUESTRA LOS INGRETIENTES FILTRADOS COMO ADICIONALES A LA CANASTA
- */
-add_filter( 'parse_query', 'filtrar_ingredientes_adicionales_canasta' );
-
-function filtrar_ingredientes_adicionales_canasta( $query ){
-    global $pagenow;
-    $type = 'ingredientes';
-    if (isset($_GET['post_type'])) {
-        $type = $_GET['post_type'];
-    }
-    if ( 'ingredientes' == $type && is_admin() && $pagenow=='edit.php' && isset($_GET['ADMIN_FILTER_FIELD_VALUE']) && $_GET['ADMIN_FILTER_FIELD_VALUE'] != '') {
-        $query->query_vars['meta_key'] = 'adicional_canasta';
-        $query->query_vars['meta_value'] = $_GET['ADMIN_FILTER_FIELD_VALUE'];
-    }
-}
