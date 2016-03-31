@@ -9,18 +9,18 @@
 	function custom_taxonomies_callback(){
 
 		// AUTORES
-		/*if( ! taxonomy_exists('autores')){
+		if( ! taxonomy_exists('unidades')){
 
 			$labels = array(
-				'name'              => 'Autores',
-				'singular_name'     => 'Autor',
+				'name'              => 'Unidades',
+				'singular_name'     => 'Unidad',
 				'search_items'      => 'Buscar',
 				'all_items'         => 'Todos',
-				'edit_item'         => 'Editar Autor',
-				'update_item'       => 'Actualizar Autor',
-				'add_new_item'      => 'Nuevo Autor',
-				'new_item_name'     => 'Nombre Nuevo Autor',
-				'menu_name'         => 'Autores'
+				'edit_item'         => 'Editar Unidad',
+				'update_item'       => 'Actualizar Unidad',
+				'add_new_item'      => 'Nuevo Unidad',
+				'new_item_name'     => 'Nombre Nuevo Unidad',
+				'menu_name'         => 'Unidades'
 			);
 
 			$args = array(
@@ -30,11 +30,11 @@
 				'show_admin_column' => true,
 				'show_in_nav_menus' => true,
 				'query_var'         => true,
-				'rewrite'           => array( 'slug' => 'autores' ),
+				'rewrite'           => array( 'slug' => 'unidades' ),
 			);
 
-			register_taxonomy( 'autor', 'libro', $args );
-		}*/
+			register_taxonomy( 'unidades', 'ingredientes', $args );
+		}
 		
 		
 		// TERMS
