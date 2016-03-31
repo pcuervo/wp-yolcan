@@ -32,9 +32,16 @@ register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
 add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canasta", "canasta");' ) );
 
 $productos = CanastaModel::productos();
+$clubes = CanastaModel::clubes();
 
-if ( ! empty($productos) ) {
-	foreach ($productos as $key => $producto) {
-		add_action( 'admin_menu', create_function( '', 'CanastaController::index("edit", "Editar '.$producto->post_title.'", "editar-'.$producto->post_name.'");' ) );
+if ( ! empty($productos) AND ! empty($clubes) ) {
+	foreach ($clubes as $key => $club) {
+		foreach ($productos as $key => $producto) {
+			$page = $club->ID.'_'.$producto->ID;
+			$name = $club->post_title.' - '.$producto->post_title;
+
+			add_action( 'admin_menu', create_function( '', 'CanastaController::index("edit", "Editar '.$name.'", "editar-'.$page.'");' ) );
+		}
 	}
+	
 }
