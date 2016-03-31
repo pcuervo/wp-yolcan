@@ -1,6 +1,4 @@
 <?php
-
-
 // TAXONOMIES ////////////////////////////////////////////////////////////////////////
 
 
@@ -35,20 +33,53 @@
 
 			register_taxonomy( 'unidades', 'ingredientes', $args );
 		}
-		
-		
-		// TERMS
-		/*if ( ! term_exists( 'some-term', 'autor' ) ){
-			wp_insert_term( 'Some term', 'category', array('slug' => 'some-term') );
-		}*/
 
-		/* // SUB TERMS CREATION
-		if(term_exists('parent-term', 'category')){
-			$term = get_term_by( 'slug', 'parent-term', 'category');
-			$term_id = intval($term->term_id);
-			if ( ! term_exists( 'child-term', 'category' ) ){
-				wp_insert_term( 'A child term', 'category', array('slug' => 'child-term', 'parent' => $term_id) );
+		if( ! taxonomy_exists('tipo-de-ingrediente')){
+
+			$labels = array(
+				'name'              => 'Tipo de ingrediente',
+				'singular_name'     => 'Tipo de ingrediente',
+				'search_items'      => 'Buscar',
+				'all_items'         => 'Todos',
+				'edit_item'         => 'Editar Tipo de ingrediente',
+				'update_item'       => 'Actualizar Tipo de ingrediente',
+				'add_new_item'      => 'Nuevo Tipo de ingrediente',
+				'new_item_name'     => 'Nombre Nuevo Tipo de ingrediente',
+				'menu_name'         => 'Tipo de ingrediente'
+			);
+
+			$args = array(
+				'hierarchical'      => true,
+				'labels'            => $labels,
+				'show_ui'           => true,
+				'show_admin_column' => true,
+				'show_in_nav_menus' => true,
+				'query_var'         => true,
+				'rewrite'           => array( 'slug' => 'tipo-de-ingrediente' ),
+			);
+
+			register_taxonomy( 'tipo-de-ingrediente', 'ingredientes', $args );
+		}
+
+		// UNIDADES
+		$terms = termsUnidades();
+		foreach ($terms as $slug => $term) {
+			if ( ! term_exists( $slug, 'unidades' ) ){
+				wp_insert_term( $term, 'unidades', array('slug' => $slug) );
 			}
-			
-		} */
+		}
+		
+	}
+
+	/**
+	 * TERMS OF TAXONOMY UNIDADES
+	 * @return [array] [terms names]
+	 */
+	function termsUnidades(){
+		return array(
+				'g' => 'g',
+				'kg' => 'Kg',
+				'lt' => 'Lt',
+				'pz' => 'Pza'
+			);
 	}
