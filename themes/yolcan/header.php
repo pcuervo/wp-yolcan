@@ -46,7 +46,7 @@
 					<div class="[ col-xs-6 inherit ][ visible-xs ][ margin-top--small ][ text-right ]">
 						<div class="[ inline-block ]">
 							<a data-toggle="modal" data-target="#menu-info">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/infomation-circle.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg">
 							</a>
 							<div id="menu-info" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
@@ -54,7 +54,7 @@
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-55 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
@@ -73,14 +73,14 @@
 						</div>
 						<div class="[ inline-block relative top-3 ][ margin-left--xsmall ]">
 							<a data-toggle="modal" data-target="#main-menu">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/navigation.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/navigation.svg">
 							</a>
 							<div id="main-menu" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-14 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">

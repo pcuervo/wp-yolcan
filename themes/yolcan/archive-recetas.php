@@ -17,7 +17,7 @@
 						<input type="text" name="search" class="[ form-control ][ input-search ][  ]">
 						<span class="[ input-group-btn ][  ]">
 							<button class="[ input-search--button ][ btn-secondary ][ no-margin padding--small ]" type="submit">
-								<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/search.svg">
+								<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/search.svg">
 							</button>
 						</span>
 

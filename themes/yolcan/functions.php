@@ -34,12 +34,13 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
-	
+
 
 	// localize scripts
 	wp_localize_script( 'functions', 'ajax_url', admin_url('admin-ajax.php') );
 	wp_localize_script( 'functions', 'is_home', (string)is_home() );
 	wp_localize_script( 'functions', 'is_conocenos', (string)is_page('conocenos') );
+	wp_localize_script( 'functions', 'is_nuestros_productos', (string)is_page('nuestros-productos') );
 	wp_localize_script( 'functions', 'is_recetas', (string)is_post_type_archive('recetas') );
 	wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
 
@@ -64,7 +65,7 @@ add_action( 'admin_enqueue_scripts', function(){
 	wp_enqueue_script( 'api-google', 'https://maps.google.com/maps/api/js?libraries=places&language=es-ES', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'admin-js', JSPATH.'admin.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'google-function', JSPATH.'google-autocomplete.js', array('api-google'), '1.0', true );
-	
+
 
 	// localize scripts
 	wp_localize_script( 'admin-js', 'ajax_url', admin_url('admin-ajax.php') );
@@ -109,11 +110,11 @@ if ( function_exists('add_theme_support') ){
 }
 
 if ( function_exists('add_image_size') ){
-	
+
 	add_image_size( 'img_blog', 305, 182, true );
-	
+
 	// cambiar el tamaño del thumbnail
-	
+
 	update_option( 'medium_size_h', 400 );
 	update_option( 'medium_size_w', 400 );
 	update_option( 'medium_crop', true );
@@ -121,7 +122,7 @@ if ( function_exists('add_image_size') ){
 	update_option( 'large_size_h', 450 );
 	update_option( 'large_size_w', 800 );
 	update_option( 'large_crop', true );
-	
+
 }
 
 
@@ -129,7 +130,7 @@ if ( function_exists('add_image_size') ){
 // POST TYPES, METABOXES, TAXONOMIES AND CUSTOM PAGES ////////////////////////////////
 
 
-	
+
 require_once('inc/post-types.php');
 
 require_once('inc/metaboxes.php');
@@ -142,8 +143,8 @@ require_once('inc/queries.php');
 
 require_once('inc/functions-newsletter.php');
 
-	
-	
+
+
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
 
 
@@ -246,7 +247,7 @@ function nav_is($compare = array(), $echo = TRUE){
 	$query = get_queried_object();
 	$inner_array = array();
 	if(gettype($compare) == 'string'){
-		
+
 		$inner_array[] = $compare;
 	}else{
 		$inner_array = $compare;
@@ -308,7 +309,7 @@ function getDateTransform($post_date){
 	return $meses[$mes].' '.$dia.', '.$ano;
 }
 
-/**	
+/**
  * AGENDA VISITA
  */
 function setAgendaVisita($data){
@@ -329,7 +330,7 @@ function setAgendaVisita($data){
 			'%s',
 			'%s',
 			'%d',
-			'%s'	
+			'%s'
 		)
 	);
 
@@ -397,7 +398,7 @@ function setContacto($data){
 }
 
 
-/**	
+/**
  * PAGINACION
  */
 
@@ -406,7 +407,7 @@ function round_num($num, $to_nearest) {
    return floor($num/$to_nearest)*$to_nearest;
 }
 
-/**	
+/**
  * OPCIONES PARA LA PAGINACION
  * @return [type] [description]
  */
@@ -429,15 +430,15 @@ function optionsPagination(){
     return $pagenavi_options;
 }
 
- 
-/**	
+
+/**
  * PAGINACION ARCHIVES (NOTA: partir en mas funciones - alex)
  * @return [string]         [html con la paginacion]
  */
 function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false, $simbol_url = '?', $variable_page = 'paged') {
 
     global $wpdb, $wp_query;
-    
+
     $before = '';
     $after = '';
 
@@ -447,11 +448,11 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
 
         $paged = $paged == '' ? intval(get_query_var($variable_page)) : $paged;
         $max_page = $num_pages == '' ? $wp_query->max_num_pages : $num_pages;
- 
+
         if(empty($paged) || $paged == 0) {
             $paged = 1;
         }
- 
+
         $pages_to_show = intval($pagenavi_options['num_pages']);
         $larger_page_to_show = intval($pagenavi_options['num_larger_page_numbers']);
         $larger_page_multiple = intval($pagenavi_options['larger_page_numbers_multiple']);
@@ -459,11 +460,11 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
         $half_page_start = floor($pages_to_show_minus_1/2);
         $half_page_end = ceil($pages_to_show_minus_1/2);
         $start_page = $paged - $half_page_start;
- 
+
         if($start_page <= 0) {
             $start_page = 1;
         }
- 
+
         $end_page = $paged + $half_page_end;
         if(($end_page - $start_page) != $pages_to_show_minus_1) {
             $end_page = $start_page + $pages_to_show_minus_1;
@@ -475,13 +476,13 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
         if($start_page <= 0) {
             $start_page = 1;
         }
- 
+
         $larger_per_page = $larger_page_to_show*$larger_page_multiple;
         $larger_start_page_start = (round_num($start_page, 10) + $larger_page_multiple) - $larger_per_page;
         $larger_start_page_end = round_num($start_page, 10) + $larger_page_multiple;
         $larger_end_page_start = round_num($end_page, 10) + $larger_page_multiple;
         $larger_end_page_end = round_num($end_page, 10) + ($larger_per_page);
- 
+
         if($larger_start_page_end - $larger_page_multiple == $start_page) {
             $larger_start_page_start = $larger_start_page_start - $larger_page_multiple;
             $larger_start_page_end = $larger_start_page_end - $larger_page_multiple;
@@ -500,7 +501,7 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             $pages_text = str_replace("%CURRENT_PAGE%", number_format_i18n($paged), $pagenavi_options['pages_text']);
             $pages_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), $pages_text);
             echo $before.'<div class="pagenavi">'."\n";
- 
+
             if(!empty($pages_text)) {
                 echo '<ul class="[ pagination ][ no-margin ]">';
             }
@@ -512,26 +513,26 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             	}else{
             		previous_posts_link($pagenavi_options['prev_text']);
             	}
-            	
+
             echo '</li>';
- 
+
             if ($start_page >= 2 && $pages_to_show < $max_page) {
                 $first_page_text = str_replace("%TOTAL_PAGES%", number_format_i18n($max_page), $pagenavi_options['first_text']);
-                
+
                 $url = $especial == true ? $siteUrl.$simbol_url.$variable_page.'=1' : esc_url(get_pagenum_link());
                 echo '<li><a href="'.$url.'" class="first" title="'.$first_page_text.'">1</a></li>';
                 if(!empty($pagenavi_options['dotleft_text'])) {
                     echo '<li><span class="expand">'.$pagenavi_options['dotleft_text'].'</span></li>';
                 }
             }
- 
+
             if($larger_page_to_show > 0 && $larger_start_page_start > 0 && $larger_start_page_end <= $max_page) {
                 for($i = $larger_start_page_start; $i < $larger_start_page_end; $i+=$larger_page_multiple) {
                     $page_text = str_replace("%PAGE_NUMBER%", number_format_i18n($i), $pagenavi_options['page_text']);
                     echo '<li><a href="'.esc_url(get_pagenum_link($i)).'" class="single_page" title="'.$page_text.'">'.$page_text.'</a></li>';
                 }
             }
- 
+
             for($i = $start_page; $i  <= $end_page; $i++) {
                 if($i == $paged) {
                     $current_page_text = str_replace("%PAGE_NUMBER%", number_format_i18n($i), $pagenavi_options['current_text']);
@@ -542,7 +543,7 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
                     echo '<li class="num-pag"><a href="'.$url.'" class="single_page" title="'.$page_text.'">'.$page_text.'</a></li>';
                 }
             }
- 
+
             if ($end_page < $max_page) {
                 if(!empty($pagenavi_options['dotright_text'])) {
                     echo '<li><span class="expand">'.$pagenavi_options['dotright_text'].'</span></li>';
@@ -559,7 +560,7 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             		next_posts_link($pagenavi_options['next_text'], $max_page);
             	}
             echo '</li>';
- 
+
             if($larger_page_to_show > 0 && $larger_end_page_start < $max_page) {
                 for($i = $larger_end_page_start; $i <= $larger_end_page_end; $i+=$larger_page_multiple) {
                     $page_text = str_replace("%PAGE_NUMBER%", number_format_i18n($i), $pagenavi_options['page_text']);
@@ -600,7 +601,7 @@ function redirect_to_checkout() {
 
 /*
  * Quitar a los datos de Facturación innecesarios
- * con la excepción del nombre, apellido y correo. 
+ * con la excepción del nombre, apellido y correo.
  */
 add_filter( 'woocommerce_checkout_fields', 'remove_unnecessary_fields', 10 );
 function remove_unnecessary_fields( $fields ){
@@ -635,9 +636,9 @@ function add_billing_consumer_club_field( $fields ){
 add_filter( 'woocommerce_checkout_fields', 'order_fields', 30 );
 function order_fields($fields) {
     $order = array(
-        "billing_first_name", 
-        "billing_last_name", 
-        "billing_email", 
+        "billing_first_name",
+        "billing_last_name",
+        "billing_email",
         "billing_consumer_club"
     );
     foreach($order as $field)
