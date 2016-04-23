@@ -32,6 +32,7 @@
 	</head>
 
 	<body>
+		<?php $user = wp_get_current_user(); ?>
 		<header class="[ bg-light ]">
 			<div class=" [ container ] ">
 				<div class="[ row ]">
@@ -59,8 +60,11 @@
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ no-padding ]">
-												<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
-												<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
+												<?php if ( ! empty($user->ID) ): ?>
+													<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
+												<?php else: ?>
+													<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
+												<?php endif; ?>
 												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
 												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
@@ -99,8 +103,13 @@
 					</div>
 					<!-- info-menu desktop -->
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
-						<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
+						<?php if ( ! empty($user->ID) ): ?>
+							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
+						<?php else: ?>
+							<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
+						<?php endif; ?>
+						
+						
 						<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
