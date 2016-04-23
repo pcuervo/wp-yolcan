@@ -117,6 +117,7 @@
 
 
 
+
 		function imgToSvg(){
 		    $('img.svg').each(function(){
 		        var $img = $(this);

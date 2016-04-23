@@ -2,7 +2,6 @@
 
 <div class="[ container ]">
 	<!-- video	-->
-	<div class="[ row ]"></div>
 	<div class="[ row ][ margin-top ]">
 		<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 ]">
 			<div class="[ js-video-wrapper ]">
@@ -62,15 +61,16 @@
 		</div>
 	</div>
 	<!-- entradas -->
+
 	<div class="[ row ][ margin-top ]">
 		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'post' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
-				while ( $entrada->have_posts() ) : 
+				while ( $entrada->have_posts() ) :
 					$entrada->the_post();
 					$url_img = attachment_image_url($post->ID, 'large'); ?>
-					
+
 					<a href="<?php the_permalink() ?>">
 						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo $url_img; ?>');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]"><?php the_title(); ?></h2>
@@ -78,16 +78,16 @@
 					</a>
 				<?php endwhile;
 			endif; ?>
-			
+
 		</div>
 		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'recetas' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
-				while ( $entrada->have_posts() ) : 
+				while ( $entrada->have_posts() ) :
 					$entrada->the_post();
 					$url_img = attachment_image_url($post->ID, 'large'); ?>
-					
+
 					<a href="<?php the_permalink() ?>">
 						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo $url_img; ?>');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]"><?php the_title(); ?></h2>
@@ -95,16 +95,16 @@
 					</a>
 				<?php endwhile;
 			endif; ?>
-			
+
 		</div>
 		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'ingredientes' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
-				while ( $entrada->have_posts() ) : 
+				while ( $entrada->have_posts() ) :
 					$entrada->the_post();
 					$url_img = attachment_image_url($post->ID, 'large'); ?>
-					
+
 					<a href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name; ?>">
 						<div class="[ bg-image rectangle-small ][ color-light text-shadow ]" style="background-image: url('<?php echo $url_img; ?>');">
 							<h2 class="[ no-margin ][ center-full ][ width-90 ][ text-center text-xbold ]"><?php the_title(); ?></h2>
@@ -117,7 +117,7 @@
 </div> <!--/container-->
 
 <!-- Consumir local -->
-<div class="[ bg-primary-darken ][ margin-top--large ]">
+<section class="[ bg-primary-darken ][ margin-top--large ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ]">
 			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
@@ -126,6 +126,7 @@
 				<p class="[ margin-bottom--large ]"> Los productos cultivados con métodos de agricultura intensiva son más baratos porque contienen químicos que dañarán tu salud y la de tu familia.</p>
 			</div>
 			<div class="[ visible-xs ][ margin-bottom--large ]"></div>
+
 			<!-- Charts.js -->
 			<div class="[ col-sm-8 ][ text-center ][ margin-bottom ]">
 				<div class="[ margin-bottom ]">
@@ -139,14 +140,15 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="[ col-sm-4 ][ text-center ][ margin-bottom ]">
 				<p class="[ margin-bottom--large ]">Por cada $100 pesos gastados en productos locales, $46 regresan a la comunidad mientras que del consumo de macrotiendas, solamente $14 pesos regresan a la misma.</p>
 			</div>
 		</div><!--/row-->
 	</div>
-</div>
+</section>
 
-<div class="[ container ]">
+<section class="[ container ]">
 	<div class="row">
 		<div class="[ col-xs-12 ]">
 			<h2>Clubes de consumo</h2>
@@ -178,10 +180,11 @@
 			</p>
 		</div>
 	</div>
-</div>
-
+</section>
 <!--Clubes de consumo-->
-<div class="[ bg-secondary ][ margin-top ]">
+
+
+<section class="[ bg-secondary ][ margin-top ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ][ padding-bottom--large ]">
 			<div class="[ col-xs-12 ]">
@@ -190,24 +193,22 @@
 			<?php $entrada = new WP_Query( array('posts_per_page' => 4, 'post_type' => array( 'beneficios' ) ) );
 
 			if ( $entrada->have_posts() ) :
-				while ( $entrada->have_posts() ) : 
+				while ( $entrada->have_posts() ) :
 					$entrada->the_post();
 					$url_img = attachment_image_url($post->ID, 'full'); ?>
-					
-					<div class="[ col-xs-12 col-sm-3 ][ margin-bottom ]">
+
+					<div class="[ col-xs-12 col-sm-4 ][ margin-bottom ]">
 						<div class="[ text-center ]">
-							<img class="[ margin-top ][ svg icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>">
+							<img class="[ margin-top ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>">
 							<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i><?php the_title(); ?></i></h3>
 						</div>
 						<?php the_content(); ?>
 					</div>
 				<?php endwhile;
 			endif; ?>
-			
-			
-			
+
 		</div>
 	</div>
-</div>
+</section>
 
 <?php get_footer(); ?>
