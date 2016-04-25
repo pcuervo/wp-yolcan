@@ -2,44 +2,21 @@
 
 <div class="[ container ]">
 	<!-- video	-->
-	<div class="[ row ][ margin-top ]">
-		<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 ]">
+	<section class="[ row ]">
+		<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 ][ margin-bottom--large ]">
 			<div class="[ js-video-wrapper ]">
 				<iframe class="[ embed-responsive-item ]" src="https://www.youtube.com/embed/HCj_EUKAis4" frameborder="0" allowfullscreen></iframe>
 			</div>
 		</div>
-	</div>
-
-	<div class="[ row ]">
 		<div class="[ col-xs-12 ]">
-			<h2 class="[ text-center ][ margin-top-bottom ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
+			<h2 class="[ text-center ][ no-margin ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
 		</div>
-	</div>
+	</section>
 
-	<div class="[ row ][ visible-xs ]">
-		<!-- banner	movil-->
-		<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/IMG_1023.jpg');">
-			<h2 class="[ no-margin ]">Canastas de verduras y frutas organicas a domicilio</h2>
-			<div class="[ btn-absolute-bottom ]">
-				<div class="[ text-center ]" >
-					<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
-					<a href="nuestros-productos.html" ><button class="[ btn btn-primary-darken ]">¿cómo funciona?</button></a>
-				</div>
-			</div>
-		</div>
-		<div class="[ col-sm-6 ][ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>images/_DSC0010.jpg');">
-			<h2 class="[ no-margin ]">Conoce como se cosechan nuestros productos y a quienes los producen</h2>
-			<div class="[ text-center ]" >
-				<div class="[ btn-absolute-bottom ]">
-					<a href="<?php echo site_url('/visitanos/'); ?>" ><button class="[ btn btn-secondary ]">visítanos</button></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="[ row ][ hidden-xs ]">
+	<section class="[ row ]">
 		<!-- banner	desktop -->
-		<div class="[ col-sm-6 ]">
-			<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>images/IMG_1023.jpg');">
+		<article class="[ col-sm-6 ]">
+			<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/IMG_1023.jpg');">
 				<h2>Canastas de verduras y frutas organicas a domicilio</h2>
 				<div class="[ btn-absolute-bottom ]">
 					<div class="[ text-center ]" >
@@ -48,9 +25,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="[ col-sm-6 ]">
-			<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ][ margin-top ]" style="background-image: url('<?php echo THEMEPATH; ?>images/_DSC0010.jpg');">
+		</article>
+		<article class="[ col-sm-6 ]">
+			<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/_DSC0010.jpg');">
 				<h2>Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 				<div class="[ text-center ]" >
 					<div class="[ btn-absolute-bottom ]">
@@ -58,12 +35,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</article>
+	</section>
 	<!-- entradas -->
 
-	<div class="[ row ][ margin-top ]">
-		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
+	<section class="[ row ]">
+		<article class="[ col-xs-12 ][ col-sm-4 ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'post' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
@@ -79,8 +56,8 @@
 				<?php endwhile;
 			endif; ?>
 
-		</div>
-		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
+		</article>
+		<article class="[ col-xs-12 ][ col-sm-4 ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'recetas' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
@@ -96,8 +73,8 @@
 				<?php endwhile;
 			endif; ?>
 
-		</div>
-		<div class="[ col-xs-12 ][ col-sm-4 ][ margin-top ]">
+		</article>
+		<article class="[ col-xs-12 ][ col-sm-4 ]">
 			<?php $entrada = new WP_Query( array('posts_per_page' => 1, 'post_type' => array( 'ingredientes' ), 'orderby' => 'rand' ) );
 
 			if ( $entrada->have_posts() ) :
@@ -112,20 +89,20 @@
 					</a>
 				<?php endwhile;
 			endif; ?>
-		</div>
-	</div>
+		</article>
+	</section>
+
 </div> <!--/container-->
 
 <!-- Consumir local -->
-<section class="[ bg-primary-darken ][ margin-top--large ]">
+<section class="[ bg-primary-darken ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ]">
-			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
+			<div class="[ col-xs-12 col-sm-10 col-md-8 col-lg-6 ]">
 				<h2>Consumir local</h2>
 				<p class="[ lead ]"><i>Comprando productos locales estas apoyando a los productorores de tu comunidad.</i></p>
 				<p class="[ margin-bottom--large ]"> Los productos cultivados con métodos de agricultura intensiva son más baratos porque contienen químicos que dañarán tu salud y la de tu familia.</p>
 			</div>
-			<div class="[ visible-xs ][ margin-bottom--large ]"></div>
 
 			<!-- Charts.js -->
 			<div class="[ col-sm-8 ][ text-center ][ margin-bottom ]">

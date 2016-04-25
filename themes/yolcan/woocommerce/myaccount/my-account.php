@@ -57,7 +57,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 			<div class="[ margin-bottom ]">
 				<div class="[ row ]">
 
-					<section class="[ hidden-xs ][ col-sm-3 ][ bg-gray-lighter ][ margin ].height-50 height-1200">
+					<section class="[ hidden-xs ][ col-sm-3 ][ bg-gray-lighter ][ margin ]">
 						<div class="[ col-sm-10 col-sm-offset-1 ][ inline-block align-middle ][ margin-top-bottom ][ padding ]">
 							<img class="[ img-user img-responsive ]" src="img/profile.png" >
 						</div>
@@ -104,7 +104,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 								if ($canasta->actualizacion->valor_puntos_completa > $saldo AND $canasta->actualizacion->valor_puntos_mitad < $saldo) $ingredientes = $canasta->getMediaCanasta();
 							endif; ?>
 							<ul class="[ list-style-none ][ padding--left ]">
-								<?php if (!empty($ingredientes)): 
+								<?php if (!empty($ingredientes)):
 									foreach ($ingredientes as $key => $ingrediente): ?>
 										<li><?php echo $ingrediente->nombre_ingrediente; ?></li>
 									<?php endforeach;
@@ -125,8 +125,8 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 						<form>
 							<?php if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
 								$adicionales = $canasta->getIngredientesAdicionales();
-								if ( ! empty($adicionales) ): 
-									foreach($adicionales as $data_ingrediente): 
+								if ( ! empty($adicionales) ):
+									foreach($adicionales as $data_ingrediente):
 										$ingrediente = get_post($data_ingrediente->ingrediente_id);?>
 										<div class="[ margin-bottom ]">
 											<a data-toggle="collapse" href="#<?php echo $ingrediente->post_name; ?>" class="[ no-decoration color-dark color-dark-hover ]">
@@ -161,9 +161,9 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 											</div>
 										</div>
 									<?php endforeach;
-								endif; 
+								endif;
 							endif; ?>
-							
+
 						</form>
 					</div> <!-- /forms -->
 

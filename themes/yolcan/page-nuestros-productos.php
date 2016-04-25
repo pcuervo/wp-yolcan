@@ -1,20 +1,12 @@
 <?php get_header();
 the_post(); ?>
 
-<div class="[ container ]" >
-	<div class="[ row ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<h1 class="[ h2 text-center ]"><strong><?php the_title(); ?></strong></h1>
-			<?php the_content(); ?>
-		</div>
-	</div>
-</div>
-
-<div class="[ bg-gray-lighter ][ padding--top-bottom--xxlarge ]">
-	<div class="[ container ]" >
-		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-4 ]">
-				<div class="[ card ][ margin-bottom--large ]">
+<section class="[ bg-gray-lighter ]">
+	<div class="[ container ]">
+		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
+		<div class="[ row ][ margin-bottom--large ]">
+			<article class="[ col-xs-12 col-sm-4 ]">
+				<div class="[ card ]">
 					<div class="[ card__header ]">
 						<h3 class="[ card__title ]">Media canasta</h3>
 						<h5 class="[ card__subtitle ]">para 1 persona</h5>
@@ -53,9 +45,9 @@ the_post(); ?>
 						</form>
 					</div>
 				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-4 ]">
-				<div class="[ card ][ margin-bottom--large ]">
+			</article>
+			<article class="[ col-xs-12 col-sm-4 ]">
+				<div class="[ card ]">
 					<div class="[ card__header ]">
 						<h3 class="[ card__title ]">Canasta completa</h3>
 						<h5 class="[ card__subtitle ]">Para 2 personas</h5>
@@ -94,9 +86,9 @@ the_post(); ?>
 						</form>
 					</div>
 				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-4 ]">
-				<div class="[ card ][ margin-bottom--large ]">
+			</article>
+			<article class="[ col-xs-12 col-sm-4 ]">
+				<div class="[ card ]">
 					<div class="[ card__header ]">
 						<h3 class="[ card__title ]">Canasta familiar</h3>
 						<h5 class="[ card__subtitle ]">Para 2 adultos y 2 niños</h5>
@@ -135,7 +127,7 @@ the_post(); ?>
 						</form>
 					</div>
 				</div>
-			</div>
+			</article>
 		</div>
 
 		<div class="[ row ][ margin-bottom ]">
@@ -165,31 +157,31 @@ the_post(); ?>
 
 		<p class="[ text-center ]">Puedes editar tu orden en la sección de tu cuenta</p>
 	</div>
-</div>
+</section>
 
-<div class="[ bg-light ][ padding--top-bottom--xxlarge ]">
+<section class="[ bg-light ]">
 	<div class="[ container ]">
-		<h2 class="text-center">¿Preguntas? Aquí tenemos tus respuestas</h2>
+		<h2 class="[ text-center ]">¿Preguntas? Aquí tenemos tus respuestas</h2>
 		<div class="[ row ][ js-masonry-container ]">
-			<div class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
+			<article class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
 				<h4>Can I select the recipes?</h4>
 				<p>Quo plebiscito decreta a senatu est consuli quaestio Cn. Ita graviter et severe voluptatem secrevit a bono. Magni enim aestimabat pecuniam non modo non contra leges, sed etiam legibus partam. Quid enim possumus hoc agere divinius? Duo Reges: autem in homine praestantissimum atque optimum est, id deseruit. Hinc ceteri particulas arripere conati suam quisque videro voluit afferre sententiam. Si longus, levis;</p>
-			</div>
-			<div class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
+			</article>
+			<article class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
 				<h4>Can I select the recipes?</h4>
 				<p>Yes! Each week, 10 days before your delivery day, you’ll receive an email with meal choices. If you'd like to swap recipes, you can do so under "My Account."</p>
-			</div>
-			<div class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
+			</article>
+			<article class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
 				<h4>Can I select the recipes?</h4>
 				<p>Itaque hic ipse iam pridem est reiectus; Sed ad bona praeterita redeamus. Ego quoque, inquit, didicerim libentius si quid attuleris, quam te reprehenderim. Duo Reges: constructio interrete.</p>
-			</div>
-			<div class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
+			</article>
+			<article class="[ col-sm-12 col-sm-4 col-md-3 ][ js-masonry-item ]">
 				<h4>Can I select the recipes?</h4>
 				<p>Hoc loco tenere se Triarius non potuit. Ita relinquet duas, de quibus etiam atque etiam consideret. Hoc loco tenere se Triarius non potuit. Nunc agendum est subtilius. Itaque rursus eadem ratione, qua sum paulo ante usus, haerebitis. Et harum quidem rerum facilis est et expedita distinctio. Duo Reges: iure in vestris auribus commentatus?</p>
-			</div>
+			</article>
 		</div>
 	</div>
-</div>
+</section>
 
 
 <?php get_footer(); ?>

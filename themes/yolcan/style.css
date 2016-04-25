@@ -1077,6 +1077,26 @@ body {
   color: #333333;
   background-color: #fff;
 }
+section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+section article {
+  padding: 0;
+  margin-bottom: 24px;
+}
+section article:last-of-type {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  section article {
+    margin-bottom: 0;
+  }
+}
+article {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
 input,
 button,
 select,
@@ -1175,6 +1195,7 @@ h6,
 .h4,
 .h5,
 .h6 {
+  margin-top: 0;
   font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1215,8 +1236,7 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 h1 small,
 .h1 small,
@@ -1238,7 +1258,6 @@ h5,
 .h5,
 h6,
 .h6 {
-  margin-top: 10px;
   margin-bottom: 10px;
 }
 h4 small,
@@ -1279,19 +1298,23 @@ h6,
 .h6 {
   font-size: 12px;
 }
-h1 {
-  margin: 0;
+h1,
+.h1 {
   padding: 0;
   font-size: 14px;
 }
 h2,
-h5 {
+.h2,
+h5,
+.h5 {
   font-family: "proxima-nova", sans-serif;
   font-style: normal;
   font-weight: 700;
 }
 h3,
-h4 {
+.h3,
+h4,
+.h4 {
   font-family: "bree-serif", sans-serif;
 }
 p {
@@ -8414,14 +8437,19 @@ a .active {
   stroke: currentColor;
 }
 header {
+  height: 75px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: solid 3px #272c28;
   font-family: "proxima-nova", sans-serif;
   font-style: normal;
   font-weight: 400;
-  height: 75px;
   position: relative;
-  border-bottom: solid 3px #272c28;
-  padding-top: 12px;
-  padding-bottom: 12px;
+}
+@media (min-width: 768px) {
+  header {
+    height: 130px;
+  }
 }
 .width-logo {
   width: 180px;
@@ -8496,6 +8524,10 @@ a.info-menu:last-child {
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
+}
+footer {
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 footer .svg {
   margin-left: 5px;
