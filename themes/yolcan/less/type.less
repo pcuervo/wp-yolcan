@@ -7,6 +7,7 @@
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-top: 0;
   font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -24,8 +25,7 @@ h1, h2, h3, h4, h5, h6,
 h1, .h1,
 h2, .h2,
 h3, .h3 {
-  margin-top: 0;
-  margin-bottom: (@line-height-computed / 2);
+  margin-bottom: (@line-height-computed);
 
   small,
   .small {
@@ -35,7 +35,6 @@ h3, .h3 {
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  margin-top: (@line-height-computed / 2);
   margin-bottom: (@line-height-computed / 2);
 
   small,
@@ -52,19 +51,18 @@ h5, .h5 { font-size: @font-size-h5; }
 h6, .h6 { font-size: @font-size-h6; }
 
 
-h1{
-  margin: 0;
+h1, .h1{
   padding: 0;
   font-size: 14px;
-   }
+}
 
-h2, h5, {
+h2, .h2, h5, .h5 {
   font-family: "proxima-nova",sans-serif;
   font-style: normal;
   font-weight: 700;
 }
 
-h3,h4, {
+h3, .h3, h4, .h4 {
   font-family: "bree-serif", sans-serif;
 }
 

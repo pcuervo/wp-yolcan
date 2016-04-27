@@ -32,6 +32,24 @@ body {
   background-color: @body-bg;
 }
 
+// Sections and articles
+
+section{
+  padding-top: (@padding-base-vertical*4); padding-bottom: (@padding-base-vertical*4);
+
+  article{
+    padding: 0; margin-bottom: (@padding-base-vertical*4);
+
+    &:last-of-type{ margin-bottom: 0; }
+
+    @media (min-width: @screen-sm){
+      margin-bottom: 0;
+    }
+  }
+}
+
+article{ padding-top: (@padding-base-vertical*2); padding-bottom: (@padding-base-vertical*2); }
+
 // Reset fonts for relevant elements
 input,
 button,
@@ -44,7 +62,6 @@ textarea {
 
 
 // Links
-
 a {
   color: @link-color;
   text-decoration: none;

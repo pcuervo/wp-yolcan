@@ -1,15 +1,7 @@
-<?php $completa = isset($actualizacion_canasta->valor_puntos_completa) ? $actualizacion_canasta->valor_puntos_completa : 0;
-$mitad = isset($actualizacion_canasta->valor_puntos_mitad) ? $actualizacion_canasta->valor_puntos_mitad : 0; ?>
 <div class="wrap">
-	<h1>Editar Canasta</h1>
+	<h1>Editar <?php echo $nombre_canasta; ?></h1>
 	<hr>
 	<form action="" method="POST">
-		<label for="valor_puntos_completa" class="label-paquetes">Puntos Canasta completa: </label>
-		<input type="text" name="valor_puntos_completa" value="<?php echo $completa; ?>" id="valor_puntos_completa" placeholder=""/> 
-
-		<label for="valor_puntos_mitad" class="label-paquetes">Puntos media Canasta: </label>
-		<input type="text" name="valor_puntos_mitad" value="<?php echo $mitad; ?>" id="valor_puntos_mitad" placeholder=""/> 
-		<hr>
 		<table class="table-ingredientes">
 	      	<thead>
 	      	  	<tr>

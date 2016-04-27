@@ -1,16 +1,11 @@
-<?php $completa = isset($actualizacion_canasta->valor_puntos_completa) ? $actualizacion_canasta->valor_puntos_completa : 0;
-$mitad = isset($actualizacion_canasta->valor_puntos_mitad) ? $actualizacion_canasta->valor_puntos_mitad : 0;
-$fecha = isset($actualizacion_canasta->ultima_actualizacion) ? $actualizacion_canasta->ultima_actualizacion : 0; ?>
 <div class="wrap">
 	<h1>Canasta Actual</h1>
 	<hr>
 	<h3>Ingredientes</h3>
-	<?php $date = getDateTransformUpdate(date("Y-m-d", strtotime($fecha))); ?>
-	<p><strong>Ultima Actualización:</strong> <?php echo $date[3].', '.$date[0].' de '.$date[1].' del '.$date[2]; ?></p>
+	
 	<div class="content-ingredientes">
 		<h4>Canasta completa</h4>
-		<hr>
-		<p class="puntos">Valor en puntos: <strong><?php echo $completa ?></strong></p>
+		<p><strong>Ultima Actualización:</strong> Martes, 29 de Octubre del 2016</p>
 		<hr>
 		<ul>
 			<?php if (!empty($canasta_completa)): 
@@ -23,7 +18,7 @@ $fecha = isset($actualizacion_canasta->ultima_actualizacion) ? $actualizacion_ca
 	<div class="content-ingredientes">
 		<h4>Media Canasta</h4>
 		<hr>
-		<p class="puntos">Valor en puntos: <strong><?php echo $mitad ?></strong></p>
+		<p><strong>Ultima Actualización:</strong> Martes, 29 de Octubre del 2016</p>
 		<hr>
 		<ul>
 			<?php if (!empty($media_canasta)): 

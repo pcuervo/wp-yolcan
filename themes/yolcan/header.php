@@ -32,6 +32,7 @@
 	</head>
 
 	<body>
+		<?php $user = wp_get_current_user(); ?>
 		<header class="[ bg-light ]">
 			<div class=" [ container ] ">
 				<div class="[ row ]">
@@ -59,7 +60,7 @@
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ no-padding ]">
-												<?php if ( is_user_logged_in() ): ?>
+												<?php if ( ! empty($user->ID) ): ?>
 													<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
 												<?php else: ?>
 													<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
@@ -102,7 +103,7 @@
 					</div>
 					<!-- info-menu desktop -->
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
-						<?php if ( is_user_logged_in() ): ?>
+						<?php if ( ! empty($user->ID) ): ?>
 							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
 						<?php else: ?>
 							<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>

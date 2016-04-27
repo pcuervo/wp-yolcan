@@ -1,4 +1,4 @@
-		<footer class="[ bg-primary-darken ][ text-center ][ color-gray-xxlight ]">
+		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
 				<div class="[ row ]">
 					<div class="[ col-sm-3 no-padding--right no-padding--left ]">
@@ -69,11 +69,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="[ row ]">
-					<div class="[ col-xs-12 ][ margin-top-bottom ]">
-						<p class="[ color-gray-xlight ]">Content copyright 2015. Yolcan. All right reserved.</p>
-					</div>
-				</div>
+				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
 			</div>
 		</footer>
 

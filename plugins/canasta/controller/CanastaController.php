@@ -43,10 +43,14 @@ class CanastaController {
 	 */
 	public function edit()
 	{
+		$page = getClubeProductoPage($_GET['page']);
+
 		if (! empty($_POST)) $this->model_ingredientes->setIngredientesCanasta($_POST);
 
 		$data = $this->getCanasta();
 		$data['ingredientes'] = $this->model_ingredientes->getIngredientes();
+		$data['nombre_canasta'] = $page['nombre_canasta'];
+		$data['id_canasta'] = $page['id_canasta'];
 
 		return view('edit', $data);
 	}
