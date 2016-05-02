@@ -20,11 +20,13 @@ if( $my_posts ) :
 
 
 	<div id="content">
+        <div class="[ container ]">
+            <div class="[ row ]">
 		<?php if (! empty($recetas) ):
 			foreach ($recetas as $post):
 			 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
-				<div class="[ box-content ]">
+				<div>
 					<a href="<?php echo get_permalink($post->ID) ?>">
 						<img alt="" src="<?php echo $url_img; ?>">
 						<p class=""><?php echo get_the_title($post->ID); ?></p>
@@ -35,7 +37,8 @@ if( $my_posts ) :
 		else:
 			echo '<p>No se encontraron recetas con ese ingrediente</p>';
 		endif; ?>
-
+            </div>
+        </div>
 	</div>
 
 
