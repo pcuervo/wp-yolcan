@@ -2661,12 +2661,6 @@ legend {
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
 input[type="search"] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -5342,28 +5336,28 @@ nav .woocommerce-breadcrumb {
   background-color: #fff;
   cursor: not-allowed;
 }
-.label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
-  font-weight: bold;
+.label,
+label {
+  display: inline-block;
+  max-width: 100%;
+  padding-bottom: 0.2em;
   line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25em;
 }
 a.label:hover,
-a.label:focus {
+alabel:hover,
+a.label:focus,
+alabel:focus {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
 }
-.label:empty {
+.label:empty,
+label:empty {
   display: none;
 }
-.btn .label {
+.btn .label,
+.btn label {
   position: relative;
   top: -1px;
 }
@@ -5431,16 +5425,17 @@ input[type="checkbox"] {
 }
 input[type="checkbox"] + label span {
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: #fff;
   border: 2px solid #3ac6b1;
   margin: 4px 4px 5px 0;
   vertical-align: middle;
   cursor: pointer;
 }
-input[type="checkbox"] + label {
-  font-weight: lighter;
+input[type="checkbox"] + label span:after {
+  content: '';
+  position: relative;
 }
 input[type="checkbox"]:checked + label span {
   background-color: #3ac6b1;

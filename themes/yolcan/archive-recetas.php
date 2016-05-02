@@ -47,7 +47,7 @@
 				<div class="[ row ]">
 					<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
 						<input type="checkbox" id="c1" name="cc">
-						<label for="c1"><span></span>desayuno</label>
+						<label for="c1"><span></span>desayuno largo largo largo orale sí está largo eh de veritas</label>
 					</div>
 					<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
 						<input type="checkbox" id="c2" name="cc">
