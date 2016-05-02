@@ -38,17 +38,6 @@ if( $my_posts ) :
 
 	</div>
 
-
-	<!-- pagination -->
-	<section class="[ bg-gray ][ text-center ]">
-		<?php if($max_num_pages > 1):
-			$url = site_url('/recetas/?ingrediente='.$_GET['ingrediente']);
-			pagenavi($pagina, $max_num_pages, $url, true, '&', 'pagina');
-		else: ?>
-			<div class="no-pagination">pag 1 de 1</div>
-		<?php endif; ?>
-
-	</section>
 <?php else:
 	echo '<p>No se encontraron recetas con ese ingrediente</p>';
 endif; ?>

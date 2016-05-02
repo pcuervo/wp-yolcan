@@ -80,7 +80,7 @@
 					<div class="[ modal-body ][ color-light ]">
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
@@ -106,7 +106,7 @@
 									<div class="[ text-center ]">
 										<a href="https://www.facebook.com">
 											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" href="#" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
 												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
 												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
 											</button>
@@ -127,7 +127,7 @@
 					<div class="[ modal-body ][ color-light ]">
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom--large ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
@@ -162,7 +162,7 @@
 									<div class="[ text-center ]">
 										<a href="https://www.facebook.com">
 											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" href="#" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
 												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
 												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
 											</button>
@@ -183,7 +183,7 @@
 				<div class="[ modal-content ]">
 					<div class="[ modal-body modal--horizontal ][ bg-light ][ padding--top-bottom--xxlarge ][ color-light ]">
 						<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
 						<h2 class="[ text-center color-dark ][ no-margin--top ]">Canasta mediana</h2>
 						<div class="[ row ]">

@@ -58,14 +58,9 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 				<div class="[ row ]">
 
 					<section class="[ hidden-xs ][ col-sm-3 ][ bg-gray-lighter ][ margin ]">
-						<div class="[ col-sm-10 col-sm-offset-1 ][ inline-block align-middle ][ margin-top-bottom ][ padding ]">
-							<img class="[ img-user img-responsive ]" src="img/profile.png" >
-						</div>
-						<div class="[ col-sm-10 col-sm-offset-1 ][ inline-block align-middle ][ margin-bottom ]">
-							<h2><strong>Daniela Morfín</strong></h2>
-							<a href="#" class="[ underline ][ color-secondary ]"><em>editar</em></a>
-							<a href="#" class="[ underline ][ color-secondary ][ margin-left--xsmall ]"><em>salir</em></a>
-						</div>
+						<h2>Daniela Morfín</h2>
+						<a href="#" class="[ underline ][ color-secondary ]"><em>editar</em></a>
+						<a href="#" class="[ underline ][ color-secondary ][ margin-left--xsmall ]"><em>salir</em></a>
 					</section>
 
 					<section class="[ visible-xs ]">
@@ -87,8 +82,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 							<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>
 							<p>Equivale a <strong>2 y media canastas</strong></p>
 							<div class="[ text-center ]">
-								<a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom ]">agrega saldo a tu cuenta</a>
-								<a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom ]">programa tu pago</a>
+								<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ][ margin-bottom ]">agrega saldo a tu cuenta</a>
 							</div>
 						</div>
 

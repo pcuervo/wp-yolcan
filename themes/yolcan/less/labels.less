@@ -6,7 +6,7 @@
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+  font-weight: lighter;
   line-height: 1;
   color: @label-color;
   text-align: center;
@@ -89,22 +89,19 @@ input[type="checkbox"]{ display: none; }
 
 input[type="checkbox"] + label span{
     display: inline-block;
-    width: 25px;
-    height: 25px;
+    width: 20px; height: 20px;
     background-color: @light;
     border: 2px solid @secondary;
     margin: 4px 4px 5px 0;
     vertical-align: middle;
     cursor:pointer;
-}
-input[type="checkbox"] + label {
-    font-weight: lighter;
 
-  }
-
-input[type="checkbox"]:checked + label span{
-    background-color: @secondary;
+    &:after{
+      content: '';
+    }
 }
+
+input[type="checkbox"]:checked + label span{ background-color: @secondary; }
 
 //// label input radio
 

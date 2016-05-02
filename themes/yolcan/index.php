@@ -98,29 +98,27 @@
 <section class="[ bg-primary-darken ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ]">
-			<div class="[ col-xs-12 col-sm-10 col-md-8 col-lg-6 ]">
+			<article class="[ col-xs-12 col-sm-10 col-md-8 col-lg-6 ]">
 				<h2>Consumir local</h2>
 				<p class="[ lead ]"><i>Comprando productos locales estas apoyando a los productorores de tu comunidad.</i></p>
-				<p class="[ margin-bottom--large ]"> Los productos cultivados con métodos de agricultura intensiva son más baratos porque contienen químicos que dañarán tu salud y la de tu familia.</p>
-			</div>
+				<p class=""> Los productos cultivados con métodos de agricultura intensiva son más baratos porque contienen químicos que dañarán tu salud y la de tu familia.</p>
+			</article>
 
 			<!-- Charts.js -->
-			<div class="[ col-sm-8 ][ text-center ][ margin-bottom ]">
-				<div class="[ margin-bottom ]">
-					<div class="[ inline-block ][ margin-sides--small ]">
-						<canvas id="mycanvas" width="130%" height="130%"></canvas>
-						<p class="[ color-tertiary ][ lead ]">$46 Productos locales</p>
-					</div>
-					<div class="[ inline-block ][ margin-sides--small ]">
-						<canvas id="mycanvas1" width="130%" height="130%" class="[ margin-left--small ]"></canvas>
-						<p class="[ color-quaternary ][ lead ]">$14 Macro tiendas</p>
-					</div>
+			<article class="[ col-sm-8 ][ text-center ]">
+				<div class="[ inline-block ][ margin-sides--small ]">
+					<canvas id="mycanvas" width="130%" height="130%"></canvas>
+					<p class="[ color-tertiary ][ lead ]">$46 Productos locales</p>
 				</div>
-			</div>
+				<div class="[ inline-block ][ margin-sides--small ]">
+					<canvas id="mycanvas1" width="130%" height="130%" class="[ margin-left--small ]"></canvas>
+					<p class="[ color-quaternary ][ lead ]">$14 Macro tiendas</p>
+				</div>
+			</article>
 
-			<div class="[ col-sm-4 ][ text-center ][ margin-bottom ]">
-				<p class="[ margin-bottom--large ]">Por cada $100 pesos gastados en productos locales, $46 regresan a la comunidad mientras que del consumo de macrotiendas, solamente $14 pesos regresan a la misma.</p>
-			</div>
+			<article class="[ col-sm-4 ][ text-center ]">
+				<p class="">Por cada $100 pesos gastados en productos locales, $46 regresan a la comunidad mientras que del consumo de macrotiendas, solamente $14 pesos regresan a la misma.</p>
+			</article>
 		</div><!--/row-->
 	</div>
 </section>
