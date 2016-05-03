@@ -1,7 +1,7 @@
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
-				<div class="[ row ]">
-					<div class="[ col-sm-3 no-padding--right no-padding--left ]">
+				<section class="[ row ]">
+					<article class="[ col-sm-3 ]">
 						<h3><em>Contacto</em></h3>
 						<!-- Contacto: social-media -->
 						<?php $contactanos = get_page_by_path('contactanos');
@@ -31,23 +31,23 @@
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
 						</a>
-					</div>
-					<div class="[ col-sm-4 col-md-3 ]">
+					</article>
+					<article class="[ col-sm-4 col-md-3 ]">
 						<h3><em>Únete</em></h3>
 						<div class="[ margin-bottom ]">
 							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
 							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 						</div>
-					</div>
-					<div class="[ col-sm-2 col-md-3 ]">
+					</article>
+					<article class="[ col-sm-2 col-md-3 ]">
 						<h3><em>Métodos de pago</em></h3>
 						<div class="[ row ]">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/visa.svg" alt="">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/paypal.svg" alt="">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/mastercard.svg" alt="">
 						</div>
-					</div>
-					<div class="[ col-sm-3 ]">
+					</article>
+					<article class="[ col-sm-3 ]">
 						<h3><em>Newsletter</em></h3>
 						<div class="[ text-left ]">
 							<p>Recibe las últimas noticias y ofertas antes que nadie, déjanos tu correo.</p>
@@ -67,8 +67,8 @@
 								</span>
 							</form>
 						</div>
-					</div>
-				</div>
+					</article>
+				</section>
 				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
 			</div>
 		</footer>
