@@ -29,7 +29,7 @@ require(PATH_CANASTA."/models/CanastaModel.php");
 
 register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
 
-add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canastas Semanales", "canasta");' ) );
+add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canasta Semanal", "canasta");' ) );
 
 $productos = CanastaModel::productos();
 $clubes = CanastaModel::clubes();
