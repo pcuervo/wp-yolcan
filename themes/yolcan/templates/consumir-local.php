@@ -1,4 +1,4 @@
-<div class="[ bg-primary-darken ][ margin-top--large margin-bottom ]">
+<section class="[ bg-primary-darken ][ margin-bottom ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ]">
 			<div class="[ col-xs-12 ]">
@@ -29,4 +29,4 @@
 			</div>
 		</div><!--/row-->
 	</div>
-</div>
+</section>
