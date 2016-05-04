@@ -21,7 +21,7 @@
 						$check_c = (isset($status->adicional) AND $status->adicional == 1) ? 'checked' : ''; ?>
 			      	  	<tr>
 			      	  	  	<td class="ingrediente"><?php echo $ingrediente['nombre']; ?></td>
-			      	  	  	<td><input type="checkbox" name="ingredientes_canasta[<?php echo $key ?>][canasta_completa]" value="1" <?php echo $check_a; ?> ></td>
+			      	  	  	<td><input type="checkbox" name="ingredientes_canasta[<?php echo $key ?>][canasta_completa]" value="1" <?php echo $check_a; ?>></td>
 			      	  	  	<td><input type="checkbox" name="ingredientes_canasta[<?php echo $key ?>][media_canasta]" value="1" <?php echo $check_b; ?>></td>
 			      	  	  	<td><input type="checkbox" name="ingredientes_canasta[<?php echo $key ?>][adicional]" value="1" <?php echo $check_c; ?>></td>
 			      	  	  	<td><?php echo $ingrediente['puntos']; ?></td>
