@@ -134,20 +134,20 @@ the_post(); ?>
 			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 ]">
 				<div class="[ row ]">
 					<div class="[ col-xs-4 ][ feature ]">
-						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ]">
-							<img class="[ svg ][ icon icon--stroke icon--thickness-1 ][ color-secondary ]"src="<?php echo THEMEPATH; ?>icons/box-1.svg">
+						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">
+							<img class="[ svg ][ icon icon--iconed--large icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 						</div>
 						<span class="[ feature__text ]">Envio a domicilio semanal gratuito</span>
 					</div>
 					<div class="[ col-xs-4 ][ feature ]">
-						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ]">
-							<img class="[ svg ][ icon icon--stroke icon--thickness-1 ][ color-secondary ]"src="<?php echo THEMEPATH; ?>icons/filter-7.svg">
+						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">
+							<img class="[ svg ][ icon icon--iconed--large  icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/filter-7.svg">
 						</div>
 						<span class="[ feature__text ]">Sáltate cualquier semana </span>
 					</div>
 					<div class="[ col-xs-4 ][ feature ]">
-						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ]">
-							<img class="[ svg ][ icon icon--stroke icon--thickness-1 ][ color-secondary ]"src="<?php echo THEMEPATH; ?>icons/apple-1.svg">
+						<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">
+							<img class="[ svg ][ icon icon--iconed--large  icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/apple-1.svg">
 						</div>
 						<span class="[ feature__text ]">Agrega ingredientes a tu canasta</span>
 					</div>

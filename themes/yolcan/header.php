@@ -33,7 +33,7 @@
 
 	<body>
 		<?php $user = wp_get_current_user(); ?>
-		<header class="[ bg-light ]">
+		<header class="[ header-wrapper ][ bg-light ]">
 			<div class=" [ container ] ">
 				<div class="[ row ]">
 					<div class="[ col-xs-6 ]">

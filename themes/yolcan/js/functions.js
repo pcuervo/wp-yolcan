@@ -214,6 +214,27 @@
 		    });
 		}
 
+		function footerBottom(){
+			var alturaFooter = getFooterHeight();
+			$('.main').css('padding-bottom', alturaFooter );
+		}
+
+		//Footer
+
+		function footerBottom(){
+		    var alturaFooter = getFooterHeight();
+		    $('.main').css('padding-bottom', alturaFooter );
+		}
+
+		/**
+		 * Get footer's height
+		 */
+		function getFooterHeight(){
+		    return $('footer').outerHeight();
+		}// getFooterHeight
+
+
+
 		//Get the header height
 		function getHeaderHeight(){
 		    return $('.header-wrapper').height();

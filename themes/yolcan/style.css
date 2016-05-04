@@ -1066,6 +1066,10 @@ th {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+html,
+body {
+  height: 100%;
+}
 html {
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1076,6 +1080,14 @@ body {
   line-height: 1.42857143;
   color: #333333;
   background-color: #fff;
+  width: 100%;
+}
+.main {
+  min-height: -moz-calc(100% - 130px);
+  min-height: -o-calc(100% - 130px);
+  min-height: -webkit-calc(100% - 130px);
+  min-height: calc(100% - 130px);
+  position: relative;
 }
 section {
   padding-top: 24px;
@@ -8321,6 +8333,7 @@ a .active {
 }
 header {
   height: 75px;
+  width: 100%;
   padding-top: 12px;
   padding-bottom: 12px;
   border-bottom: solid 3px #272c28;
