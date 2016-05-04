@@ -4,7 +4,10 @@
 
 	$(function(){
 
-		
+		$('.date-picker').datepicker({
+	        dateFormat : 'yy-mm-dd',
+	        minDate: 0
+	    });
 
 	});
 

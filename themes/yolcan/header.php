@@ -13,8 +13,6 @@
 		<meta http-equiv="cleartype" content="on">
 		<!-- Favicon - generated with http://www.favicomatic.com/ -->
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<!-- Google font(s) -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
 		<!-- Font awesome -->
@@ -48,7 +46,7 @@
 					<div class="[ col-xs-6 inherit ][ visible-xs ][ margin-top--small ][ text-right ]">
 						<div class="[ inline-block ]">
 							<a data-toggle="modal" data-target="#menu-info">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/infomation-circle.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg">
 							</a>
 							<div id="menu-info" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
@@ -56,16 +54,17 @@
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-55 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ no-padding ]">
 												<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
-												<li><a href="perfil.html">tu perfil</a></li>
-												<li><a href="cuenta.html">tu suscripción</a></li>
+												<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
+												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
 												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
+												<li><a href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a></li>
 											</ul>
 										</div>
 									</div>
@@ -74,14 +73,14 @@
 						</div>
 						<div class="[ inline-block relative top-3 ][ margin-left--xsmall ]">
 							<a data-toggle="modal" data-target="#main-menu">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/navigation.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/navigation.svg">
 							</a>
 							<div id="main-menu" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-14 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>images/icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
@@ -101,10 +100,11 @@
 					<!-- info-menu desktop -->
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
 						<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="perfil.html">tu perfil</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="cuenta.html">tu suscripción</a>
+						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
+						<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
+						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a>
 					</div>
 				</div>
 				<!-- menu desktop -->
@@ -117,5 +117,6 @@
 						</a><a class="[ color-primary-darken ][ width-20 ][ text-uppercase ][ inline-block ]" href="<?php echo site_url('/contactanos/'); ?>"><div class="[ border-bottom--secondary ]">Contáctanos</div></a>
 					</div>
 				</nav>
+				<div class="[ clear ]"></div>
 			</div> <!-- /container -->
 		</header>

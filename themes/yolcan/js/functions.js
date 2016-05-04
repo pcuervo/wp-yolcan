@@ -9,7 +9,7 @@
 	    });
 
 		imgToSvg();
-		init_masonry();
+		init_masonry('#content', '.box-content');
 
 		/**
 		 * home
@@ -18,7 +18,7 @@
 			/**
 			 * On ready
 			**/
-			
+
 			$('.js-video-wrapper').fitVids();
 			/**
 			 * Triggered events
@@ -70,7 +70,7 @@
 
 		};
 
-		
+
 
 		if (is_recetas == 1) {
 			/*------------------------------------*\
@@ -107,7 +107,14 @@
 			});
 		};
 
-		
+		/**
+		 * Nuestros-productos
+		**/
+		if (is_nuestros_productos == 1 ){
+			init_masonry('.js-masonry-container', '.js-masonry-item');
+		}
+
+
 
 
 		function imgToSvg(){
@@ -147,12 +154,12 @@
 		    #TOGGLE FUNCTIONS
 		\*------------------------------------*/
 
-		function init_masonry(){
-		    var $container = $('#content');
+		function init_masonry(container, item){
+		    var $container = $(container);
 
 		    $container.imagesLoaded( function(){
 		        $container.masonry({
-		          itemSelector: '.box-content',
+		          itemSelector: item,
 		          isAnimated: true
 		        });
 		    });
@@ -392,7 +399,7 @@
 			var email = $('#correo_contacto').val();
 			var telefono = $('#telefono_contacto').val();
 			var mensaje = $('#mensaje_contacto').val();
-			
+
 
 			if (nombre == '' || email == '' || telefono == '' || mensaje == '' ) {
 				alert('Favor de llenar todos los campos');
@@ -402,7 +409,7 @@
 
 		});
 
-		/**	
+		/**
 		 * NEWSLETTER
 		 */
 		$('.form-news').on('submit', function(event){
@@ -414,7 +421,7 @@
 			$(this).children('div').children('input.mail-news').val('');
 		});
 
-		/**	
+		/**
 		 * NEWSLETTER 2
 		 */
 		$('.form-news-2').on('submit', function(event){
@@ -426,7 +433,7 @@
 			$(this).children('input.mail-news').val('');
 		});
 
-		/**	
+		/**
 		 * ENVIA EL MAIL POR AJAX PAR AEL NEWSLETTER
 		 */
 		function sendAjaxNews(email){
@@ -456,23 +463,23 @@
 		};
 
 
-		/**	
+		/**
 		 * MAPS
 		 */
-		
+
 		if (is_home == 1) {
 			initialize();
 		};
-		
-		
+
+
 		function initialize() {
-			
+
 			var data_clubs = [];
 			var infoWindowContent = [];
 
 			$.each( clubes, function( key, value ) {
-				var cada_uno = [value.name, value.lat, value.long];
-				var data_uno = ['<div class="info_content"><h3>'+value.name+'</h3></div>'];
+				var cada_uno = [value.nombre, value.latitud, value.longitud];
+				var data_uno = ['<div class="info_content"><h3>'+value.nombre+'</h3></div>'];
 			 	data_clubs.push(cada_uno);
 			 	infoWindowContent.push(data_uno);
 
@@ -484,18 +491,18 @@
 		    var mapOptions = {
 		        mapTypeId: 'roadmap'
 		    };
-		                    
+
 		    // Display a map on the page
 		    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 		    map.setTilt(45);
-		        
+
 		    // Multiple Markers
 		    var markers = data_clubs;
-		        
+
 		    // Display multiple markers on a map
 		    var infoWindow = new google.maps.InfoWindow(), marker, i;
-		    
-		    // Loop through our array of markers & place each one on the map  
+
+		    // Loop through our array of markers & place each one on the map
 		    for( i = 0; i < markers.length; i++ ) {
 		        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
 		        bounds.extend(position);
@@ -504,8 +511,8 @@
 		            map: map,
 		            title: markers[i][0]
 		        });
-		        
-		        // Allow each marker to have an info window    
+
+		        // Allow each marker to have an info window
 		        google.maps.event.addListener(marker, 'click', (function(marker, i) {
 		            return function() {
 		                infoWindow.setContent(infoWindowContent[i][0]);
@@ -522,7 +529,7 @@
 		        // this.setZoom(14);
 		        google.maps.event.removeListener(boundsListener);
 		    });
-		    
+
 		}
 
 

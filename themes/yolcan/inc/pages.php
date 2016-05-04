@@ -110,12 +110,12 @@
 			wp_insert_post( $page, true );
 		}
 
-		if( ! get_page_by_path('clubes-de-consumo') ){
+		if( ! get_page_by_path('informacion-clubes-de-consumo') ){
 			$page = array(
 				'post_author' => 1,
 				'post_status' => 'publish',
-				'post_title'  => 'Clubes de consumo',
-				'post_name'   => 'clubes-de-consumo',
+				'post_title'  => 'Información Clubes de consumo',
+				'post_name'   => 'informacion-clubes-de-consumo',
 				'post_type'   => 'page'
 			);
 			wp_insert_post( $page, true );
