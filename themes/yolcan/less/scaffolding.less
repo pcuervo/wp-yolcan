@@ -36,12 +36,18 @@ body {
 }
 
 .main{
-  min-height: -moz-calc(100% - 130px);
-  min-height: -o-calc(100% - 130px);
-  min-height: -webkit-calc(100% - 130px);
-  min-height: calc(100% - 130px);
+  min-height: -moz-calc(100% - 75px);
+  min-height: -o-calc(100% - 75px);
+  min-height: -webkit-calc(100% - 75px);
+  min-height: calc(100% - 75px);
   position: relative;
   // .min-height-calc(100% - 130px);
+  @media (min-width: @screen-sm){
+    min-height: -moz-calc(100% - 120px);
+    min-height: -o-calc(100% - 120px);
+    min-height: -webkit-calc(100% - 120px);
+    min-height: calc(100% - 120px);
+  }
 }
 
 // Sections and articles

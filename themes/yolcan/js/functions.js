@@ -10,6 +10,13 @@
 
 		imgToSvg();
 		init_masonry('#content', '.box-content');
+		footerBottom();
+
+		/**
+		 * Triggered events
+		**/
+
+		$(window).resize(function () { footerBottom(); });
 
 		/**
 		 * home
@@ -23,6 +30,7 @@
 			/**
 			 * Triggered events
 			**/
+
 
 			//Chart.js
 
@@ -213,27 +221,6 @@
 		        });
 		    });
 		}
-
-		function footerBottom(){
-			var alturaFooter = getFooterHeight();
-			$('.main').css('padding-bottom', alturaFooter );
-		}
-
-		//Footer
-
-		function footerBottom(){
-		    var alturaFooter = getFooterHeight();
-		    $('.main').css('padding-bottom', alturaFooter );
-		}
-
-		/**
-		 * Get footer's height
-		 */
-		function getFooterHeight(){
-		    return $('footer').outerHeight();
-		}// getFooterHeight
-
-
 
 		//Get the header height
 		function getHeaderHeight(){
@@ -554,6 +541,19 @@
 
 		}
 
+		//Footer
+
+		function footerBottom(){
+		    var alturaFooter = getFooterHeight();
+		    $('.main').css('padding-bottom', alturaFooter );
+		}
+
+		/**
+		 * Get footer's height
+		 */
+		function getFooterHeight(){
+		    return $('footer').outerHeight();
+		}// getFooterHeight
 
 	});
 

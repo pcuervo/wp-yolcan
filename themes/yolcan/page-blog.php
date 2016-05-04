@@ -34,7 +34,7 @@ $blog = new WP_Query( array('posts_per_page' => $post_page, 'post_type' => array
 	</section> <!-- /container -->
 
 	<!-- pagination -->
-	<div class="[ bg-gray ][ text-center ]">
+	<div class="[ bg-gray ][ text-center ][ padding--top-bottom ]">
 		<?php if($blog->max_num_pages > 1):
 			$url = site_url('/blog/');
 			pagenavi($pagina,$blog->max_num_pages, $url, true, '?', 'pagina');
