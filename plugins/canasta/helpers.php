@@ -66,3 +66,17 @@ function getDateTransformUpdate($fecha){
 
 	return array($fecha[2], $mes[$fecha[1]], $fecha[0], $dia_name, $fecha[1], $dia_recortado);
 }
+
+/**
+ * REGRESA EL PRODUCTO Y EL CLUBE
+ */
+function getClubeProductoPage($page){
+	$page = explode("-", $page);
+	$separados = explode("_", $page[1]);
+	$id_clube = $separados[0];
+	$id_producto = $separados[1];
+	return array(
+		'id_canasta' => $id_clube.$id_producto,
+		'nombre_canasta' => get_the_title( $id_clube ).' - '.get_the_title( $id_producto )
+		);
+}

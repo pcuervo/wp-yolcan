@@ -43,7 +43,12 @@ class IngredientesModel {
 
     }
 
-
+    /**
+     * GUARDA LOS INGREDIENTES DE LA ACTUALIZACIÓN DE LA CANASTA
+     * @param  [int] $canasta_id   [id de la actualizacion de la canasta]
+     * @param  [array] $ingredientes [ingredientes a guaradar de la actualizacion]
+     * @return [boolean]               [true]
+     */
     public function saveIngredientes($canasta_id, $ingredientes)
     {
     	if (! empty($ingredientes)) {
@@ -71,7 +76,12 @@ class IngredientesModel {
     	return true;
     }
 
-
+    /**
+     * GUARDA LA ACTUALIZACION DE PUNTOS Y FECHA DE LA CANASTA
+     * @param  [int] $puntos_completa [puntos de canasat completa]
+     * @param  [int] $puntos_mitad    [puntos de la mitad de la canasta]
+     * @return [int]                  [id de la actualización]
+     */
     public function saveCanasta($puntos_completa, $puntos_mitad)
     {
     	$this->_wpdb->insert(
@@ -88,7 +98,37 @@ class IngredientesModel {
             )
         );
 
-        return $wpdb->insert_id;
+        return $this->_wpdb->insert_id;
+    }
+	
+
+	public function getUltimaActualizacion()
+    {
+    	return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}actualizaciones_canasta
+    		ORDER BY ultima_actualizacion DESC
+    		LIMIT 1;
+		", OBJECT );
+    }
+
+    /**
+     * REGRESA LOS INGREDIENTES DE LA ACTUALIZACION INDICADA
+     * @param  [integer] $id_actualizacion [id de la actualizacion]
+     * @param  string $tipo             [tipo de canasta]
+     * @return [object]                   [ingredientes]
+     */
+    public function getIngredientesCanasta($id_actualizacion, $tipo = 'all')
+    {
+        $query_extra = ' ';
+        if ($tipo == 'completa') $query_extra .= 'AND canasta_completa = 1';
+        if ($tipo == 'media') $query_extra .= 'AND media_canasta = 1';
+        if ($tipo == 'adicionales') $query_extra .= 'AND adicional = 1';
+
+
+    	return $this->_wpdb->get_results( "SELECT cr.*, p.post_title as nombre_ingrediente FROM {$this->_prefix}canasta_relationships as cr
+            INNER JOIN {$this->_prefix}posts as p
+            ON cr.ingrediente_id = p.ID
+    		WHERE canasta_id = $id_actualizacion {$query_extra};
+		", OBJECT );
     }
 
 }

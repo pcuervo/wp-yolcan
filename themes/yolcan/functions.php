@@ -593,7 +593,7 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
-add_filter ('add_to_cart_redirect', 'redirect_to_checkout');
+add_filter('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
 function redirect_to_checkout() {
 	wc_clear_notices();
     return WC()->cart->get_checkout_url();

@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 		<div class="[ container ]">
 			<div class="[ row padding--sides--xsm ]">
-				<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 ][ bg-primary-darken ][ margin-top-bottom--large ][ color-light ]">
+				<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 ][ bg-primary-darken ][ margin-top-bottom--large padding ][ color-light ]">
 					<h2><?php _e( 'Login', 'woocommerce' ); ?></h2>
 
 					<form method="post" class="login [ no-border ]">

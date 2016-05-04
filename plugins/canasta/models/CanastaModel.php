@@ -45,4 +45,26 @@ class CanastaModel {
 		);
     }
 
+    /**
+     * PRODUCTOS
+     */
+    static function productos()
+    {
+    	global $wpdb;
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
+			WHERE post_status = 'publish' AND post_type = 'product';
+		", OBJECT );
+	}
+
+	/**
+	 * CLUBES DE CONSUMO 
+	 */
+	static function clubes()
+	{
+		global $wpdb;
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
+			WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo';
+		", OBJECT );
+	}
+
 }

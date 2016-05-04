@@ -9,25 +9,17 @@ if( isset( $result['success'] ) ): ?>
 	<div class="[ bg-success btn-lg text-center ]"><?php echo $result['success']; ?></div>
 <?php endif;  ?>
 
-<section class="[ user-content--visitas ]" >
-	<h2>Visitanos</h2>
-	<p>Vive la experiencia chinampera</p>
-	<?php the_content();
-	$url_img = attachment_image_url($post->ID, 'large'); ?>
-	<img src="<?php echo $url_img; ?>">
-	<h4>Duración aproximada: 2 horas 30 minutos</h4>
-	<ul>
-		<li>- Salida del embarcadero de Cuemanco</li>
-		<li>- Visita chinampa tecnificada para ver proceso de potabilización de agua.</li>
-		<li>- Aguas frescas de ingredientes naturales.</li>
-		<li>- Tamales artesanales de maíz criollo.</li>
-		<li>- Ensalada preparada en la chinampa.</li>
-	</ul>
-</section>
-<article class="[ container ]">
-
-		<div class="[ row ]">
-			<section class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-1 col-lg-8 col-lg-offset-2 ][ margin-top  ]">
+<section class="[ container ]">
+	<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
+	<h3 class="[ text-center ]"><em>Vive la experiencia chinampera</em></h3>
+	<div class="[ user-content--visitas ]">
+		<?php
+			the_post_thumbnail('large');
+			the_content();
+		?>
+	</div>
+	<div class="[ row ]">
+		<article class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-1 col-lg-8 col-lg-offset-2 ][ margin-top  ]">
 			<div class="[ row ][ text-center ]">
 				<div class="[ col-xs-3 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Costo</strong></p>
@@ -35,7 +27,7 @@ if( isset( $result['success'] ) ): ?>
 				</div>
 				<div class="[ col-xs-4 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Capacidad</strong></p>
-					<p class="[ fz-16 ]"><?php echo get_post_meta($post->ID, 'capasidad_visita', true); ?></p>
+					<p class="[ fz-16 ]"><?php echo get_post_meta($post->ID, 'capacidad_visita', true); ?></p>
 				</div>
 				<div class="[ col-xs-5 padding--sides--xsmall col-sm-4 ]">
 					<p class="[ fz-18 ][ no-margin ]"><strong>Persona extra</strong></p>
@@ -73,22 +65,23 @@ if( isset( $result['success'] ) ): ?>
 						</div>
 					</div>
 					<input type="hidden" name="action" value="set-agenda-visita">
-					<div class="text-center">
-						<button type="submit" href="#" class="[ btn btn-secondary ][ margin-bottom ]">enviar</button>
+					<div class="[ text-center ]">
+						<button type="submit" href="#" class="[ btn btn-secondary ]">enviar</button>
 					</div>
 				</form>
-				<div class="[ visible-sm ][ margin-bottom--large ]"></div>
 			</div>
-		</section>
-		<section class="[ inline-block ][ user-content--visitas ]">
-			<h2>Xochimilco</h2>
-			<?php $xochimilco = get_page_by_path('xochimilco');
-			echo $xochimilco->post_content; ?>
-
-		</section>
-
+		</article>
 	</div>
+</section>
 
-</article>
+<section class="[ container ]">
+	<h2 class="[ text-center ]">Xochimilco</h2>
+	<div class="[ user-content--visitas ]">
+		<?php
+		$xochimilco = get_page_by_path('xochimilco');
+		echo $xochimilco->post_content;
+		?>
+	</div>
+</section>
 
 <?php get_footer(); ?>

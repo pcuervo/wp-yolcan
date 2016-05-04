@@ -1,7 +1,8 @@
-<?php get_header();
+<?php
+get_header();
 the_post();
-
-$no_id = $post->ID; ?>
+$no_id = $post->ID;
+?>
 
 <section class="[ container ]">
 	<div class="[ margin-top ]">
@@ -38,28 +39,25 @@ $no_id = $post->ID; ?>
 	<div class="[ row ]">
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Ingredientes</strong></em></p>
-			<div class="[ list list-point ]">
-				<p><?php the_content(); ?></p>
-			</div>
+			<?php the_content(); ?>
 		</div>
 
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Preparación</strong></em></p>
-			<div>
-				<p><?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?></p>
-			</div>
+			<?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?>
 		</div>
 	</div>
 
-	<div class="[ row ]">
-		<div class="[ col-xs-12 ]">
-			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Más recetas para ti</strong></em></p>
-			<div id="content">
+	<?php
+	$recetas = new WP_Query( array('posts_per_page' => 5, 'post_type' => array( 'recetas' ), 'post__not_in' => array($no_id),'orderby' => 'rand' ) );
+	if ( $recetas->have_posts() ) :
+	?>
+		<div class="[ row ]">
+			<div class="[ col-xs-12 ]">
+				<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Más recetas para ti</strong></em></p>
+				<div id="content">
 
-				<?php $recetas = new WP_Query( array('posts_per_page' => 5, 'post_type' => array( 'recetas' ), 'post__not_in' => array($no_id),'orderby' => 'rand' ) );
-
-				if ( $recetas->have_posts() ) :
-					while ( $recetas->have_posts() ) :
+					<?php while ( $recetas->have_posts() ) :
 						$recetas->the_post();
 						$url_img = attachment_image_url($post->ID, 'medium');?>
 						<div class="[ box-content ]">
@@ -69,13 +67,13 @@ $no_id = $post->ID; ?>
 							</a>
 						</div>
 
-					<?php endwhile;
-				endif; ?>
+					<?php endwhile; ?>
 
+
+				</div>
 			</div>
 		</div>
-	</div>
-
+	<?php endif; ?>
 </section>
 
 <?php get_footer(); ?>
