@@ -60,7 +60,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 			</article>
 
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
-				<h4>Tu próxima canasta</h4>
+				<h4>Tu próxima canasta - <span class="[ color-primary ]">$3,000</span></h4>
 				<p>Media canasta para el 12 de mayo:</p>
 				<?php $ingredientes = array();
 				if (isset($canasta->actualizacion)):
@@ -73,8 +73,24 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 							<li><?php echo $ingrediente->nombre_ingrediente; ?></li>
 						<?php endforeach;
 					else:
-						echo '<p>Sando insuficiente</p>';
+						echo '<p>Saldo insuficiente</p>';
 					endif; ?>
+				</ul>
+
+				<h5>Productos agregados:</h5>
+				<div>
+					<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">-</button>
+					<span>Jitomate 100gr - $20</span>
+				</div>
+				<div>
+					<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">-</button>
+					<span>Jitomate 100gr - $20</span>
+				</div>
+				<div>
+					<span>Jitomate 100gr - $20</span> <a class="[ underline ][ color-secondary ]" href="#">eliminar</a>
+				</div>
+				<ul>
+					<li> Jitomate 100gr - $20 <a class="[ underline ][ color-secondary ]" href="#">eliminar</a></li>
 				</ul>
 
 				<a href="#" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
@@ -84,7 +100,36 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 				<h4>Agrega productos</h4>
 				<p>Selecciona los productos que deseas agregar a tu canasta:</p>
 				<form>
-					<?php if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
+
+					<div class="[ margin-bottom ]">
+						<a data-toggle="collapse" href="#jitomate" class="[ no-decoration color-dark color-dark-hover ]">
+							<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
+							<p class="[ inline-block align-middle ][ no-margin ]">Jitomate 100gr - $15</p>
+						</a>
+						<div id="jitomate" class="[ panel-collapse collapse ][ padding--top ]">
+							<p class="[ color-gray-xlight ]">Cantidad <small>(en gramos)</small></p>
+							<div class="[ row ]">
+								<div class="[ col-xs-3 padding--right--small ]">
+									<input type="number" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
+								</div>
+								<div class="[ col-xs-5 no-padding ]">
+									<div class="[ custom-radio ]">
+										<input type="radio" id="option11" name="cc">
+										<label for="option11"><span class="[ margin-right--xxsmall ]"></span> Sólo esta ocasión</label>
+									</div>
+									<div class="[ custom-radio ]">
+										<input type="radio" id="option12" name="cc">
+										<label for="option12"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
+									</div>
+								</div>
+								<div class="[ col-xs-4 padding--left--small ]">
+									<button type="submit" class="[ btn btn-secondary padding--xsmall ][ margin-bottom ]">agregar</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<?php /* if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
 						$adicionales = $canasta->getIngredientesAdicionales();
 						if ( ! empty($adicionales) ):
 							foreach($adicionales as $data_ingrediente):
@@ -109,11 +154,6 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 													<input type="radio" id="option12" name="cc">
 													<label for="option12"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
 												</div>
-												<div>
-													<input type="radio" id="option13" name="cc">
-													<label for="option13"><span class="[ margin-right--xxsmall ]"></span>Cada 15 días</label>
-												</div>
-
 											</div>
 											<div class="[ col-xs-4 padding--left--small ]">
 												<button type="submit" class="[ btn btn-secondary padding--xsmall ][ margin-bottom ]">agregar</button>
@@ -123,7 +163,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 								</div>
 							<?php endforeach;
 						endif;
-					endif; ?>
+					endif; */ ?>
 
 				</form>
 			</article> <!-- /forms -->

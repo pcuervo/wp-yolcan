@@ -607,9 +607,7 @@ input[type="checkbox"] {
   }
 }
 
-.checkbox-secondary input{
-  border: 1px solid @secondary;
-}
+.checkbox-secondary input{ border: 1px solid @secondary; }
 
 .select {
   width: 100%; height: 45px;
@@ -618,14 +616,14 @@ input[type="checkbox"] {
   font-size: 14px;
   line-height: 1.42;
 }
-  .select select {
+.select select {
     padding: 6px 12px;
     width: 100%; height: 45px;
     border:none;
     background-color: transparent;
     background-image: none;
     appearance: none;
-  }
+}
 
 .input-text{
   .form-control;
@@ -634,3 +632,26 @@ input[type="checkbox"] {
   .color-gray-xlight;
 }
 
+
+
+// Custom form elements
+//
+// Replace radio and checkboxes browser defaults
+
+.custom-radio input[type="radio"] { display: none; }
+
+input[type="radio"] + label span{
+    display: inline-block;
+    border-radius: 100px;
+    background-color: @gray-xxlight;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    cursor:pointer;
+}
+
+input[type="radio"]:checked + label span{
+    .transition;
+    border: solid 5px @secondary;
+    background-color: @secondary;
+}

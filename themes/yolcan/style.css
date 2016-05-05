@@ -3229,6 +3229,26 @@ fieldset[disabled] .input-text {
 textarea.input-text {
   height: auto;
 }
+.custom-radio input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label span {
+  display: inline-block;
+  border-radius: 100px;
+  background-color: #d9d9d9;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+input[type="radio"]:checked + label span {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  border: solid 5px #3ac6b1;
+  background-color: #3ac6b1;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
@@ -5438,24 +5458,6 @@ input[type="checkbox"] + label span:after {
   position: relative;
 }
 input[type="checkbox"]:checked + label span {
-  background-color: #3ac6b1;
-}
-input[type="radio"] + label span {
-  display: inline-block;
-  border-radius: 100px;
-  border: solid 5px #8c8c8c;
-  background-color: #d9d9d9;
-  width: 20px;
-  height: 20px;
-  vertical-align: middle;
-  cursor: pointer;
-}
-input[type="radio"]:checked + label span {
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  border: solid 5px #3ac6b1;
   background-color: #3ac6b1;
 }
 .badge {
