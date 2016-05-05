@@ -72,6 +72,7 @@
 				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
 			</div>
 		</footer>
+	</div><!-- end main -->
 
 		<!-- modal unete -->
 		<div id="unete" class="[ modal fade ]" role="dialog">
