@@ -1091,10 +1091,10 @@ body {
 }
 @media (min-width: 768px) {
   .main {
-    min-height: -moz-calc(100% - 120px);
-    min-height: -o-calc(100% - 120px);
-    min-height: -webkit-calc(100% - 120px);
-    min-height: calc(100% - 120px);
+    min-height: -moz-calc(100% - 130px);
+    min-height: -o-calc(100% - 130px);
+    min-height: -webkit-calc(100% - 130px);
+    min-height: calc(100% - 130px);
   }
 }
 section {
@@ -3248,6 +3248,9 @@ fieldset[disabled] .input-text {
 }
 textarea.input-text {
   height: auto;
+}
+.ui-datepicker {
+  display: none!important;
 }
 .btn {
   display: inline-block;
