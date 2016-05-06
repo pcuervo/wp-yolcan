@@ -4,6 +4,7 @@ $post_page = 8;
 $offset = $post_page * ($pagina - 1);
 $blog = new WP_Query( array('posts_per_page' => $post_page, 'post_type' => array( 'post' ), 'offset' => $offset ) );?>
 
+<div class="[ main ]">
 	<section class="[ container ]">
 		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 		<div class="[ row ][ margin-bottom--large ]">

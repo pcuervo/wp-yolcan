@@ -1,6 +1,7 @@
 <?php get_header();
 the_post(); ?>
 
+<div class="[ main ]">
 	<section class="">
 		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 		<div class="[ container ][ text-center ]">

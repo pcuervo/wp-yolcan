@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+<div class="[ main ]">
 	<div class="[ container ]">
 		<!-- video	-->
 		<section class="[ row ]">

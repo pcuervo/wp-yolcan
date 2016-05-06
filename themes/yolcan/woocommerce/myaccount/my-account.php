@@ -95,8 +95,8 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 							<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
 							<p class="[ inline-block align-middle ][ no-margin ]">Jitomate 100gr - $15</p>
 						</a>
-						<div id="jitomate" class="[ panel-collapse collapse ]">
-							<p class="[ color-gray-xlight ][ padding--top ]">Cantidad <small>(en gramos)</small></p>
+						<div id="jitomate" class="[ panel-collapse collapse ][ padding--top ]">
+							<p class="[ color-gray-xlight ]">Cantidad <small>(en gramos)</small></p>
 							<div class="[ row ]">
 								<div class="[ col-xs-3 padding--right--small ]">
 									<input type="number" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
