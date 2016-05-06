@@ -1364,6 +1364,15 @@ p {
     font-size: 23.8px;
   }
 }
+li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+@media (min-width: 768px) {
+  li {
+    font-size: 16px;
+  }
+}
 small,
 .small {
   font-size: 85%;
