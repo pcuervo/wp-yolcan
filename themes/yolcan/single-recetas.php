@@ -4,7 +4,6 @@ the_post();
 $no_id = $post->ID;
 ?>
 
-<div class="[ main ]">
 	<section class="[ container ]">
 		<div class="[ margin-top ]">
 			<a href="<?php echo site_url('/recetas/'); ?>" class="[ underline ][ color-secondary ]"><em>ver todas las recetas</em></a>

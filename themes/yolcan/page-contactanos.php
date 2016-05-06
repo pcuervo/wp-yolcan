@@ -10,7 +10,6 @@ if( isset( $result['success'] ) ): ?>
 	<div class="[ bg-success btn-lg text-center ]"><?php echo $result['success']; ?></div>
 <?php endif;  ?>
 
-<div class="[ main ]">
 	<section class="[ container ]">
 		<h1 class="[ h2 text-center ]">Contáctanos</h1>
 		<div class="[ row ]">

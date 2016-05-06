@@ -127,3 +127,4 @@
 				<div class="[ clear ]"></div>
 			</div> <!-- /container -->
 		</header>
+		<div class="main">

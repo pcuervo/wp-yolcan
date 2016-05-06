@@ -143,6 +143,8 @@ require_once('inc/queries.php');
 
 require_once('inc/functions-newsletter.php');
 
+require_once('inc/usuarios.php');
+
 
 
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
