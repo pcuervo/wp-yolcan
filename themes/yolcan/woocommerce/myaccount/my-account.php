@@ -29,10 +29,10 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 	<div class="[ row ]">
 
 		<section class="[ col-sm-3 ][ bg-gray-lighter ]">
-			<article>
+			<article class="[ margin-bottom ]">
 				<?php
 					printf(
-						__( '<h2>%1$s</h2> <a href="%2$s" class="[ underline ][ color-secondary ]"><em>salir</em></a>', 'woocommerce' ) . ' ',
+						__( '<h2 class="[ no-margin ]">%1$s</h2> <a href="%2$s" class="[ underline ][ color-secondary ]"><em>salir</em></a>', 'woocommerce' ) . ' ',
 						$current_user->display_name,
 						wc_get_endpoint_url( 'customer-logout', '', wc_get_page_permalink( 'myaccount' ) )
 					);
@@ -50,13 +50,12 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 
 		<section class="[ col-xs-12 col-sm-8 ]">
 
-			<article class="[ padding-bottom border-bottom margin-bottom ]">
+			<article class="[ padding--bottom border-bottom margin-bottom ]">
 				<h4>Tu cuenta</h4>
 				<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>
 				<p>Equivale a <strong>2 y media canastas</strong></p>
-				<div class="[ text-center ]">
-					<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ][ margin-bottom ]">agrega saldo a tu cuenta</a>
-				</div>
+				<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
+
 			</article>
 
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
@@ -78,20 +77,10 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 				</ul>
 
 				<h5>Productos agregados:</h5>
-				<div>
-					<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">-</button>
-					<span>Jitomate 100gr - $20</span>
+				<div class="[ margin-botton ]">
+					<p><span>Jitomate 100gr - $20</span> <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small></p>
+					<p><span>Jitomate 100gr - $20</span> <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small></p>
 				</div>
-				<div>
-					<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">-</button>
-					<span>Jitomate 100gr - $20</span>
-				</div>
-				<div>
-					<span>Jitomate 100gr - $20</span> <a class="[ underline ][ color-secondary ]" href="#">eliminar</a>
-				</div>
-				<ul>
-					<li> Jitomate 100gr - $20 <a class="[ underline ][ color-secondary ]" href="#">eliminar</a></li>
-				</ul>
 
 				<a href="#" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
 			</article>

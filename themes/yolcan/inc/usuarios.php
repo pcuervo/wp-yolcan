@@ -1,17 +1,17 @@
 <?php
 
 //$wp_roles = new WP_Roles(); $wp_roles->remove_role("cobranza");
-$wp_roles = new WP_Roles(); $names = $wp_roles->get_names(); print_r($names);
+//$wp_roles = new WP_Roles(); $names = $wp_roles->get_names(); print_r($names);
 
 add_action('admin_init','add_role_practicantes',999);
 function add_role_practicantes() {
 
 		$roles = array('practicantes','administrator','cobranza');
-		
-		foreach($roles as $the_role) { 
+
+		foreach($roles as $the_role) {
 
 		     $role = get_role($the_role);
-			
+
 	             $role->add_cap('read');
 	             $role->add_cap('read_receta');
 	             $role->add_cap('read_private_recetas');
@@ -63,7 +63,7 @@ function add_role_practicantes() {
 	             $role->add_cap('delete_others_club-de-consumos');
 	             $role->add_cap('delete_private_club-de-consumos');
 	             $role->add_cap('delete_published_club-de-consumos');
-		
+
 		}
 }
 
@@ -92,22 +92,22 @@ add_role('practicantes', __('Practicantes'),
         'read_faqs' => false,
         'edit_faq' => false,
         'edit_faqs' => false,
-        
+
         'edit_contacto' => false,
         'edit_contactos' => false,
         'publish_contacto' => false,
         'publish_contactos' => false,
         'read_contacto' => false,
         'read_contactos' => false,
-        
-        
+
+
         'edit_club-de-consumo' => false,
         'edit_club-de-consumos' => false,
         'publish_club-de-consumo' => false,
         'publish_club-de-consumos' => false,
         'read_club-de-consumo' => false,
         'read_club-de-consumos' => false,
-        
+
     )
 );
 
