@@ -8450,12 +8450,11 @@ footer {
   padding-top: 24px;
   padding-bottom: 24px;
 }
-footer .svg {
-  margin-left: 5px;
-  margin-right: 5px;
-}
 footer h3 {
   margin-bottom: 20px;
+}
+.social-media span {
+  word-wrap: break-word;
 }
 @media (min-width: 768px) {
   .social-media {
