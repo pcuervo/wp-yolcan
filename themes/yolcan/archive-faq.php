@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+<div class="[ main ]">
 	<div class="[ container ]">
 		<section class="[ margin-bottom ]">
 			<h1 class="[ h2 text-center ]">Preguntas frecuentes</h1>

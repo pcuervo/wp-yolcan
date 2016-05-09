@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+<div class="[ main ]">
 	<section class="">
 		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 		<p class="[ fz-medium text-center ]">Ideas para nuestros ingredientes</p>

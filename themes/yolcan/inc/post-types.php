@@ -115,7 +115,7 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'menu_position'      => 6,
 			'supports'           => array( 'title', 'editor' ),
                         'capability_type'    => array('faq','faqs'),
-                        'map_meta_cap'       => true,
+                        'map_meta_cap'       => true
 		);
 		register_post_type( 'faq', $args );
 
@@ -213,7 +213,7 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'hierarchical'       => false,
 			'menu_position'      => 6,
 			'supports'           => array( 'title', 'editor', 'thumbnail' ),
-                        'capability_type'    => array('club-de-consumo','clubes-de-consumo'),
+                        'capability_type'    => array('club-de-consumo','club-de-consumos'),
                         'map_meta_cap'       => true,
 		);
 		register_post_type( 'clubes-de-consumo', $args );
