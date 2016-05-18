@@ -55,9 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p class="form-row [ text-center ]">
 							<?php wp_nonce_field( 'woocommerce-login' ); ?>
 							<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
-							<!-- <label for="rememberme" class="inline [ margin-bottom ]">
-								<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
-							</label> -->
 						</p>
 						<p class="lost_password [ text-center ]">
 							<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>

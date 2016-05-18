@@ -1347,6 +1347,10 @@ p {
     font-size: 16px;
   }
 }
+a.link-light:hover {
+  text-decoration: underline;
+  color: #fff;
+}
 .fact {
   font-family: "proxima-nova", sans-serif;
   font-style: normal;

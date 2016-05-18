@@ -152,11 +152,11 @@
 											<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
 										</p>
 										<p class="lost_password [ text-center ]">
-											<a class="[ color-light ][ small ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+											<a class="[ link-light ][ color-light ][ small ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
 										</p>
-									<!-- 	<p class="[ text-center ]">
+										<p class="[ text-center ]">
 											<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
-										</p> -->
+										</p>
 
 										<?php do_action( 'woocommerce_login_form_end' ); ?>
 									</form>

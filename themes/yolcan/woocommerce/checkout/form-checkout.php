@@ -50,9 +50,9 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<?php endif; ?>
 
 		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-8 col-sm-offset-4 col-md-6 col-md-offset-6">
+			<div class="[ col-xs-12 col-sm-6 col-sm-offset-6 ]">
 
-				<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+				<h3 id="order_review_heading" class="[ padding--left ]"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
 
 				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
