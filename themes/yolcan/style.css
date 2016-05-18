@@ -6457,6 +6457,8 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+  width: 40px;
+  height: 40px;
 }
 .close-table {
   color: #498D42 !important;
@@ -8445,17 +8447,16 @@ a.info-menu:last-child {
 }
 footer {
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0;
   padding-top: 24px;
   padding-bottom: 24px;
 }
-footer .svg {
-  margin-left: 5px;
-  margin-right: 5px;
-}
 footer h3 {
   margin-bottom: 20px;
+}
+.social-media span {
+  word-wrap: break-word;
 }
 @media (min-width: 768px) {
   .social-media {
