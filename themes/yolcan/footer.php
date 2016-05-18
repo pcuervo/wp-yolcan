@@ -150,12 +150,12 @@
 										<p class="form-row [ text-center ]">
 											<?php wp_nonce_field( 'woocommerce-login' ); ?>
 											<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
-											<label for="rememberme" class="inline [ margin-bottom ]">
-												<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
-											</label>
 										</p>
 										<p class="lost_password [ text-center ]">
-											<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+											<a class="[ link-light ][ color-light ][ small ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+										</p>
+										<p class="[ text-center ]">
+											<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
 										</p>
 
 										<?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -207,13 +207,13 @@
 								Entregas semanales durante:
 							</div>
 							<label class="[ radio-options__selector__label ]" for="c9_meals">
-								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" value="c9"> 1 mes
+								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c9"> 1 mes
 							</label>
 							<label class="[ radio-options__selector__label ]" for="c10_meals">
-								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" value="c10"> 3 meses
+								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c10"> 3 meses
 							</label>
 							<label class="[ radio-options__selector__label ]" for="c12_meals">
-								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" value="c12" checked=""> 6 meses
+								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c12" checked=""> 6 meses
 							</label>
 						</div>
 						<form class="[ card__form ][ text-center ]" action="">

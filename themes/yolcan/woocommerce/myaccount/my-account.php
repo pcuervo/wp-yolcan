@@ -49,15 +49,14 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 		</section>
 
 		<section class="[ col-xs-12 col-sm-8 ]">
-
-			<article class="[ padding--bottom border-bottom margin-bottom ]">
+			<article class="[ padding--bottom margin-bottom ]">
 				<h4>Tu cuenta</h4>
 				<!--<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>-->
                                 <p>
-                                    <?php 
+                                    <?php
                                         $saldo_agregado = get_the_author_meta( 'cantidad_saldo', $current_user->ID );
                                         echo "Tu saldo es de <strong>$ ".number_format($saldo_agregado).".00 </strong>";
-                                        
+
                                     ?>
                                 </p>
                                         <?php
@@ -66,20 +65,20 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
                                         ?>
                                             <?php if ($wc_query->have_posts()) : ?>
                                                     <?php
-                                                        
+
                                                         //19 y 16
-                                                        $media_canasta_saldo = new WC_Product( 19 ); // // replace 123 with the actual product id 
+                                                        $media_canasta_saldo = new WC_Product( 19 ); // // replace 123 with the actual product id
                                                         $media_saldox = $media_canasta_saldo->get_price();
                                                         $completa_canasta_saldo = new WC_Product(16);
                                                         $completa_saldox = $completa_canasta_saldo->get_price();
-                                                        
+
                                                         $saldo_media_canasta = $saldo_agregado / $media_saldox;
                                                         $saldo_completa_canasta = $saldo_agregado / $completa_saldox;
-                                                        
+
                                                         echo "<p>Equivale a <strong>".round($saldo_media_canasta)." Medias Canastas</strong>";
                                                         echo " y/o <strong>".round($saldo_completa_canasta)." Canastas Completas</strong>.</p>";
-                                                        
-                                                        
+
+
                                                     ?>
                                                 <?php wp_reset_postdata(); ?>
                                             <?php else:  ?>
@@ -87,10 +86,33 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
                                                      <?php _e( 'No Products'); ?>
                                                 </p>
                                             <?php endif; ?>
-				
+
 				<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
 
 			</article>
+			<article class="[ padding--bottom border-bottom margin-bottom ]">
+				<p>Desea <strong>suspender</strong> sus entregas?</p>
+				<form action="">
+					<div class="[ margin-bottom--small ]">
+						<input id="suspender-1" type="radio" class="input-radio" name="suspension" value="cheque" checked="checked">
+						<label for="suspender-1">1 Entrega</label>
+					</div>
+					<div class="[ margin-bottom--small ]">
+						<input id="suspender-2" type="radio" class="input-radio" name="suspension" value="cheque">
+						<label for="suspender-2">2 Entregas</label>
+					</div>
+					<div class="[ margin-bottom--small ]">
+						<input id="suspender-3" type="radio" class="input-radio" name="suspension" value="cheque">
+						<label for="suspender-3">3 Entregas</label>
+					</div>
+					<div class="[ margin-bottom--small ]">
+						<input id="suspender-4" type="radio" class="input-radio" name="suspension" value="cheque">
+						<label for="suspender-4">4 Entregas</label>
+					</div>
+				</form>
+				<a href="#" class="[ btn btn-secondary btn-small ]">suspender entrega</a>
+			</article>
+
 
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
 				<h4>Tu próxima canasta - <span class="[ color-primary ]">$3,000</span></h4>
