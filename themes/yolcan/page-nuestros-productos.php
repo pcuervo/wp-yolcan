@@ -26,7 +26,6 @@ global $product;
 <?php get_header();
 the_post(); ?>
 
-<div class="[ main ]">
 	<section class="[ bg-gray-lighter ]">
 		<div class="[ container ]">
 			<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
@@ -37,9 +36,9 @@ the_post(); ?>
                                                         'posts_per_page' => 12
                                                         );
                                                 $loop = new WP_Query( $args );
-                                                
+
                                                 if ( $loop->have_posts() ) {
-                                                    
+
                                                         while ( $loop->have_posts() ) : $loop->the_post();
 
                                                         ?>
@@ -120,7 +119,7 @@ the_post(); ?>
                                                             </article>
                                                         <?php
                                                         endwhile;
-                                                        
+
                                                 } else {
                                                         echo __( 'No hay canastas' );
                                                 }

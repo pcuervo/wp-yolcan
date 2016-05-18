@@ -3,7 +3,6 @@ the_post();
 $no_id = $post->ID;
 $user = get_user_by( 'id', $post->post_author ); ?>
 
-<div class="[ main ]">
     <div class="[ container ]">
         <div class="[ row ]">
         <!--  Entrada single Blog -->
