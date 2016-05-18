@@ -52,8 +52,42 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
 				<h4>Tu cuenta</h4>
-				<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>
-				<p>Equivale a <strong>2 y media canastas</strong></p>
+				<!--<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>-->
+                                <p>
+                                    <?php 
+                                        $saldo_agregado = get_the_author_meta( 'cantidad_saldo', $current_user->ID );
+                                        echo "Tu saldo es de <strong>$ ".number_format($saldo_agregado).".00 </strong>";
+                                        
+                                    ?>
+                                </p>
+                                        <?php
+                                            $params = array('posts_per_page' => 5, 'post_type' => 'product');
+                                            $wc_query = new WP_Query($params);
+                                        ?>
+                                            <?php if ($wc_query->have_posts()) : ?>
+                                                    <?php
+                                                        
+                                                        //19 y 16
+                                                        $media_canasta_saldo = new WC_Product( 19 ); // // replace 123 with the actual product id 
+                                                        $media_saldox = $media_canasta_saldo->get_price();
+                                                        $completa_canasta_saldo = new WC_Product(16);
+                                                        $completa_saldox = $completa_canasta_saldo->get_price();
+                                                        
+                                                        $saldo_media_canasta = $saldo_agregado / $media_saldox;
+                                                        $saldo_completa_canasta = $saldo_agregado / $completa_saldox;
+                                                        
+                                                        echo "<p>Equivale a <strong>".round($saldo_media_canasta)." Medias Canastas</strong>";
+                                                        echo " y/o <strong>".round($saldo_completa_canasta)." Canastas Completas</strong>.</p>";
+                                                        
+                                                        
+                                                    ?>
+                                                <?php wp_reset_postdata(); ?>
+                                            <?php else:  ?>
+                                                <p>
+                                                     <?php _e( 'No Products'); ?>
+                                                </p>
+                                            <?php endif; ?>
+				
 				<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
 
 			</article>

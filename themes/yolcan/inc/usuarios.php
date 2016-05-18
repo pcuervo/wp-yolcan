@@ -111,4 +111,27 @@ add_role('practicantes', __('Practicantes'),
     )
 );
 
+/*-------------------------------------AGREGAR SALDO MANUALMENTE POR USUARIO - ADMINISTRADOR---------------*/
+
+add_action( 'show_user_profile', 'extra_user_profile_fields' );
+add_action( 'edit_user_profile', 'extra_user_profile_fields' );
+function extra_user_profile_fields( $user ) { ?>
+    <h3><?php _e("Agregar saldo", "blank"); ?></h3>
+    <table class="form-table">
+        <tr>
+            <th><label for="address"><?php _e("Cantidad ($)"); ?></label></th>
+            <td>
+                <input type="text" name="cantidad_saldo" id="cantidad_saldo" value="<?php echo esc_attr( get_the_author_meta( 'cantidad_saldo', $user->ID ) ); ?>" class="regular-text" /><br />
+                <span class="description"><?php _e("Agregar cantidad a usuario."); ?></span>
+            </td>
+        </tr>
+    </table>
+<?php }
+
+add_action( 'personal_options_update', 'save_extra_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'save_extra_user_profile_fields' );
+function save_extra_user_profile_fields( $user_id ) {
+if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
+    update_user_meta( $user_id, 'cantidad_saldo', $_POST['cantidad_saldo'] );
+}
 
