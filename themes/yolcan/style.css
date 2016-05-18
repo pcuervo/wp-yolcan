@@ -6457,8 +6457,6 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
-  width: 40px;
-  height: 40px;
 }
 .close-table {
   color: #498D42 !important;
@@ -8447,7 +8445,7 @@ a.info-menu:last-child {
 }
 footer {
   width: 100%;
-  position: relative;
+  position: absolute;
   bottom: 0;
   padding-top: 24px;
   padding-bottom: 24px;
