@@ -3281,6 +3281,12 @@ input[type="radio"]:checked + label span {
 .ui-datepicker {
   display: none!important;
 }
+#billing_consumer_club_field {
+  width: 47%;
+  float: right;
+  margin-bottom: 30px;
+  clear: none;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
