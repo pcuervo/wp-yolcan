@@ -45,7 +45,7 @@ $no_id = $post->ID; ?>
 
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Preparación</strong></em></p>
-			<div class="[ list list-number ]">
+			<div>
 				<p><?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?></p>
 			</div>
 		</div>
