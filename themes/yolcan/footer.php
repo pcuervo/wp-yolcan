@@ -74,53 +74,6 @@
 		</footer>
 	</div><!-- end main -->
 
-		<!-- modal unete -->
-		<div id="unete" class="[ modal fade ]" role="dialog">
-			<div class="[ modal-dialog ]">
-				<div class="[ modal-content ]">
-					<div class="[ modal-body ][ color-light ]">
-						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
-							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
-							</button>
-							<div class="[ row ]">
-								<div class="[ col-xs-10 col-xs-offset-1 ]">
-									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
-									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ text-center ]">
-											<button type="submit" href="#" class="[ btn btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
-										</div>
-									</form>
-									<div class="[ text-center ]">
-										<a href="https://www.facebook.com">
-											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
-												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
-												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
-											</button>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<!-- modal ingresa -->
 		<div id="ingresa" class="[ modal fade ]" role="dialog">
 			<div class="[ modal-dialog ]">
@@ -176,6 +129,54 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
+
+
+		<!-- modal unete -->
+		<div id="unete" class="[ modal fade ]" role="dialog">
+			<div class="[ modal-dialog ]">
+				<div class="[ modal-content ]">
+					<div class="[ modal-body ][ color-light ]">
+						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
+							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+							</button>
+							<div class="[ row ]">
+								<div class="[ col-xs-10 col-xs-offset-1 ]">
+									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
+									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
+									<form class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Correo</label>
+											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+										</div>
+										<div class="[ text-center ]">
+											<button type="submit" href="#" class="[ btn btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
+										</div>
+									</form>
+									<div class="[ text-center ]">
+										<a href="https://www.facebook.com">
+											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
+											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
+												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
+											</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 		<!-- modal ingredientes canastas -->
