@@ -15,6 +15,9 @@
 
 
 		if ($post->post_name == 'visitanos'){
+			echo '<pre>';
+			echo 'si estamos aquí hermano';
+			echo '</pre>';
 			add_meta_box( 'meta-box-datos_visita', 'Datos visitas', 'show_metabox_datos_visita', 'page', 'side', 'high');
 		}
 
