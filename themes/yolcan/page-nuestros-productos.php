@@ -59,13 +59,13 @@ the_post(); ?>
                                                                                                             Entregas semanales durante:
                                                                                                     </div>
                                                                                                     <label class="[ radio-options__selector__label ]" for="c9_meals">
-                                                                                                            <input id="c9_meals" class="[ radio-options__selector ]" type="radio" value="c9"> 1 mes
+                                                                                                            <input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c9"> 1 mes
                                                                                                     </label>
                                                                                                     <label class="[ radio-options__selector__label ]" for="c10_meals">
-                                                                                                            <input id="c10_meals" class="[ radio-options__selector ]" type="radio" value="c10"> 3 meses
+                                                                                                            <input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c10"> 3 meses
                                                                                                     </label>
                                                                                                     <label class="[ radio-options__selector__label ]" for="c12_meals">
-                                                                                                            <input id="c12_meals" class="[ radio-options__selector ]" type="radio" value="c12" checked=""> 6 meses
+                                                                                                            <input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c12" checked=""> 6 meses
                                                                                                     </label>
                                                                                             </div>
                                                                                             <div class="[ card__price-table ]">
