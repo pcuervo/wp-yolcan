@@ -77,10 +77,11 @@ if( isset( $result['success'] ) ): ?>
 	<section class="[ container ]">
 		<h2 class="[ text-center ]">Xochimilco</h2>
 		<div class="[ user-content--visitas ]">
+			<p>
 			<?php
 			$xochimilco = get_page_by_path('xochimilco');
 			echo $xochimilco->post_content;
-			?>
+			?></p>
 		</div>
 	</section>
 
