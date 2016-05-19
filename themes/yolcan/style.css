@@ -8153,6 +8153,10 @@ a .active {
 .reviews_tab {
   display: none !important;
 }
+.woocommerce-checkout #payment div.payment_box {
+  width: 95%;
+  margin-left: 7%;
+}
 @-ms-viewport {
   width: device-width;
 }

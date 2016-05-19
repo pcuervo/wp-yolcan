@@ -60,6 +60,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
 						</p>
 
+						<p class="[ text-center ]">
+							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+						</p>
+
 						<?php do_action( 'woocommerce_login_form_end' ); ?>
 
 					</form>

@@ -138,7 +138,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 					<p><span>Jitomate 100gr - $20</span> <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small></p>
 				</div>
 
-				<a href="#" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
+				<a href="<?php echo site_url('/recetas/'); ?>" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
 			</article>
 
 			<article class="">
