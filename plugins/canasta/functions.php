@@ -1,5 +1,5 @@
 <?php
-
+/*---------------------PRUEBA DE CANASTA--------------------------*/
 function nacin_register_slideshows_post_type() {
         register_post_type( 'ingredientesss', array(
                 'labels' => array(

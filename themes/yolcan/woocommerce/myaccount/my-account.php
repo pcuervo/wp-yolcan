@@ -15,6 +15,9 @@
  * @version     2.0.0
  */
 
+
+/*--------------------------PRUEBA DE PLUGIN----------------------*/
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }

@@ -1,5 +1,5 @@
 <?php
-
+//PRUEBA DE PLUGIN
 //$wp_roles = new WP_Roles(); $wp_roles->remove_role("cobranza");
 //$wp_roles = new WP_Roles(); $names = $wp_roles->get_names(); print_r($names);
 

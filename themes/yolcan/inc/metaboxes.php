@@ -3,6 +3,8 @@
 
 // CUSTOM METABOXES //////////////////////////////////////////////////////////////////
 
+// PRUEBA DE PLUGIN
+
 
 
 add_action('add_meta_boxes', function(){
