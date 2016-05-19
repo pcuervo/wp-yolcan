@@ -19,7 +19,7 @@ if( isset( $result['success'] ) ): ?>
 			?>
 		</div>
 		<div class="[ row ]">
-			<article class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-1 col-lg-8 col-lg-offset-2 ][ margin-top  ]">
+			<article class="[ col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-8 col-lg-offset-2 ][ margin-top  ]">
 				<div class="[ row ][ text-center ]">
 					<div class="[ col-xs-3 padding--sides--xsmall col-sm-4 ]">
 						<p class="[ fz-18 ][ no-margin ]"><strong>Costo</strong></p>
