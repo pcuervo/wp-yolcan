@@ -8164,6 +8164,29 @@ a .active {
   width: 95%;
   margin-left: 7%;
 }
+#customer_details .woocommerce form .form-row {
+  padding: 0px!important;
+}
+#customer_details #billing_first_name_field,
+#customer_details #billing_email_field,
+#customer_details #billing_last_name_field,
+#customer_details #billing_consumer_club_field {
+  width: 50%!important;
+}
+#customer_details #billing_first_name_field,
+#customer_details #billing_email_field,
+#customer_details #billing_last_name_field,
+#customer_details #billing_consumer_club_field {
+  padding-right: 15px!important;
+}
+#customer_details #billing_last_name_field,
+#customer_details #billing_consumer_club_field {
+  padding-left: 15px!important;
+}
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td {
+  padding: 9px 0px;
+}
 @-ms-viewport {
   width: device-width;
 }
