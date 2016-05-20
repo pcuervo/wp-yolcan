@@ -98,22 +98,27 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 				<form action="">
 					<div class="[ margin-bottom--small ]">
 						<input id="suspender-1" type="radio" class="input-radio" name="suspension" value="cheque" checked="checked">
-						<label for="suspender-1">1 Entrega</label>
+						<label for="suspender-1">1 Semana</label>
 					</div>
 					<div class="[ margin-bottom--small ]">
 						<input id="suspender-2" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-2">2 Entregas</label>
+						<label for="suspender-2">2 Semanas</label>
 					</div>
 					<div class="[ margin-bottom--small ]">
 						<input id="suspender-3" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-3">3 Entregas</label>
+						<label for="suspender-3">3 Semanas</label>
 					</div>
 					<div class="[ margin-bottom--small ]">
 						<input id="suspender-4" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-4">4 Entregas</label>
+						<label for="suspender-4">4 Semanas</label>
 					</div>
+					<button href="#" class="[ btn btn-secondary btn-small ][ margin-bottom ]">suspender entrega</button>
+					<p>Tus entregas han sido suspendidas por <strong class="[ color-primary ]">1 semana</strong></p>
 				</form>
-				<a href="#" class="[ btn btn-secondary btn-small ]">suspender entrega</a>
+
+			<!-- Reanudar -->
+				<p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
+				<a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom--large ]">Reanudar entregas</a>
 			</article>
 
 
