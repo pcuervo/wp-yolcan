@@ -144,18 +144,18 @@
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
+									<form id="form-unete" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
 										</div>
 										<div class="[ text-center ]">
 											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
@@ -226,6 +226,9 @@
 		</div><!-- end modal -->
 
 		<?php wp_footer(); ?>
+		<script type="text/javascript">
+			$('#form-unete').parsley();
+		</script>
 
 	</body>
 </html>
