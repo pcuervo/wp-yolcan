@@ -39,7 +39,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 
 			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-			<div class="col2-set" id="customer_details">
+			<div class="" id="customer_details">
 				<div class="[ row ]">
 					<?php do_action( 'woocommerce_checkout_billing' ); ?>
 				</div>
@@ -52,7 +52,7 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 		<div class="[ row ]">
 			<div class="[ col-xs-12 col-sm-6 col-sm-offset-6 ]">
 
-				<h3 id="order_review_heading" class="[ padding--left ]"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+				<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
 
 				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 

@@ -54,10 +54,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						<p class="form-row [ text-center ]">
 							<?php wp_nonce_field( 'woocommerce-login' ); ?>
-							<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
+							<input type="submit" class="button btn btn-lg [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
 						</p>
 						<p class="lost_password [ text-center ]">
-							<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+							<a class="[ link-light ][ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
 						</p>
 
 						<p class="[ text-center ]">
