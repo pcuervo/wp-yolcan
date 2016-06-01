@@ -13,6 +13,8 @@ add_action('add_meta_boxes', function(){
 	add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 	add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
 	add_meta_box( 'meta-box-informacion_ingrediente', 'Ingredientes', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-precio_ingrediente', 'Precio', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
 
@@ -220,6 +222,26 @@ function show_metabox_informacion_ingrediente($post){
 	echo "<input type='text' class='widefat' id='valor_en_puntos' name='valor_en_puntos' value='$valor_en_puntos'/><br><br>";
 }
 
+function show_metabox_cantidad_ingrediente($post){
+	wp_nonce_field(__FILE__, '_cantidad_ingrediente_nonce');
+
+	$cantidad_en_peso = get_post_meta($post->ID, 'cantidad_en_peso', true);
+    $tipo_en_peso = get_post_meta($post->ID, 'tipo_en_peso', true);
+
+	echo "<label for='cantidad_en_peso' class='label-paquetes'>Cantidad en peso: </label>";
+	echo "<input type='text' class='widefat' id='cantidad_en_peso' name='cantidad_en_peso' value='$cantidad_en_peso'/><br><br>";
+    echo "<label for='tipo_en_peso' class='label-paquetes'>Tipo: </label>";
+	echo "<select name='tipo_en_peso'><option value='$tipo_en_peso'>$tipo_en_peso</option><option value='Gramos'>Gramos</option><option value='Kilogramos'>Kilogramos</option><option value='Unidad'>Unidad</option><option value='Docena'>Docena</option><option value='Manojo'>Manojo</option></select><br><br>";
+}
+
+function show_metabox_precio_ingrediente($post){
+	wp_nonce_field(__FILE__, '_precio_ingrediente_nonce');
+
+	$precio_ingrediente = get_post_meta($post->ID, 'precio_ingrediente', true);
+
+	echo "<input type='text' class='widefat' id='precio_ingrediente' name='precio_ingrediente' value='$precio_ingrediente'/><br><br>";
+}
+
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
 
@@ -291,7 +313,19 @@ add_action('save_post', function($post_id){
 	if ( isset($_POST['valor_en_puntos']) and check_admin_referer(__FILE__, '_info_ingrediente_nonce') ){
 		update_post_meta($post_id, 'valor_en_puntos', $_POST['valor_en_puntos']);
 	}
+    
+    
+    if ( isset($_POST['cantidad_en_peso']) and check_admin_referer(__FILE__, '_cantidad_ingrediente_nonce') ){
+		update_post_meta($post_id, 'cantidad_en_peso', $_POST['cantidad_en_peso']);
+	}
 
+    if ( isset($_POST['tipo_en_peso']) and check_admin_referer(__FILE__, '_cantidad_ingrediente_nonce') ){
+		update_post_meta($post_id, 'tipo_en_peso', $_POST['tipo_en_peso']);
+	}
+    
+    if ( isset($_POST['precio_ingrediente']) and check_admin_referer(__FILE__, '_precio_ingrediente_nonce') ){
+		update_post_meta($post_id, 'precio_ingrediente', $_POST['precio_ingrediente']);
+	}
 
 
 	// Guardar correctamente los checkboxes
