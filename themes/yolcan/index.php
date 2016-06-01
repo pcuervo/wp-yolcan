@@ -162,12 +162,12 @@
 	</section>
 
 	<section class="[ container ]">
-		<h2 class="[ text-center ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
+		<h2 class="[ text-center ][ margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
 		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
 				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-secondary  ]" src=""><!-- <?php echo THEMEPATH; ?>icons/logo-whatsapp.svg -->
-					<h3 class="[ color-secondary ]">a) Escoge el club más cercano</h3>
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
+					<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 				</div>
 				<div class="[ row ][ margin-bottom--large ][ text-center ]">
 					<div class="[ col-xs-12 ]">
@@ -196,37 +196,39 @@
 					</div>
 				</div>
 				<div class="[ text-center ]">
-					<h3 class="[ color-secondary ]">b) Crea uno en tu casa u oficina</h3>
-					<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
+					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
+					<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
 				</div>
 			</div>
-			<div class="[ col-xs-12 col-sm-4 ][ text-center ]">
+			<div class="[ col-xs-12 col-sm-6 ][ text-center ][ margin-bottom--xlarge ]">
 				<div class="">
-					<img class="[ margin-bottom--large ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-secondary  ]" src=""><!-- <?php echo THEMEPATH; ?>icons/logo-whatsapp.svg -->
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
 					<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
 				</div>
-				<div class="[ margin-bottom--large ]">
-					<p class="[ text-center ][ color-primary ][ lead ]">MEDIA CANASTA</p>
-					<p class="[ no-margin ]">3-4.5 KG</p>
-					<p>Ensalada Gourmet (200 gr.)</p>
-					<p><strong class="[ lead ][ color-primary ]">$250</strong> semanales</p>
-				</div>
-				<div class="[ margin-bottom--large ]">
-					<p class="[ text-center ][ color-primary ][ lead ]">CANASTA COMPLETA</p>
-					<p class="[ no-margin ]">4.5-6.5 KG</p>
-					<p>Ensalada Gourmet (300 gr.)</p>
-					<p><strong class="[ lead ][ color-primary ]">$375</strong> semanales</p>
-				</div>
-				<div class="[ margin-bottom--large ]">
-					<p class="[ text-center ][ color-primary ][ lead ]">CANASTA FAMILIAR</p>
-					<p class="[ no-margin ]">6.5-8.5 KG</p>
-					<p>Ensalada Gourmet (500 gr.)</p>
-					<p><strong class="[ lead ][ color-primary ]">$500</strong> semanales</p>
+				<div class="[ row ]">
+					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
+						<p class="[ text-center ][ color-primary ][ lead ]">Media Canasta</p>
+						<p class="[ no-margin ]">3-4.5 KG</p>
+						<p>Ensalada Gourmet (200 gr.)</p>
+						<p><strong class="[ lead ][ color-primary ]">$250</strong> semanales</p>
+					</div>
+					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
+						<p class="[ text-center ][ color-primary ][ lead ]">Canasta Completa</p>
+						<p class="[ no-margin ]">4.5-6.5 KG</p>
+						<p>Ensalada Gourmet (300 gr.)</p>
+						<p><strong class="[ lead ][ color-primary ]">$375</strong> semanales</p>
+					</div>
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
+						<p class="[ text-center ][ color-primary ][ lead ]">Canasta Familiar</p>
+						<p class="[ no-margin ]">6.5-8.5 KG</p>
+						<p>Ensalada Gourmet (500 gr.)</p>
+						<p><strong class="[ lead ][ color-primary ]">$500</strong> semanales</p>
+					</div>
 				</div>
 			</div>
-			<div class="[ col-xs-12 col-sm-4 ]">
+			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
 				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-secondary  ]" src=""><!-- <?php echo THEMEPATH; ?>icons/logo-whatsapp.svg -->
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
 				</div>
 			</div>
