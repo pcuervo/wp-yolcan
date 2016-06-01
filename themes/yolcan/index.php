@@ -3,7 +3,7 @@
 	<div class="[ container ]">
 		<!-- video	-->
 		<section class="[ row ]">
-			<div class="[ col-xs-12 col-sm-8 col-sm-offset-2 ][ margin-bottom--large ]">
+			<div class="[ col-xs-12 ][ margin-bottom--large ]">
 				<div class="[ js-video-wrapper ]">
 					<iframe class="[ embed-responsive-item ]" src="https://www.youtube.com/embed/HCj_EUKAis4" frameborder="0" allowfullscreen></iframe>
 				</div>
