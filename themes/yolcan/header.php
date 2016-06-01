@@ -33,7 +33,7 @@
 
 	<body>
 		<?php $user = wp_get_current_user(); ?>
-		<header class="[ bg-light ]">
+		<header class="[ js-header ][ bg-light ]">
 			<div class=" [ container ] ">
 				<div class="[ row ]">
 					<div class="[ col-xs-6 ]">
@@ -47,7 +47,7 @@
 					<div class="[ col-xs-6 inherit ][ visible-xs ][ margin-top--small ][ text-right ]">
 						<div class="[ inline-block ]">
 							<a data-toggle="modal" data-target="#menu-info">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg">
 							</a>
 							<div id="menu-info" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
@@ -55,20 +55,19 @@
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-55 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
 											<ul class="[ no-padding ]">
 												<?php if ( ! empty($user->ID) ): ?>
-													<li><a href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a></li>
+													<li><a href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a></li>
 												<?php else: ?>
 													<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
 												<?php endif; ?>
 												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
 												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
-												<li><a href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a></li>
 											</ul>
 										</div>
 									</div>
@@ -77,14 +76,14 @@
 						</div>
 						<div class="[ inline-block relative top-3 ][ margin-left--xsmall ]">
 							<a data-toggle="modal" data-target="#main-menu">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/navigation.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/navigation.svg">
 							</a>
 							<div id="main-menu" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-14 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
@@ -104,16 +103,15 @@
 					<!-- info-menu desktop -->
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
 						<?php if ( ! empty($user->ID) ): ?>
-							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">tu perfil</a>
+							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a>
 						<?php else: ?>
 							<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
 						<?php endif; ?>
-						
-						
+
+
 						<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
-						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-carrito'); ?>">mi carrito</a>
 					</div>
 				</div>
 				<!-- menu desktop -->
@@ -129,3 +127,4 @@
 				<div class="[ clear ]"></div>
 			</div> <!-- /container -->
 		</header>
+		<div class="[ main ]"><!-- Fijar footer. Cierra en footer -->

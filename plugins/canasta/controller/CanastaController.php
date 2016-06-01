@@ -4,23 +4,43 @@ class CanastaController {
 	public $actualizacion;
 	public $model_ingredientes;
 
-
 	function __construct() {
 		$this->model_ingredientes = model('IngredientesModel');
         $this->actualizacion = $this->model_ingredientes->getUltimaActualizacion();
-    }
+        }
 
 	static function index($method, $name_menu, $slug_page){
 		$canasta = new CanastaController;
 
 		if ($slug_page == 'canasta'){
 			add_menu_page( $name_menu, $name_menu, 'edit_pages', $slug_page, array($canasta, $method), '', 13 );
+                        
 		}else{
 			add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($canasta, $method));
+                        
 		}
 			
 
 	}
+        
+        static function ingrediente($method, $name_menu, $slug_page){
+		
+		$ingrediente = new CanastaController;
+                
+
+		add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($ingrediente, $method));
+                        
+
+	}
+        
+        static function agregar_ingrediente($method, $name_menu, $slug_page){
+		
+		$agregaringrediente = new CanastaController;
+
+		add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($agregaringrediente, $method));
+                
+	}
+        
 
 	/**	
 	 * MUESTRA LA VISTA DE CANASRA

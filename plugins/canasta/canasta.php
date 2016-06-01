@@ -8,7 +8,8 @@ Description: Creación y edición de la canasta semanal, ademas de poder reparti
 Version: 1.0
 Author: Alejandro Cervantes para pcuervo.com
 Author URI: http://pcuervo.com
-*/ 
+*/
+/*---------------------PRUEBA DE CANASTA--------------------------*/
 
 global $errores;
 global $mesage_error;
@@ -29,10 +30,11 @@ require(PATH_CANASTA."/models/CanastaModel.php");
 
 register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
 
-add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canastas Semanales", "canasta");' ) );
+add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canasta Semanal", "canasta");' ) );
 
 $productos = CanastaModel::productos();
 $clubes = CanastaModel::clubes();
+$ingredientes = CanastaModel::ingredientes();
 
 if ( ! empty($productos) AND ! empty($clubes) ) {
 	foreach ($clubes as $key => $club) {
@@ -45,3 +47,6 @@ if ( ! empty($productos) AND ! empty($clubes) ) {
 	}
 	
 }
+
+
+

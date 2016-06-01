@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 		<div class="[ container ]">
 			<div class="[ row padding--sides--xsm ]">
-				<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 ][ bg-primary-darken ][ margin-top-bottom--large ][ color-light ]">
+				<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 ][ bg-primary-darken ][ margin-top-bottom--large padding ][ color-light ]">
 					<h2><?php _e( 'Login', 'woocommerce' ); ?></h2>
 
 					<form method="post" class="login [ no-border ]">
@@ -54,13 +54,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						<p class="form-row [ text-center ]">
 							<?php wp_nonce_field( 'woocommerce-login' ); ?>
-							<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
-							<label for="rememberme" class="inline [ margin-bottom ]">
-								<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
-							</label>
+							<input type="submit" class="button btn btn-lg [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
 						</p>
 						<p class="lost_password [ text-center ]">
-							<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+							<a class="[ link-light ][ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+						</p>
+
+						<p class="[ text-center ]">
+							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
 						</p>
 
 						<?php do_action( 'woocommerce_login_form_end' ); ?>

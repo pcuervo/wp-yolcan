@@ -1,7 +1,7 @@
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
-				<div class="[ row ]">
-					<div class="[ col-sm-3 no-padding--right no-padding--left ]">
+				<section class="[ row ]">
+					<article class="[ col-sm-3 ]">
 						<h3><em>Contacto</em></h3>
 						<!-- Contacto: social-media -->
 						<?php $contactanos = get_page_by_path('contactanos');
@@ -31,23 +31,23 @@
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
 						</a>
-					</div>
-					<div class="[ col-sm-4 col-md-3 ]">
+					</article>
+					<article class="[ col-sm-4 col-md-3 ]">
 						<h3><em>Únete</em></h3>
 						<div class="[ margin-bottom ]">
 							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
 							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 						</div>
-					</div>
-					<div class="[ col-sm-2 col-md-3 ]">
+					</article>
+					<article class="[ col-sm-2 col-md-3 ]">
 						<h3><em>Métodos de pago</em></h3>
 						<div class="[ row ]">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/visa.svg" alt="">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/paypal.svg" alt="">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/mastercard.svg" alt="">
 						</div>
-					</div>
-					<div class="[ col-sm-3 ]">
+					</article>
+					<article class="[ col-sm-3 ]">
 						<h3><em>Newsletter</em></h3>
 						<div class="[ text-left ]">
 							<p>Recibe las últimas noticias y ofertas antes que nadie, déjanos tu correo.</p>
@@ -67,58 +67,12 @@
 								</span>
 							</form>
 						</div>
-					</div>
-				</div>
+					</article>
+				</section>
 				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
 			</div>
 		</footer>
-
-		<!-- modal unete -->
-		<div id="unete" class="[ modal fade ]" role="dialog">
-			<div class="[ modal-dialog ]">
-				<div class="[ modal-content ]">
-					<div class="[ modal-body ][ color-light ]">
-						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
-							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
-							</button>
-							<div class="[ row ]">
-								<div class="[ col-xs-10 col-xs-offset-1 ]">
-									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
-									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]">
-										</div>
-										<div class="[ text-center ]">
-											<button type="submit" href="#" class="[ btn btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
-										</div>
-									</form>
-									<div class="[ text-center ]">
-										<a href="https://www.facebook.com">
-											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" href="#" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
-												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
-												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
-											</button>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	</div><!-- end main -->
 
 		<!-- modal ingresa -->
 		<div id="ingresa" class="[ modal fade ]" role="dialog">
@@ -127,7 +81,7 @@
 					<div class="[ modal-body ][ color-light ]">
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom--large ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
@@ -148,13 +102,13 @@
 										<?php do_action( 'woocommerce_login_form' ); ?>
 										<p class="form-row [ text-center ]">
 											<?php wp_nonce_field( 'woocommerce-login' ); ?>
-											<input type="submit" class="button [ input-btn-secondary ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
-											<label for="rememberme" class="inline [ margin-bottom ]">
-												<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
-											</label>
+											<input type="submit" class="button btn btn-lg [ input-btn-secondary ][ margin-bottom--small ]" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
 										</p>
 										<p class="lost_password [ text-center ]">
-											<a class="[ color-light ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+											<a class="[ link-light ][ color-light ][ small ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
+										</p>
+										<p class="[ text-center ]">
+											<a data-toggle="modal" data-target="#unete" class="[ margin-bottom--small ][ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
 										</p>
 
 										<?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -162,7 +116,7 @@
 									<div class="[ text-center ]">
 										<a href="https://www.facebook.com">
 											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" href="#" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
 												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
 												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
 											</button>
@@ -177,13 +131,61 @@
 		</div><!-- end modal -->
 
 
+		<!-- modal unete -->
+		<div id="unete" class="[ modal fade ]" role="dialog">
+			<div class="[ modal-dialog ]">
+				<div class="[ modal-content ]">
+					<div class="[ modal-body ][ color-light ]">
+						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
+							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+							</button>
+							<div class="[ row ]">
+								<div class="[ col-xs-10 col-xs-offset-1 ]">
+									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
+									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
+									<form id="form-unete" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Correo</label>
+											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+										</div>
+										<div class="[ text-center ]">
+											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
+										</div>
+									</form>
+									<div class="[ text-center ]">
+										<a href="https://www.facebook.com">
+											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
+											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
+												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
+											</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<!-- modal ingredientes canastas -->
 		<div id="ingredientes" class="[ modal fade ]" role="dialog">
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body modal--horizontal ][ bg-light ][ padding--top-bottom--xxlarge ][ color-light ]">
 						<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]"src="<?php echo THEMEPATH; ?>icons/close.svg">
+							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
 						<h2 class="[ text-center color-dark ][ no-margin--top ]">Canasta mediana</h2>
 						<div class="[ row ]">
@@ -206,13 +208,13 @@
 								Entregas semanales durante:
 							</div>
 							<label class="[ radio-options__selector__label ]" for="c9_meals">
-								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" value="c9"> 1 mes
+								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c9"> 1 mes
 							</label>
 							<label class="[ radio-options__selector__label ]" for="c10_meals">
-								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" value="c10"> 3 meses
+								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c10"> 3 meses
 							</label>
 							<label class="[ radio-options__selector__label ]" for="c12_meals">
-								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" value="c12" checked=""> 6 meses
+								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c12" checked=""> 6 meses
 							</label>
 						</div>
 						<form class="[ card__form ][ text-center ]" action="">
@@ -224,6 +226,9 @@
 		</div><!-- end modal -->
 
 		<?php wp_footer(); ?>
+		<script type="text/javascript">
+			$('#form-unete').parsley();
+		</script>
 
 	</body>
 </html>

@@ -143,6 +143,8 @@ require_once('inc/queries.php');
 
 require_once('inc/functions-newsletter.php');
 
+require_once('inc/usuarios.php');
+
 
 
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
@@ -509,7 +511,7 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             echo '<li class="pag-anterior">';
             	if ($especial == true) {
             		$pa = $paged - 1;
-            		echo $paged > 1 ? '<a href="'.$siteUrl.$simbol_url.$variable_page.'='.$pa.'"><img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="'.THEMEPATH.'images/icons/arrow-left-12.svg"></a>' : '';
+            		echo $paged > 1 ? '<a href="'.$siteUrl.$simbol_url.$variable_page.'='.$pa.'"><img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="'.THEMEPATH.'icons/arrow-left-12.svg"></a>' : '';
             	}else{
             		previous_posts_link($pagenavi_options['prev_text']);
             	}
@@ -555,7 +557,7 @@ function pagenavi($paged = '', $num_pages = '', $siteUrl = '', $especial = false
             echo '<li class="pag-siguiente">';
             	if ($especial == true) {
             		$pa = $paged + 1;
-            		echo $paged < $num_pages ? '<a href="'.$siteUrl.$simbol_url.$variable_page.'='.$pa.'"><img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="'.THEMEPATH.'images/icons/arrow-right-12.svg"></a>' : '';
+            		echo $paged < $num_pages ? '<a href="'.$siteUrl.$simbol_url.$variable_page.'='.$pa.'"><img class="[ svg icon--iconed--small icon--stoke icon--thickness-3 ][ color-dark ]" src="'.THEMEPATH.'icons/arrow-right-12.svg"></a>' : '';
             	}else{
             		next_posts_link($pagenavi_options['next_text'], $max_page);
             	}
@@ -655,4 +657,12 @@ function style_fields( $args ){
 	// var_dump( $args );
 	// echo '</pre>';
 	return $args;
+}
+
+
+add_filter('add_to_cart_redirect', 'themeprefix_add_to_cart_redirect');
+function themeprefix_add_to_cart_redirect() {
+ global $woocommerce;
+ $checkout_url = $woocommerce->cart->get_checkout_url();
+ return $checkout_url;
 }
