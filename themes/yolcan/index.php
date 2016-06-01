@@ -169,31 +169,8 @@
 					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
 					<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 				</div>
-				<div class="[ row ][ margin-bottom--large ][ text-center ]">
-					<div class="[ col-xs-12 ]">
-						<h4>Las Lomas</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Condesa</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Roma</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>San Miguel Chapultepec</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Bosques</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Anzures</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Polanco</h4>
-					</div>
-					<div class="[ col-xs-12 ]">
-						<h4>Jardines del Pedregal</h4>
-					</div>
+				<div class="[ margin-bottom--large ][ text-center ]">
+					<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
 				</div>
 				<div class="[ text-center ]">
 					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
@@ -207,22 +184,22 @@
 				</div>
 				<div class="[ row ]">
 					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
-						<p class="[ text-center ][ color-primary ][ lead ]">Media Canasta</p>
+						<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
 						<p class="[ no-margin ]">3-4.5 KG</p>
 						<p>Ensalada Gourmet (200 gr.)</p>
-						<p><strong class="[ lead ][ color-primary ]">$250</strong> semanales</p>
+						<p><strong class="[ color-primary ]">$250</strong> semanales</p>
 					</div>
 					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
-						<p class="[ text-center ][ color-primary ][ lead ]">Canasta Completa</p>
+						<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
 						<p class="[ no-margin ]">4.5-6.5 KG</p>
 						<p>Ensalada Gourmet (300 gr.)</p>
-						<p><strong class="[ lead ][ color-primary ]">$375</strong> semanales</p>
+						<p><strong class="[ color-primary ]">$375</strong> semanales</p>
 					</div>
 					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<p class="[ text-center ][ color-primary ][ lead ]">Canasta Familiar</p>
+						<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
 						<p class="[ no-margin ]">6.5-8.5 KG</p>
 						<p>Ensalada Gourmet (500 gr.)</p>
-						<p><strong class="[ lead ][ color-primary ]">$500</strong> semanales</p>
+						<p><strong class="[ color-primary ]">$500</strong> semanales</p>
 					</div>
 				</div>
 			</div>
