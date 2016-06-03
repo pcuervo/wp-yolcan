@@ -154,39 +154,14 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 				<p>Selecciona los productos que deseas agregar a tu canasta:</p>
 				<form>
 
-					<div class="[ margin-bottom ]">
-						<a data-toggle="collapse" href="#jitomate" class="[ no-decoration color-dark color-dark-hover ]">
-							<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
-							<p class="[ inline-block align-middle ][ no-margin ]">Jitomate 100gr - $15</p>
-						</a>
-						<div id="jitomate" class="[ panel-collapse collapse ][ padding--top ]">
-							<p class="[ color-gray-xlight ]">Cantidad <small>(en gramos)</small></p>
-							<div class="[ row ]">
-								<div class="[ col-xs-3 padding--right--small ]">
-									<input type="number" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
-								</div>
-								<div class="[ col-xs-5 no-padding ]">
-									<div class="[ custom-radio ]">
-										<input type="radio" id="option11" name="cc">
-										<label for="option11"><span class="[ margin-right--xxsmall ]"></span> Sólo esta ocasión</label>
-									</div>
-									<div class="[ custom-radio ]">
-										<input type="radio" id="option12" name="cc">
-										<label for="option12"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
-									</div>
-								</div>
-								<div class="[ col-xs-4 padding--left--small ]">
-									<button type="submit" class="[ btn btn-secondary padding--xsmall ][ margin-bottom ]">agregar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<?php /* if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
+					<?php if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
 						$adicionales = $canasta->getIngredientesAdicionales();
 						if ( ! empty($adicionales) ):
 							foreach($adicionales as $data_ingrediente):
-								$ingrediente = get_post($data_ingrediente->ingrediente_id);?>
+								$ingrediente = get_post($data_ingrediente->ingrediente_id);
+                                $precio = get_post_meta($data_ingrediente->ingrediente_id, 'precio_ingrediente', true);
+                                $peso = get_post_meta($data_ingrediente->ingrediente_id, 'cantidad_en_peso', true);
+                                $tipo = get_post_meta($data_ingrediente->ingrediente_id, 'tipo_en_peso', true);?>
 								<div class="[ margin-bottom ]">
 									<a data-toggle="collapse" href="#<?php echo $ingrediente->post_name; ?>" class="[ no-decoration color-dark color-dark-hover ]">
 										<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
@@ -194,6 +169,8 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 									</a>
 									<div id="<?php echo $ingrediente->post_name; ?>" class="[ panel-collapse collapse ][ padding--top ]">
 										<p class="[ color-gray-xlight ]">Cantidad</p>
+                                        <p class="[ color-gray-xlight ]">Precio: $ <?php echo number_format($precio); ?></p>
+                                        <p class="[ color-gray-xlight ]">Peso: <?php echo $peso; ?> <?php echo $tipo; ?></p>
 										<div class="[ row ]">
 											<div class="[ col-xs-3 padding--right--small ]">
 												<input type="number" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
@@ -216,7 +193,7 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 								</div>
 							<?php endforeach;
 						endif;
-					endif; */ ?>
+					endif; ?>
 
 				</form>
 			</article> <!-- /forms -->
