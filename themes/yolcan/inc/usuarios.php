@@ -135,3 +135,72 @@ if ( !current_user_can( 'edit_user', $user_id ) ) { return false; }
     update_user_meta( $user_id, 'cantidad_saldo', $_POST['cantidad_saldo'] );
 }
 
+/*-------------------------------ADMINISTRADOR DE USUARIO--------------------------------------------*/
+
+/*---------------------------------------------------
+register settings
+----------------------------------------------------*/
+function theme_settings_init(){
+register_setting( 'theme_settings', 'theme_settings' );
+}
+
+function add_settings_page() {
+add_menu_page( __('Panel YOLCAN'), __('Panel YOLCAN'), 'manage_options', 'settings', 'theme_settings_page');
+}
+
+add_action( 'admin_init', 'theme_settings_init' );
+add_action( 'admin_menu', 'add_settings_page' );
+
+function theme_settings_page() {
+    $blogusers = get_users( array( 'fields' => array( 'display_name' ) ) );
+?>
+    <div class="wrap">
+        <div id="icon-options-general"></div>
+        <h2>Administrador YOLCAN</h2>    
+        <table class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th id="cb" class="manage-column column-cb check-column" scope="col"></th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">USUARIO</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">SALDO</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">CLUB DE CONSUMO</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">INGREDIENTES ADICIONALES</th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <th class="manage-column column-cb check-column" scope="col"></th>
+                <th class="manage-column column-columnname" scope="col"></th>
+                <th class="manage-column column-columnname" scope="col"></th>
+                <th class="manage-column column-columnname" scope="col"></th>
+                <th class="manage-column column-columnname" scope="col">Administrador de acciones de usuarios YOLCAN</th>
+            </tr>
+            </tfoot>
+
+            <tbody>
+                <?php
+                    foreach ( $blogusers as $user ) {
+                ?>
+                <tr class="alternate" valign="top">
+                    <th class="check-column" scope="row"></th>
+                    <td class="column-columnname">
+                        <?php echo '<span>' . esc_html( $user->display_name ) . '</span>'; ?>
+                        <div class="row-actions">
+                            <span><a href="#">Editar</a> |</span>
+                            <span><a href="#">Eliminar</a></span>
+                        </div>
+                    </td>
+                    <td class="column-columnname"></td>
+                    <td class="column-columnname"></td>
+                    <td class="column-columnname"></td>
+                </tr>
+                <?php
+                   }
+                ?>
+            </tbody>   
+        </table>
+    </div>
+<?php
+}
+
