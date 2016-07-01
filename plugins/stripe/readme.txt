@@ -1,9 +1,9 @@
 === WP Simple Pay Lite for Stripe ===
 Contributors: moonstonemedia, pderksen, nickyoung87, nekojira
 Tags: stripe, stripe checkout, payments, simple stripe checkout, ecommerce, e-commerce
-Requires at least: 4.0
-Tested up to: 4.4
-Stable tag: 1.4.6
+Requires at least: 4.1
+Tested up to: 4.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 
 Add high conversion Stripe checkout forms to your WordPress site and start accepting payments in minutes.
@@ -68,6 +68,19 @@ SSL note: Stripe now requires that any page hosting a live checkout form be SSL 
 
 Find our docs at [wpsimplepay.com/docs](https://wpsimplepay.com/docs/?utm_source=wordpress.org&utm_medium=link&utm_campaign=simple-pay-lite-readme&utm_content=faq)
 
+= Can I get notified by email of new releases? =
+
+[Subscribe here](https://www.getdrip.com/forms/6606935/submissions/new) to be notified by email of major features or updates.
+
+= How do I contribute to WP Simple Pay Lite? =
+
+We'd love your help! Here's a few things you can do:
+
+* [Rate our plugin](https://wordpress.org/support/view/plugin-reviews/stripe?postform#postform) and help spread the word!
+* Help answer questions in our [community support forum](https://wordpress.org/support/plugin/stripe).
+* Report bugs (with steps to reproduce) or submit pull requests [on GitHub](https://github.com/moonstonemedia/WP-Simple-Pay-Lite-for-Stripe).
+* Help add or update a [plugin translation](https://translate.wordpress.org/projects/wp-plugins/stripe).
+
 == Screenshots ==
 
 1. Desktop checkout overlay
@@ -76,6 +89,22 @@ Find our docs at [wpsimplepay.com/docs](https://wpsimplepay.com/docs/?utm_source
 4. Settings: Site-wide defaults
 
 == Changelog ==
+
+= 1.5.1 - June 18, 2016 =
+
+* Fix: Check for Pro version of WP Simple Pay to prevent fatal error in some cases.
+* Dev: Improve store name url encoding and escaping for display on payment success page.
+* Dev: Improve product name escaping for display on payment success page.
+
+= 1.5.0 - March 6, 2016 =
+
+* Tweak: Admin toggle switch UI for Test/Live modes updated.
+* Tweak: Translations moved from .po/.mo files to official wordpress.org translation packs.
+* Tweak: Always enqueue scripts option removed. Now forced on unless dequeued in code.
+* Tweak: Stop execution of plugin instead of deactivating if Pro version detected.
+* Dev: Harden security by escaping text variables in inline JavaScript with esc_js().
+* Dev: Now using Composer to handle PHP library dependencies (i.e. Stripe PHP).
+* Dev: Tested up to WordPress 4.5.
 
 = 1.4.6 - November 19, 2015 =
 
