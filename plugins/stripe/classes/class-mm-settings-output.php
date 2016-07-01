@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Base settings output class - displays the fields HTML
+ * Base settings output class - displays the fields HTML - Shared between SP Lite & Pro (and other plugins)
  */
 
 // Exit if accessed directly.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'MM_Settings_Output' ) ) {
 		public function textbox( $id, $classes = '' ) {
 
 			$html = '<input type="text" class="' . esc_attr( $classes ) . '" name="' . esc_attr( $this->get_setting_id( $id ) ) . '" ' .
-			        'id="' . esc_attr( $this->get_setting_id( $id ) ) . '" value="' . esc_attr( $this->get_setting_value( $id ) ) . '" />';
+			        'id="' . esc_attr( $this->get_setting_id( $id ) ) . '" value="' . sanitize_text_field( $this->get_setting_value( $id ) ) . '" />';
 
 			echo $html;
 		}
@@ -65,25 +65,17 @@ if ( ! class_exists( 'MM_Settings_Output' ) ) {
 		 */
 		public function radio_button( $id, $label, $value, $section = '' ) {
 
-			$html = '';
+			$name_attr = esc_attr( $this->get_setting_id( $section ) ); // sc_settings[payment_button_style]
+			$id_attr   = esc_attr( $this->get_setting_id( $section ) . '[' . $id . ']' ); // sc_settings[payment_button_style][stripe]
+			$checked   = false;
 
 			if ( ! empty( $section ) ) {
-				$id   = $this->get_setting_id( $id );
-				$name = $this->option . '[' . $section . ']';
-
-				$saved_value =  $this->get_setting_value( $section );
-
-				$checked = null !== $saved_value ? ( ( $saved_value == $value ) ? true : false ) : false;
-
-			} else {
-				$id = $this->get_setting_id( $id );
-
-				$checked = ( null !== $this->get_setting_value( $id ) ? true : false );
+				$saved_value = $this->get_setting_value( $section );
+				$checked     = ( $saved_value == $value );
 			}
 
-			$html  = '<input name="' . esc_attr( $name ) . '" id="' . esc_attr( $id ) . '" type="radio" ' .
-			         'value="' . esc_attr( $value ) . '" ' . checked( true, $checked, false ) . '/>&nbsp;';
-			$html .= '<label for="' . esc_attr( $id ) . '">' . $label . '</label><br/>';
+			$html = '<input name="' . $name_attr . '" id="' . $id_attr . '" type="radio" ' . 'value="' . esc_attr( $value ) . '" ' . checked( true, $checked, false ) . '/>&nbsp;';
+			$html .= '<label for="' . $id_attr . '">' . $label . '</label><br/>';
 
 			echo $html;
 		}
@@ -95,11 +87,8 @@ if ( ! class_exists( 'MM_Settings_Output' ) ) {
 			// Return empty string if no options.
 			if ( empty( $options ) ) {
 				if ( current_user_can( 'manage_options' ) ) {
-					echo '<p><strong>Warning:</strong> You have not included any options for this select setting.</p>';
-				} else {
-					echo '';
+					echo '<h6>' . __( 'Admin note: Option attributes are not set for all select controls.', 'stripe' ) . '</h6>';
 				}
-
 				return;
 			}
 
