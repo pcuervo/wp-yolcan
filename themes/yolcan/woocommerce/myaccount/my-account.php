@@ -23,8 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 wc_print_notices();
+if (class_exists('CanastaController')) $canasta = new CanastaController;
 
-if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
+global $post;
+?>
 
 <?php do_action( 'woocommerce_before_my_account' ); ?>
 
@@ -66,65 +68,66 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
                                             $params = array('posts_per_page' => 5, 'post_type' => 'product');
                                             $wc_query = new WP_Query($params);
                                         ?>
-                                            <?php if ($wc_query->have_posts()) : ?>
-                                                    <?php
-
-                                                        //19 y 16
-                                                        $media_canasta_saldo = new WC_Product( 19 ); // // replace 123 with the actual product id
-                                                        $media_saldox = $media_canasta_saldo->get_price();
-                                                        $completa_canasta_saldo = new WC_Product(16);
-                                                        $completa_saldox = $completa_canasta_saldo->get_price();
-
-                                                        $saldo_media_canasta = $saldo_agregado / $media_saldox;
-                                                        $saldo_completa_canasta = $saldo_agregado / $completa_saldox;
-
-                                                        echo "<p>Equivale a <strong>".round($saldo_media_canasta)." Medias Canastas</strong>";
-                                                        echo " y/o <strong>".round($saldo_completa_canasta)." Canastas Completas</strong>.</p>";
-
-
-                                                    ?>
-                                                <?php wp_reset_postdata(); ?>
-                                            <?php else:  ?>
-                                                <p>
-                                                     <?php _e( 'No Products'); ?>
-                                                </p>
-                                            <?php endif; ?>
+                                        
 
 				<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
 
 			</article>
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
 				<p>Desea <strong>suspender</strong> sus entregas?</p>
-				<form action="">
-					<div class="[ margin-bottom--small ]">
-						<input id="suspender-1" type="radio" class="input-radio" name="suspension" value="cheque" checked="checked">
-						<label for="suspender-1">1 Semana</label>
-					</div>
-					<div class="[ margin-bottom--small ]">
-						<input id="suspender-2" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-2">2 Semanas</label>
-					</div>
-					<div class="[ margin-bottom--small ]">
-						<input id="suspender-3" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-3">3 Semanas</label>
-					</div>
-					<div class="[ margin-bottom--small ]">
-						<input id="suspender-4" type="radio" class="input-radio" name="suspension" value="cheque">
-						<label for="suspender-4">4 Semanas</label>
-					</div>
-					<button href="#" class="[ btn btn-secondary btn-small ][ margin-bottom ]">suspender entrega</button>
-					<p>Tus entregas han sido suspendidas por <strong class="[ color-primary ]">1 semana</strong></p>
-				</form>
-
+				<?php
+                    if(isset($_POST['enviar'])) {
+                        if($_POST['suspension']=='')
+                        {
+                            echo "Por favor indique el periodo.";
+                        }
+                        else
+                        { 
+                            $postid = $current_user->ID;
+                            $data = $_POST['suspension'];
+                            update_post_meta($postid, 'suspension', $data );
+                        }
+                    }
+                    $suspension = get_post_meta($current_user->ID, 'suspension', true);
+                ?>
+                <form method="post" id="contactus_form" action="">
+                  <div class="[ margin-bottom--small ]">
+                        <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1 semana" checked="checked">
+                        <label for="suspender-1">1 Semana</label>
+                  </div>
+                  <div class="[ margin-bottom--small ]">
+                        <input id="suspender-2" type="radio" class="input-radio" name="suspension" value="2 semanas">
+                        <label for="suspender-2">2 Semanas</label>
+                  </div>
+                  <div class="[ margin-bottom--small ]">
+                        <input id="suspender-3" type="radio" class="input-radio" name="suspension" value="3 Semanas">
+                        <label for="suspender-3">3 Semanas</label>
+                  </div>
+                  <div class="[ margin-bottom--small ]">
+                        <input id="suspender-4" type="radio" class="input-radio" name="suspension" value="4 Semanas">
+                        <label for="suspender-4">4 Semanas</label>
+                   </div>
+                   <input type="submit" name="enviar" id="submit" class="[ btn btn-secondary btn-small ][ margin-bottom ]" value="suspender entrega"/>
+                    <p>Tus entregas han sido suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension ?> jajaaja</strong></p>
+                </form>
 			<!-- Reanudar -->
-				<p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
-				<a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom--large ]">Reanudar entregas</a>
+                    <?php
+                        $suspension = get_post_meta($current_user->ID, 'suspension', true);
+                        if ( $suspension != "" ){
+                    ?>
+                        <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregasssss?</p>
+                        <a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom--large ]">Reanudar entregas</a>
+                    <?php
+                        } else {
+                    ?>
+                        <p class="[ margin-top--large ]">NO hay nada que reanudar</p>
+                    <?php } ?>
 			</article>
 
 
 			<article class="[ padding--bottom border-bottom margin-bottom ]">
 				<h4>Tu próxima canasta - <span class="[ color-primary ]">$3,000</span></h4>
-				<p>Media canasta para el 12 de mayo:</p>
+				<p>Media canasta para el 10 de junio:</p>
 				<?php $ingredientes = array();
 				if (isset($canasta->actualizacion)):
 					if ($canasta->actualizacion->valor_puntos_completa < $saldo) $ingredientes = $canasta->getCanastaCompleta();
@@ -142,8 +145,19 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 
 				<h5>Productos agregados:</h5>
 				<div class="[ margin-botton ]">
-					<p><span>Jitomate 100gr - $20</span> <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small></p>
-					<p><span>Jitomate 100gr - $20</span> <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small></p>
+					<p>
+                        <span>
+                            <?php 
+                            $padicionalnombre = get_post_meta($current_user->ID, 'padicionalnombre', true);
+                            $padicionalprecio = get_post_meta($current_user->ID, 'padicionalprecio', true);
+                            $padicionalpeso = get_post_meta($current_user->ID, 'padicionalpeso', true);
+                            $padicionaltipo = get_post_meta($current_user->ID, 'padicionaltipo', true);
+                            $padicionalnumber = get_post_meta($current_user->ID, 'padicionalnumber', true);
+                            $padicionalocasion = get_post_meta($current_user->ID, 'padicionalocasion', true);
+                            ?>
+                            <?php echo $padicionalnumber; ?> | <?php echo $padicionalnombre; ?> - <?php echo $padicionalpeso; ?> <?php echo $padicionaltipo; ?> - $ <?php echo $padicionalprecio; ?>.00 | <?php echo $padicionalocasion; ?></span> 
+                        <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small>
+                    </p>
 				</div>
 
 				<a href="<?php echo site_url('/recetas/'); ?>" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
@@ -152,8 +166,6 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 			<article class="">
 				<h4>Agrega productos</h4>
 				<p>Selecciona los productos que deseas agregar a tu canasta:</p>
-				<form>
-
 					<?php if (! empty($canasta) AND method_exists($canasta, 'getIngredientesAdicionales')) :
 						$adicionales = $canasta->getIngredientesAdicionales();
 						if ( ! empty($adicionales) ):
@@ -161,41 +173,75 @@ if (class_exists('CanastaController')) $canasta = new CanastaController;  ?>
 								$ingrediente = get_post($data_ingrediente->ingrediente_id);
                                 $precio = get_post_meta($data_ingrediente->ingrediente_id, 'precio_ingrediente', true);
                                 $peso = get_post_meta($data_ingrediente->ingrediente_id, 'cantidad_en_peso', true);
-                                $tipo = get_post_meta($data_ingrediente->ingrediente_id, 'tipo_en_peso', true);?>
+                                $tipo = get_post_meta($data_ingrediente->ingrediente_id, 'tipo_en_peso', true);
+                                $user_id = get_current_user_id();
+                                $user = get_userdata( $user_id );
+                                if(isset($_POST['padicional'])) {
+                                        if($_POST['padicionalnumber']=='')
+                                        {
+                                            echo "Por favor indique el número.";
+                                        }
+                                        else
+                                        {
+                                            $postid = $current_user->ID;
+                                            $padicionalnombre = $_POST['padicionalnombre'];
+                                            $padicionalprecio = $_POST['padicionalprecio'];
+                                            $padicionalpeso = $_POST['padicionalpeso'];
+                                            $padicionaltipo = $_POST['padicionaltipo'];
+                                            $padicionalnumber = $_POST['padicionalnumber'];
+                                            $padicionalocasion = $_POST['padicionalocasion'];
+                                            update_post_meta($postid, 'padicionalnombre', $padicionalnombre );
+                                            update_post_meta($postid, 'padicionalprecio', $padicionalprecio );
+                                            update_post_meta($postid, 'padicionalpeso', $padicionalpeso );
+                                            update_post_meta($postid, 'padicionaltipo', $padicionaltipo );
+                                            update_post_meta($postid, 'padicionalnumber', $padicionalnumber );
+                                            update_post_meta($postid, 'padicionalocasion', $padicionalocasion );
+                                        }
+                                }
+                                $padicionalnombre = get_post_meta($current_user->ID, 'padicionalnombre', true);
+                                $padicionalprecio = get_post_meta($current_user->ID, 'padicionalprecio', true);
+                                $padicionalpeso = get_post_meta($current_user->ID, 'padicionalpeso', true);
+                                $padicionaltipo = get_post_meta($current_user->ID, 'padicionaltipo', true);
+                                $padicionalnumber = get_post_meta($current_user->ID, 'padicionalnumber', true);
+                                $padicionalocasion = get_post_meta($current_user->ID, 'padicionalocasion', true);
+                                ?>
+                                <form method="post" id="contactus_form" action="">
 								<div class="[ margin-bottom ]">
 									<a data-toggle="collapse" href="#<?php echo $ingrediente->post_name; ?>" class="[ no-decoration color-dark color-dark-hover ]">
 										<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
 										<p class="[ inline-block align-middle ][ no-margin ]"><?php echo $ingrediente->post_title; ?></p>
+                                        <input type="hidden" name="padicionalnombre" value="<?php echo $ingrediente->post_title; ?>">
 									</a>
 									<div id="<?php echo $ingrediente->post_name; ?>" class="[ panel-collapse collapse ][ padding--top ]">
-										<p class="[ color-gray-xlight ]">Cantidad</p>
-                                        <p class="[ color-gray-xlight ]">Precio: $ <?php echo number_format($precio); ?></p>
-                                        <p class="[ color-gray-xlight ]">Peso: <?php echo $peso; ?> <?php echo $tipo; ?></p>
+										<p class="[ color-gray-xlight ]">Precio: $ <?php echo number_format($precio); ?>
+                                            <input type="hidden" name="padicionalprecio" value="<?php echo number_format($precio); ?>">
+                                        <br>Peso: <?php echo $peso; ?> <?php echo $tipo; ?></p>
+                                            <input type="hidden" name="padicionalpeso" value="<?php echo $peso; ?>">
+                                            <input type="hidden" name="padicionaltipo" value="<?php echo $tipo; ?>">
 										<div class="[ row ]">
 											<div class="[ col-xs-3 padding--right--small ]">
-												<input type="number" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
+												<input type="number" name="padicionalnumber" class="[ width-90 padding--xsmall ][ form-control no-border no-border-radius bg-gray ]">
 											</div>
 											<div class="[ col-xs-5 no-padding ]">
 												<div>
-													<input type="radio" id="option11" name="cc">
+													<input type="radio" id="option11" name="padicionalocasion" value="Sólo esta ocación">
 													<label for="option11"><span class="[ margin-right--xxsmall ]"></span> Sólo esta ocación</label>
 												</div>
 												<div>
-													<input type="radio" id="option12" name="cc">
+													<input type="radio" id="option12" name="padicionalocasion" value="Cada semana">
 													<label for="option12"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
 												</div>
 											</div>
 											<div class="[ col-xs-4 padding--left--small ]">
-												<button type="submit" class="[ btn btn-secondary padding--xsmall ][ margin-bottom ]">agregar</button>
+                                                <input type="submit" name="padicional" id="submit" class="[ btn btn-secondary padding--xsmall ][ margin-bottom ]" value="agregar"/>
 											</div>
 										</div>
 									</div>
 								</div>
+                                </form>
 							<?php endforeach;
 						endif;
 					endif; ?>
-
-				</form>
 			</article> <!-- /forms -->
 
 			<?php //wc_get_template( 'myaccount/my-downloads.php' ); ?>
