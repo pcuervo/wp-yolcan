@@ -18,7 +18,7 @@ function view($view, $array=array()){
 }
 
 /**
- * ABRE UN MODELO ESPESIFICADO
+ * ABRE UN MODELO ESPECIFICADO
  */
 function model($model = ''){
 	if ($model != ''):
@@ -71,7 +71,7 @@ function getDateTransformUpdate($fecha){
 }
 
 /**
- * REGRESA EL PRODUCTO Y EL CLUBE
+ * REGRESA EL PRODUCTO Y EL CLUB
  */
 function getClubeProductoPage($page){
 	$page = explode("-", $page);

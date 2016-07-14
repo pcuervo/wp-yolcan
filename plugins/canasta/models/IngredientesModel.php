@@ -38,8 +38,8 @@ class IngredientesModel {
 
     public function setIngredientesCanasta($data)
     {
-    	$canasta_id = $this->saveCanasta($data['valor_puntos_completa'], $data['valor_puntos_mitad']);
-    	$this->saveIngredientes($canasta_id, $data['ingredientes_canasta']);
+    	//$canasta_id = $this->saveCanasta($data['valor_puntos_completa'], $data['valor_puntos_mitad']);
+    	//$this->saveIngredientes($canasta_id, $data['ingredientes_canasta']);
 
     }
 
@@ -102,7 +102,7 @@ class IngredientesModel {
     }
 	
 
-	public function getUltimaActualizacion()
+    public function getUltimaActualizacion()
     {
     	return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}actualizaciones_canasta
     		ORDER BY ultima_actualizacion DESC
