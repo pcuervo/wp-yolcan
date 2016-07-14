@@ -47,7 +47,9 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'supports'           => array( 'title', 'editor', 'thumbnail' )
+			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+                        'capability_type'    => array('ingrediente','ingredientes'),
+                        'map_meta_cap'       => true,
 		);
 		register_post_type( 'ingredientes', $args );
 
@@ -78,7 +80,9 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'supports'           => array( 'title', 'editor', 'thumbnail' )
+			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+                        'capability_type'    => array('receta','recetas'),
+                        'map_meta_cap'       => true,
 		);
 		register_post_type( 'recetas', $args );
 
@@ -109,7 +113,9 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'supports'           => array( 'title', 'editor' )
+			'supports'           => array( 'title', 'editor' ),
+                        'capability_type'    => array('faq','faqs'),
+                        'map_meta_cap'       => true
 		);
 		register_post_type( 'faq', $args );
 
@@ -140,7 +146,9 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'supports'           => array( 'title', 'editor' )
+			'supports'           => array( 'title', 'editor' ),
+                        'capability_type'    => array('contacto','contactos'),
+                        'map_meta_cap'       => true
 		);
 		register_post_type( 'contactos', $args );
 
@@ -204,7 +212,9 @@ add_action( 'admin_menu', 'change_post_menu_label' );
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 6,
-			'supports'           => array( 'title', 'editor', 'thumbnail' )
+			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+                        'capability_type'    => array('club-de-consumo','club-de-consumos'),
+                        'map_meta_cap'       => true,
 		);
 		register_post_type( 'clubes-de-consumo', $args );
 

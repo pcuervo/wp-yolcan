@@ -1,32 +1,39 @@
-<?php global $wp_query;
+<?php 
+global $wp_query;
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;?>
-<div class="[ container ]">
-	<div id="content">
-		<?php if ( have_posts() ) :
-			while( have_posts() ) : the_post();
-			 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
-				<div class="[ box-content ]">
-					<a href="<?php the_permalink() ?>">
-						<img alt="" src="<?php echo $url_img; ?>">
-						<p class=""><?php the_title(); ?></p>
-					</a>
-				</div>
+<?php if ( have_posts() ) : ?>
+	<div class="[ row ]">
+		<?php while( have_posts() ) : the_post();
+		 	$url_img = attachment_image_url($post->ID, 'medium'); ?>
 
-			<?php endwhile;
-		endif; ?>
+			<div class="[ box-content ][ col-xs-6 col-sm-4 col-lg-3 ]">
+				<a href="<?php the_permalink() ?>">
+					<img alt="" src="<?php echo $url_img; ?>">
+					<p class=""><?php the_title(); ?></p>
+                                        <p>Ingredientes:</p>
+                                        
+                                        
+                                        <?php
+                                        
+                                        $ingredientes = new WP_Query( ['post_type' => 'ingredientes', 'posts_per_page' => -1] );
+                                        if ( ! empty($ingredientes->posts) ) :
+                                                $activitisShip = orderIndexObject(getIngredientsShip($post->ID));
+                                                foreach ($ingredientes->posts as $ingrediente):
+                                                        $checked = isset( $activitisShip[$ingrediente->ID] ) ? 'checked' : '';?>
 
+                                                        <input type="checkbox" name="ingredientes[]" id="ingredientes[]" value="<?php echo $ingrediente->ID ?>" <?php echo $checked; ?> /> <?php echo $ingrediente->post_title; ?><br><br>
+
+                                                <?php endforeach;
+                                        endif;
+                                       
+                                        ?>
+                                        
+                                        
+                                        
+				</a>
+			</div>
+
+		<?php endwhile; ?>
 	</div>
-</div>
-
-
-<!-- pagination -->
-<section class="[ bg-gray ][ text-center ]">
-	<?php if($wp_query->max_num_pages > 1):
-		$url = site_url('/recetas/');
-		pagenavi('', $wp_query->max_num_pages, $url, true);
-	else: ?>
-		<div class="no-pagination">pag 1 de 1</div>
-	<?php endif; ?>
-
-</section>
+<?php endif; ?>

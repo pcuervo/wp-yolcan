@@ -19,6 +19,8 @@
 
 // Body reset
 
+html, body { height: 100%;}
+
 html {
   font-size: 10px;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -30,7 +32,41 @@ body {
   line-height: @line-height-base;
   color: @text-color;
   background-color: @body-bg;
+  width: 100%;
 }
+
+.main{
+  min-height: -moz-calc(100% - 75px);
+  min-height: -o-calc(100% - 75px);
+  min-height: -webkit-calc(100% - 75px);
+  min-height: calc(100% - 75px);
+  position: relative;
+  // .min-height-calc(100% - 130px);
+  @media (min-width: @screen-sm){
+    min-height: -moz-calc(100% - 130px);
+    min-height: -o-calc(100% - 130px);
+    min-height: -webkit-calc(100% - 130px);
+    min-height: calc(100% - 130px);
+  }
+}
+
+// Sections and articles
+
+section{
+  padding-top: (@padding-base-vertical*4); padding-bottom: (@padding-base-vertical*4);
+
+  article{
+    padding: 0; margin-bottom: (@padding-base-vertical*4);
+
+    &:last-of-type{ margin-bottom: 0; }
+
+    @media (min-width: @screen-sm){
+      margin-bottom: 0;
+    }
+  }
+}
+
+article{ padding-top: (@padding-base-vertical*2); padding-bottom: (@padding-base-vertical*2); }
 
 // Reset fonts for relevant elements
 input,
@@ -44,7 +80,6 @@ textarea {
 
 
 // Links
-
 a {
   color: @link-color;
   text-decoration: none;

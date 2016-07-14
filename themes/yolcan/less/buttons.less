@@ -95,13 +95,7 @@
 }
 
 .btn-primary-darken{
-  background-color: @primary-darken;
-  .btn-box-shadow;
-  &:hover,
-  &:focus,
-  &.focus {
-    background-color: darken(@primary-darken, 5%);
-  }
+  .button-variant(@light; @primary-darken; transparent);
 }
 
 .btn-facebook{
@@ -152,7 +146,7 @@
 // Button Sizes
 // --------------------------------------------------
 
-.btn-lg {
+.btn-lg, .woocommerce input.button.btn-lg {
   // line-height: ensure even-numbered height of button next to large input
   .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large; @line-height-large; @btn-border-radius-large);
 }

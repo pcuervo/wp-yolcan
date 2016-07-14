@@ -1,40 +1,30 @@
 <?php get_header(); ?>
 
-<section class="[ container ]">
-	<div class="[ row ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<h2><strong>Recetas</strong></h2>
-			<p class="[ fz-medium ]">Ideas para nuestros ingredientes</p>
-		</div>
-	</div>
-</section>
-<section class="[ bg-gray ][  ][ padding--top-bottom--small ]">
-	<div class="[ container ]">
-		<div class="[ row  ]">
-			<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-				<form>
-					<div class="input-group">
-						<input type="text" name="search" class="[ form-control ][ input-search ][  ]">
-						<span class="[ input-group-btn ][  ]">
-							<button class="[ input-search--button ][ btn-secondary ][ no-margin padding--small ]" type="submit">
-								<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/search.svg">
-							</button>
-						</span>
 
+	<section class="">
+		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
+		<p class="[ fz-medium text-center ]">Ideas para nuestros ingredientes</p>
+		<div class="[ bg-gray ][ padding--top-bottom--small ]">
+			<div class="[ container ]">
+				<div class="[ row ]">
+					<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
+						<form>
+							<div class="input-group">
+								<input type="text" name="search" class="[ form-control ][ input-search ][  ]">
+								<span class="[ input-group-btn ][  ]">
+									<button class="[ input-search--button ][ btn-secondary ][ no-margin padding--small ]" type="submit">
+										<img class="[ svg icon--iconed--large icon--stroke icon--responsive ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/search.svg">
+									</button>
+								</span>
+							</div>
+						</form>
 					</div>
-				</form>
+				</div>
+				<?php $ingrTemporada = getIngredientsShip(0); ?>
 			</div>
 		</div>
-
-	</div>
-
-</section>
-
-<div class="[ container ]">
-	<div class="[ row ][ margin-bottom ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
-			<?php $ingrTemporada = getIngredientsShip(0); ?>
-			<p>
+		<div class="[ container ]">
+			<p class="[ no-margin ][ text-center ]">
 				Esta temporada cocinamos con:
 				<?php if (! empty($ingrTemporada)):
 					$TotIng = count($ingrTemporada) - 1;
@@ -47,180 +37,148 @@
 				<?php endif; ?>
 			</p>
 		</div>
-	</div>
-</div>
+	</section>
 
-<div>
-	<!-- Push Wrapper -->
-	<div id="mp-pusher" class="[ mp-pusher ][ container ]">
-		<!-- mp-menu -->
+	<section class="[ container ]">
+		<div class="row">
+			<article class="[ col-xs-12 col-md-4 ]">
+				<h3 class="">Filtra nuestras recetas</h3>
+				<div class="[ filter-ingredientes ]">
+					<h4><a class="[ text-center ]" data-filter="ingredientes">Ingredientes</a></h4>
+					<div class="[ row ]">
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c1" name="cc">
+							<label for="c1"><span></span>desayuno largo largo largo orale sí está largo eh de veritas</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c2" name="cc">
+							<label for="c2"><span></span>botana</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c3" name="cc">
+							<label for="c3"><span></span>plato fuerte</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c4" name="cc">
+							<label for="c4"><span></span>sopa</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c5" name="cc">
+							<label for="c5"><span></span>entrada</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c6" name="cc">
+							<label for="c6"><span></span>cena</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c7" name="cc">
+							<label for="c7"><span></span>sandwich</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c8" name="cc">
+							<label for="c8"><span></span>guarnición</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c9" name="cc">
+							<label for="c9"><span></span>postre</label>
+						</div>
+					</div>
+				</div><!-- .filter-colecciones -->
+				<div class="[ filter-temporada ]">
+					<h4><a class="[ text-center ]" data-filter="temporada">Temporada</a></h4>
+					<div class="[ row ]">
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c11" name="cc">
+							<label for="c11"><span></span>desayuno</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c12" name="cc">
+							<label for="c12"><span></span>botana</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c13" name="cc">
+							<label for="c13"><span></span>plato fuerte</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c14" name="cc">
+							<label for="c14"><span></span>sopa</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c15" name="cc">
+							<label for="c15"><span></span>entrada</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c16" name="cc">
+							<label for="c16"><span></span>cena</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c17" name="cc">
+							<label for="c17"><span></span>sandwich</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c18" name="cc">
+							<label for="c18"><span></span>guarnición</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c19" name="cc">
+							<label for="c19"><span></span>postre</label>
+						</div>
+					</div>
+				</div>
+				<div class="[ filter-tipo-de-platillo ]">
+					<h4><a class="[ text-center ]" data-filter="platillo">Tipo de platillo</a></h4>
+					<div class="[ row ]">
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c21" name="cc">
+							<label for="c21"><span></span>desayuno</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c22" name="cc">
+							<label for="c22"><span></span>botana</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c23" name="cc">
+							<label for="c23"><span></span>plato fuerte</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c24" name="cc">
+							<label for="c24"><span></span>sopa</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c25" name="cc">
+							<label for="c25"><span></span>entrada</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c26" name="cc">
+							<label for="c26"><span></span>cena</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c27" name="cc">
+							<label for="c27"><span></span>sandwich</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c28" name="cc">
+							<label for="c28"><span></span>guarnición</label>
+						</div>
+						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+							<input type="checkbox" id="c29" name="cc">
+							<label for="c29"><span></span>postre</label>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="[ col-xs-12 col-md-8 ]">
+				<?php
+				if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
+					get_template_part('templates/recetas', 'ingrediente');
+				elseif(isset($_GET['search']) AND $_GET['search'] != ''):
+					get_template_part('templates/recetas', 'search');
+				else:
+					get_template_part('templates/recetas', 'archive');
+				endif;
+				?>
+			</article>
+		</div>
+	</section><!-- /container -->
 
-		<div class="[ content-wrapper ]"><!-- this is for emulating position fixed of the nav -->
-			<div class="[ content ]">
-				<div class="[ main-wrapper ] [ margin-bottom ]" >
-					<div class="[ main ]">
-						<section class="[ filters ] [ margin-bottom--small ]">
-							<div class="[ filters__tabs ] [ clearfix ]">
-								<a class="[ tab-filter ] [ text-center ] [ col-xs-4 ]" data-filter="ingredientes">ingredientes</a>
-								<a class="[ tab-filter ] [ text-center ] [ col-xs-4 ]" data-filter="temporada">temporada</a>
-								<a class="[ tab-filter ] [ text-center ] [ col-xs-4 ]" data-filter="platillo">tipo de platillo</a>
-							</div><!-- filters__tabs -->
-							<div class="[ filters__content ][ border-bottom--secondary--small ]">
-								<div class="[ filter-ingredientes ]">
-									<div class="[ row ]">
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c1" name="cc">
-												<label for="c1"><span></span>desayuno</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c2" name="cc">
-												<label for="c2"><span></span>botana</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c3" name="cc">
-												<label for="c3"><span></span>plato fuerte</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c4" name="cc">
-												<label for="c4"><span></span>sopa</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c5" name="cc">
-												<label for="c5"><span></span>entrada</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c6" name="cc">
-												<label for="c6"><span></span>cena</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c7" name="cc">
-												<label for="c7"><span></span>sandwich</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c8" name="cc">
-												<label for="c8"><span></span>guarnición</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c9" name="cc">
-												<label for="c9"><span></span>postre</label>
-											</div>
-										</div>
-									</div>
-								</div><!-- .filter-colecciones -->
-								<div class="[ filter-temporada ][ border-bottom--secondary--small ]">
-									<div class="[ row ]">
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c11" name="cc">
-												<label for="c11"><span></span>desayuno</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c12" name="cc">
-												<label for="c12"><span></span>botana</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c13" name="cc">
-												<label for="c13"><span></span>plato fuerte</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c14" name="cc">
-												<label for="c14"><span></span>sopa</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c15" name="cc">
-												<label for="c15"><span></span>entrada</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c16" name="cc">
-												<label for="c16"><span></span>cena</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c17" name="cc">
-												<label for="c17"><span></span>sandwich</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c18" name="cc">
-												<label for="c18"><span></span>guarnición</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c19" name="cc">
-												<label for="c19"><span></span>postre</label>
-											</div>
-										</div>
-									</div>
-								</div><!-- .filter-fotografos -->
-								<div class="[ filter-platillo ][ border-bottom--secondary--small ]">
-									<div class="[ row ]">
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c21" name="cc">
-												<label for="c21"><span></span>desayuno</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c22" name="cc">
-												<label for="c22"><span></span>botana</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c23" name="cc">
-												<label for="c23"><span></span>plato fuerte</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c24" name="cc">
-												<label for="c24"><span></span>sopa</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c25" name="cc">
-												<label for="c25"><span></span>entrada</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c26" name="cc">
-												<label for="c26"><span></span>cena</label>
-											</div>
-										</div>
-										<div class="[ col-xs-4 ][ padding--sides--xsmall ]">
-											<div>
-												<input type="checkbox" id="c27" name="cc">
-												<label for="c27"><span></span>sandwich</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c28" name="cc">
-												<label for="c28"><span></span>guarnición</label>
-											</div>
-											<div>
-												<input type="checkbox" id="c29" name="cc">
-												<label for="c29"><span></span>postre</label>
-											</div>
-										</div>
-									</div>
-								</div><!-- .filter-decada -->
-							</div><!-- filters__content -->
-						</section><!-- .filters -->
-					</div> <!-- .main -->
-				</div> <!-- .main-wrapper -->
-
-			</div><!-- /content -->
-		</div><!-- /content-wrapper -->
-	</div><!-- /pusher -->
-</div><!-- /container -->
-
-<?php
-if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
-	get_template_part('templates/recetas', 'ingrediente');
-elseif(isset($_GET['search']) AND $_GET['search'] != ''):
-	get_template_part('templates/recetas', 'search');
-else:
-	get_template_part('templates/recetas', 'archive');
-endif;
-
-get_footer(); ?>
+<?php get_footer(); ?>
