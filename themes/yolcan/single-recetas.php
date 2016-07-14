@@ -15,19 +15,19 @@ $no_id = $post->ID; ?>
 			<div class="[ row ]">
 				<div class="[ col-xs-4 padding--right--small ][ text-center ]">
 					<div class="[ bg-gray-dark ][ padding--top-bottom--small ]">
-						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/alarm-clock.svg">
+						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/alarm-clock.svg">
 					</div>
 					<div class="[ bg-gray ][ padding--top-bottom--small ][ fact fz-18 ]"><?php echo get_post_meta($post->ID, 'tiempo_preparacion', true); ?></div>
 				</div>
 				<div class="[ col-xs-4 padding--sides--xsmall ][ text-center ]">
 					<div class="[ bg-gray-dark ][ padding--top-bottom--small ]">
-						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/food-dome.svg">
+						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/food-dome.svg">
 					</div>
 					<div class="[ bg-gray ][ padding--top-bottom--small ][ fact fz-18 ]"><?php echo get_post_meta($post->ID, 'numero_personas', true); ?></div>
 				</div>
 				<div class="[ col-xs-4 padding--left--small ][ text-center ]">
 					<div class="[ bg-gray-dark ][ padding--top-bottom--small ]">
-						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>images/icons/phone-signal-high.svg">
+						<img class="[ svg icon--stroke icon--iconed--xlarge icon--thickness-1 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-signal-high.svg">
 					</div>
 					<div class="[ bg-gray ][ padding--top-bottom--small ][ fact fz-18 ]"><?php echo get_post_meta($post->ID, 'nivel_de_preparacion', true); ?></div>
 				</div>
@@ -45,7 +45,7 @@ $no_id = $post->ID; ?>
 
 		<div class="[ col-xs-12 col-sm-6 ]">
 			<p class="[ fz-large ][ text-center ][ margin-top ]"><em><strong>Preparación</strong></em></p>
-			<div class="[ list list-number ]">
+			<div>
 				<p><?php echo get_post_meta($post->ID, 'pasos_preparacion', true); ?></p>
 			</div>
 		</div>

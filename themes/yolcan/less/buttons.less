@@ -7,14 +7,15 @@
 // --------------------------------------------------
 
 .btn {
-  font-family: "proxima-nova",sans-serif;
-  font-style: normal;
-  font-weight: 400;
   display: inline-block;
-  margin-bottom: 0; // For input.btn
+  font-family: "proxima-nova",sans-serif; font-style: normal; font-weight: 400;
+  margin-left: (@margin-base/4); margin-right: (@margin-base/4); margin-bottom: 0;
+  border-radius: 3px;
+  font-size: 18px;
   font-weight: @btn-font-weight;
   text-align: center;
   vertical-align: middle;
+  .btn-box-shadow;
   touch-action: manipulation;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
@@ -70,7 +71,11 @@
   .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
 }
 .btn-primary {
-  .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+  .button-variant(@light; @primary; transparent);
+}
+
+.btn-secondary {
+  .button-variant(@light; @secondary; transparent);
 }
 // Success appears as green
 .btn-success {
@@ -89,41 +94,13 @@
   .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
 }
 
-
-
 .btn-primary-darken{
   background-color: @primary-darken;
-  color: @light;
-  border-radius: 3px;
-  border: 0px;
-  margin-left: (@margin-base/4); margin-right: (@margin-base/4);
-  font-size: 18px;
   .btn-box-shadow;
-    &:hover,
-    &:focus,
-    &.focus {
-    color: @light;
+  &:hover,
+  &:focus,
+  &.focus {
     background-color: darken(@primary-darken, 5%);
-    text-decoration: none;
-    .transition(@transition: all 0.3s ease );
-  }
-}
-
-.btn-secondary{
-  background-color: @secondary;
-  color: @light;
-  border-radius: 3px;
-  border: 0px;
-  margin-left: (@margin-base/4); margin-right: (@margin-base/4);
-  font-size: 18px;
-  .btn-box-shadow;
-   &:hover,
-    &:focus,
-    &.focus {
-    color: @light;
-    background-color: darken(@secondary, 10%);
-    text-decoration: none;
-    .transition(@transition: all 0.3s ease );
   }
 }
 
@@ -233,7 +210,7 @@ input[type="button"] {
 
 .input-btn-secondary,
 .a-btn-secondary{
-  .btn-secondary!important;
+  .btn-secondary !important;
   font-family: "proxima-nova", sans-serif!important;
   text-transform: lowercase!important;
   font-weight: normal!important;
