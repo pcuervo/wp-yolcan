@@ -5,8 +5,8 @@ class CanastaController {
 	public $model_ingredientes;
 
 	function __construct() {
-		$this->model_ingredientes = model('IngredientesModel');
-        $this->actualizacion = $this->model_ingredientes->getUltimaActualizacion();
+	    $this->model_ingredientes = model('IngredientesModel');
+            $this->actualizacion = $this->model_ingredientes->getUltimaActualizacion();
         }
 
 	static function index($method, $name_menu, $slug_page){
