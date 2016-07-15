@@ -660,7 +660,7 @@ function style_fields( $args ){
 }
 
 
-add_filter('add_to_cart_redirect', 'themeprefix_add_to_cart_redirect');
+add_filter('woocommerce_add_to_cart_redirect', 'themeprefix_add_to_cart_redirect');
 function themeprefix_add_to_cart_redirect() {
  global $woocommerce;
  $checkout_url = $woocommerce->cart->get_checkout_url();

@@ -9,14 +9,16 @@ class CanastaModel {
         $this->_prefix = $wpdb->prefix;
     }
 
-    static function install(){
+    static function install()
+    {
     	$model = new CanastaModel;
   		$model->createTableCanasta();
   		$model->createTableCanastaRelationships();
 
     }
 
-    private function createTableCanasta(){
+    private function createTableCanasta()
+    {
     	global $wpdb;
 		$wpdb->query(
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}actualizaciones_canasta (
@@ -30,7 +32,8 @@ class CanastaModel {
 		);
     }
 
-    private function createTableCanastaRelationships(){
+    private function createTableCanastaRelationships()
+    {
     	global $wpdb;
 		$wpdb->query(
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}canasta_relationships (
@@ -45,17 +48,6 @@ class CanastaModel {
 		);
     }
 
-    /**
-     * PRODUCTOS
-     */
-    static function productos()
-        {
-                global $wpdb;
-		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
-			WHERE post_status = 'publish' AND post_type = 'product';
-		", OBJECT );
-	}
-
 	/**
 	 * CLUBES DE CONSUMO 
 	 */
@@ -66,6 +58,7 @@ class CanastaModel {
 			WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo';
 		", OBJECT );
 	}
+
         
     static function ingredientes()
 	{

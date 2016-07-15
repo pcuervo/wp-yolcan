@@ -1,10 +1,7 @@
 <?php 
 /**
  * MUESTRA UNA VISTA
- 
  */
-
-/*---------------------PRUEBA DE CANASTA--------------------------*/
 function view($view, $array=array()){
 	global $errores;
 	global $mesage_error;

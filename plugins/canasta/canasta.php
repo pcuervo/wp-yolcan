@@ -9,7 +9,6 @@ Version: 1.0
 Author: Alejandro Cervantes para pcuervo.com
 Author URI: http://pcuervo.com
 */
-/*---------------------PRUEBA DE CANASTA--------------------------*/
 
 global $errores;
 global $mesage_error;
@@ -30,23 +29,10 @@ require(PATH_CANASTA."/models/CanastaModel.php");
 
 register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
 
-add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canasta Semanal", "canasta");' ) );
+add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canastas", "canasta");' ) );
 
-$productos = CanastaModel::productos();
-$clubes = CanastaModel::clubes();
-$ingredientes = CanastaModel::ingredientes();
 
-if ( ! empty($productos) AND ! empty($clubes) ) {
-	foreach ($clubes as $key => $club) {
-		foreach ($productos as $key => $producto) {
-			$page = $club->ID.'_'.$producto->ID;
-			$name = $club->post_title.' - '.$producto->post_title;
 
-			add_action( 'admin_menu', create_function( '', 'CanastaController::index("edit", "Editar '.$name.'", "editar-'.$page.'");' ) );
-		}
-	}
-	
+if (isset($_GET['id_club'])){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("canastasClube", "Canastas del Club", "canastas_club");' ) );
 }
-
-
-
