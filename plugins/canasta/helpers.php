@@ -73,9 +73,6 @@ function getGroupCanastas($ingredientes){
 		foreach ($ingredientes as $key => $ingrediente) {
 			$arrNew[$ingrediente->canasta_id][$ingrediente->ingrediente_id] = $ingrediente;
 		}
-		echo '<pre>';
-		print_r($arrNew);
-		echo '</pre>';
 	}else{
 		return [];
 	}
