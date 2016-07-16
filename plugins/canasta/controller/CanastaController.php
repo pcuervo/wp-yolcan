@@ -4,11 +4,13 @@ class CanastaController {
 	public $actualizacion;
 	public $modelIngredientes;
 	public $idClub;
+	public $dataPost;
 
 
 	function __construct() {
 	    $this->modelIngredientes = model('IngredientesModel');
         $this->idClub = isset($_GET['id_club']) ? $_GET['id_club'] : 0;
+        $this->dataPost = !empty($_POST) ? $_POST : array();
     }
 
 	static function index($method, $name_menu, $slug_page)
@@ -52,10 +54,15 @@ class CanastaController {
 	public function canastasClube()
 	{
 		$productos = model('ProductosModel');
-
+		$mCanasta = model('CanastaModel');
+		$canastasActivas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub));
+		$canastasProgramadas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub, 2));
+		
 		return view('canastas-club', [
 			'idClub' => $this->idClub,
-			'productos' => $productos->productos()
+			'productos' => $productos->productos(),
+			'canastasActivas' => $canastasActivas,
+			'canastasProgramadas' => $canastasProgramadas
 		]);
 	}
 
@@ -65,14 +72,50 @@ class CanastaController {
 	 */
 	public function editCanastas()
 	{
-		if (! empty($_POST)) $this->setCanastas($_POST);
+		// if (! empty($_POST)) $this->setCanastas($_POST);
 		
+		// $productos = model('ProductosModel');
+		// return view('editar-canasta', [
+		// 	'ingredientes' => $this->modelIngredientes->getIngredientes(),
+		// 	'idClub' => $this->idClub,
+		// 	'productos' => $productos->productos()
+		// ]);
+	}
+
+	/**	
+	 * CREAR CANASTA
+	 * @return [type] [description]
+	 */
+	public function createCanastas()
+	{
 		$productos = model('ProductosModel');
+
 		return view('editar-canasta', [
-			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'titulo' => 'Crear canastas',
 			'idClub' => $this->idClub,
-			'productos' => $productos->productos()
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'productos' => $productos->productos(),
+			'action' => 'store'
 		]);
+	}
+
+	/**
+	 * GUARDA LAS CANASTAS
+	 * @return [type] [description]
+	 */
+	public function storeCanastas()
+	{
+		$mCanasta = model('CanastaModel');
+		$idActualizacion = $mCanasta->storeCanasta($this->idClub, 1);
+		if ($this->dataPost['type'] == 'base') { }
+
+		if (!empty($this->dataPost['ingredientes_canastas'])) {
+			foreach ($this->dataPost['ingredientes_canastas'] as $idCanasta => $canasta) {
+				$this->updateIngredientesCanasta($idCanasta, $canasta, 'no', $idActualizacion);
+			}
+		}
+		$urlRedirect = admin_url().'admin.php?page=canastas_club&id_club='.$this->idClub;
+		wp_redirect($urlRedirect);
 	}
 
 	/**
@@ -82,37 +125,33 @@ class CanastaController {
 	 */
 	private function setCanastas($data)
 	{
-		$mCanasta = model('CanastaModel');
-		$actualizacion = isset($data['actualizacion']) ? 'si' : 'no'; 
-		if ($data['type'] == 'base') { }
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
+		// $mCanasta = model('CanastaModel');
+		// $actualizacion = isset($data['actualizacion']) ? 'si' : 'no'; 
+		// if ($data['type'] == 'base') { }
 
-		if (!empty($data['ingredientes_canastas'])) {
-			foreach ($data['ingredientes_canastas'] as $idCanasta => $canasta) {
-				$this->updateIngredientesCanasta($idCanasta, $canasta, $actualizacion, $data['idActualizacion']);
-			}
-		}
+		// if (!empty($data['ingredientes_canastas'])) {
+		// 	foreach ($data['ingredientes_canastas'] as $idCanasta => $canasta) {
+		// 		$this->updateIngredientesCanasta($idCanasta, $canasta, $actualizacion, $data['idActualizacion']);
+		// 	}
+		// }
 	}
 
 
 	private function updateIngredientesCanasta($idCanasta, $canasta, $actualizacion, $idActualizacion)
 	{
-		echo '<pre>';
-			print_r($idActualizacion);
-			echo '</pre>';
-		$fechaActualizacion = '2016-07-22';
-		$fechaEntrega = '2016-07-22';
+		$mCanasta = model('CanastaModel');
 		if (!empty($canasta)) {
-			// if ($actualizacion == 'no') $mCanasta->destroyIngredientesCanasta($idCanasta);
+			if ($actualizacion == 'si') $mCanasta->destroyIngredientesCanasta($idCanasta);
 			
-			$idActualizacion = $actualizacion == 'si' ? $mCanasta->storeCanasta($idCanasta, 2, $fechaActualizacion, $fechaEntrega) : $idActualizacion;
-
-			echo '<pre>';
-			print_r($idActualizacion);
-			echo '</pre>';
-			// foreach ($canasta as $key => $ingrediente) {
-			// 	$this->model_ingredientes->storeIngredienteCanasta($idCanasta, $idIngrediente);
-			// }
+			foreach ($canasta as $key => $ingrediente) {
+				$this->modelIngredientes->storeIngredienteCanasta($idCanasta, $idActualizacion, $ingrediente);
+			}
 		}
+
+		return true;
 	}
 
 

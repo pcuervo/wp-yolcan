@@ -52,15 +52,17 @@ class IngredientesModel {
      * @param  [type] $idCanasta [description]
      * @return [type]            [description]
      */
-    public function storeIngredienteCanasta($idCanasta, $idIngrediente)
+    public function storeIngredienteCanasta($idCanasta, $idActualizacion, $idIngrediente)
     {
         $this->_wpdb->insert(
             $this->_prefix.'canasta_relationships',
             array(
                 'canasta_id' => $idCanasta,
-                'ingrediente_id' =>$idIngrediente
+                'ingrediente_id' => $idIngrediente,
+                'actualizacion_id' =>$idActualizacion
             ),
             array(
+                '%d',
                 '%d',
                 '%d'
             )

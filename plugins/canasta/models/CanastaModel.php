@@ -23,8 +23,8 @@ class CanastaModel {
 		$wpdb->query(
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}actualizaciones_canasta (
 				id bigint(20) NOT NULL AUTO_INCREMENT,
-				canasta_id bigint(20) unsigned NOT NULL DEFAULT '0',
-				se_entrega date NOT NULL DEFAULT '0000-00-00',
+				club_id bigint(20) unsigned NOT NULL DEFAULT '0',
+				fecha_activar_canasta date NOT NULL DEFAULT '0000-00-00',
 				fecha_creacion datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 				fecha_actualizacion datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
 				status int(11) NOT NULL DEFAULT '0',
@@ -74,37 +74,39 @@ class CanastaModel {
      * @param  [int] $puntos_mitad    [puntos de la mitad de la canasta]
      * @return [int]                  [id de la actualización]
      */
-    public function storeCanasta($idCanasta, $status, $fechaActualizacion, $fechaEntrega)
+    public function storeCanasta($idClub, $status)
     {
     	$this->_wpdb->insert(
             $this->_prefix.'actualizaciones_canasta',
             array(
-                'canasta_id' => $idCanasta,
+                'club_id' => $idClub,
                 'fecha_creacion'  => date('Y-m-d h:i:s'),
-                'status'  => $status,
-                'fecha_actualizacion' => $fechaActualizacion,
-                'se_entrega' => $fechaEntrega
-
+                'fecha_actualizacion' => date('Y-m-d h:i:s'),
+                'status' => $status
             ),
             array(
                 '%d',
                 '%s',
-                '%d',
                 '%s',
-                '%s'
+                '%d'
             )
         );
 
         return $this->_wpdb->insert_id;
     }
 
-
-  //   public function getUltimaActualizacion()
-  //   {
-  //   	return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}actualizaciones_canasta
-  //   		ORDER BY ultima_actualizacion DESC
-  //   		LIMIT 1;
-		// ", OBJECT );
-  //   }
+    /**
+     * REGRESA LA CANASTA ACTIVA
+     * @param  [int] $idClub [id del club]
+     * @return [object]      [ingredientes canastas]
+     */
+    public function getCanastasClub($idClub, $status = 1)
+    {
+    	return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}actualizaciones_canasta as ac
+          INNER JOIN {$this->_prefix}canasta_relationships as cr
+          ON ac.id = cr.actualizacion_id
+          WHERE club_id = $idClub AND status = $status;", 
+      OBJECT );
+    }
 
 }

@@ -26,17 +26,14 @@ function model($model = ''){
 		endif;
 
 		if (class_exists($model, FALSE)):
-
 			$class = new $model();
 			return $class;
-
 		else:
 			show_error('El modelo solicitado en  models/'.$model.'.php no existe : '.$model);
 		endif;
 	else:
 		show_error('No se encontro el archivo solicitado : models/'.$model.'.php');
 	endif;
-
 }
 
 /**
@@ -65,4 +62,21 @@ function getDateTransformUpdate($fecha){
 	$mes = array('01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril', '05' => 'Mayo', '06' =>'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre');
 
 	return array($fecha[2], $mes[$fecha[1]], $fecha[0], $dia_name, $fecha[1], $dia_recortado);
+}
+
+/**
+ * AGRUPA LAS CANASTAS DE LA ACTUALIZACION
+ */
+function getGroupCanastas($ingredientes){
+	if (!empty($ingredientes)) {
+		$arrNew = [];
+		foreach ($ingredientes as $key => $ingrediente) {
+			$arrNew[$ingrediente->canasta_id][$ingrediente->ingrediente_id] = $ingrediente;
+		}
+		echo '<pre>';
+		print_r($arrNew);
+		echo '</pre>';
+	}else{
+		return [];
+	}
 }

@@ -39,3 +39,11 @@ if (isset($_GET['page']) AND $_GET['page'] == 'canastas_club'){
 if (isset($_GET['page']) AND $_GET['page'] == 'editar_canastas'){
 	add_action( 'admin_menu', create_function( '', 'CanastaController::index("editCanastas", "Editar canastas", "editar_canastas");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'crear_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("createCanastas", "Crear canastas", "crear_canastas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'store_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("storeCanastas", "Crear canastas", "store_canastas");' ) );
+}
