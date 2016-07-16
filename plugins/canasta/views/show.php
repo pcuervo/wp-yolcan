@@ -4,6 +4,13 @@
     <h3>Clubs de consumo</h3>
     <?php if (! empty($clubes)) : ?>
         <ul class="ul-clubes">
+            <li class="text-center">
+                <h3>Canastas Base</h3>
+                <a href="<?php echo admin_url().'admin.php?page=canastas_club&id_club=0'; ?>">
+                    Ver Canastas
+                </a>
+            </li>
+
             <?php foreach ($clubes as $key => $club): ?>
                 
                 <li class="text-center">

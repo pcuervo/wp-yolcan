@@ -32,7 +32,10 @@ register_activation_hook( __FILE__, array( 'CanastaModel', 'install' ) );
 add_action( 'admin_menu', create_function( '', 'CanastaController::index("canasta", "Canastas", "canasta");' ) );
 
 
-
-if (isset($_GET['id_club'])){
+if (isset($_GET['page']) AND $_GET['page'] == 'canastas_club'){
 	add_action( 'admin_menu', create_function( '', 'CanastaController::index("canastasClube", "Canastas del Club", "canastas_club");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'editar_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("editCanastas", "Editar canastas", "editar_canastas");' ) );
 }

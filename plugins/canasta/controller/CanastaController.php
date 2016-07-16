@@ -2,14 +2,13 @@
 class CanastaController {
 
 	public $actualizacion;
-	public $model_ingredientes;
-	public $idClube;
+	public $modelIngredientes;
+	public $idClub;
 
 
 	function __construct() {
-	    $this->model_ingredientes = model('IngredientesModel');
-        $this->actualizacion = $this->model_ingredientes->getUltimaActualizacion();
-        $this->idClube = isset($_GET['id_club']) ? $_GET['id_club'] : 0;
+	    $this->modelIngredientes = model('IngredientesModel');
+        $this->idClub = isset($_GET['id_club']) ? $_GET['id_club'] : 0;
     }
 
 	static function index($method, $name_menu, $slug_page)
@@ -55,28 +54,67 @@ class CanastaController {
 		$productos = model('ProductosModel');
 
 		return view('canastas-club', [
-			'idClube' => $this->idClube,
+			'idClub' => $this->idClub,
 			'productos' => $productos->productos()
 		]);
 	}
 
-	// /**	
-	//  * VISTA PARA EDITAR
-	//  * @return [type] [description]
-	//  */
-	// public function edit()
-	// {
-	// 	$page = getClubeProductoPage($_GET['page']);
+	/**
+	 * EDITCANASTA BASE 
+	 * @return [type] [description]
+	 */
+	public function editCanastas()
+	{
+		if (! empty($_POST)) $this->setCanastas($_POST);
+		
+		$productos = model('ProductosModel');
+		return view('editar-canasta', [
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'idClub' => $this->idClub,
+			'productos' => $productos->productos()
+		]);
+	}
 
-	// 	if (! empty($_POST)) $this->model_ingredientes->setIngredientesCanasta($_POST);
+	/**
+	 * GUARDA LA ACTUALIZACION DE LA CANASTA
+	 * @param  [type] $_POST [description]
+	 * @return [type]        [description]
+	 */
+	private function setCanastas($data)
+	{
+		$mCanasta = model('CanastaModel');
+		$actualizacion = isset($data['actualizacion']) ? 'si' : 'no'; 
+		if ($data['type'] == 'base') { }
 
-	// 	$data = $this->getCanasta();
-	// 	$data['ingredientes'] = $this->model_ingredientes->getIngredientes();
-	// 	$data['nombre_canasta'] = $page['nombre_canasta'];
-	// 	$data['id_canasta'] = $page['id_canasta'];
+		if (!empty($data['ingredientes_canastas'])) {
+			foreach ($data['ingredientes_canastas'] as $idCanasta => $canasta) {
+				$this->updateIngredientesCanasta($idCanasta, $canasta, $actualizacion, $data['idActualizacion']);
+			}
+		}
+	}
 
-	// 	return view('edit', $data);
-	// }
+
+	private function updateIngredientesCanasta($idCanasta, $canasta, $actualizacion, $idActualizacion)
+	{
+		echo '<pre>';
+			print_r($idActualizacion);
+			echo '</pre>';
+		$fechaActualizacion = '2016-07-22';
+		$fechaEntrega = '2016-07-22';
+		if (!empty($canasta)) {
+			// if ($actualizacion == 'no') $mCanasta->destroyIngredientesCanasta($idCanasta);
+			
+			$idActualizacion = $actualizacion == 'si' ? $mCanasta->storeCanasta($idCanasta, 2, $fechaActualizacion, $fechaEntrega) : $idActualizacion;
+
+			echo '<pre>';
+			print_r($idActualizacion);
+			echo '</pre>';
+			// foreach ($canasta as $key => $ingrediente) {
+			// 	$this->model_ingredientes->storeIngredienteCanasta($idCanasta, $idIngrediente);
+			// }
+		}
+	}
+
 
 	// /**
 	//  * ACTUALIZA EL INDEX DEL ARREGLO POR EL ID DEL INGREDIENTE
@@ -95,18 +133,18 @@ class CanastaController {
 	// 	return $new_array;
 	// }
 
-	// /**
-	//  * REGRESA LA ACTUALIZACIÓN COMPLETA DE LA CANASTA
-	//  * @return [array] [actualización canasta]
-	//  */
-	// public function getCanasta()
-	// {
-	// 	$ultimos_ingredientes = ! empty($this->actualizacion) ? $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id) : array();
-	// 	return array(
-	// 		'actualizacion_canasta' => ! empty($this->actualizacion) ? $this->actualizacion  : array(),
-	// 		'ingredientes_canasta' => $this->getActualizaIndexIngredientes($ultimos_ingredientes)
-	// 	);
-	// }
+	/**
+	 * REGRESA LA ACTUALIZACIÓN COMPLETA DE LA CANASTA
+	 * @return [array] [actualización canasta]
+	 */
+	public function getCanasta($idActualizacion)
+	{
+		$ultimosIngredientes = ! empty($this->actualizacion) ? $this->modelIngredientes->getIngredientesCanasta($idActualizacion) : array();
+		return array(
+			'actualizacion_canasta' => ! empty($this->actualizacion) ? $this->actualizacion  : array(),
+			'ingredientes_canasta' => $this->getActualizaIndexIngredientes($ultimos_ingredientes)
+		);
+	}
 
 	// /**	
 	//  * REGRESA LA CANASTA COMPLETA ACTUAL
@@ -114,7 +152,7 @@ class CanastaController {
 	//  */
 	// public function getCanastaCompleta()
 	// {
-	// 	return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'completa');
+	// 	return $this->modelIngredientes->getIngredientesCanasta($this->actualizacion->id, 'completa');
 	// }
 
 	// /**	
@@ -123,7 +161,7 @@ class CanastaController {
 	//  */
 	// public function getMediaCanasta()
 	// {
-	// 	return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'media');
+	// 	return $this->modelIngredientes->getIngredientesCanasta($this->actualizacion->id, 'media');
 	// }
 
 	// /**	
@@ -132,7 +170,7 @@ class CanastaController {
 	//  */
 	// public function getIngredientesAdicionales()
 	// {
-	// 	return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'adicionales');
+	// 	return $this->modelIngredientes->getIngredientesCanasta($this->actualizacion->id, 'adicionales');
 	// }
 
 }
