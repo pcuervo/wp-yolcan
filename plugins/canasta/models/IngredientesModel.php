@@ -41,9 +41,18 @@ class IngredientesModel {
      * @param  [int] $idCanasta [id de la canasta]
      * @return [type]            [description]
      */
-    public function destroyIngredientesCanasta($idCanasta)
+    public function destroyIngredientesCanasta($idActualizacion, $idCanasta)
     {   
-        $this->_wpdb->delete( $this->_prefix.'canasta_relationships', array( 'canasta_id' => $idCanasta ), array( '%d' ) );
+        $this->_wpdb->delete( $this->_prefix.'canasta_relationships', 
+            array( 
+                'actualizacion_id' => $idActualizacion,
+                'canasta_id' => $idCanasta
+            ),
+            array( 
+                '%d',
+                '%d'
+            ) 
+        );
     }
 
 
@@ -52,16 +61,18 @@ class IngredientesModel {
      * @param  [type] $idCanasta [description]
      * @return [type]            [description]
      */
-    public function storeIngredienteCanasta($idCanasta, $idActualizacion, $idIngrediente)
+    public function storeIngredienteCanasta($idCanasta, $idActualizacion, $idIngrediente, $unidad)
     {
         $this->_wpdb->insert(
             $this->_prefix.'canasta_relationships',
             array(
                 'canasta_id' => $idCanasta,
                 'ingrediente_id' => $idIngrediente,
-                'actualizacion_id' =>$idActualizacion
+                'actualizacion_id' =>$idActualizacion,
+                'cantidad' => $unidad
             ),
             array(
+                '%d',
                 '%d',
                 '%d',
                 '%d'

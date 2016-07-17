@@ -51,7 +51,6 @@ function show_error($message, $status_code = 500)
 /**
  * EDITA EL FORMATO DE LA FECHA
  */
-
 function getDateTransformUpdate($fecha){
 	$dias = array('Lunes','Martes','Miercoles','Jueves','Viernes','Sábado','Domingo');
 	$dias_recortados = array('Lun','Mar','Mie','Jue','Vie','Sab','Dom');
@@ -64,15 +63,28 @@ function getDateTransformUpdate($fecha){
 	return array($fecha[2], $mes[$fecha[1]], $fecha[0], $dia_name, $fecha[1], $dia_recortado);
 }
 
+
+/**
+ * EDITA EL FORMATO DE LA FECHA
+ */
+function getDateTransformFormat($fecha){
+	$fecha = date("Y-m-d", strtotime($fecha));
+	$date = getDateTransformUpdate($fecha);
+
+	return $date[3].', '.$date[0].' de '.$date[1].' del '.$date[2];
+}
+
 /**
  * AGRUPA LAS CANASTAS DE LA ACTUALIZACION
  */
 function getGroupCanastas($ingredientes){
 	if (!empty($ingredientes)) {
 		$arrNew = [];
+		$arrNew['actualizacion'] = $ingredientes[0];
 		foreach ($ingredientes as $key => $ingrediente) {
-			$arrNew[$ingrediente->canasta_id][$ingrediente->ingrediente_id] = $ingrediente;
+			$arrNew['canastas'][$ingrediente->canasta_id][$ingrediente->ingrediente_id] = $ingrediente;
 		}
+		return $arrNew;
 	}else{
 		return [];
 	}

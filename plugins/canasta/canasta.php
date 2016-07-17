@@ -47,3 +47,23 @@ if (isset($_GET['page']) AND $_GET['page'] == 'crear_canastas'){
 if (isset($_GET['page']) AND $_GET['page'] == 'store_canastas'){
 	add_action( 'admin_menu', create_function( '', 'CanastaController::index("storeCanastas", "Crear canastas", "store_canastas");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'update_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("updateCanastas", "Actualizar canastas", "update_canastas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'programar_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("createCanastasProgramadas", "Programar canastas", "programar_canastas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'store_programar_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("storeCanastasProgramadas", "Programar canastas", "store_programar_canastas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'editar_canastas_programadas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("editCanastasProgramadas", "Programar canastas", "editar_canastas_programadas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'configuaracion_canasta_base'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("configCanastaBase", "Configuracion canasta base", "configuaracion_canasta_base");' ) );
+}

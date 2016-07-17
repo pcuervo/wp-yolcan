@@ -74,7 +74,7 @@ class CanastaModel {
      * @param  [int] $puntos_mitad    [puntos de la mitad de la canasta]
      * @return [int]                  [id de la actualización]
      */
-    public function storeCanasta($idClub, $status)
+    public function storeCanasta($idClub, $status, $fecha_activa)
     {
     	$this->_wpdb->insert(
             $this->_prefix.'actualizaciones_canasta',
@@ -82,13 +82,15 @@ class CanastaModel {
                 'club_id' => $idClub,
                 'fecha_creacion'  => date('Y-m-d h:i:s'),
                 'fecha_actualizacion' => date('Y-m-d h:i:s'),
-                'status' => $status
+                'status' => $status,
+                'fecha_activar_canasta' => $fecha_activa
             ),
             array(
                 '%d',
                 '%s',
                 '%s',
-                '%d'
+                '%d',
+                '%s'
             )
         );
 
@@ -107,6 +109,28 @@ class CanastaModel {
           ON ac.id = cr.actualizacion_id
           WHERE club_id = $idClub AND status = $status;", 
       OBJECT );
+    }
+
+    /**
+     * EDITA LA FECHA DE ACT UALIZACION
+     * @param  [int] $idActualizacion [id de la actualizacion a editar]
+     * @return [bool]
+     */
+    public function updateDateEditCanasta($idActualizacion, $fechaActiva)
+    {
+        $this->_wpdb->update( 
+          $this->_prefix.'actualizaciones_canasta', 
+          array( 
+            'fecha_actualizacion' => date('Y-m-d h:i:s'),
+            'fecha_activar_canasta' => $fechaActiva
+          ), 
+          array('id' => $idActualizacion), 
+          array( 
+            '%s',
+            '%s'
+          ), 
+          array( '%d' ) 
+        );
     }
 
 }
