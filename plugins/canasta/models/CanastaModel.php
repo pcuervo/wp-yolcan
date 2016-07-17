@@ -14,48 +14,8 @@ class CanastaModel {
 		$model = new CanastaModel;
 		$model->createTableCanasta();
 		$model->createTableCanastaRelationships();
-
-		/** CAMBIAR ESTA TABLA AL PLUGIN DE USUARIOS -- ALEX */
-		$model->createTableOptionsClientes();
-		$model->createTableSuspencionEntregas();
-
 	}
-
-	/** CAMBIAR ESTA TABLA AL PLUGIN DE USUARIOS -- ALEX */
-	private function createTableOptionsClientes()
-	{
-		global $wpdb;
-		$wpdb->query(
-			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}opciones_clientes (
-				id bigint(20) NOT NULL AUTO_INCREMENT,
-				status int(11) NOT NULL DEFAULT '0',
-				club_id bigint(20) unsigned NOT NULL DEFAULT '0',
-				saldo double(8,2) DEFAULT NULL,
-				suspendido int(11) NOT NULL DEFAULT '0',
-				id_suspencion bigint(20) unsigned NOT NULL DEFAULT '0',
-				fecha_cambio_status date NOT NULL DEFAULT '0000-00-00',
-			
-				UNIQUE KEY `id` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-		);
-	}
-
-	/** CAMBIAR ESTA TABLA AL PLUGIN DE USUARIOS -- ALEX */
-	private function createTableSuspencionEntregas()
-	{
-		global $wpdb;
-		$wpdb->query(
-			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}suspencion_entregas (
-				id bigint(20) NOT NULL AUTO_INCREMENT,
-				status int(11) NOT NULL DEFAULT '0',
-				tiempo_suspencion bigint(20) unsigned NOT NULL DEFAULT '0',
-				fecha_inicio_suspencion date NOT NULL DEFAULT '0000-00-00',
-				fecha_fin_suspencion date NOT NULL DEFAULT '0000-00-00',
-			
-				UNIQUE KEY `id` (`id`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-		);
-	}
+	
 
 	private function createTableCanasta()
 	{

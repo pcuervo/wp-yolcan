@@ -19,6 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $opCliente;
+
 $customer_id = get_current_user_id();
 
 if ( ! wc_ship_to_billing_address_only() && get_option( 'woocommerce_calc_shipping' ) !== 'no' ) {
@@ -35,6 +37,8 @@ if ( ! wc_ship_to_billing_address_only() && get_option( 'woocommerce_calc_shippi
 }
 
 $col = 1;
+
+print_r($opCliente);
 ?>
 
 <h3>Mi club de consumo</h3>
