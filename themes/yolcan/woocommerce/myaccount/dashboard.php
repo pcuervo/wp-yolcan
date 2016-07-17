@@ -1,4 +1,4 @@
-<div class="[ container ]"><!-- end in my-address -->
+<div class="[ container ]"><!-- end ina my-address -->
 	<div class="[ row ]">
 
 		<section class="[ col-sm-3 ][ bg-gray-lighter ]">
