@@ -5,6 +5,7 @@ add_action('init', function() use (&$wpdb){
 			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			status int(11) NOT NULL DEFAULT '0',
 			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			producto_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			saldo double(8,2) DEFAULT NULL,
 			suspendido int(11) NOT NULL DEFAULT '0',
 			id_suspencion bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -40,4 +41,30 @@ function getOpcionesCliente($clienteId){
 
 	return $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}opciones_clientes 
 		WHERE cliente_id = $clienteId;", OBJECT );
+}
+
+/**
+ * Actualiza el club de consumo del cliente
+ */
+function setClubCliente($clubId, $clienteId){
+	global $wpdb;
+	$wpdb->insert(
+		$wpdb->prefix.'opciones_clientes',
+		array(
+			'cliente_id' => $clienteId,
+			'status'  => 1,
+			'saldo' => 0.00,
+			'club_id' => $clubId,
+			'fecha_cambio_status' => date('Y-m-d')
+		),
+		array(
+			'%d',
+			'%d',
+			'%f',
+			'%d',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
 }

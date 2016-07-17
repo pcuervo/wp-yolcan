@@ -26,24 +26,41 @@
             <?php if ($opCliente->clubId == ''): ?>
                 <article class="[ padding--bottom margin-bottom ]">
                     <p>Para continuar favor de seleccionar un clube de consumo</p>
-                    <form>
+                    <form id="select-club" method="POST" class="select-club">
                         <table>
                             <tr>
                                 <th></th>
                                 <th>Club</th>
                             </tr>
-                            <tr>
-                                <td> <input type="radio" name="club" value="id"> </td>
-                                <td>Maria Anders</td>
-                            </tr>
+                            <?php $clubes = new WP_Query([
+                                'post_type' => 'clubes-de-consumo',
+                                'posts_per_page' => -1
+
+                                ]);
+                            if ( $clubes->have_posts() ):
+                                while ( $clubes->have_posts() ): $clubes->the_post(); 
+                                $direccion = get_post_meta(get_the_ID(), 'ubicacion-club', true); ?>
+                                    <tr>
+                                        <td> 
+                                            <input type="radio" name="club" value="<?php echo get_the_ID(); ?>">
+                                        </td>
+                                        <td>
+                                            <?php the_title(); ?>
+                                            <p><?php echo $direccion; ?></p>
+                                        </td>
+                                    </tr>
+                                <?php endwhile;
+                            endif; ?>
                             
                         </table>
+                        <br>
                         <input type="submit" value="Guardar">
                     </form>
+
                 </article>
 
             <?php else:
-                wc_get_template( 'myaccount/template/cuenta.php' );
+                get_template_part('woocommerce/myaccount/templates/cuenta');
             endif; ?>
 
 		</section>

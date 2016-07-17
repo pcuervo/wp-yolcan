@@ -1,6 +1,8 @@
 <?php global $opCliente;
 add_action('get_header', function() {
+	if (is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
 	if (is_page('mi-cuenta')) checkStatusCliente();
+
 });
 
 function getCliente($clienteId){
@@ -22,4 +24,15 @@ function checkStatusCliente(){
 	global $current_user;
 	global $opCliente;
 	$opCliente = getCliente($current_user->ID);
+}
+
+/**
+ * GUARDA EL CLUB DONDE QUIERE SU CANASTA EL CLIENTE
+ */
+function saveClubCliente($clubId){
+	if ($clubId == '') return false;
+
+	global $current_user;
+	setClubCliente($clubId, $current_user->ID);
+	return true;
 }

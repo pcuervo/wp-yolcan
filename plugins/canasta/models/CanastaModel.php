@@ -15,7 +15,7 @@ class CanastaModel {
 		$model->createTableCanasta();
 		$model->createTableCanastaRelationships();
 	}
-	
+
 
 	private function createTableCanasta()
 	{
@@ -119,17 +119,17 @@ class CanastaModel {
 	public function updateDateEditCanasta($idActualizacion, $fechaActiva)
 	{
 		$this->_wpdb->update( 
-		  $this->_prefix.'actualizaciones_canasta', 
-		  array( 
-			'fecha_actualizacion' => date('Y-m-d h:i:s'),
-			'fecha_activar_canasta' => $fechaActiva
-		  ), 
-		  array('id' => $idActualizacion), 
-		  array( 
-			'%s',
-			'%s'
-		  ), 
-		  array( '%d' ) 
+		  	$this->_prefix.'actualizaciones_canasta', 
+		  	array( 
+				'fecha_actualizacion' => date('Y-m-d h:i:s'),
+				'fecha_activar_canasta' => $fechaActiva
+		  	), 
+		  	array('id' => $idActualizacion), 
+		  	array( 
+				'%s',
+				'%s'
+		 	), 
+		  	array( '%d' ) 
 		);
 	}
 

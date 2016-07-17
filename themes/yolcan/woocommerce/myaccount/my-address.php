@@ -37,11 +37,9 @@ if ( ! wc_ship_to_billing_address_only() && get_option( 'woocommerce_calc_shippi
 }
 
 $col = 1;
+$clubId = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'A un no cuentas con un club'; ?>
 
-print_r($opCliente);
-?>
-
-<h3>Mi club de consumo</h3>
+<h3>Club:<br> <?php echo $clubId; ?></h3>
 
 <p class="myaccount_address">
 	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', __( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); ?>
