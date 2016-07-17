@@ -89,3 +89,16 @@ function getGroupCanastas($ingredientes){
 		return [];
 	}
 }
+
+/**
+ * PRODUCTO ADICIONALES
+ * @return [type] [description]
+ */
+function getObjetAdicionales(){
+	$adicional = [];
+	$adicional[] = (object) [
+	    'ID' => 1,
+	    'post_title' => 'Adicionales',
+	 ];
+	return $adicional;
+}

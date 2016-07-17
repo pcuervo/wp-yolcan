@@ -25,7 +25,6 @@
 	      	  	  	<?php if(!empty($productos)): 
 	      	  	  		foreach ($productos as $key => $producto): ?>
 	      	  	  			<th><?php echo $producto->post_title; ?></th>
-	      	  	  			<th>Unidades</th>
 	      	  	  		<?php endforeach;
 	      	  	  	endif; ?>
 	      	  	</tr>

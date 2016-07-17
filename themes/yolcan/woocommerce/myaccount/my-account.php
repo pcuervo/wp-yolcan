@@ -57,17 +57,13 @@ global $post;
 			<article class="[ padding--bottom margin-bottom ]">
 				<h4>Tu cuenta</h4>
 				<!--<p>Tu saldo es de <strong>$<?php echo $saldo; ?></strong></p>-->
-                                <p>
-                                    <?php
-                                        $saldo_agregado = get_the_author_meta( 'cantidad_saldo', $current_user->ID );
-                                        echo "Tu saldo es de <strong>$ ".number_format($saldo_agregado).".00 </strong>";
-
-                                    ?>
-                                </p>
-                                        <?php
-                                            $params = array('posts_per_page' => 5, 'post_type' => 'product');
-                                            $wc_query = new WP_Query($params);
-                                        ?>
+                <p>
+                    <?php $saldo_agregado = get_the_author_meta( 'cantidad_saldo', $current_user->ID );
+                    $saldo = $saldo_agregado != '' ? $saldo_agregado : 0;
+                    echo "Tu saldo es de <strong>$ ".number_format($saldo).".00 </strong>"; ?>
+                </p>
+                <?php $params = array('posts_per_page' => 5, 'post_type' => 'product');
+                $wc_query = new WP_Query($params); ?>
                                         
 
 				<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>

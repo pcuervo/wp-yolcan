@@ -50,7 +50,7 @@ class CanastaController {
 
 		return view('canastas-club', [
 			'idClub' => $this->idClub,
-			'productos' => $productos->productos(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
 			'canastasActivas' => $canastasActivas,
 			'canastasProgramadas' => $canastasProgramadas
 		]);
@@ -69,7 +69,7 @@ class CanastaController {
 			'titulo' => 'Crear canastas',
 			'idClub' => $this->idClub,
 			'ingredientes' => $this->modelIngredientes->getIngredientes(),
-			'productos' => $productos->productos(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
 			'action' => 'store'
 		]);
 	}
@@ -110,7 +110,7 @@ class CanastaController {
 			'ingredientes' => $this->modelIngredientes->getIngredientes(),
 			'ingredientesCanastas' => $ingredientesCanastas,
 			'idClub' => $this->idClub,
-			'productos' => $productos->productos(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
 			'action' => 'update'
 		]);
 	}
@@ -151,7 +151,7 @@ class CanastaController {
 			'titulo' => 'Programar canastas',
 			'idClub' => $this->idClub,
 			'ingredientes' => $this->modelIngredientes->getIngredientes(),
-			'productos' => $productos->productos(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
 			'action' => 'store_programar'
 		]);
 	}
@@ -193,7 +193,7 @@ class CanastaController {
 			'ingredientes' => $this->modelIngredientes->getIngredientes(),
 			'ingredientesCanastas' => $ingredientesCanastas,
 			'idClub' => $this->idClub,
-			'productos' => $productos->productos(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
 			'action' => 'update'
 		]);
 	}
