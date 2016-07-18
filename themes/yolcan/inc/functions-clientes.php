@@ -36,3 +36,19 @@ function saveClubCliente($clubId){
 	setClubCliente($clubId, $current_user->ID);
 	return true;
 }
+
+/**	
+ * REGRESA UN ARREGLO CON LOS CLUBES
+ * @return [type] [description]
+ */
+function clubesDeConsumo(){
+	$clubes = getClubesDeConsumo();
+	$newArr = [];
+	if (!empty($clubes)) {
+		foreach ($clubes as $key => $club) {
+			$newArr[$club->ID] = $club->post_title;
+		}
+	}
+
+	return $newArr;
+}

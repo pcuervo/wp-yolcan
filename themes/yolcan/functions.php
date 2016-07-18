@@ -603,7 +603,7 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
-add_filter('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
+add_filter ('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
 function redirect_to_checkout() {
 	wc_clear_notices();
     return WC()->cart->get_checkout_url();
@@ -623,17 +623,28 @@ function remove_unnecessary_fields( $fields ){
 		$fields['billing'][$key]['required'] = false;
 		array_push( $fields['billing'][$key]['class'], '[ hidden ]');
 	}
-
 	return $fields;
 }
 
+add_filter( 'woocommerce_checkout_fields', 'add_billing_consumer_club_field', 20 );
+function add_billing_consumer_club_field( $fields ){
+	$fields['billing']['billing_consumer_club'] = array(
+		'type' => 'select',
+        'label' => 'Clubes de consumo',
+	    'required' => true,
+	    'class'	=> array( 'form-row-wide' ),
+	    'options'=> clubesDeConsumo()
+     );
+     return $fields;
+}
 
 add_filter( 'woocommerce_checkout_fields', 'order_fields', 30 );
 function order_fields($fields) {
     $order = array(
         "billing_first_name",
         "billing_last_name",
-        "billing_email"
+        "billing_email",
+        "billing_consumer_club"
     );
     foreach($order as $field)
     {
@@ -643,18 +654,25 @@ function order_fields($fields) {
     return $fields;
 }
 
+add_action( 'woocommerce_checkout_update_order_meta', 'save_extra_checkout_fields', 10, 2 );
+function save_extra_checkout_fields( $order_id, $posted ){
+    if( isset( $posted['billing_consumer_club'] ) ) {
+    	global $current_user;
+    	$opCliente = getOpcionesCliente($current_user->ID);
+
+    	if (!empty($opCliente)) {
+    		updateClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
+    	}else{
+    		setClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
+    	}
+		
+    }
+}
+
 add_filter( 'woocommerce_form_field_args', 'style_fields', 5 );
 function style_fields( $args ){
 	// echo '<pre>';
 	// var_dump( $args );
 	// echo '</pre>';
 	return $args;
-}
-
-
-add_filter('woocommerce_add_to_cart_redirect', 'themeprefix_add_to_cart_redirect');
-function themeprefix_add_to_cart_redirect() {
- global $woocommerce;
- $checkout_url = $woocommerce->cart->get_checkout_url();
- return $checkout_url;
 }

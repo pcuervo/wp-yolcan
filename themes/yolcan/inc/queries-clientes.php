@@ -68,3 +68,33 @@ function setClubCliente($clubId, $clienteId){
 
 	return $wpdb->insert_id;
 }
+
+/**
+ * Actualiza el club de consumo del cliente
+ */
+function updateClubCliente($clubId, $clienteId){
+	global $wpdb;
+	$wpdb->update( 
+		$wpdb->prefix.'opciones_clientes',
+		array( 
+			'club_id' => $clubId
+		), 
+		array( 'cliente_id' => $clienteId ), 
+		array( 
+			'%d'
+		), 
+		array( '%d' ) 
+	);
+
+	return true;
+}
+
+/**
+ * REGRESA LOS CLUBES
+ */
+function getClubesDeConsumo(){
+	global $wpdb;
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
+		WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo';
+	", OBJECT );
+}
