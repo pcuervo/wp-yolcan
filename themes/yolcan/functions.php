@@ -627,29 +627,13 @@ function remove_unnecessary_fields( $fields ){
 	return $fields;
 }
 
-add_filter( 'woocommerce_checkout_fields', 'add_billing_consumer_club_field', 20 );
-function add_billing_consumer_club_field( $fields ){
-	$fields['billing']['billing_consumer_club'] = array(
-		'type'			=> 'select',
-        'label'     	=> 'Clubes de consumo',
-	    'required'  	=> true,
-	    'class'			=> array( 'form-row-wide' ),
-	    'options'		=> array(
-		    				'1' => 'Club 1',
-		    				'2' => 'Club 2',
-		    			)
-     );
-
-     return $fields;
-}
 
 add_filter( 'woocommerce_checkout_fields', 'order_fields', 30 );
 function order_fields($fields) {
     $order = array(
         "billing_first_name",
         "billing_last_name",
-        "billing_email",
-        "billing_consumer_club"
+        "billing_email"
     );
     foreach($order as $field)
     {

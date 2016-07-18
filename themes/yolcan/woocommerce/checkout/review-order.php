@@ -19,9 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$precio = $_POST['precio'];
-echo $precio;
-
 ?>
 <table class="[ no-border ] shop_table woocommerce-checkout-review-order-table">
 	<thead>
