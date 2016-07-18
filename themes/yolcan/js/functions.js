@@ -555,6 +555,18 @@
 		    return $('footer').outerHeight();
 		}// getFooterHeight
 
+		// ---- PRODUCTOS ----//
+		
+		$('.check-compra').on('click', function(){
+			var precio = $(this).data('costo');
+			var variacion = $(this).data('variacion');
+			var producto = $(this).data('producto');
+			var url = site_url+'mi-carrito/?add-to-cart='+variacion;
+
+			$('.url-add-cart-product-'+producto).attr('href', url);
+			$('.precio-producto-check-'+producto).text('$' + precio);
+		});
+
 	});
 
 })(jQuery);

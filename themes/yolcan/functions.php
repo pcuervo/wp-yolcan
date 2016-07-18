@@ -43,6 +43,8 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_localize_script( 'functions', 'is_nuestros_productos', (string)is_page('nuestros-productos') );
 	wp_localize_script( 'functions', 'is_recetas', (string)is_post_type_archive('recetas') );
 	wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
+	wp_localize_script( 'functions', 'site_url', SITEURL );
+
 
 	if ( is_home() ) {
 		$direc_club = getLocationClubs();
@@ -146,6 +148,8 @@ require_once('inc/queries-clientes.php');
 require_once('inc/functions-clientes.php');
 
 require_once('inc/functions-newsletter.php');
+
+require_once('inc/function-productos.php');
 
 require_once('inc/usuarios.php');
 
