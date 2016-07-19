@@ -1,20 +1,22 @@
 <?php global $current_user; 
-global $opCliente; ?>
+global $opCliente;
+global $clubCanasta;
+$costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0; ?>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
-	<h4>Tu próxima canasta - <span class="[ color-primary ]">$3,000</span></h4>
-	<p>Media canasta para el 10 de junio:</p>
-	<?php $ingredientes = array();
-	if (isset($canasta->actualizacion)):
-		if ($canasta->actualizacion->valor_puntos_completa < $saldo) $ingredientes = $canasta->getCanastaCompleta();
-		if ($canasta->actualizacion->valor_puntos_completa > $saldo AND $canasta->actualizacion->valor_puntos_mitad < $saldo) $ingredientes = $canasta->getMediaCanasta();
-	endif; ?>
+	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal;?></span></h4>
+	<p><?php echo $clubCanasta->producto_name; ?> para el 10 de junio:</p>
+	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
-		<?php if (!empty($ingredientes)):
-			foreach ($ingredientes as $key => $ingrediente): ?>
-				<li><?php echo $ingrediente->nombre_ingrediente; ?></li>
+		<?php if (!empty($clubCanasta->ingredientes)):
+			foreach ($clubCanasta->ingredientes as $key => $ingrediente): 
+				$terms = wp_get_post_terms( $ingrediente->ingrediente_id, 'unidades' );
+				$unidad = isset($terms[0]) ? $terms[0]->name : ''; ?>
+				<li>
+					- <?php echo get_the_title($ingrediente->ingrediente_id); ?> ( <?php echo $ingrediente->cantidad.' '.$unidad; ?> )
+				</li>
 			<?php endforeach;
 		else:
-			echo '<p>Saldo insuficiente</p>';
+			echo '<p>Aun no hay ingredientes</p>';
 		endif; ?>
 	</ul>
 

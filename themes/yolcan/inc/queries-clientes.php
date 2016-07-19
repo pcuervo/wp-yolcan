@@ -98,3 +98,13 @@ function getClubesDeConsumo(){
 		WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo';
 	", OBJECT );
 }
+
+
+function getIngredientesCanasta($canastaID){
+	global $wpdb;
+	return $wpdb->get_results( "SELECT ingrediente_id, cantidad FROM {$wpdb->prefix}actualizaciones_canasta as ac
+		INNER JOIN {$wpdb->prefix}canasta_relationships as cr
+		ON ac.id = cr.actualizacion_id
+		WHERE canasta_id = $canastaID AND status = 1;
+	", OBJECT );
+}

@@ -94,7 +94,7 @@ class IngredientesModel {
     	return $this->_wpdb->get_results( "SELECT cr.*, p.post_title as nombre_ingrediente FROM {$this->_prefix}canasta_relationships as cr
             INNER JOIN {$this->_prefix}posts as p
             ON cr.ingrediente_id = p.ID
-    		WHERE actualizacionID = $idActualizacion {$query_extra};
+    		WHERE actualizacionID = $idActualizacion;
 		", OBJECT );
     }
 
