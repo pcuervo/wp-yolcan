@@ -3,7 +3,6 @@ global $opCliente;
 global $clubCanasta; ?>
 <article class="[ padding--bottom margin-bottom ]">
 	<h4>Tu cuenta</h4>
-
     <p>
         <?php echo "Tu saldo es de <strong>$ ".number_format($opCliente->saldo)." </strong>"; ?>
     </p>
@@ -11,9 +10,11 @@ global $clubCanasta; ?>
 	<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
 
 </article>
+
+<!-- SUSPENDER ENTREGAS - FALTA INTEGRAR -->
 <article class="[ padding--bottom border-bottom margin-bottom ]">
     <?php if ($opCliente->suspendido != 1): ?>
-    	<p>Desea <strong>suspender</strong> sus entregas?</p>
+    	<p>Desea <strong>suspender</strong> sus entregas? <small class="[ text-danger ]">** Falta integrar</small></p>
     	
         <form method="post" id="contactus_form" action="">
             <div class="[ margin-bottom--small ]">

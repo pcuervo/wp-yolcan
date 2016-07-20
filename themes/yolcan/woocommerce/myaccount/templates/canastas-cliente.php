@@ -38,7 +38,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 				$unidad = isset($terms[0]) ? $terms[0]->name : '';?>
 				<li>
 		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
-		            <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small>
+		            <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small><small class="[ text-danger ]">** Falta integrar el eliminar ingrediente</small>
 		        </li>
 			<?php endforeach;
 		else:
