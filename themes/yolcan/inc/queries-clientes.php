@@ -31,6 +31,33 @@ add_action('init', function() use (&$wpdb){
 	);
 });	
 
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}decuentos_canastas (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			cantidad bigint(20) unsigned NOT NULL DEFAULT '0',
+			producto_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			adicionales_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			fecha_descuesto date NOT NULL DEFAULT '0000-00-00',
+			UNIQUE KEY `id` (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+	);
+});	
+
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}adicionales_cliente (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			adicionales longtext COLLATE utf8mb4_unicode_ci,
+			UNIQUE KEY `id` (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+	);
+});	
+
+
+
 /**
  * REGRESA LAOPCIONES DEL CLIENTE
  * @param  [integer] $clinetId [id del cliente]
@@ -107,4 +134,52 @@ function getIngredientesCanasta($canastaID){
 		ON ac.id = cr.actualizacion_id
 		WHERE canasta_id = $canastaID AND status = 1;
 	", OBJECT );
+}
+
+
+function getIngredientesAdicionales($clienteId){
+	global $wpdb;
+	return $wpdb->get_var("SELECT adicionales FROM {$wpdb->prefix}adicionales_cliente
+		WHERE cliente_id = $clienteId;"
+	);
+}
+
+/**	
+ * GUARDA EL REGISTRO DE LOS INGREDIENTES ADICIONALES
+ */
+function saveIngredientesAdicionales($data, $clienteId){
+	global $wpdb;
+	$wpdb->insert(
+		$wpdb->prefix.'adicionales_cliente',
+		array(
+			'cliente_id' => $clienteId,
+			'adicionales' => $data
+		),
+		array(
+			'%d',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
+}
+
+/**
+ * ACTUALIZA LOS INGREDIENES ADICIONALES
+ */
+function updateIngredientesAdicionales($data, $clienteId){
+	global $wpdb;
+	$wpdb->update( 
+		$wpdb->prefix.'adicionales_cliente',
+		array( 
+			'adicionales' => $data
+		), 
+		array( 'cliente_id' => $clienteId ), 
+		array( 
+			'%s'
+		), 
+		array( '%d' ) 
+	);
+
+	return true;
 }

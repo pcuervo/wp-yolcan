@@ -1,17 +1,72 @@
 <?php global $opCliente;
 global $clubCanasta;
 add_action('get_header', function() {
-	if (is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
-	if (is_page('mi-cuenta')) checkStatusCliente();
-	if (is_page('mi-cuenta')) getClubAndCanasta();
-	
-
+	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
+	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
+	if(is_page('mi-cuenta')) checkStatusCliente();
+	if(is_page('mi-cuenta')) getClubAndCanasta();
+	getClientDescountPoints();
 });
 
+/**	
+ * ACTUALIZA LOS INGREDIENTES ADICIONALES DEL CLIENTE
+ */
+function setIngredienteAdicional($data){
+	global $current_user;
+	$adicionales = getIngredientesAdicionales($current_user->ID);
+	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
+	
+	return editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+}
+
+/**
+ * GUARDA LOS ADICIONALES DEL CLIENTE
+ */
+function storeIngredientesAdicionales($clienteId, $data){
+	$newArr = [];
+	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
+	$newArr['total_adicionales'] = $total;
+	$newArr['ingredientes'][$data['adicional-id']] = [
+		'ingredienteID' => $data['adicional-id'],
+		'costo_unitario' => $data['adicional-costo'],
+		'total' => $total,
+		'cantidad' => $data['adicional-numero-productos'],
+		'periodo' => $data['adicional-periodo']
+	];
+
+	return saveIngredientesAdicionales(serialize($newArr), $clienteId);
+}
+
+
+function editIngredientesAdicionales($clienteId, $data, $adicionales){
+	$adicionales = unserialize($adicionales);
+	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
+
+	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] + $total;
+
+	$totalOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['total'] : 0;
+	$cantidadOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['cantidad'] : 0;
+	$totalIngrediente = $totalOld + $total;
+	$cantidadIngrediente = $cantidadOld + $data['adicional-numero-productos'];
+	$adicionales['ingredientes'][$data['adicional-id']] = [
+		'ingredienteID' => $data['adicional-id'],
+		'costo_unitario' => $data['adicional-costo'],
+		'total' => $totalIngrediente,
+		'cantidad' => $cantidadIngrediente ,
+		'periodo' => $data['adicional-periodo']
+	];
+
+	return updateIngredientesAdicionales(serialize($adicionales), $clienteId);
+}
+
+/**
+ * INFORMACION BASE DEL CLIENTE
+ */
 function getCliente($clienteId){
 	$opCliente = getOpcionesCliente($clienteId);
 
 	$newArr = (object) [
+		'clineteId' => $clienteId,
 		'status' => isset($opCliente->status) ? $opCliente->status : 0,
 		'clubId' => isset($opCliente->club_id) ? $opCliente->club_id : '',
 		'saldo' => isset($opCliente->saldo) ? $opCliente->saldo : '0.00',
@@ -72,7 +127,8 @@ function getClubAndCanasta(){
 			'canastaID' => $canasta,
 			'ingredientes' => getIngredientesCanasta($canasta),
 			'adicionales' => getIngredientesCanasta($adicionalesId),
-			'attr_variation' => getCostoVariationID($opCliente->producto_id)
+			'attr_variation' => getCostoVariationID($opCliente->producto_id),
+			'adicionalesAgregados' => unserialize(getIngredientesAdicionales($opCliente->clineteId))
 		];
 	}else{
 		$clubCanasta = (object) [];
@@ -148,4 +204,12 @@ function getCostoCanastaTemporalidad($temporalidad, $costo){
 	        return $costo / 24;
 	        break;
 	}
+}
+
+/**
+ * UPDATE POINTS CLIENT
+ * @return [type] [description]
+ */
+function getClientDescountPoints(){
+
 }

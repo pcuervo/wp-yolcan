@@ -567,6 +567,27 @@
 			$('.precio-producto-check-'+producto).text('$' + precio);
 		});
 
+		// --- VALIDATE ADD PRODUCT ADDITIONAL ---- //
+		
+		$('.add-additional').on('submit', function(event){
+			
+			var id = $(this).children('#adicional-id').val();
+			var saldoLibre = $('#saldo-libre').val();
+			var adicionalCosto = $('#adicional-costo-'+id).val();
+			var cantidad = $('#numero-productos-'+id).val();
+
+			var total = cantidad * adicionalCosto;
+
+			if(cantidad == ''){
+				event.preventDefault();
+				alert('Favor de poner la cantidad');
+			}else if (saldoLibre <= total) {
+				event.preventDefault();
+				alert('No cuenta con saldo suficiente para agregar el ingrediente');
+			}
+			
+		});
+
 	});
 
 })(jQuery);
