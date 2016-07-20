@@ -1,52 +1,32 @@
 <div class="wrap">
-	<h1>Canasta Actual</h1>
-	<hr>
-	<h3>Ingredientes</h3>
-	
-	<div class="content-ingredientes">
-		<h4>Canasta completa</h4>
-		<p><strong>Ultima Actualización:</strong> Martes, 29 de Octubre del 2016</p>
-		<hr>
-		<ul>
-			<?php if (!empty($canasta_completa)): 
-				foreach ($canasta_completa as $key => $ingrediente): ?>
-					<li><?php echo $ingrediente->nombre_ingrediente; ?></li>
-				<?php endforeach;
-			endif; ?>
-		</ul>
-	</div>
-	<div class="content-ingredientes">
-		<h4>Media Canasta</h4>
-		<hr>
-		<p><strong>Ultima Actualización:</strong> Martes, 29 de Octubre del 2016</p>
-		<hr>
-		<ul>
-			<?php if (!empty($media_canasta)): 
-				foreach ($media_canasta as $key => $ingrediente): ?>
-					<li><?php echo $ingrediente->nombre_ingrediente; ?></li>
-				<?php endforeach;
-			endif; ?>
-		</ul>
-	</div>
-	<div class="content-ingredientes-adicionales">
-		<h4>Adicionales en canasta</h4>
-		<hr>
-		<ul>
-			<li class="header">
-				<span class="ingrediente">Ingrediente</span>
-				<span class="valor">Puntos</span>
-			</li>
-			<?php if (!empty($ingredientes_adicionales)): 
-				foreach ($ingredientes_adicionales as $key => $ingrediente):
-					$puntos = get_post_meta($ingrediente->ingrediente_id, 'valor_en_puntos', true); ?>
-					<li>
-						<span class="ingrediente"><?php echo $ingrediente->nombre_ingrediente; ?></span>
-						<span class="valor"><?php echo $puntos != '' ? $puntos : 0; ?></span>
-					</li>
-				<?php endforeach;
-			endif; ?>
-		</ul>
-	</div>
-	<br><br>
-	<a class="button button-primary button-editar-canasta" href="<?php echo admin_url().'admin.php?page=editar-canasta'; ?>">Editar canasta</a>
+    <h1>Canastas Actuales</h1>
+    <hr>
+    <h3>Clubs de consumo</h3>
+    <p>** Los Clubes en rojo usan la canasta base - ( Para dejar de usar la canasta base cambiar en la configuracion de la misma ).</p>
+    <?php if (! empty($clubes)) : ?>
+        <ul class="ul-clubes">
+            <li class="text-center">
+                <h3>Canastas Base</h3>
+                <a href="<?php echo admin_url().'admin.php?page=canastas_club&id_club=1'; ?>">
+                    Ver Canastas
+                </a>
+                |
+                <a href="<?php echo admin_url().'admin.php?page=configuaracion_canasta_base'; ?>">
+                    Configuración
+                </a>
+            </li>
+
+            <?php foreach ($clubes as $key => $club):
+                $class = isset($clubesCanastaBase[$club->ID]) ? 'danger-club' : ''; ?>
+                
+                <li class="text-center <?php echo $class; ?>">
+                    <h3><?php echo $club->post_title; ?></h3>
+                    <a href="<?php echo admin_url().'admin.php?page=canastas_club&id_club='.$club->ID; ?>">
+                        Ver Canastas
+                    </a>
+                </li>
+
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </div>

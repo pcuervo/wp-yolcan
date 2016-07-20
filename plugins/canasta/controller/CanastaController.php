@@ -2,134 +2,253 @@
 class CanastaController {
 
 	public $actualizacion;
-	public $model_ingredientes;
+	public $modelIngredientes;
+	public $idClub;
+	public $dataPost;
+
 
 	function __construct() {
-		$this->model_ingredientes = model('IngredientesModel');
-        $this->actualizacion = $this->model_ingredientes->getUltimaActualizacion();
-        }
+	    $this->modelIngredientes = model('IngredientesModel');
+        $this->idClub = isset($_GET['id_club']) ? $_GET['id_club'] : 0;
+        $this->dataPost = !empty($_POST) ? $_POST : array();
+    }
 
-	static function index($method, $name_menu, $slug_page){
+	static function index($method, $name_menu, $slug_page)
+	{
 		$canasta = new CanastaController;
 
 		if ($slug_page == 'canasta'){
 			add_menu_page( $name_menu, $name_menu, 'edit_pages', $slug_page, array($canasta, $method), '', 13 );
-                        
 		}else{
-			add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($canasta, $method));
-                        
+			add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($canasta, $method));          
 		}
-			
-
 	}
-        
-        static function ingrediente($method, $name_menu, $slug_page){
-		
-		$ingrediente = new CanastaController;
-                
 
-		add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($ingrediente, $method));
-                        
-
-	}
-        
-        static function agregar_ingrediente($method, $name_menu, $slug_page){
-		
-		$agregaringrediente = new CanastaController;
-
-		add_submenu_page('canasta', $name_menu, $name_menu, 'edit_pages', $slug_page, array($agregaringrediente, $method));
-                
-	}
-        
 
 	/**	
-	 * MUESTRA LA VISTA DE CANASRA
+	 * MUESTRA LOS CLUBS PARA VER SUS CANASTAS
 	 * @return [type] [description]
 	 */
 	public function canasta()
 	{
-		$data = array(
-			'actualizacion_canasta' => $this->actualizacion,
-			'canasta_completa' => $this->getCanastaCompleta(),
-			'media_canasta' => $this->getMediaCanasta(),
-			'ingredientes_adicionales' => $this->getIngredientesAdicionales()
-		);
-		return view('show', $data);
-	}
-
-	/**	
-	 * VISTA PARA EDITAR
-	 * @return [type] [description]
-	 */
-	public function edit()
-	{
-		$page = getClubeProductoPage($_GET['page']);
-
-		if (! empty($_POST)) $this->model_ingredientes->setIngredientesCanasta($_POST);
-
-		$data = $this->getCanasta();
-		$data['ingredientes'] = $this->model_ingredientes->getIngredientes();
-		$data['nombre_canasta'] = $page['nombre_canasta'];
-		$data['id_canasta'] = $page['id_canasta'];
-
-		return view('edit', $data);
+		return view('show', [
+			'clubes' => CanastaModel::clubes(),
+			'clubesCanastaBase' => get_option('clubes_usan_canasta_base')
+		]);
 	}
 
 	/**
-	 * ACTUALIZA EL INDEX DEL ARREGLO POR EL ID DEL INGREDIENTE
-	 * @param  [object] $ingredientes [ingredientes de la ultima actualización]
-	 * @return [object]               [ingredientes]
+	 * [canastasClube description]
+	 * @return [type] [description]
 	 */
-	public function getActualizaIndexIngredientes($ingredientes)
+	public function canastasClube()
 	{
-		$new_array = array();
-		if (! empty($ingredientes)) {
-			foreach ($ingredientes as $key => $ingrediente) {
-				$new_array[$ingrediente->ingrediente_id] = $ingrediente;
+		$productos = model('ProductosModel');
+		$mCanasta = model('CanastaModel');
+		$canastasActivas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub));
+		$canastasProgramadas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub, 2));
+
+		return view('canastas-club', [
+			'idClub' => $this->idClub,
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
+			'canastasActivas' => $canastasActivas,
+			'canastasProgramadas' => $canastasProgramadas
+		]);
+	}
+
+
+	/**	
+	 * CREAR CANASTA
+	 * @return [type] [description]
+	 */
+	public function createCanastas()
+	{
+		$productos = model('ProductosModel');
+
+		return view('editar-canasta', [
+			'titulo' => 'Crear canastas',
+			'idClub' => $this->idClub,
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
+			'action' => 'store'
+		]);
+	}
+
+	/**
+	 * GUARDA LAS CANASTAS
+	 * @return [type] [description]
+	 */
+	public function storeCanastas()
+	{
+		$mCanasta = model('CanastaModel');
+		$fecha_activa = isset($this->dataPost['fecha_activar_canasta']) ? $this->dataPost['fecha_activar_canasta'] : '0000-00-00';
+		$idActualizacion = $mCanasta->storeCanasta($this->idClub, 1, $fecha_activa);
+
+		if (!empty($this->dataPost['ingredientes_canastas']['ingredientes'])) {
+			foreach ($this->dataPost['ingredientes_canastas']['ingredientes'] as $idCanasta => $canasta) {
+				$unidades = $this->dataPost['ingredientes_canastas']['unidades'];
+				$this->updateIngredientesCanasta($idCanasta, $canasta, 'no', $idActualizacion, $unidades);
+			}
+		}
+		$urlRedirect = admin_url().'admin.php?page=canastas_club&id_club='.$this->idClub;
+		wp_redirect($urlRedirect);
+	}
+
+	/**
+	 * EDITAR CANASTA
+	 * @return [type] [description]
+	 */
+	public function editCanastas()
+	{
+		$productos = model('ProductosModel');
+		$mCanasta = model('CanastaModel');
+
+		$ingredientesCanastas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub));
+
+		return view('editar-canasta', [
+			'titulo' => 'Editar canastas',
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'ingredientesCanastas' => $ingredientesCanastas,
+			'idClub' => $this->idClub,
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
+			'action' => 'update'
+		]);
+	}
+
+	/**
+	 * ACTUALIZAR CANASTA
+	 * @return [type] [description]
+	 */
+	public function updateCanastas()
+	{
+		$mCanasta = model('CanastaModel');
+		$idActualizacion = $this->dataPost['idActualizacion'];
+		$fecha_activa = isset($this->dataPost['fecha_activar_canasta']) ? $this->dataPost['fecha_activar_canasta'] : '0000-00-00';
+		$mCanasta->updateDateEditCanasta($idActualizacion, $fecha_activa);
+		$unidades = $this->dataPost['ingredientes_canastas']['unidades'];
+
+		if (!empty($this->dataPost['ingredientes_canastas']['ingredientes'])) {
+			foreach ($this->dataPost['ingredientes_canastas']['ingredientes'] as $idCanasta => $canasta) {
+
+				$this->updateIngredientesCanasta($idCanasta, $canasta, 'si', $idActualizacion, $unidades);
 			}
 		}
 
-		return $new_array;
+		$urlRedirect = admin_url().'admin.php?page=canastas_club&id_club='.$this->idClub;
+		wp_redirect($urlRedirect);
+	}
+
+
+	/**	
+	 * CREAR CANASTA PROGRAMADA
+	 * @return [type] [description]
+	 */
+	public function createCanastasProgramadas()
+	{
+		$productos = model('ProductosModel');
+
+		return view('editar-canasta', [
+			'titulo' => 'Programar canastas',
+			'idClub' => $this->idClub,
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
+			'action' => 'store_programar'
+		]);
 	}
 
 	/**
-	 * REGRESA LA ACTUALIZACIÓN COMPLETA DE LA CANASTA
-	 * @return [array] [actualización canasta]
-	 */
-	public function getCanasta()
-	{
-		$ultimos_ingredientes = ! empty($this->actualizacion) ? $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id) : array();
-		return array(
-			'actualizacion_canasta' => ! empty($this->actualizacion) ? $this->actualizacion  : array(),
-			'ingredientes_canasta' => $this->getActualizaIndexIngredientes($ultimos_ingredientes)
-		);
-	}
-
-	/**	
-	 * REGRESA LA CANASTA COMPLETA ACTUAL
+	 * GUARDA LAS CANASTAS
 	 * @return [type] [description]
 	 */
-	public function getCanastaCompleta()
+	public function storeCanastasProgramadas()
 	{
-		return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'completa');
+		$mCanasta = model('CanastaModel');
+		$fecha_activa = isset($this->dataPost['fecha_activar_canasta']) ? $this->dataPost['fecha_activar_canasta'] : '0000-00-00';
+		$idActualizacion = $mCanasta->storeCanasta($this->idClub, 2, $fecha_activa);
+		$unidades = $this->dataPost['ingredientes_canastas']['unidades'];
+
+		if (!empty($this->dataPost['ingredientes_canastas']['ingredientes'])) {
+			foreach ($this->dataPost['ingredientes_canastas']['ingredientes'] as $idCanasta => $canasta) {
+				$this->updateIngredientesCanasta($idCanasta, $canasta, 'no', $idActualizacion, $unidades);
+			}
+		}
+		$urlRedirect = admin_url().'admin.php?page=canastas_club&id_club='.$this->idClub;
+		wp_redirect($urlRedirect);
 	}
 
-	/**	
-	 * REGRESA LA MEDIA CANASTA ACTUAL
+
+	/**
+	 * EDITAR CANASTA
 	 * @return [type] [description]
 	 */
-	public function getMediaCanasta()
+	public function editCanastasProgramadas()
 	{
-		return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'media');
+		$productos = model('ProductosModel');
+		$mCanasta = model('CanastaModel');
+
+		$ingredientesCanastas = getGroupCanastas($mCanasta->getCanastasClub($this->idClub, 2));
+
+		return view('editar-canasta', [
+			'titulo' => 'Editar canastas programadas',
+			'ingredientes' => $this->modelIngredientes->getIngredientes(),
+			'ingredientesCanastas' => $ingredientesCanastas,
+			'idClub' => $this->idClub,
+			'productos' => array_merge($productos->productos(), getObjetAdicionales() ),
+			'action' => 'update'
+		]);
 	}
 
-	/**	
-	 * REGRESA INGREDIENTES ADICIONALES
+
+	/**
+	 * ACTUALIZA LOS INGREDIENTES DE LAS CANASTAS
+	 * @param  [int] $idCanasta       [id de la canasta]
+	 * @param  [object] $ingredientes     ingredientes de la canasta]
+	 * @param  [string] $actualizacion   [si se edita o crea la actualizacion]
+	 * @param  [id] $idActualizacion [id de la actualizacion]
+	 * @return [bool]                  [true ó false]
+	 */
+	private function updateIngredientesCanasta($idCanasta, $ingredientes, $actualizacion, $idActualizacion, $unidades)
+	{
+		if (!empty($ingredientes)) {
+			if ($actualizacion == 'si') $this->modelIngredientes->destroyIngredientesCanasta($idActualizacion, $idCanasta);
+			
+			foreach ($ingredientes as $key => $ingrediente) {
+				$unidad = $unidades[$idCanasta][$ingrediente];
+				$this->modelIngredientes->storeIngredienteCanasta($idCanasta, $idActualizacion, $ingrediente, $unidad);
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * CONFIGURACION DE LA CANASTA BASE
 	 * @return [type] [description]
 	 */
-	public function getIngredientesAdicionales()
-	{
-		return $this->model_ingredientes->getIngredientesCanasta($this->actualizacion->id, 'adicionales');
+	public function configCanastaBase(){
+		if(! empty($this->dataPost)) $this->updateConfigCanastaBase($this->dataPost);
+		return view('config-canasta-base', [
+			'titulo' => 'Configuración canasta base',
+			'clubes' => CanastaModel::clubes(),
+			'clubesAplica' => get_option('clubes_usan_canasta_base')
+		]);
+	}
+
+
+	/**
+	 * GUARDA LA CONFIGURACION DE CANASTA BASE
+	 */
+	public function updateConfigCanastaBase($dataPost){
+		$optionName = 'clubes_usan_canasta_base';
+		$newValue = $dataPost['clubes'];
+
+		if (get_option( $optionName ) !== false){
+		    update_option( $optionName, $newValue );
+		}else{
+		    $deprecated = null;
+		    $autoload = 'no';
+		    add_option( $optionName, $newValue, $deprecated, $autoload );
+		}
 	}
 
 }

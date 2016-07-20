@@ -8684,3 +8684,25 @@ footer h3 {
   margin: 0;
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.select-club table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.select-club td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+.select-club tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.select-club td p{
+  font-size:13px;
+  color:#777777;
+  margin-bottom: 0;
+}
