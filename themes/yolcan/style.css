@@ -8170,17 +8170,30 @@ a .active {
 #customer_details #billing_first_name_field,
 #customer_details #billing_email_field,
 #customer_details #billing_last_name_field,
-#customer_details #billing_consumer_club_field {
+#customer_details #billing_consumer_club_field,
+#customer_details #billing_address_1_field,
+#customer_details #billing_city_field,
+#customer_details #billing_state_field,
+#customer_details #billing_country_field,
+#customer_details #billing_postcode_field,
+#customer_details #billing_phone_field
+ {
   width: 50%!important;
 }
 #customer_details #billing_first_name_field,
 #customer_details #billing_email_field,
 #customer_details #billing_last_name_field,
-#customer_details #billing_consumer_club_field {
+#customer_details #billing_consumer_club_field ,
+#customer_details #billing_address_1_field,
+#customer_details #billing_city_field,
+#customer_details #billing_state_field,
+#customer_details #billing_country_field,
+#customer_details #billing_postcode_field,
+#customer_details #billing_phone_field{
   padding-right: 15px!important;
 }
 #customer_details #billing_last_name_field,
-#customer_details #billing_consumer_club_field {
+#customer_details #billing_consumer_club_field{
   padding-left: 15px!important;
 }
 .woocommerce table.shop_table th,

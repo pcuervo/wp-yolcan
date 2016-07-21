@@ -620,6 +620,16 @@ function remove_unnecessary_fields( $fields ){
 			$fields['billing'][$key]['required'] = true;
 			continue;
 		}
+
+		if( 'billing_address_1' == $key || 'billing_city' == $key || 'billing_state' == $key || 'billing_country' == $key ) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
+
+		if( 'billing_postcode' == $key || 'billing_phone' == $key) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
 		$fields['billing'][$key]['required'] = false;
 		array_push( $fields['billing'][$key]['class'], '[ hidden ]');
 	}
@@ -644,7 +654,13 @@ function order_fields($fields) {
         "billing_first_name",
         "billing_last_name",
         "billing_email",
-        "billing_consumer_club"
+        "billing_consumer_club",
+        "billing_address_1",
+        "billing_city",
+        'billing_state',
+        "billing_country",
+        "billing_postcode",
+        "billing_phone"
     );
     foreach($order as $field)
     {
@@ -667,12 +683,4 @@ function save_extra_checkout_fields( $order_id, $posted ){
     	}
 		
     }
-}
-
-add_filter( 'woocommerce_form_field_args', 'style_fields', 5 );
-function style_fields( $args ){
-	// echo '<pre>';
-	// var_dump( $args );
-	// echo '</pre>';
-	return $args;
 }
