@@ -20,7 +20,9 @@
 					<h2>Canastas de verduras y frutas organicas a domicilio</h2>
 					<div class="[ btn-absolute-bottom ]">
 						<div class="[ text-center ]" >
-							<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
+							<?php if ( ! is_user_logged_in() ){ ?>
+								<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
+							<?php } ?>
 							<a href="<?php echo site_url('/conocenos/') ?>" ><button class="[ btn btn-primary-darken ]">¿cómo funciona?</button></a>
 						</div>
 					</div>
@@ -109,9 +111,11 @@
 					echo wpautop($cc->post_content); ?>
 				</div>
 				<div class="[  ][ hidden-xs ]">
-					<div class="[ text-center ]">
-						<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom padding ]">únete</button></a>
-					</div>
+					<?php if ( ! is_user_logged_in() ){ ?>
+						<div class="[ text-center ]">
+							<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom padding ]">únete</button></a>
+						</div>
+					<?php } ?>
 					<p>Si quieres armar un nuevo club de consumo, haz
 						<a class="[ color-primary-darken ]" href=""><i><u>click aquí</u></i></a>
 					</p>
@@ -122,9 +126,11 @@
 				<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen></iframe> -->
 			</div>
 			<div class="[ col-xs-12 ][ visible-xs ]">
-				<div class="[ text-center ]">
-					<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom ]">únete</button></a>
-				</div>
+				<?php if ( ! is_user_logged_in() ){ ?>
+					<div class="[ text-center ]">
+						<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom ]">únete</button></a>
+					</div>
+				<?php } ?>
 				<p class="[ color-gray-xlight ]">Si quieres armar un nuevo club de consumo, haz
 					<a class="[ color-gray-xlight ]" href=""><i><u>click aquí</u></i></a>
 				</p>

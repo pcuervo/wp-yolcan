@@ -35,7 +35,9 @@
 					<article class="[ col-sm-4 col-md-3 ]">
 						<h3><em>Únete</em></h3>
 						<div class="[ margin-bottom ]">
-							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+							<?php if ( ! is_user_logged_in() ){ ?>
+								<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+							<?php } ?>
 							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 						</div>
 					</article>
