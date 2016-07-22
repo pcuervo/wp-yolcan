@@ -1,5 +1,6 @@
 <?php global $opCliente;
 global $clubCanasta;
+global $procesoRegistro;
 add_action('get_header', function() {
 	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
@@ -7,6 +8,25 @@ add_action('get_header', function() {
 	if(is_page('mi-cuenta')) getClubAndCanasta();
 	getClientDescountPoints();
 });
+
+if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoCliente($_POST);
+
+
+function setNuevoCliente($data){
+	global $procesoRegistro;
+	extract($data);
+	$user_id = username_exists( $emailCliente );
+	if ( !$user_id and email_exists($emailCliente) == false ) {
+		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
+		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+		if(!is_wp_error($user_id)){
+		    wp_set_current_user($user_id);
+		    wp_set_auth_cookie($user_id); 
+		}
+	} else {
+		$procesoRegistro['error'] = 'El email ya esta en uso';
+	}
+}
 
 /**	
  * ACTUALIZA LOS INGREDIENTES ADICIONALES DEL CLIENTE

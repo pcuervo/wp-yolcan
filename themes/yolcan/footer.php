@@ -1,3 +1,4 @@
+<?php global $procesoRegistro;?>
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
 				<section class="[ row ]">
@@ -129,10 +130,15 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
-
-
+		
 		<!-- modal unete -->
-		<div id="unete" class="[ modal fade ]" role="dialog">
+		<?php if(isset($procesoRegistro['error'])): ?>
+			<div id="unete" class="[ modal fade ] in" role="dialog" aria-hidden="false" style="display: block;">
+		<?php else: ?>	
+			<div id="unete" class="[ modal fade ]" role="dialog">
+		<?php endif; 
+		$nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
+		$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
@@ -144,21 +150,25 @@
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form id="form-unete" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
+									<?php if(isset($procesoRegistro['error'])): ?>
+										<p class="text-danger">El <strong>Email</strong> <?php echo $emailCliente; ?> ya esta en uso.</p>
+									<?php endif; ?>
+									<form id="form-unete" method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+											<input type="text" name="nombreCliente" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio." value="<?php echo $nombreCliente ?>">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+											<input type="email" name="emailCliente" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio." value="<?php echo $emailCliente ?>">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+											<label class="[ sans-serif ][ no-margin ]">Contraseña</label>
+											<input id="password" name="passwordCliente" type="password" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="Favor de ingresar una contraseña.">
 										</div>
+										<input type="hidden" name="action" value="create-client">
 										<div class="[ text-center ]">
-											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
+											<input type="submit" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]" value="únete">
 										</div>
 									</form>
 									<div class="[ text-center ]">
