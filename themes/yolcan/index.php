@@ -117,7 +117,7 @@
 						</div>
 					<?php } ?>
 					<p>Si quieres armar un nuevo club de consumo, haz
-						<a class="[ color-primary-darken ]" href=""><i><u>click aquí</u></i></a>
+						<a data-toggle="modal" data-target="#club-consumo"  class="[ color-primary-darken ]"><i><u>click aquí</u></i></a>
 					</p>
 				</div>
 			</div>
@@ -132,7 +132,7 @@
 					</div>
 				<?php } ?>
 				<p class="[ color-gray-xlight ]">Si quieres armar un nuevo club de consumo, haz
-					<a class="[ color-gray-xlight ]" href=""><i><u>click aquí</u></i></a>
+					<a data-toggle="modal" data-target="#club-consumo" class="[ color-gray-xlight ]"><i><u>click aquí</u></i></a>
 				</p>
 			</div>
 		</div>
@@ -180,7 +180,7 @@
 				</div>
 				<div class="[ text-center ]">
 					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
-					<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
+					<a data-toggle="modal" data-target="#club-consumo" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
 				</div>
 			</div>
 			<div class="[ col-xs-12 col-sm-6 ][ text-center ][ margin-bottom--xlarge ]">

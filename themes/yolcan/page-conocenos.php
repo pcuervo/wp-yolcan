@@ -43,24 +43,18 @@ the_post(); ?>
 				<?php if ( ! is_user_logged_in() ){ ?>
 					<a data-toggle="modal" data-target="#unete" class="[ btn btn-secondary ][ margin-bottom ]">únete</a>
 				<?php } ?>
+				<?php if ( is_user_logged_in() ){ ?>
+					<a data-toggle="modal" data-target="#club-consumo" class="[ btn btn-secondary ][ margin-bottom ]">crea un club de consumo</a>
+				<?php } ?>
 			</article>
 			<article class="[ col-xs-12 col-sm-6 col-md-4 ]">
 				<img class="[ svg icon--iconed--xxxlarge icon--thickness-1 icon--stoke ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/chinampa.svg">
 				<p class="[ text-left ]">Canastas con productos orgánicos de temporada. son frutas y verduras orgánicas, producidos por Yolcan y su red de pequeños productores.</p>
-				<?php if ( ! is_user_logged_in() ){ ?>
-					<div class="[ col-xs-12 ]">
-						<a href="<?php echo site_url('/visitanos/') ?>" class="[ btn btn-secondary ][ margin-bottom ]">visítanos</a>
-					</div>
-				<?php } ?>
-			</article>
-		</div>
-		<?php if ( is_user_logged_in() ){ ?>
-			<div class="[ text-center ][ margin-top ]">
 				<div class="[ col-xs-12 ]">
 					<a href="<?php echo site_url('/visitanos/') ?>" class="[ btn btn-secondary ][ margin-bottom ]">visítanos</a>
 				</div>
-			</div>
-		<?php } ?>
+			</article>
+		</div>
 	</section>
 
 	<!-- Consumir local -->
