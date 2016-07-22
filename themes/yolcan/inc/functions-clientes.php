@@ -234,11 +234,6 @@ function getCostoCanastaTemporalidad($temporalidad, $costo){
 	}
 }
 
-
-function setProductoAndSaldo($variation_id){
-
-}
-
 /**
  * UPDATE POINTS CLIENT
  * @return [type] [description]

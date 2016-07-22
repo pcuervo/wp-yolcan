@@ -692,10 +692,9 @@ function call_restaurant($order_id) {
 	$customer = new WC_Customer( $order_id );
 	
 	$items = $order->get_items();
-	$user_id = $order->post->post_author;
+	$user_id =  get_post_meta( $order->post->ID, '_customer_user', true );
 
 	if(!empty($items)){
-		global $current_user;
 		foreach ( $items as $item ) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			$opCliente = getOpcionesCliente($user_id);
