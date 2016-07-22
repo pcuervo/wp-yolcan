@@ -160,7 +160,7 @@ a:hover {
     width: 280px;
     @media (min-width: @screen-sm) { width: 320px;}
  }
-
+.height--auto{ height: auto!important;}
 .height-50{height: 50px;}
 .height-auto{ min-height: auto;}
 .height-1200  {height: 1200px;}
@@ -180,6 +180,7 @@ a:hover {
 .padding--xsmall{ padding: (@padding-base-vertical); }
 .padding--xxsmall{ padding: (@padding-base-vertical/2); }
 
+.padding--top-0{ padding-top: 0px; }
 .padding--top{ padding-top: (@padding-base-vertical*2); }
 .padding--top--small{ padding-top: (@padding-base-vertical); }
 .padding--top--large{ padding-top: (@padding-base-vertical*4); }
@@ -247,7 +248,7 @@ a:hover {
 
 .margin-bottom{ margin-bottom: @margin-base; }
 .margin-bottom--xsmall{ margin-bottom: (@margin-base/4); }
-.margin-bottom--small{ margin-bottom: (@margin-base/2); }
+.margin-bottom--small{ margin-bottom: (@margin-base/2)!important; }
 .margin-bottom--large{ margin-bottom: (@margin-base*2); }
 .margin-bottom--xlarge{ margin-bottom: (@margin-base*4); }
 .margin-bottom--xxlarge{ margin-bottom: (@margin-base*8); }
@@ -281,7 +282,7 @@ a:hover {
 
 .margin-left{ margin-left: @margin-base; }
 .margin-left--xsmall{ margin-left: (@margin-base/4); }
-.margin-left--small{ margin-left: (@margin-base/2); }
+.margin-left--small{ margin-left: (@margin-base/2)!important; }
 .margin-left--large{ margin-left: (@margin-base*2); }
 
 .margin-top-bottom{ margin-top: @margin-base; margin-bottom: @margin-base; }
@@ -503,10 +504,10 @@ a .active{
 
 //payment_box
 
-.woocommerce-checkout #payment div.payment_box{
-  width: 95%;
-  margin-left: 7%;
-}
+// .woocommerce-checkout #payment div.payment_box{
+//   width: 95%;
+//   margin-left: 7%;
+// }
 
 //grid
 #customer_details{
@@ -518,4 +519,4 @@ a .active{
   #billing_last_name_field, #billing_consumer_club_field { padding-left: 15px!important; }
 }
 
-.woocommerce table.shop_table th, .woocommerce table.shop_table td { padding: 9px 0px; }
+// .woocommerce table.shop_table th, .woocommerce table.shop_table td { padding: 9px 0px; }

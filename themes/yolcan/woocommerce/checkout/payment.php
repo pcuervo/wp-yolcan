@@ -22,10 +22,10 @@ if ( ! is_ajax() ) {
 	do_action( 'woocommerce_review_order_before_payment' );
 }
 ?>
-<div id="payment" class="woocommerce-checkout-payment [ margin-bottom--large ][ bg-light ]">
+<div id="payment" class="woocommerce-checkout-payment [ padding--top--small margin-bottom--large ][ bg-light ]">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
-		<h4 class="[ text-center ]">Selecciona tu metodo de pago:</h4>
-		<ul class="wc_payment_methods payment_methods methods">
+		<h4 class="[ text-center ][ margin-top ]">Selecciona tu metodo de pago:</h4>
+			<ul class="wc_payment_methods payment_methods methods [ no-border ]">
 			<?php
 				if ( ! empty( $available_gateways ) ) {
 					foreach ( $available_gateways as $gateway ) {

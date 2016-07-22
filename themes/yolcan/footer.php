@@ -36,7 +36,9 @@
 					<article class="[ col-sm-4 col-md-3 ]">
 						<h3><em>Únete</em></h3>
 						<div class="[ margin-bottom ]">
-							<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+							<?php if ( ! is_user_logged_in() ){ ?>
+								<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+							<?php } ?>
 							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 						</div>
 					</article>
@@ -234,6 +236,52 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
+
+		<!-- modal club de consumo -->
+		<div id="club-consumo" class="[ modal fade ]" role="dialog">
+			<div class="[ modal-dialog ]">
+				<div class="[ modal-content ]">
+					<div class="[ modal-body ][ color-light ]">
+						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
+							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+							</button>
+							<div class="[ row ]">
+								<div class="[ col-xs-10 col-xs-offset-1 ]">
+									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
+									<p class="[ text-center ]">¿Te interesa crear un club de consumo? Déjanos tus datos y te contactaremos </p>
+									<form id="form-club" class="[ text-left ]" data-parsley-validate>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Correo</label>
+											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Ubicación del club a crear</label>
+											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
+										</div>
+										<div class="[ form-group ]">
+											<label class="[ sans-serif ][ no-margin ]">Mensaje</label>
+											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
+										</div>
+										<div class="[ text-center ]">
+											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ]">enviar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<?php wp_footer(); ?>
 		<script type="text/javascript">

@@ -25,7 +25,7 @@
 		<section class="[ col-xs-12 col-sm-8 ]">
             <?php if ($opCliente->clubId == '' || $opCliente->clubId == 0): ?>
                 <article class="[ padding--bottom margin-bottom ]">
-                    <p>Para continuar favor de seleccionar un clube de consumo</p>
+                    <p>Para continuar favor de seleccionar un club de consumo</p>
                     <form id="select-club" method="POST" class="select-club">
                         <table>
                             <tr>
@@ -38,10 +38,10 @@
 
                                 ]);
                             if ( $clubes->have_posts() ):
-                                while ( $clubes->have_posts() ): $clubes->the_post(); 
+                                while ( $clubes->have_posts() ): $clubes->the_post();
                                 $direccion = get_post_meta(get_the_ID(), 'ubicacion-club', true); ?>
                                     <tr>
-                                        <td> 
+                                        <td>
                                             <input type="radio" name="club" value="<?php echo get_the_ID(); ?>">
                                         </td>
                                         <td>
@@ -51,10 +51,10 @@
                                     </tr>
                                 <?php endwhile;
                             endif; ?>
-                            
+
                         </table>
                         <br>
-                        <input type="submit" value="Guardar">
+                        <input class="[ btn btn-secondary ]" type="submit" value="guardar">
                     </form>
 
                 </article>
