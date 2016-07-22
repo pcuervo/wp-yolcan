@@ -22,6 +22,8 @@ function setNuevoCliente($data){
 		if(!is_wp_error($user_id)){
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id); 
+		    wp_safe_redirect( site_url('/mi-cuenta') );
+   			exit();
 		}
 	} else {
 		$procesoRegistro['error'] = 'El email ya esta en uso';
