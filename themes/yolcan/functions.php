@@ -679,25 +679,34 @@ function save_extra_checkout_fields( $order_id, $posted ){
 }
 
 function mysite_woocommerce_payment_complete( $order_id ) {
+	$order = new WC_Order($order_id);
+	$order->update_status('completed');
+}
+add_action( 'woocommerce_payment_complete', 'mysite_woocommerce_payment_complete' );
+
+
+add_action('woocommerce_order_status_completed', 'call_restaurant');
+
+function call_restaurant($order_id) {
 	$order = new WC_Order( $order_id );
+	$customer = new WC_Customer( $order_id );
+	
 	$items = $order->get_items();
+	$user_id = $order->post->post_author;
 
 	if(!empty($items)){
 		global $current_user;
 		foreach ( $items as $item ) {
-			$club = get_user_meta($current_user->ID,  'club_proximo', true );
-			$opCliente = getOpcionesCliente($current_user->ID);
+			$club = get_user_meta($user_id,  'club_proximo', true );
+			$opCliente = getOpcionesCliente($user_id);
 
 	    	if (!empty($opCliente)) {
 	    		$total = $item['line_total'] + $opCliente->saldo;
-	    		updateOpcionesCliente($club, $item['variation_id'], $total, $current_user->ID);
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $current_user->ID);
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $user_id);
 	    	}
 
 		}
 	}	
-	
 }
-add_action( 'woocommerce_payment_complete', 'mysite_woocommerce_payment_complete' );
-	
