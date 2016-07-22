@@ -23,7 +23,7 @@
 		</section>
 
 		<section class="[ col-xs-12 col-sm-8 ]">
-            <?php if ($opCliente->clubId == ''): ?>
+            <?php if ($opCliente->clubId == '' || $opCliente->clubId == 0): ?>
                 <article class="[ padding--bottom margin-bottom ]">
                     <p>Para continuar favor de seleccionar un clube de consumo</p>
                     <form id="select-club" method="POST" class="select-club">

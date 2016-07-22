@@ -3,7 +3,7 @@ global $opCliente;
 global $clubCanasta;
 
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
-$adicionalesAgregados = $clubCanasta->adicionalesAgregados;
+$adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
 $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0; ?>
 <span id="productos-canasta"></span>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
@@ -11,7 +11,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 	<!-- PROCIMA CANASTA -->
 
 	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal;?></span></h4>
-	<p><?php echo $clubCanasta->producto_name; ?> para el 10 de junio:</p>
+	<p><?php echo isset($clubCanasta->producto_name) ? $clubCanasta->producto_name : ''; ?> para el 10 de junio:</p>
 	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (!empty($clubCanasta->ingredientes)):

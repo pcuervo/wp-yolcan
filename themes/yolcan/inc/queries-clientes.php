@@ -73,14 +73,15 @@ function getOpcionesCliente($clienteId){
 /**
  * Actualiza el club de consumo del cliente
  */
-function setClubCliente($clubId, $clienteId){
+function setOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
 	global $wpdb;
 	$wpdb->insert(
 		$wpdb->prefix.'opciones_clientes',
 		array(
 			'cliente_id' => $clienteId,
 			'status'  => 1,
-			'saldo' => 0.00,
+			'saldo' => $saldo,
+			'producto_id' => $variation_id,
 			'club_id' => $clubId,
 			'fecha_cambio_status' => date('Y-m-d')
 		),
@@ -88,6 +89,7 @@ function setClubCliente($clubId, $clienteId){
 			'%d',
 			'%d',
 			'%f',
+			'%d',
 			'%d',
 			'%s'
 		)
@@ -99,15 +101,19 @@ function setClubCliente($clubId, $clienteId){
 /**
  * Actualiza el club de consumo del cliente
  */
-function updateClubCliente($clubId, $clienteId){
+function updateOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
 	global $wpdb;
 	$wpdb->update( 
 		$wpdb->prefix.'opciones_clientes',
 		array( 
-			'club_id' => $clubId
+			'club_id' => $clubId,
+			'saldo' => $saldo,
+			'producto_id' => $variation_id
 		), 
 		array( 'cliente_id' => $clienteId ), 
 		array( 
+			'%d',
+			'%f',
 			'%d'
 		), 
 		array( '%d' ) 

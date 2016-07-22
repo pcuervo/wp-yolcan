@@ -92,7 +92,13 @@ function saveClubCliente($clubId){
 	if ($clubId == '') return false;
 
 	global $current_user;
-	setClubCliente($clubId, $current_user->ID);
+	$opCliente = getOpcionesCliente($current_user->ID);
+
+	if (!empty($opCliente)) {
+		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $current_user->ID);
+	}else{
+		setOpcionesCliente($clubId, 0, 0.00,$current_user->ID);
+	}
 	return true;
 }
 
@@ -204,6 +210,11 @@ function getCostoCanastaTemporalidad($temporalidad, $costo){
 	        return $costo / 24;
 	        break;
 	}
+}
+
+
+function setProductoAndSaldo($variation_id){
+
 }
 
 /**

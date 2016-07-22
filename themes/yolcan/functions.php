@@ -674,13 +674,30 @@ add_action( 'woocommerce_checkout_update_order_meta', 'save_extra_checkout_field
 function save_extra_checkout_fields( $order_id, $posted ){
     if( isset( $posted['billing_consumer_club'] ) ) {
     	global $current_user;
-    	$opCliente = getOpcionesCliente($current_user->ID);
-
-    	if (!empty($opCliente)) {
-    		updateClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
-    	}else{
-    		setClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
-    	}
-		
+    	update_user_meta( $current_user->ID, 'club_proximo', $posted['billing_consumer_club'] );
     }
 }
+
+function mysite_woocommerce_payment_complete( $order_id ) {
+	$order = new WC_Order( $order_id );
+	$items = $order->get_items();
+
+	if(!empty($items)){
+		global $current_user;
+		foreach ( $items as $item ) {
+			$club = get_user_meta($current_user->ID,  'club_proximo', true );
+			$opCliente = getOpcionesCliente($current_user->ID);
+
+	    	if (!empty($opCliente)) {
+	    		$total = $item['line_total'] + $opCliente->saldo;
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $current_user->ID);
+	    	}else{
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $current_user->ID);
+	    	}
+
+		}
+	}	
+	
+}
+add_action( 'woocommerce_payment_complete', 'mysite_woocommerce_payment_complete' );
+	
