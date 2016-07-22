@@ -43,6 +43,8 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_localize_script( 'functions', 'is_nuestros_productos', (string)is_page('nuestros-productos') );
 	wp_localize_script( 'functions', 'is_recetas', (string)is_post_type_archive('recetas') );
 	wp_localize_script( 'functions', 'is_single_recetas', (string)is_singular('recetas') );
+	wp_localize_script( 'functions', 'site_url', SITEURL );
+
 
 	if ( is_home() ) {
 		$direc_club = getLocationClubs();
@@ -141,7 +143,13 @@ require_once('inc/pages.php');
 
 require_once('inc/queries.php');
 
+require_once('inc/queries-clientes.php');
+
+require_once('inc/functions-clientes.php');
+
 require_once('inc/functions-newsletter.php');
+
+require_once('inc/function-productos.php');
 
 require_once('inc/usuarios.php');
 
@@ -595,7 +603,7 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
-add_filter('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
+add_filter ('woocommerce_add_to_cart_redirect', 'redirect_to_checkout');
 function redirect_to_checkout() {
 	wc_clear_notices();
     return WC()->cart->get_checkout_url();
@@ -612,26 +620,31 @@ function remove_unnecessary_fields( $fields ){
 			$fields['billing'][$key]['required'] = true;
 			continue;
 		}
+
+		if( 'billing_address_1' == $key || 'billing_city' == $key || 'billing_state' == $key || 'billing_country' == $key ) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
+
+		if( 'billing_postcode' == $key || 'billing_phone' == $key) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
 		$fields['billing'][$key]['required'] = false;
 		array_push( $fields['billing'][$key]['class'], '[ hidden ]');
 	}
-
 	return $fields;
 }
 
 add_filter( 'woocommerce_checkout_fields', 'add_billing_consumer_club_field', 20 );
 function add_billing_consumer_club_field( $fields ){
 	$fields['billing']['billing_consumer_club'] = array(
-		'type'			=> 'select',
-        'label'     	=> 'Clubes de consumo',
-	    'required'  	=> true,
-	    'class'			=> array( 'form-row-wide' ),
-	    'options'		=> array(
-		    				'1' => 'Club 1',
-		    				'2' => 'Club 2',
-		    			)
+		'type' => 'select',
+        'label' => 'Clubes de consumo',
+	    'required' => true,
+	    'class'	=> array( 'form-row-wide' ),
+	    'options'=> clubesDeConsumo()
      );
-
      return $fields;
 }
 
@@ -641,7 +654,13 @@ function order_fields($fields) {
         "billing_first_name",
         "billing_last_name",
         "billing_email",
-        "billing_consumer_club"
+        "billing_consumer_club",
+        "billing_address_1",
+        "billing_city",
+        'billing_state',
+        "billing_country",
+        "billing_postcode",
+        "billing_phone"
     );
     foreach($order as $field)
     {
@@ -651,18 +670,43 @@ function order_fields($fields) {
     return $fields;
 }
 
-add_filter( 'woocommerce_form_field_args', 'style_fields', 5 );
-function style_fields( $args ){
-	// echo '<pre>';
-	// var_dump( $args );
-	// echo '</pre>';
-	return $args;
+add_action( 'woocommerce_checkout_update_order_meta', 'save_extra_checkout_fields', 10, 2 );
+function save_extra_checkout_fields( $order_id, $posted ){
+    if( isset( $posted['billing_consumer_club'] ) ) {
+    	global $current_user;
+    	update_user_meta( $current_user->ID, 'club_proximo', $posted['billing_consumer_club'] );
+    }
 }
 
+function mysite_woocommerce_payment_complete( $order_id ) {
+	$order = new WC_Order($order_id);
+	$order->update_status('completed');
+}
+add_action( 'woocommerce_payment_complete', 'mysite_woocommerce_payment_complete' );
 
-add_filter('add_to_cart_redirect', 'themeprefix_add_to_cart_redirect');
-function themeprefix_add_to_cart_redirect() {
- global $woocommerce;
- $checkout_url = $woocommerce->cart->get_checkout_url();
- return $checkout_url;
+
+add_action('woocommerce_order_status_completed', 'call_restaurant');
+
+function call_restaurant($order_id) {
+	$order = new WC_Order( $order_id );
+	$customer = new WC_Customer( $order_id );
+	
+	$items = $order->get_items();
+	$user_id = $order->post->post_author;
+
+	if(!empty($items)){
+		global $current_user;
+		foreach ( $items as $item ) {
+			$club = get_user_meta($user_id,  'club_proximo', true );
+			$opCliente = getOpcionesCliente($user_id);
+
+	    	if (!empty($opCliente)) {
+	    		$total = $item['line_total'] + $opCliente->saldo;
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $user_id);
+	    	}else{
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $user_id);
+	    	}
+
+		}
+	}	
 }

@@ -30,101 +30,83 @@ the_post(); ?>
 		<div class="[ container ]">
 			<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 			<div class="[ row ][ margin-bottom--large ]">
-                                        <?php
-                                                $args = array(
-                                                        'post_type' => 'product',
-                                                        'posts_per_page' => 12
-                                                        );
-                                                $loop = new WP_Query( $args );
+                 <?php $args = array(
+                        'post_type' => 'product',
+                        'posts_per_page' => 12
+                        );
+                $productos = new WP_Query( $args );
 
-                                                if ( $loop->have_posts() ) {
+                if ( $productos->have_posts() ):
 
-                                                        while ( $loop->have_posts() ) : $loop->the_post();
+                    while ( $productos->have_posts() ) : $productos->the_post();
+                        $producto = wc_get_product( get_the_ID() );
+                        $variations = $producto->get_available_variations(); 
+                         ?>
+                        <article class="[ col-xs-12 col-sm-4 ]">
+                            <div class="[ card ]">
+                                <div class="[ card__header ]">
+                                        <h3 class="[ card__title ]"><?php the_title(); ?></h3>
+                                        <h5 class="[ card__subtitle ]">para 1 persona</h5>
+                                </div>
+                                <div class="[ card__image ]">
+                                        <img class="[ img-responsive ]" src="https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?crop=entropy&dpr=2&fit=crop&fm=jpg&h=200&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=300">
+                                </div>
+                                <div class="[ card__footer ]">
 
-                                                        ?>
-                                                            <article class="[ col-xs-12 col-sm-4 ]">
-                                                                    <div class="[ card ]">
-                                                                            <div class="[ card__header ]">
-                                                                                    <h3 class="[ card__title ]"><?php the_title(); ?></h3>
-                                                                                    <h5 class="[ card__subtitle ]">para 1 persona</h5>
-                                                                            </div>
-                                                                            <div class="[ card__image ]">
-                                                                                    <img class="[ img-responsive ]" src="https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?crop=entropy&dpr=2&fit=crop&fm=jpg&h=200&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=300">
-                                                                            </div>
-                                                                            <div class="[ card__footer ]">
-                                                                                    <form class="[ card__form ]" action="">
+                                    <div class="[ card__radio-options ][ text-center ]">
+                                        <div class="[ radio-options__label ]">
+                                                Entregas semanales durante:
+                                        </div>
+                                        <?php if (!empty($variations)):
+                                            foreach($variations as $variation):
+                                                $name = getNameVariation($variation['variation_id']); ?>
+                                                <label class="[ radio-options__selector__label ]" for="c9_meals-<?php echo $variation['variation_id']; ?>">
+                                                    <input 
+                                                        id="c9_meals-<?php echo $variation['variation_id']; ?>" 
+                                                        data-costo="<?php echo number_format($variation['display_price']); ?>"
+                                                        data-producto="<?php echo get_the_ID(); ?>"
+                                                        data-variacion="<?php echo $variation['variation_id']; ?>"
+                                                        class="[ radio-options__selector ][ check-compra ]" 
+                                                        type="radio" 
+                                                        name="entregas" 
+                                                        value="c9"
+                                                    > <?php echo $name; ?>
+                                                </label>
+                                            <?php endforeach;
+                                        endif; ?>
+                                       
+                                    </div>
+                                    <div class="[ card__price-table ]">
+                                        <div class="[ price-table__set ][ clearfix ]">
+                                            <span class="[ price-table__text ]">Precio total:</span>
+                                            <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]"></span>
+                                        </div>
+                                        <div class="[ price-table__set ][ clearfix ]">
+                                            <span class="[ price-table__text ]">Precio por canasta:</span>
+                                            <span class="[ price-table__value ]">
+                                                <?php if ($price_html = $product->get_price_html()):
+                                                        echo $price_html;
+                                                endif; ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <button type="button" data-toggle="modal" data-target="#ingredientes" class="[ btn btn-link ][ width-100 block ]">Ver ingredientes</button>
 
-                                                                                            <div class="[ card__radio-options ][ text-center ]">
-                                                                                                    <div class="[ radio-options__label ]">
-                                                                                                            Entregas semanales durante:
-                                                                                                    </div>
-                                                                                                    <label class="[ radio-options__selector__label ]" for="c9_meals">
-                                                                                                            <input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c9"> 1 mes
-                                                                                                    </label>
-                                                                                                    <label class="[ radio-options__selector__label ]" for="c10_meals">
-                                                                                                            <input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c10"> 3 meses
-                                                                                                    </label>
-                                                                                                    <label class="[ radio-options__selector__label ]" for="c12_meals">
-                                                                                                            <input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entregas" value="c12" checked=""> 6 meses
-                                                                                                    </label>
-                                                                                            </div>
-                                                                                            <div class="[ card__price-table ]">
-                                                                                                    <div class="[ price-table__set ][ clearfix ]">
-                                                                                                            <span class="[ price-table__text ]">Precio total:</span>
-                                                                                                            <span class="[ price-table__value ]">$3,000</span>
-                                                                                                    </div>
-                                                                                                    <div class="[ price-table__set ][ clearfix ]">
-                                                                                                            <span class="[ price-table__text ]">Precio por canasta:</span>
-                                                                                                            <span class="[ price-table__value ]">
-                                                                                                                <?php
-                                                                                                                    if ($price_html = $product->get_price_html()){
-                                                                                                                        echo $price_html;
-                                                                                                                    }
-                                                                                                                ?>
-                                                                                                            </span>
-                                                                                                    </div>
-                                                                                            </div>
-                                                                                            <button type="button" data-toggle="modal" data-target="#ingredientes" class="[ btn btn-link ][ width-100 block ]">Ver ingredientes</button>
+                                    <?php if ( $product->is_in_stock() ) : ?>
+                                    <div class="text-center">
+                                        <a class="[ btn btn-secondary ] url-add-cart-product-<?php echo get_the_ID(); ?>" href="">Añadir al carrito</a>
+                                    </div>
+                                        
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endwhile;
 
-                                                                                                <?php if ( $product->is_in_stock() ) : ?>
-
-                                                                                                    <?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
-
-                                                                                                            <form class="cart" method="post" enctype='multipart/form-data'>
-                                                                                                                    <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
-
-                                                                                                                    <?php
-                                                                                                                            if ( ! $product->is_sold_individually() ) {
-                                                                                                                                    woocommerce_quantity_input( array(
-                                                                                                                                            'min_value'   => apply_filters( 'woocommerce_quantity_input_min', 1, $product ),
-                                                                                                                                            'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->backorders_allowed() ? '' : $product->get_stock_quantity(), $product ),
-                                                                                                                                            'input_value' => ( isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : 1 )
-                                                                                                                                    ) );
-                                                                                                                            }
-                                                                                                                    ?>
-
-                                                                                                                    <input type="hidden" name="add-to-cart" value="<?php echo esc_attr( $product->id ); ?>" />
-
-                                                                                                                    <button type="submit" class="[ btn btn-secondary ][ block ][ width-100 ]"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-
-                                                                                                                    <?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
-                                                                                                            </form>
-
-                                                                                                            <?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
-
-                                                                                                    <?php endif; ?>
-                                                                                    </form>
-                                                                            </div>
-                                                                    </div>
-                                                            </article>
-                                                        <?php
-                                                        endwhile;
-
-                                                } else {
-                                                        echo __( 'No hay canastas' );
-                                                }
-                                                wp_reset_postdata();
-                                        ?>
+                else:
+                        echo __( 'No hay canastas' );
+                endif;
+                wp_reset_postdata();?>
 			</div>
 
 			<div class="[ row ][ margin-bottom ]">

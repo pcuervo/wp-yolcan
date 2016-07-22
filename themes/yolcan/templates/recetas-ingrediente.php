@@ -34,6 +34,7 @@ if( $my_posts ) :
 				</div>
 
 			<?php endforeach;
+                        
 		else:
 			echo '<p>No se encontraron recetas con ese ingrediente</p>';
 		endif; ?>

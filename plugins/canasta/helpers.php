@@ -1,10 +1,7 @@
 <?php 
 /**
  * MUESTRA UNA VISTA
- 
  */
-
-/*---------------------PRUEBA DE CANASTA--------------------------*/
 function view($view, $array=array()){
 	global $errores;
 	global $mesage_error;
@@ -18,7 +15,7 @@ function view($view, $array=array()){
 }
 
 /**
- * ABRE UN MODELO ESPESIFICADO
+ * ABRE UN MODELO ESPECIFICADO
  */
 function model($model = ''){
 	if ($model != ''):
@@ -29,17 +26,14 @@ function model($model = ''){
 		endif;
 
 		if (class_exists($model, FALSE)):
-
 			$class = new $model();
 			return $class;
-
 		else:
 			show_error('El modelo solicitado en  models/'.$model.'.php no existe : '.$model);
 		endif;
 	else:
 		show_error('No se encontro el archivo solicitado : models/'.$model.'.php');
 	endif;
-
 }
 
 /**
@@ -57,7 +51,6 @@ function show_error($message, $status_code = 500)
 /**
  * EDITA EL FORMATO DE LA FECHA
  */
-
 function getDateTransformUpdate($fecha){
 	$dias = array('Lunes','Martes','Miercoles','Jueves','Viernes','Sábado','Domingo');
 	$dias_recortados = array('Lun','Mar','Mie','Jue','Vie','Sab','Dom');
@@ -70,16 +63,42 @@ function getDateTransformUpdate($fecha){
 	return array($fecha[2], $mes[$fecha[1]], $fecha[0], $dia_name, $fecha[1], $dia_recortado);
 }
 
+
 /**
- * REGRESA EL PRODUCTO Y EL CLUBE
+ * EDITA EL FORMATO DE LA FECHA
  */
-function getClubeProductoPage($page){
-	$page = explode("-", $page);
-	$separados = explode("_", $page[1]);
-	$id_clube = $separados[0];
-	$id_producto = $separados[1];
-	return array(
-		'id_canasta' => $id_clube.$id_producto,
-		'nombre_canasta' => get_the_title( $id_clube ).' - '.get_the_title( $id_producto )
-		);
+function getDateTransformFormat($fecha){
+	$fecha = date("Y-m-d", strtotime($fecha));
+	$date = getDateTransformUpdate($fecha);
+
+	return $date[3].', '.$date[0].' de '.$date[1].' del '.$date[2];
+}
+
+/**
+ * AGRUPA LAS CANASTAS DE LA ACTUALIZACION
+ */
+function getGroupCanastas($ingredientes){
+	if (!empty($ingredientes)) {
+		$arrNew = [];
+		$arrNew['actualizacion'] = $ingredientes[0];
+		foreach ($ingredientes as $key => $ingrediente) {
+			$arrNew['canastas'][$ingrediente->canasta_id][$ingrediente->ingrediente_id] = $ingrediente;
+		}
+		return $arrNew;
+	}else{
+		return [];
+	}
+}
+
+/**
+ * PRODUCTO ADICIONALES
+ * @return [type] [description]
+ */
+function getObjetAdicionales(){
+	$adicional = [];
+	$adicional[] = (object) [
+	    'ID' => 1,
+	    'post_title' => 'Adicionales',
+	 ];
+	return $adicional;
 }

@@ -12,8 +12,8 @@ add_action('add_meta_boxes', function(){
 
 	add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 	add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
-	add_meta_box( 'meta-box-informacion_ingrediente', 'Ingredientes', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
-    add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
+	add_meta_box( 'meta-box-informacion_ingrediente', 'Info. Adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
+    // add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-precio_ingrediente', 'Precio', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
@@ -215,8 +215,8 @@ function show_metabox_informacion_ingrediente($post){
 	$adicional_canasta = get_post_meta($post->ID, 'adicional_canasta', true);
 	$valor_en_puntos = get_post_meta($post->ID, 'valor_en_puntos', true);
 
-	$checked = $adicional_canasta == 'si' ? 'checked' : '';
-	echo '<input type="radio" name="adicional_canasta" value="si" '.$checked.'> Adicional en canasta<br><br>';
+	// $checked = $adicional_canasta == 'si' ? 'checked' : '';
+	// echo '<input type="radio" name="adicional_canasta" value="si" '.$checked.'> Adicional en canasta<br><br>';
 
 	echo "<label for='valor_en_puntos' class='label-paquetes'>Valor en puntos: </label>";
 	echo "<input type='text' class='widefat' id='valor_en_puntos' name='valor_en_puntos' value='$valor_en_puntos'/><br><br>";
@@ -241,6 +241,7 @@ function show_metabox_precio_ingrediente($post){
 
 	echo "<input type='text' class='widefat' id='precio_ingrediente' name='precio_ingrediente' value='$precio_ingrediente'/><br><br>";
 }
+
 
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
