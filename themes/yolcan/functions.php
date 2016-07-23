@@ -147,6 +147,8 @@ require_once('inc/queries-clientes.php');
 
 require_once('inc/functions-clientes.php');
 
+require_once('inc/functions-update-canastas.php');
+
 require_once('inc/functions-newsletter.php');
 
 require_once('inc/function-productos.php');

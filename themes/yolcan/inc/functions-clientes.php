@@ -10,12 +10,15 @@ add_action('get_header', function() {
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
 	if(is_page('mi-cuenta')) checkStatusCliente();
 	if(is_page('mi-cuenta')) getClubAndCanasta();
-	getClientDescountPoints();
 });
 
 if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoCliente($_POST);
 
 
+/**
+ * CREA UN NURVO CLIENTE
+ * @param [type] $data [description]
+ */
 function setNuevoCliente($data){
 	global $procesoRegistro;
 	extract($data);
@@ -224,12 +227,13 @@ function getIdCanastaAdicionalesClube($clubId, $producto){
  * @return [type]             [description]
  */
 function getCostoVariationID($variant_id){
-	$var = new WC_Product_Variation($variant_id);
-	$attr = $var->get_variation_attributes();
-	$costo = getCostoCanastaTemporalidad($attr['attribute_pa_temporalidad'], $var->regular_price);
+	$temporalidad = get_post_meta( $variant_id, 'attribute_pa_temporalidad', true );
+	$regular_price = get_post_meta( $variant_id, '_regular_price', true );
+
+	$costo = getCostoCanastaTemporalidad($temporalidad, $regular_price);
 	return (object) [
-		'temporalidad' => $attr['attribute_pa_temporalidad'],
-		'costo' => $var->regular_price,
+		'temporalidad' => $temporalidad,
+		'costo' => $regular_price,
 		'costoSemanal' => $costo
 	];
 }
@@ -327,10 +331,11 @@ function getCostoCanastaTemporalidad($temporalidad, $costo){
 	}
 }
 
+
 /**
- * UPDATE POINTS CLIENT
+ * PROXIMO CORTE PARA TODAS LAS CANASRTAS
  * @return [type] [description]
  */
-function getClientDescountPoints(){
-
+function getProximoCorte(){
+	return date("Y-m-d",strtotime("next Friday"));
 }

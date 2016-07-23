@@ -247,7 +247,11 @@ function updateSuspensionOpcionesCliente($clienteId, $idSuspension, $status = 1)
 	return true;
 }
 
-
+/**
+ * INFORMACION DE LA SUSPENSION DEL CLIENTE
+ * @param  [int] $clineteId [id del cliente]
+ * @return [object]            [informacion de la suspension]
+ */
 function getDataSuspensionActiva($clineteId){
 	global $wpdb;
 
@@ -256,4 +260,51 @@ function getDataSuspensionActiva($clineteId){
 		INNER JOIN {$wpdb->prefix}suspension_entregas as se
 		ON oc.id_suspension = se.id
 		WHERE oc.cliente_id = $clineteId AND oc.suspendido = 1", OBJECT );
+}
+
+
+/**
+ * REGRESA LOS CLIENTES QUE SE LES TIENE QUE DESACTIVAR SU CUENTA
+ * @param  string $fecha [fecha actual]
+ * @return [type]        [description]
+ */
+function getClientesDesactivarSuspension($fecha = ''){
+	$fecha = $fecha == '' ? date('Y-m-d') : $fecha;
+	global $wpdb;
+	return $wpdb->get_results( "SELECT oc.cliente_id FROM {$wpdb->prefix}opciones_clientes as oc
+		INNER JOIN {$wpdb->prefix}suspension_entregas as se
+		ON oc.id_suspension = se.id
+		WHERE oc.suspendido = 1 AND fecha_fin_suspension = '$fecha';
+	", OBJECT );
+	
+}
+
+/**	
+ * CLIENTES ACTIVOS
+ * @return [type] [description]
+ */
+function getClientesActivos(){
+	global $wpdb;
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}opciones_clientes 
+		WHERE suspendido = 0 AND status = 1;
+	", OBJECT );
+}
+
+
+function updateSaldoCliente($clienteId, $saldo){
+	global $wpdb;
+	$wpdb->update( 
+		$wpdb->prefix.'opciones_clientes',
+		array( 
+			'saldo' => $saldo
+		), 
+		array( 'cliente_id' => $clienteId ), 
+		array( '%f' ), 
+		array( '%d' ) 
+	);
+	echo '<pre>';
+	print_r($saldo);
+	echo '</pre>';
+
+	return true;
 }
