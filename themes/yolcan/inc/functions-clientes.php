@@ -2,6 +2,7 @@
 global $clubCanasta;
 global $procesoRegistro;
 add_action('get_header', function() {
+	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST);
 	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);
 	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
@@ -110,7 +111,7 @@ function getCliente($clienteId){
 		'clubId' => isset($opCliente->club_id) ? $opCliente->club_id : '',
 		'saldo' => isset($opCliente->saldo) ? $opCliente->saldo : '0.00',
 		'suspendido' => isset($opCliente->suspendido) ? $opCliente->suspendido : 0,
-		'id_suspencion' => isset($opCliente->id_suspencion) ? $opCliente->id_suspencion : 0,
+		'id_suspencion' => isset($opCliente->id_suspension) ? $opCliente->id_suspension : 0,
 		'producto_id' => isset($opCliente->producto_id) ? $opCliente->producto_id : 0,
 	];
 
@@ -173,7 +174,8 @@ function getClubAndCanasta(){
 			'ingredientes' => getIngredientesCanasta($canasta),
 			'adicionales' => getIngredientesCanasta($adicionalesId),
 			'attr_variation' => getCostoVariationID($opCliente->producto_id),
-			'adicionalesAgregados' => unserialize(getIngredientesAdicionales($opCliente->clineteId))
+			'adicionalesAgregados' => unserialize(getIngredientesAdicionales($opCliente->clineteId)),
+			'suspension' => getSuspensionCanastas($opCliente->clineteId)
 		];
 	}else{
 		$clubCanasta = (object) [];
@@ -227,6 +229,65 @@ function getCostoVariationID($variant_id){
 		'temporalidad' => $attr['attribute_pa_temporalidad'],
 		'costo' => $var->regular_price,
 		'costoSemanal' => $costo
+	];
+}
+
+
+/**
+ * SUSPENDER LA CANASTA TEMPORALMENTE
+ * @param  [array] $data [data suspencion]
+ * @return [type]       [description]
+ */
+function suspenderCanastaTemporal($data){
+	extract($data);
+	global $current_user;
+	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+	$fecha_inicio = date('Y-m-d');
+
+	$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
+	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
+	
+	$idSuspension = updateSuspensionCanasta($current_user->ID, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+
+	updateSuspensionOpcionesCliente($current_user->ID, $idSuspension);
+}
+
+/**	
+ * REGRESA LA FECHA PROXIMO COBRO
+ * @param  [date] $proximo_viernes [inicio suspencion]
+ * @param  [int] $tiempoSuspension      [semans de suspencion]
+ * @return [type]                  [description]
+ */
+function getFechaProximoCobro($proximo_viernes, $tiempoSuspension = 1){
+	$fechaCobro = date('Y-m-d',strtotime('+'.$tiempoSuspension.' weeks', strtotime($proximo_viernes)));
+	return $fechaCobro;
+}
+
+/**	
+ * REGRESA LA FECHA FIN DE LA SUSPENCION
+ * @param  [date] $proximo_viernes [inicio suspencion]
+ * @param  [int] $tiempoSuspension      [semans de suspencion]
+ * @return [type]                  [description]
+ */
+function getFechaFinSuspension($proximo_cobro){
+	$fechaFin = date('Y-m-d',strtotime('-1 weeks', strtotime($proximo_cobro)));
+	return $fechaFin;
+}
+
+
+/**	
+ * REGRESA UN ARREGLO CON LA INFORMACION DE LA SUSPENCION
+ * @param  [type] $clineteId [description]
+ * @return [type]            [description]
+ */
+function getSuspensionCanastas($clineteId){
+	$suspension = getDataSuspensionActiva($clineteId);
+	return (object) [
+		'status' => !empty($suspension) ? 1 : 0,
+		'temporalidad' => !empty($suspension) ? $suspension->tiempo_suspension : '',
+		'fechaSuspension' => !empty($suspension) ? $suspension->fecha_inicio_suspension : '',
+		'fechaFin' => !empty($suspension) ? $suspension->fecha_fin_suspension : '',
+		'FechaProximoDescuento' =>!empty($suspension) ? $suspension->fecha_proximo_cobro : '',
 	];
 }
 

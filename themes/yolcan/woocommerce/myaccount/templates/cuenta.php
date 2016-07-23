@@ -14,31 +14,39 @@ global $clubCanasta; ?>
 <!-- SUSPENDER ENTREGAS - FALTA INTEGRAR -->
 <article class="[ padding--bottom border-bottom margin-bottom ]">
     <?php if ($opCliente->suspendido != 1): ?>
-    	<p>Desea <strong>suspender</strong> sus entregas? <small class="[ text-danger ]">** Falta integrar</small></p>
+    	<p>Desea <strong>suspender</strong> sus entregas?</p>
     	
         <form method="post" id="contactus_form" action="">
             <div class="[ margin-bottom--small ]">
-                <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1 semana" checked="checked">
+                <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1" checked="checked">
                 <label for="suspender-1">1 Semana</label>
             </div>
             <div class="[ margin-bottom--small ]">
-                <input id="suspender-2" type="radio" class="input-radio" name="suspension" value="2 semanas">
+                <input id="suspender-2" type="radio" class="input-radio" name="suspension" value="2">
                 <label for="suspender-2">2 Semanas</label>
             </div>
             <div class="[ margin-bottom--small ]">
-                <input id="suspender-3" type="radio" class="input-radio" name="suspension" value="3 Semanas">
+                <input id="suspender-3" type="radio" class="input-radio" name="suspension" value="3">
                 <label for="suspender-3">3 Semanas</label>
             </div>
             <div class="[ margin-bottom--small ]">
-                <input id="suspender-4" type="radio" class="input-radio" name="suspension" value="4 Semanas">
+                <input id="suspender-4" type="radio" class="input-radio" name="suspension" value="4">
                 <label for="suspender-4">4 Semanas</label>
             </div>
+            <input type="hidden" name="action" value="suspender-canasta">
             <input type="submit" name="enviar" id="submit" class="[ btn btn-secondary btn-small ][ margin-bottom ]" value="suspender entrega"/>
         </form>
     <?php endif;
-    if ($opCliente->suspendido == 1): ?>
-        <p>Tus entregas estan suspendidas por: <strong class="[ color-primary ]"><?php echo $opCliente->id_suspencion; ?></strong></p>
+    if ($opCliente->suspendido == 1):
+        $suspension = $clubCanasta->suspension; ?>
+        <p>Tus entregas estan suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension->temporalidad; ?> Semanas</strong></p>
+        <p>Fecha suspensión: <strong> <?php echo getDateTransform($suspension->fechaSuspension); ?></strong>
+        <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
+        <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
+
+
         <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
+
         <a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom--large ]">Reanudar entregas</a>
     <?php endif ?>
         

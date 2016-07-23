@@ -8,7 +8,7 @@ add_action('init', function() use (&$wpdb){
 			producto_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			saldo double(8,2) DEFAULT NULL,
 			suspendido int(11) NOT NULL DEFAULT '0',
-			id_suspencion bigint(20) unsigned NOT NULL DEFAULT '0',
+			id_suspension bigint(20) unsigned NOT NULL DEFAULT '0',
 			fecha_cambio_status date NOT NULL DEFAULT '0000-00-00',
 		
 			UNIQUE KEY `cliente_id` (`cliente_id`)
@@ -19,12 +19,13 @@ add_action('init', function() use (&$wpdb){
 
 add_action('init', function() use (&$wpdb){
 	$wpdb->query(
-		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}suspencion_entregas (
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}suspension_entregas (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
-			status int(11) NOT NULL DEFAULT '0',
-			tiempo_suspencion bigint(20) unsigned NOT NULL DEFAULT '0',
-			fecha_inicio_suspencion date NOT NULL DEFAULT '0000-00-00',
-			fecha_fin_suspencion date NOT NULL DEFAULT '0000-00-00',
+			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			tiempo_suspension bigint(20) unsigned NOT NULL DEFAULT '0',
+			fecha_inicio_suspension date NOT NULL DEFAULT '0000-00-00',
+			fecha_fin_suspension date NOT NULL DEFAULT '0000-00-00',
+			fecha_proximo_cobro date NOT NULL DEFAULT '0000-00-00',
 		
 			UNIQUE KEY `id` (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
@@ -188,4 +189,71 @@ function updateIngredientesAdicionales($data, $clienteId){
 	);
 
 	return true;
+}
+
+/**
+ * GUARDA LA SUSPENCION DE LA CANASTA
+ * @param  [int] $clienteID   [id del cliente]
+ * @param  [int] $suspencion  [semanas de suspencion]
+ * @param  [date] $fechaInicio [fecha en que se suspendio]
+ * @param  [date] $fechaFin    [fecha del proximo descuento]
+ * @return [int]              [id suspencion]
+ */
+function updateSuspensionCanasta($clienteId, $suspension, $fechaInicio, $fechaFin, $fechaProximoCobro){
+	global $wpdb;
+	$wpdb->insert(
+		$wpdb->prefix.'suspension_entregas',
+		array(
+			'cliente_id' => $clienteId,
+			'tiempo_suspension' => $suspension,
+			'fecha_inicio_suspension' => $fechaInicio,
+			'fecha_fin_suspension' => $fechaFin,
+			'fecha_proximo_cobro' => $fechaProximoCobro
+		),
+		array(
+			'%d',
+			'%d',
+			'%s',
+			'%s',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
+}
+
+/**
+ * CAMBIA EL STATUS DE LA SUSPENCION
+ * @param  [type] $clienteId    [description]
+ * @param  [type] $idSuspension [description]
+ * @return [type]               [description]
+ */
+function updateSuspensionOpcionesCliente($clienteId, $idSuspension, $status = 1){
+	global $wpdb;
+	$wpdb->update( 
+		$wpdb->prefix.'opciones_clientes',
+		array( 
+			'suspendido' => $status,
+			'id_suspension' => $idSuspension
+		), 
+		array( 'cliente_id' => $clienteId ), 
+		array( 
+			'%d',
+			'%d'
+		), 
+		array( '%d' ) 
+	);
+
+	return true;
+}
+
+
+function getDataSuspensionActiva($clineteId){
+	global $wpdb;
+
+	return $wpdb->get_row( "SELECT tiempo_suspension, fecha_inicio_suspension, fecha_fin_suspension, fecha_proximo_cobro 
+		FROM {$wpdb->prefix}opciones_clientes as oc
+		INNER JOIN {$wpdb->prefix}suspension_entregas as se
+		ON oc.id_suspension = se.id
+		WHERE oc.cliente_id = $clineteId AND oc.suspendido = 1", OBJECT );
 }
