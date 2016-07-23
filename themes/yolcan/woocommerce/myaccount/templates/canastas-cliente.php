@@ -45,6 +45,8 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 		            		<input type="submit" value="- Eliminar">
 		            	</form>
 		            </small>
+
+		           <small>* <?php echo $ingrediente['periodo']; ?></small>
 		        </li>
 			<?php endforeach;
 		else:

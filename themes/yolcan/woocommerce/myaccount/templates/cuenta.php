@@ -4,7 +4,7 @@ global $clubCanasta; ?>
 <article class="[ padding--bottom margin-bottom ]">
 	<h4>Tu cuenta</h4>
     <p>
-        <?php echo "Tu saldo es de <strong>$ ".number_format($opCliente->saldo)." </strong>"; ?>
+        <?php echo "Tu saldo es de <strong>$ ".$opCliente->saldo." </strong>"; ?>
     </p>
     <?php if ($opCliente->suspendido != 1): ?>
         <p>Fecha próximo corte: <strong> <?php echo getDateTransform(getProximoCorte()); ?></strong></p>

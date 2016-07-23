@@ -3,6 +3,7 @@ global $clubCanasta;
 global $procesoRegistro;
 add_action('get_header', function() {
 	global $current_user;
+	getClientUpdate();
 	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
 	if(isset($_POST['action']) AND $_POST['action'] == 'reanudar-canasta') reanudarCanasta($current_user->ID);
 	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);

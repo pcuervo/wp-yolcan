@@ -34,13 +34,15 @@ add_action('init', function() use (&$wpdb){
 
 add_action('init', function() use (&$wpdb){
 	$wpdb->query(
-		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}decuentos_canastas (
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}corte_canastas (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
-			cantidad bigint(20) unsigned NOT NULL DEFAULT '0',
-			producto_id bigint(20) unsigned NOT NULL DEFAULT '0',
-			adicionales_id bigint(20) unsigned NOT NULL DEFAULT '0',
-			fecha_descuesto date NOT NULL DEFAULT '0000-00-00',
+			saldo_anterior double(8,2) DEFAULT NULL,
+			costo_canasta double(8,2) DEFAULT NULL,
+			variation_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			adicionales longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+			fecha_corte date NOT NULL DEFAULT '0000-00-00',
 			UNIQUE KEY `id` (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 	);
@@ -291,20 +293,45 @@ function getClientesActivos(){
 }
 
 
+/**
+ * ACTUALIZA EL SALDO DEL CLIENTE
+ * @param  [int] $clienteId [cliente id]
+ * @param  [float] $saldo     [saldo]
+ * @return [type]            [description]
+ */
 function updateSaldoCliente($clienteId, $saldo){
 	global $wpdb;
-	$wpdb->update( 
-		$wpdb->prefix.'opciones_clientes',
-		array( 
-			'saldo' => $saldo
-		), 
-		array( 'cliente_id' => $clienteId ), 
-		array( '%f' ), 
-		array( '%d' ) 
+	$wpdb->query("UPDATE {$wpdb->prefix}opciones_clientes 
+		SET saldo = $saldo
+		WHERE cliente_id = $clienteId;"
 	);
-	echo '<pre>';
-	print_r($saldo);
-	echo '</pre>';
+}
 
-	return true;
+
+function saveCanastaAlCorteCliente($data){
+	extract($data);
+	global $wpdb;
+	$wpdb->insert(
+		$wpdb->prefix.'corte_canastas',
+		array(
+			'cliente_id' => $cliente_id,
+			'saldo_anterior' => $saldo_anterior,
+			'costo_canasta' => $costo_canasta,
+			'variation_id' => $variation_id,
+			'club_id' => $club_id,
+			'adicionales' => $adicionales,
+			'fecha_corte' => $fecha_corte,
+		),
+		array(
+			'%d',
+			'%s',
+			'%s',
+			'%d',
+			'%d',
+			'%s',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
 }
