@@ -41,6 +41,8 @@ add_action('init', function() use (&$wpdb){
 			costo_canasta double(8,2) DEFAULT NULL,
 			variation_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			actualizacion_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			canasta_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			adicionales longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
 			fecha_corte date NOT NULL DEFAULT '0000-00-00',
 			UNIQUE KEY `id` (`id`)
@@ -321,6 +323,8 @@ function saveCanastaAlCorteCliente($data){
 			'club_id' => $club_id,
 			'adicionales' => $adicionales,
 			'fecha_corte' => $fecha_corte,
+			'actualizacion_id' => $actualizacion_id,
+			'canasta_id' => $canasta_id
 		),
 		array(
 			'%d',
@@ -329,9 +333,39 @@ function saveCanastaAlCorteCliente($data){
 			'%d',
 			'%d',
 			'%s',
-			'%s'
+			'%s',
+			'%d',
+			'%d'
 		)
 	);
 
 	return $wpdb->insert_id;
+}
+
+/**
+ * REGRESA EL ID DE LA ACTUALIZACION DE LA CANASTA
+ * @param  [int] $clubId [id del clube]
+ * @return [type]                   [description]
+ */
+function getActualizacionCanasta($clubId){
+	global $wpdb;
+	return $wpdb->get_var("SELECT id FROM {$wpdb->prefix}actualizaciones_canasta
+		WHERE club_id = $clubId AND status = 1;"
+	);
+}
+
+
+/**	
+ * REGRESA LA ACTUALIZACION DE LA CANASTA ID ACTIVA
+ * @param  [type] $canastaId [description]
+ * @return [type]            [description]
+ */
+function getActualizacionCanastaID($canastaId){
+	global $wpdb;
+	return $wpdb->get_var("SELECT ac.id FROM sy_actualizaciones_canasta as ac
+		INNER JOIN sy_canasta_relationships as cr
+		ON ac.id = cr.actualizacion_id 
+		WHERE canasta_id = $canastaId AND status = 1
+		GROUP BY ac.id;"
+	);
 }

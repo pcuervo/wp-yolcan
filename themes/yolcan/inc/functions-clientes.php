@@ -3,7 +3,7 @@ global $clubCanasta;
 global $procesoRegistro;
 add_action('get_header', function() {
 	global $current_user;
-	getClientUpdate();
+	// getClientUpdate();
 	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
 	if(isset($_POST['action']) AND $_POST['action'] == 'reanudar-canasta') reanudarCanasta($current_user->ID);
 	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);
@@ -203,6 +203,22 @@ function getIdCanastaClube($clubId, $producto){
 	}
 
 	return $clubId.$producto;
+}
+
+/**	
+ * REGRESA EL ID DE LA AaCTUALIZACION SEGUN LA CANASTA
+ * @param  [int] $clubId   [id del club]
+ * @param  [int] $producto [id del producto]
+ * @return [int]           [id de canasta]
+ */
+function getIdActualizacionCanasta($clubId, $producto, $actualizasionID){
+	$clubesCanastaBase = get_option('clubes_usan_canasta_base');
+
+	if (isset($clubesCanastaBase[$clubId])) {
+		return getActualizacionCanastaID('1'.$producto);
+	}
+
+	return $actualizasionID;
 }
 
 /**

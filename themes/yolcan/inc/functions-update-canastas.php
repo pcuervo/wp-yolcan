@@ -31,9 +31,6 @@ function descontarSaldoClientes(){
 	
 	if (!empty($clientes)) {
 		foreach ($clientes as $key => $cliente) {
-			echo '<pre>';
-			print_r($cliente);
-			echo '</pre>';
 			$variacion = getCostoVariationID($cliente->producto_id);
 			$adicionales = unserialize(getIngredientesAdicionales($cliente->cliente_id));
 
@@ -49,6 +46,10 @@ function descontarSaldoClientes(){
 
 
 function storeCanastaAlCorteCliente($cliente, $variacion, $adicionales){
+	$actualizacionID = getActualizacionCanasta($cliente->club_id);
+	$producto = wp_get_post_parent_id( $cliente->producto_id );
+	$canasta = getIdCanastaClube($cliente->club_id, $producto);
+	$actualizacionId = getIdActualizacionCanasta($cliente->club_id, $producto, $actualizacionID);
 	$arr = [
 		'cliente_id' => $cliente->cliente_id,
 		'saldo_anterior' => $cliente->saldo,
@@ -56,7 +57,9 @@ function storeCanastaAlCorteCliente($cliente, $variacion, $adicionales){
 		'variation_id' => $cliente->producto_id,
 		'club_id' => $cliente->club_id,
 		'adicionales' => serialize($adicionales),
-		'fecha_corte' => date('Y-m-d')
+		'fecha_corte' => date('Y-m-d'),
+		'actualizacion_id' => $actualizacionId,
+		'canasta_id' => $canasta
 	];
 
 	saveCanastaAlCorteCliente($arr);
