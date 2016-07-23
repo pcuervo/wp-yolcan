@@ -38,7 +38,13 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 				$unidad = isset($terms[0]) ? $terms[0]->name : '';?>
 				<li>
 		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
-		            <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small><small class="[ text-danger ]">** Falta integrar el eliminar ingrediente</small>
+		            <small>
+		            	<form action="" method="post" class="form-delete-aditional">
+		            		<input type="hidden" name="adicional_id" value="<?php echo $ingrediente['ingredienteID']; ?>">
+		            		<input type="hidden" name="action" value="delete-aditional">
+		            		<input type="submit" value="- Eliminar">
+		            	</form>
+		            </small>
 		        </li>
 			<?php endforeach;
 		else:

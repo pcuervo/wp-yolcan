@@ -2,6 +2,7 @@
 global $clubCanasta;
 global $procesoRegistro;
 add_action('get_header', function() {
+	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);
 	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
 	if(is_page('mi-cuenta')) checkStatusCliente();
@@ -39,6 +40,22 @@ function setIngredienteAdicional($data){
 	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
 	
 	return editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+}
+
+
+/**
+ * ELIMINAR INGREDIENTES ADICIONALES
+ * @return [type]        [description]
+ */
+function deleteIngredienteAdicional($data){
+	global $current_user;
+	$adicionales = unserialize(getIngredientesAdicionales($current_user->ID) );
+
+	$restar = isset($adicionales['ingredientes'][$data['adicional_id']]['total']) ? $adicionales['ingredientes'][$data['adicional_id']]['total'] : 0;
+	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] - $restar;
+	unset($adicionales['ingredientes'][$data['adicional_id']]);
+
+	updateIngredientesAdicionales(serialize($adicionales), $current_user->ID);
 }
 
 /**
