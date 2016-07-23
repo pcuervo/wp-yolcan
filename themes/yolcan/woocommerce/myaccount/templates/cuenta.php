@@ -44,10 +44,11 @@ global $clubCanasta; ?>
         <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
         <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
 
-
         <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
-
-        <a href="#" class="[ btn btn-secondary btn-small ][ margin-bottom--large ]">Reanudar entregas</a>
+        <form method="post" action="">
+            <input type="hidden" name="action" value="reanudar-canasta">
+            <input type="submit" name="enviar" id="submit" class="[ btn btn-secondary btn-small ][ margin-bottom ]" value="Reanudar entregas"/>
+        </form>
     <?php endif ?>
         
 </article>

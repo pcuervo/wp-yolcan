@@ -2,7 +2,9 @@
 global $clubCanasta;
 global $procesoRegistro;
 add_action('get_header', function() {
-	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST);
+	global $current_user;
+	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
+	if(isset($_POST['action']) AND $_POST['action'] == 'reanudar-canasta') reanudarCanasta($current_user->ID);
 	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);
 	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
@@ -238,18 +240,17 @@ function getCostoVariationID($variant_id){
  * @param  [array] $data [data suspencion]
  * @return [type]       [description]
  */
-function suspenderCanastaTemporal($data){
+function suspenderCanastaTemporal($data, $clientId){
 	extract($data);
-	global $current_user;
 	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
 	$fecha_inicio = date('Y-m-d');
 
 	$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
 	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
 	
-	$idSuspension = updateSuspensionCanasta($current_user->ID, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+	$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
 
-	updateSuspensionOpcionesCliente($current_user->ID, $idSuspension);
+	updateSuspensionOpcionesCliente($clientId, $idSuspension);
 }
 
 /**	
@@ -289,6 +290,11 @@ function getSuspensionCanastas($clineteId){
 		'fechaFin' => !empty($suspension) ? $suspension->fecha_fin_suspension : '',
 		'FechaProximoDescuento' =>!empty($suspension) ? $suspension->fecha_proximo_cobro : '',
 	];
+}
+
+
+function reanudarCanasta($clienteId){
+	updateSuspensionOpcionesCliente($clienteId, 0, 0);
 }
 
 
