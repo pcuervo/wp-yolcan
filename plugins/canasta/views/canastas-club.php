@@ -18,12 +18,13 @@
                     $idCanasta = $idClub.$product->ID;
                     $ingredientes = isset($canastas[$idCanasta]) ? $canastas[$idCanasta] : []; ?>
                     <div class="content-ingredientes bg">
-                        <h3 class="text-center"><?php echo $product->post_title; ?> </h3>
+                        <h3 class="text-center"><?php echo $product->post_title; ?>  </h3>
                         <div class="body-canasta">
                             <ul>
                                 <?php if (!empty($ingredientes)): 
-                                    foreach ($ingredientes as $key => $ingrediente): ?>
-                                        <li>- <?php echo get_the_title($ingrediente->ingrediente_id); ?></li>
+                                    foreach ($ingredientes as $key => $ingrediente):
+                                        $terms = wp_get_post_terms( $ingrediente->ingrediente_id, 'unidades' ); ?>
+                                        <li>- <?php echo get_the_title($ingrediente->ingrediente_id); ?> (<?php echo $ingrediente->cantidad; ?> <?php echo isset($terms[0]) ? $terms[0]->name : ''; ?> )</li>
                                     <?php endforeach;
                                 endif; ?>
                             </ul>
@@ -47,7 +48,7 @@
 
     <hr>
 
-    <!-- CANASTAS PROGRAMADAS -->
+    <!-- CANASTAS PROGRAMADAS
     <h3>Canastas Programadas</h3>
     <?php if (!empty($canastasProgramadas)):
         $canastasP = $canastasProgramadas['canastas']; 
@@ -92,6 +93,6 @@
         <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=programar_canastas&id_club='.$idClub; ?>">
             Programar próxima canasta
         </a>
-   <?php endif; ?>
+   <?php endif; ?> -->
    
 </div>
