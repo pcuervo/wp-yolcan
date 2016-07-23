@@ -231,6 +231,15 @@ function getCostoCanastaTemporalidad($temporalidad, $costo){
 	    case 'semestral':
 	        return $costo / 24;
 	        break;
+	    case 'Mensual':
+	        return $costo / 4;
+	        break;
+	    case 'Trimestral':
+	        return $costo / 12;
+	        break;
+	    case 'Semestral':
+	        return $costo / 24;
+	        break;
 	}
 }
 

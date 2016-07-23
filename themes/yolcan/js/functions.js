@@ -561,10 +561,14 @@
 			var precio = $(this).data('costo');
 			var variacion = $(this).data('variacion');
 			var producto = $(this).data('producto');
+			var semanal = $(this).data('semanal');
+
 			var url = site_url+'mi-carrito/?add-to-cart='+variacion;
 
 			$('.url-add-cart-product-'+producto).attr('href', url);
 			$('.precio-producto-check-'+producto).text('$' + precio);
+			$('.precio-semanal-check-'+producto).text('$' + semanal);
+			
 		});
 
 		// --- VALIDATE ADD PRODUCT ADDITIONAL ---- //
