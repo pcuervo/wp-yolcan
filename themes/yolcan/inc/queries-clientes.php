@@ -362,10 +362,23 @@ function getActualizacionCanasta($clubId){
  */
 function getActualizacionCanastaID($canastaId){
 	global $wpdb;
-	return $wpdb->get_var("SELECT ac.id FROM sy_actualizaciones_canasta as ac
+	return $wpdb->get_var("SELECT ac.id FROM {$wpdb->prefix}actualizaciones_canasta as ac
 		INNER JOIN sy_canasta_relationships as cr
 		ON ac.id = cr.actualizacion_id 
 		WHERE canasta_id = $canastaId AND status = 1
 		GROUP BY ac.id;"
+	);
+}
+
+
+/**	
+ * CAMBIA EL STATUS DE LAS CANASTAS A DESACTIVADAS
+ * @return [type] [description]
+ */
+function updateStatusActualizaciones(){
+	global $wpdb;
+	$wpdb->query("UPDATE {$wpdb->prefix}actualizaciones_canasta 
+		SET status = 0
+		WHERE status = 1"
 	);
 }

@@ -8,17 +8,14 @@
  * 4.- Desactivar suspensiones qeu vensan en la fecha del update
  */
 
-// add_action('get_header', function() {
-// 	// getClientUpdate();
-// });
-
 /**
  * UPDATE CANASTAS
  * @return [type] [description]
  */
 function getClientUpdate(){
 	descontarSaldoClientes();
-	// cambioStatusSuspenciones();
+	nuevasCanastasSemanales();
+	cambioStatusSuspenciones();
 }
 
 
@@ -96,4 +93,63 @@ function cambioStatusSuspenciones(){
 			updateSuspensionOpcionesCliente($cliente->cliente_id, 0, 0);
 		}
 	}
+}
+
+
+function nuevasCanastasSemanales(){
+	$canastas =  method_exists("CanastaModel", "canastasActivas") ? CanastaModel::canastasActivas() : [];
+	$canastas = canastasPorClub($canastas);
+	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas();
+	
+	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [];
+
+	if (!empty($clubes) AND method_exists("CanastaModel", "storeCanasta")) {
+		$canasta = new CanastaModel;
+		$modelIngredientes = function_exists('model') ? model('IngredientesModel') : [];
+		
+		foreach ($clubes as $key => $club) {
+			
+			$actualizacionId = $canasta->storeCanasta($club->ID, 1, '0000-00-00');
+			if(isset($canastas[$club->ID]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+			
+				foreach ($canastas[$club->ID] as $key => $ingrediente) {
+					$canastaID = $ingrediente->canasta_id;
+					$ingredienteId = $ingrediente->ingrediente_id;
+					$cantidad = $ingrediente->cantidad;
+					$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+				}
+
+			}
+			
+		}
+
+		$actualizacionId = $canasta->storeCanasta(1, 1, '0000-00-00');
+		if(isset($canastas[1]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+			
+			foreach ($canastas[1] as $key => $ingrediente) {
+				$canastaID = $ingrediente->canasta_id;
+				$ingredienteId = $ingrediente->ingrediente_id;
+				$cantidad = $ingrediente->cantidad;
+				$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+			}
+
+		}
+
+	}
+}
+
+
+/**	
+ * ORGANIZA LAS CANASTAS POR CLUB
+ * @param  [object] $canastas [todas las canastas]
+ * @return [type]           [description]
+ */
+function canastasPorClub($canastas){
+	$newArr = [];
+	if (!empty($canastas)) {
+		foreach ($canastas as $key => $canasta) {
+			$newArr[$canasta->club_id][] = $canasta;
+		}
+	}
+	return $newArr;
 }
