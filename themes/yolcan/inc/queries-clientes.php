@@ -7,6 +7,7 @@ add_action('init', function() use (&$wpdb){
 			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			producto_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			saldo double(8,2) DEFAULT NULL,
+			costo_semanal_canasta double(8,2) DEFAULT NULL,
 			suspendido int(11) NOT NULL DEFAULT '0',
 			id_suspension bigint(20) unsigned NOT NULL DEFAULT '0',
 			fecha_cambio_status date NOT NULL DEFAULT '0000-00-00',
@@ -78,7 +79,7 @@ function getOpcionesCliente($clienteId){
 /**
  * Actualiza el club de consumo del cliente
  */
-function setOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
+function setOpcionesCliente($clubId, $variation_id, $saldo, $costoSemanalCanasta, $clienteId){
 	global $wpdb;
 	$wpdb->insert(
 		$wpdb->prefix.'opciones_clientes',
@@ -88,7 +89,8 @@ function setOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
 			'saldo' => $saldo,
 			'producto_id' => $variation_id,
 			'club_id' => $clubId,
-			'fecha_cambio_status' => date('Y-m-d')
+			'fecha_cambio_status' => date('Y-m-d'),
+			'costo_semanal_canasta' => $costoSemanalCanasta
 		),
 		array(
 			'%d',
@@ -96,7 +98,8 @@ function setOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
 			'%f',
 			'%d',
 			'%d',
-			'%s'
+			'%s',
+			'%f'
 		)
 	);
 
@@ -106,20 +109,22 @@ function setOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
 /**
  * Actualiza el club de consumo del cliente
  */
-function updateOpcionesCliente($clubId, $variation_id, $saldo, $clienteId){
+function updateOpcionesCliente($clubId, $variation_id, $saldo, $costoSemanalCanasta, $clienteId){
 	global $wpdb;
 	$wpdb->update( 
 		$wpdb->prefix.'opciones_clientes',
 		array( 
 			'club_id' => $clubId,
 			'saldo' => $saldo,
-			'producto_id' => $variation_id
+			'producto_id' => $variation_id,
+			'costo_semanal_canasta' => $costoSemanalCanasta
 		), 
 		array( 'cliente_id' => $clienteId ), 
 		array( 
 			'%d',
 			'%f',
-			'%d'
+			'%d',
+			'%f'
 		), 
 		array( '%d' ) 
 	);

@@ -699,12 +699,12 @@ function call_restaurant($order_id) {
 		foreach ( $items as $item ) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			$opCliente = getOpcionesCliente($user_id);
-
+			$costoSemanal = getCostoVariationID($item['variation_id']);
 	    	if (!empty($opCliente)) {
 	    		$total = $item['line_total'] + $opCliente->saldo;
-	    		updateOpcionesCliente($club, $item['variation_id'], $total, $user_id);
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $user_id);
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $costoSemanal->costoSemanal, $user_id);
 	    	}
 
 		}

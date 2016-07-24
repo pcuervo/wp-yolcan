@@ -141,9 +141,9 @@ function saveClubCliente($clubId){
 	$opCliente = getOpcionesCliente($current_user->ID);
 
 	if (!empty($opCliente)) {
-		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $current_user->ID);
+		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
 	}else{
-		setOpcionesCliente($clubId, 0, 0.00,$current_user->ID);
+		setOpcionesCliente($clubId, 0, 0.00, 0.00, $current_user->ID);
 	}
 	return true;
 }
