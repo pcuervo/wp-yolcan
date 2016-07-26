@@ -49,10 +49,10 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 
 		<?php endif; ?>
 
-		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-6 col-sm-offset-6 ]">
+		<div class="[ row ][ margin-top--large ]">
+			<div class="[ col-xs-12 col-sm-6 col-sm-offset-6 ][ bg-gray-lighter ][ padding--top--large margin-bottom--large ]">
 
-				<h3 id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+				<h3 class="[ padding--left--small ]" id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
 
 				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 

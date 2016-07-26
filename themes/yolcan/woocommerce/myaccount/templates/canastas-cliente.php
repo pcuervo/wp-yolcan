@@ -3,7 +3,7 @@ global $opCliente;
 global $clubCanasta;
 
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
-$adicionalesAgregados = $clubCanasta->adicionalesAgregados;
+$adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
 $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0; ?>
 <span id="productos-canasta"></span>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
@@ -11,7 +11,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 	<!-- PROCIMA CANASTA -->
 
 	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal;?></span></h4>
-	<p><?php echo $clubCanasta->producto_name; ?> para el 10 de junio:</p>
+	<p><?php echo isset($clubCanasta->producto_name) ? $clubCanasta->producto_name : ''; ?> para el 10 de junio:</p>
 	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (!empty($clubCanasta->ingredientes)):
@@ -38,7 +38,15 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 				$unidad = isset($terms[0]) ? $terms[0]->name : '';?>
 				<li>
 		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
-		            <small><a class="[ underline ][ color-secondary ]" href="#">eliminar</a></small><small class="[ text-danger ]">** Falta integrar el eliminar ingrediente</small>
+		            <small>
+		            	<form action="" method="post" class="form-delete-aditional">
+		            		<input type="hidden" name="adicional_id" value="<?php echo $ingrediente['ingredienteID']; ?>">
+		            		<input type="hidden" name="action" value="delete-aditional">
+		            		<input type="submit" value="- Eliminar">
+		            	</form>
+		            </small>
+
+		           <small>* <?php echo $ingrediente['periodo']; ?></small>
 		        </li>
 			<?php endforeach;
 		else:

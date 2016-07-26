@@ -1,12 +1,41 @@
 <?php global $opCliente;
 global $clubCanasta;
+global $procesoRegistro;
 add_action('get_header', function() {
+	global $current_user;
+	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
+	if(isset($_POST['action']) AND $_POST['action'] == 'reanudar-canasta') reanudarCanasta($current_user->ID);
+	if(isset($_POST['action']) AND $_POST['action'] == 'delete-aditional') deleteIngredienteAdicional($_POST);
 	if(isset($_POST['action']) AND $_POST['action'] == 'save-additional-ingredient') setIngredienteAdicional($_POST);
 	if(is_page('mi-cuenta') AND isset($_POST['club'])) saveClubCliente($_POST['club']);
 	if(is_page('mi-cuenta')) checkStatusCliente();
 	if(is_page('mi-cuenta')) getClubAndCanasta();
-	getClientDescountPoints();
 });
+
+if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoCliente($_POST);
+
+
+/**
+ * CREA UN NURVO CLIENTE
+ * @param [type] $data [description]
+ */
+function setNuevoCliente($data){
+	global $procesoRegistro;
+	extract($data);
+	$user_id = username_exists( $emailCliente );
+	if ( !$user_id and email_exists($emailCliente) == false ) {
+		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
+		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+		if(!is_wp_error($user_id)){
+		    wp_set_current_user($user_id);
+		    wp_set_auth_cookie($user_id); 
+		    wp_safe_redirect( site_url('/mi-cuenta') );
+   			exit();
+		}
+	} else {
+		$procesoRegistro['error'] = 'El email ya esta en uso';
+	}
+}
 
 /**	
  * ACTUALIZA LOS INGREDIENTES ADICIONALES DEL CLIENTE
@@ -17,6 +46,22 @@ function setIngredienteAdicional($data){
 	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
 	
 	return editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+}
+
+
+/**
+ * ELIMINAR INGREDIENTES ADICIONALES
+ * @return [type]        [description]
+ */
+function deleteIngredienteAdicional($data){
+	global $current_user;
+	$adicionales = unserialize(getIngredientesAdicionales($current_user->ID) );
+
+	$restar = isset($adicionales['ingredientes'][$data['adicional_id']]['total']) ? $adicionales['ingredientes'][$data['adicional_id']]['total'] : 0;
+	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] - $restar;
+	unset($adicionales['ingredientes'][$data['adicional_id']]);
+
+	updateIngredientesAdicionales(serialize($adicionales), $current_user->ID);
 }
 
 /**
@@ -71,7 +116,7 @@ function getCliente($clienteId){
 		'clubId' => isset($opCliente->club_id) ? $opCliente->club_id : '',
 		'saldo' => isset($opCliente->saldo) ? $opCliente->saldo : '0.00',
 		'suspendido' => isset($opCliente->suspendido) ? $opCliente->suspendido : 0,
-		'id_suspencion' => isset($opCliente->id_suspencion) ? $opCliente->id_suspencion : 0,
+		'id_suspencion' => isset($opCliente->id_suspension) ? $opCliente->id_suspension : 0,
 		'producto_id' => isset($opCliente->producto_id) ? $opCliente->producto_id : 0,
 	];
 
@@ -92,7 +137,13 @@ function saveClubCliente($clubId){
 	if ($clubId == '') return false;
 
 	global $current_user;
-	setClubCliente($clubId, $current_user->ID);
+	$opCliente = getOpcionesCliente($current_user->ID);
+
+	if (!empty($opCliente)) {
+		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
+	}else{
+		setOpcionesCliente($clubId, 0, 0.00, 0.00, $current_user->ID);
+	}
 	return true;
 }
 
@@ -128,7 +179,8 @@ function getClubAndCanasta(){
 			'ingredientes' => getIngredientesCanasta($canasta),
 			'adicionales' => getIngredientesCanasta($adicionalesId),
 			'attr_variation' => getCostoVariationID($opCliente->producto_id),
-			'adicionalesAgregados' => unserialize(getIngredientesAdicionales($opCliente->clineteId))
+			'adicionalesAgregados' => unserialize(getIngredientesAdicionales($opCliente->clineteId)),
+			'suspension' => getSuspensionCanastas($opCliente->clineteId)
 		];
 	}else{
 		$clubCanasta = (object) [];
@@ -150,6 +202,22 @@ function getIdCanastaClube($clubId, $producto){
 	}
 
 	return $clubId.$producto;
+}
+
+/**	
+ * REGRESA EL ID DE LA AaCTUALIZACION SEGUN LA CANASTA
+ * @param  [int] $clubId   [id del club]
+ * @param  [int] $producto [id del producto]
+ * @return [int]           [id de canasta]
+ */
+function getIdActualizacionCanasta($clubId, $producto, $actualizasionID){
+	$clubesCanastaBase = get_option('clubes_usan_canasta_base');
+
+	if (isset($clubesCanastaBase[$clubId])) {
+		return getActualizacionCanastaID('1'.$producto);
+	}
+
+	return $actualizasionID;
 }
 
 /**
@@ -175,14 +243,77 @@ function getIdCanastaAdicionalesClube($clubId, $producto){
  * @return [type]             [description]
  */
 function getCostoVariationID($variant_id){
-	$var = new WC_Product_Variation($variant_id);
-	$attr = $var->get_variation_attributes();
-	$costo = getCostoCanastaTemporalidad($attr['attribute_pa_temporalidad'], $var->regular_price);
+	$temporalidad = get_post_meta( $variant_id, 'attribute_pa_temporalidad', true );
+	$regular_price = get_post_meta( $variant_id, '_regular_price', true );
+
+	$costo = getCostoCanastaTemporalidad($temporalidad, $regular_price);
 	return (object) [
-		'temporalidad' => $attr['attribute_pa_temporalidad'],
-		'costo' => $var->regular_price,
+		'temporalidad' => $temporalidad,
+		'costo' => $regular_price,
 		'costoSemanal' => $costo
 	];
+}
+
+/**
+ * SUSPENDER LA CANASTA TEMPORALMENTE
+ * @param  [array] $data [data suspencion]
+ * @return [type]       [description]
+ */
+function suspenderCanastaTemporal($data, $clientId){
+	extract($data);
+	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+	$fecha_inicio = date('Y-m-d');
+
+	$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
+	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
+	
+	$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+
+	updateSuspensionOpcionesCliente($clientId, $idSuspension);
+}
+
+/**	
+ * REGRESA LA FECHA PROXIMO COBRO
+ * @param  [date] $proximo_viernes [inicio suspencion]
+ * @param  [int] $tiempoSuspension      [semans de suspencion]
+ * @return [type]                  [description]
+ */
+function getFechaProximoCobro($proximo_viernes, $tiempoSuspension = 1){
+	$fechaCobro = date('Y-m-d',strtotime('+'.$tiempoSuspension.' weeks', strtotime($proximo_viernes)));
+	return $fechaCobro;
+}
+
+/**	
+ * REGRESA LA FECHA FIN DE LA SUSPENCION
+ * @param  [date] $proximo_viernes [inicio suspencion]
+ * @param  [int] $tiempoSuspension      [semans de suspencion]
+ * @return [type]                  [description]
+ */
+function getFechaFinSuspension($proximo_cobro){
+	$fechaFin = date('Y-m-d',strtotime('-1 weeks', strtotime($proximo_cobro)));
+	return $fechaFin;
+}
+
+
+/**	
+ * REGRESA UN ARREGLO CON LA INFORMACION DE LA SUSPENCION
+ * @param  [type] $clineteId [description]
+ * @return [type]            [description]
+ */
+function getSuspensionCanastas($clineteId){
+	$suspension = getDataSuspensionActiva($clineteId);
+	return (object) [
+		'status' => !empty($suspension) ? 1 : 0,
+		'temporalidad' => !empty($suspension) ? $suspension->tiempo_suspension : '',
+		'fechaSuspension' => !empty($suspension) ? $suspension->fecha_inicio_suspension : '',
+		'fechaFin' => !empty($suspension) ? $suspension->fecha_fin_suspension : '',
+		'FechaProximoDescuento' =>!empty($suspension) ? $suspension->fecha_proximo_cobro : '',
+	];
+}
+
+
+function reanudarCanasta($clienteId){
+	updateSuspensionOpcionesCliente($clienteId, 0, 0);
 }
 
 /**	
@@ -202,13 +333,23 @@ function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 	    case 'semestral':
 	        return $costo / 24;
 	        break;
+	    case 'Mensual':
+	        return $costo / 4;
+	        break;
+	    case 'Trimestral':
+	        return $costo / 12;
+	        break;
+	    case 'Semestral':
+	        return $costo / 24;
+	        break;
 	}
 }
 
+
 /**
- * UPDATE POINTS CLIENT
+ * PROXIMO CORTE PARA TODAS LAS CANASRTAS
  * @return [type] [description]
  */
-function getClientDescountPoints(){
-
+function getProximoCorte(){
+	return date("Y-m-d",strtotime("next Friday"));
 }

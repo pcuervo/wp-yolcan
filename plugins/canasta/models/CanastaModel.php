@@ -69,6 +69,29 @@ class CanastaModel {
 	}
 
 	/**
+	 * REGRESA TODAS LAS CANASTAS ACTIVAS CON SUS INGREDIENTES
+	 * @return [type] [description]
+	 */
+	static function canastasActivas(){
+		global $wpdb;
+		return $wpdb->get_results( "SELECT club_id, canasta_id, ingrediente_id, cantidad
+			FROM {$wpdb->prefix}actualizaciones_canasta as ac
+			INNER JOIN {$wpdb->prefix}canasta_relationships as cr
+			ON ac.id = cr.actualizacion_id 
+			WHERE status = 1;
+		", OBJECT );
+	}
+
+
+	static function desactivarCanastas(){
+		global $wpdb;
+		$wpdb->query("UPDATE {$wpdb->prefix}actualizaciones_canasta 
+			SET status = 0
+			WHERE status = 1"
+		);
+	}
+
+	/**
 	 * GUARDA LA ACTUALIZACION DE LA CANASTA
 	 * @param  [int] $puntos_completa [puntos de canasat completa]
 	 * @param  [int] $puntos_mitad    [puntos de la mitad de la canasta]
@@ -132,5 +155,6 @@ class CanastaModel {
 		  	array( '%d' ) 
 		);
 	}
+
 
 }

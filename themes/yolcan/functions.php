@@ -1,7 +1,6 @@
 <?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
 
-
 global $result;
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
@@ -146,6 +145,8 @@ require_once('inc/queries.php');
 require_once('inc/queries-clientes.php');
 
 require_once('inc/functions-clientes.php');
+
+require_once('inc/functions-update-canastas.php');
 
 require_once('inc/functions-newsletter.php');
 
@@ -620,6 +621,16 @@ function remove_unnecessary_fields( $fields ){
 			$fields['billing'][$key]['required'] = true;
 			continue;
 		}
+
+		if( 'billing_address_1' == $key || 'billing_city' == $key || 'billing_state' == $key || 'billing_country' == $key ) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
+
+		if( 'billing_postcode' == $key || 'billing_phone' == $key) {
+			$fields['billing'][$key]['required'] = true;
+			continue;
+		}
 		$fields['billing'][$key]['required'] = false;
 		array_push( $fields['billing'][$key]['class'], '[ hidden ]');
 	}
@@ -644,7 +655,13 @@ function order_fields($fields) {
         "billing_first_name",
         "billing_last_name",
         "billing_email",
-        "billing_consumer_club"
+        "billing_consumer_club",
+        "billing_address_1",
+        "billing_city",
+        'billing_state',
+        "billing_country",
+        "billing_postcode",
+        "billing_phone"
     );
     foreach($order as $field)
     {
@@ -658,21 +675,38 @@ add_action( 'woocommerce_checkout_update_order_meta', 'save_extra_checkout_field
 function save_extra_checkout_fields( $order_id, $posted ){
     if( isset( $posted['billing_consumer_club'] ) ) {
     	global $current_user;
-    	$opCliente = getOpcionesCliente($current_user->ID);
-
-    	if (!empty($opCliente)) {
-    		updateClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
-    	}else{
-    		setClubCliente(sanitize_text_field( $posted['billing_consumer_club'] ), $current_user->ID);
-    	}
-		
+    	update_user_meta( $current_user->ID, 'club_proximo', $posted['billing_consumer_club'] );
     }
 }
 
-add_filter( 'woocommerce_form_field_args', 'style_fields', 5 );
-function style_fields( $args ){
-	// echo '<pre>';
-	// var_dump( $args );
-	// echo '</pre>';
-	return $args;
+function mysite_woocommerce_payment_complete( $order_id ) {
+	$order = new WC_Order($order_id);
+	$order->update_status('completed');
+}
+add_action( 'woocommerce_payment_complete', 'mysite_woocommerce_payment_complete' );
+
+
+add_action('woocommerce_order_status_completed', 'call_restaurant');
+
+function call_restaurant($order_id) {
+	$order = new WC_Order( $order_id );
+	$customer = new WC_Customer( $order_id );
+	
+	$items = $order->get_items();
+	$user_id =  get_post_meta( $order->post->ID, '_customer_user', true );
+
+	if(!empty($items)){
+		foreach ( $items as $item ) {
+			$club = get_user_meta($user_id,  'club_proximo', true );
+			$opCliente = getOpcionesCliente($user_id);
+			$costoSemanal = getCostoVariationID($item['variation_id']);
+	    	if (!empty($opCliente)) {
+	    		$total = $item['line_total'] + $opCliente->saldo;
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
+	    	}else{
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $costoSemanal->costoSemanal, $user_id);
+	    	}
+
+		}
+	}	
 }

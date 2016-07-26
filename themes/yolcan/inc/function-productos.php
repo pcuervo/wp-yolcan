@@ -17,4 +17,13 @@ function getNameVariation($variationId){
 	        break;
 	}
 }
+
+function getNameOriginVariation($variationId){
+	$variation = wc_get_product($variationId);
+	$format = $variation->get_formatted_name();
+	$porciones = explode(" ", $format);
+	
+	return $porciones[6];
+}
+
  
