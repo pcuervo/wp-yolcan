@@ -44,6 +44,26 @@ if (isset($_GET['page']) AND $_GET['page'] == 'proximos_caducar'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("proximosCaducar", "Cliestes Próximos a caducar", "proximos_caducar");' ) );
 }
 
+if (isset($_GET['page']) AND $_GET['page'] == 'saldo_insuficiente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("saldoInsuficiente", "Saldo Insuficiente", "saldo_insuficiente");' ) );
+}
+
 if (isset($_GET['page']) AND $_GET['page'] == 'por_club'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clubes", "Cliestes por Club", "por_club");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'cliente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("cliente", "Cliente", "cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'editar_cliente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("editarCliente", "Editar cliente", "editar_cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'update_cliente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("updateCliente", "Update cliente", "update_cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'reanudar_entrega'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("reanudarEntregas", "Reanudar entregas cliente", "reanudar_entrega");' ) );
+} 
