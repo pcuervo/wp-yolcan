@@ -185,14 +185,13 @@ function getCostoVariationID($variant_id){
 	];
 }
 
-
 /**	
  * COSTO SEMANAL DE LA CANASTA SEGUN LA TEMPORALIDAD
  * @param  [int] $temporalidad [temporalidad de la compra]
  * @param  [int] $costo        [costo de la canasta]
  * @return [int]               [costo semanal de la canasta]
  */
-function getCostoCanastaTemporalidad($temporalidad, $costo){
+function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 	switch ($temporalidad) {
 	    case 'mensual':
 	        return $costo / 4;
