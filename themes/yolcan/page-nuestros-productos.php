@@ -43,7 +43,9 @@ the_post(); ?>
                         $variations = $producto->get_available_variations(); 
                         $addToCart = '';
                         $costoVariationSemanal = 0;
-                        $costoTotal = 0; ?>
+                        $costoTotal = 0;
+                        $imagen = attachment_image_url(get_the_ID(), 'img_productos');
+                        $imagen_prod = $imagen != '' ? $imagen : ''; ?>
                         <article class="[ col-xs-12 col-sm-4 ]">
                             <div class="[ card ]">
                                 <div class="[ card__header ]">
@@ -51,7 +53,7 @@ the_post(); ?>
                                         <h5 class="[ card__subtitle ]">para 1 persona</h5>
                                 </div>
                                 <div class="[ card__image ]">
-                                        <img class="[ img-responsive ]" src="https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?crop=entropy&dpr=2&fit=crop&fm=jpg&h=200&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=300">
+                                        <img class="[ img-responsive ]" src="<?php echo $imagen; ?>">
                                 </div>
                                 <div class="[ card__footer ]">
 
