@@ -368,7 +368,7 @@ function getActualizacionCanasta($clubId){
 function getActualizacionCanastaID($canastaId){
 	global $wpdb;
 	return $wpdb->get_var("SELECT ac.id FROM {$wpdb->prefix}actualizaciones_canasta as ac
-		INNER JOIN sy_canasta_relationships as cr
+		INNER JOIN {$wpdb->prefix}canasta_relationships as cr
 		ON ac.id = cr.actualizacion_id 
 		WHERE canasta_id = $canastaId AND status = 1
 		GROUP BY ac.id;"
