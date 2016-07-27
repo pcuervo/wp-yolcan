@@ -43,7 +43,12 @@
 			      	  	  			$check = isset($ingrdientesCheck[$idCanasta][$ingrediente['ID']]) ? 'checked' : ''; ?>
 			      	  	  			<td>
 			      	  	  				<input type="checkbox" name="ingredientes_canastas[ingredientes][<?php echo $idCanasta; ?>][]" value="<?php echo $ingrediente['ID']; ?>" <?php echo $check; ?>>
-			      	  	  				<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+
+			      	  	  				<?php if($producto->ID != 1): ?>
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+										<?php else: ?>
+			      	  	  					<input type="hidden" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  				<?php endif; ?>
 			      	  	  			</td>
 			      	  	  			
 			      	  	  		<?php endforeach;
