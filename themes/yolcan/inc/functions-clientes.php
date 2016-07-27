@@ -254,7 +254,6 @@ function getCostoVariationID($variant_id){
 	];
 }
 
-
 /**
  * SUSPENDER LA CANASTA TEMPORALMENTE
  * @param  [array] $data [data suspencion]
@@ -317,14 +316,13 @@ function reanudarCanasta($clienteId){
 	updateSuspensionOpcionesCliente($clienteId, 0, 0);
 }
 
-
 /**	
  * COSTO SEMANAL DE LA CANASTA SEGUN LA TEMPORALIDAD
  * @param  [int] $temporalidad [temporalidad de la compra]
  * @param  [int] $costo        [costo de la canasta]
  * @return [int]               [costo semanal de la canasta]
  */
-function getCostoCanastaTemporalidad($temporalidad, $costo){
+function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 	switch ($temporalidad) {
 	    case 'mensual':
 	        return $costo / 4;

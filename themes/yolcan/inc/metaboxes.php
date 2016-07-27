@@ -17,7 +17,6 @@ add_action('add_meta_boxes', function(){
     add_meta_box( 'meta-box-precio_ingrediente', 'Precio', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
-
 	if ($post->post_name == 'visitanos'){
 		add_meta_box( 'meta-box-datos_visita', 'Datos visitas', 'show_metabox_datos_visita', 'page', 'side', 'high');
 	}
