@@ -67,3 +67,12 @@ if (isset($_GET['page']) AND $_GET['page'] == 'update_cliente'){
 if (isset($_GET['page']) AND $_GET['page'] == 'reanudar_entrega'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("reanudarEntregas", "Reanudar entregas cliente", "reanudar_entrega");' ) );
 } 
+
+if (isset($_GET['page']) AND $_GET['page'] == 'historial_cliente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("historialCanastas", "Historial cliente", "historial_cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'ingredientes_canasta_cliente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("ingredientesCanasta", "Historial cliente", "ingredientes_canasta_cliente");' ) );
+}
+

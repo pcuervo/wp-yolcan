@@ -176,7 +176,8 @@ class CanastaModel {
 	 * @param  integer $limit        [limite de actualizaciones]
 	 * @return [object]                [ultimas actualizaciones]
 	 */
-	public function getHistorialCanastasByClub($idClub, $limit = 20){
+	public function getHistorialCanastasByClub($idClub, $limit = 20)
+	{
 		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}actualizaciones_canasta
 			WHERE club_id = $idClub
 			ORDER BY id DESC
