@@ -225,7 +225,8 @@ class CanastaController {
 	 * CONFIGURACION DE LA CANASTA BASE
 	 * @return [type] [description]
 	 */
-	public function configCanastaBase(){
+	public function configCanastaBase()
+	{
 		if(! empty($this->dataPost)) $this->updateConfigCanastaBase($this->dataPost);
 		return view('config-canasta-base', [
 			'titulo' => 'Configuración canasta base',
@@ -238,7 +239,8 @@ class CanastaController {
 	/**
 	 * GUARDA LA CONFIGURACION DE CANASTA BASE
 	 */
-	public function updateConfigCanastaBase($dataPost){
+	public function updateConfigCanastaBase($dataPost)
+	{
 		$optionName = 'clubes_usan_canasta_base';
 		$newValue = $dataPost['clubes'];
 
@@ -249,6 +251,42 @@ class CanastaController {
 		    $autoload = 'no';
 		    add_option( $optionName, $newValue, $deprecated, $autoload );
 		}
+	}
+
+
+	/**
+	 * HISTORIAL DE CANASTAS
+	 * @return [type] [description]
+	 */
+	public function historialCanasta()
+	{
+		$mCanasta = model('CanastaModel');
+		return view('historial-canastas', [
+			'titulo' => 'Historial de canastas',
+			'clubId' => $this->idClub,
+			'historial' => $mCanasta->getHistorialCanastasByClub($this->idClub)
+		]);
+	}
+
+	/**
+	 * INGREDIENTES DE CANASTAS
+	 * @return [type] [description]
+	 */
+	public function showCanastas()
+	{
+		$idActualizacion = isset($_GET['id_actualización']) ? $_GET['id_actualización'] : 0;
+
+		$productos = model('ProductosModel');
+		$mCanasta = model('CanastaModel');
+		$canastas = getGroupCanastas($mCanasta->getCanastasClubByActualizacion($idActualizacion));
+
+		return view('canastas-club', [
+			'idClub' => $this->idClub,
+			'productos' => array_merge( $productos->productos(), getObjetAdicionales() ),
+			'canastasActivas' => $canastas,
+			'historial' => TRUE
+		]);
+		
 	}
 
 }

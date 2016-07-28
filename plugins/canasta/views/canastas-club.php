@@ -2,15 +2,33 @@
     <h1>
         <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
     </h1>
-    <h3>Canastas Activas</h3>
+    <?php if (!isset($historial)): ?>
+        <h3>Canastas Activas</h3>
+    <?php endif; ?>
     
     <!-- CANASTAS ACTIVAS -->
     <?php if (!empty($canastasActivas)):
         $canastas = $canastasActivas['canastas']; 
-        $actualizacion = $canastasActivas['actualizacion']; ?>
-        <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=editar_canastas&id_club='.$idClub; ?>">
-            Editar canastas
-        </a><br><br>
+        $actualizacion = $canastasActivas['actualizacion'];
+        if (!isset($historial)): ?>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=canasta'; ?>">
+                << Regresar clubes
+            </a>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=editar_canastas&id_club='.$idClub; ?>">
+                Editar canastas
+            </a>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+                Ver historial canastas
+            </a><br><br>
+        <?php else: ?>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+                Regresar historial de canastas
+            </a><br><br>
+        <?php endif; ?>
+        <p>
+            <strong>Fecha de creación:</strong> <?php echo getDateTransformFormat($actualizacion->fecha_creacion); ?><br>
+            <strong>Fecha de aplicación:</strong> <?php echo getCorteCanasta($actualizacion->fecha_creacion); ?><br>
+        </p>
         <div class="content-canastas">
             <?php if (!empty($productos)): 
 
@@ -40,6 +58,9 @@
 
         <div class="mensaje mensaje-error">No tiene canastas activas</div>
         <br>
+        <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+            Regresar historial de canastas
+        </a>
         <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=crear_canastas&id_club='.$idClub; ?>">
             Crear primera canasta
         </a>

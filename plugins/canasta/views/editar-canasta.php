@@ -3,12 +3,12 @@
 	<h3>
         <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
     </h3>
-	<?php if($idClub == 0): ?>
-		<div class="update-nag">
-			IMPORTANTE!. Al actualizar ó crear las siguientes canastas, se actualizarán todas las canastas de los clubes con los mismos ingredientes
-		</div>
-	<?php endif; ?>
+	
 	<hr>
+	<a class="button-primary"  href="<?php echo admin_url().'admin.php?page=canastas_club&id_club='.$idClub; ?>">
+        << Regresar
+    </a>
+    <br><br>
 	<form action="<?php echo admin_url().'admin.php?page='.$action.'_canastas&id_club='.$idClub; ?>" method="POST">
 
 		<?php $actualizacion = isset($ingredientesCanastas['actualizacion']) ? $ingredientesCanastas['actualizacion'] : []; 
