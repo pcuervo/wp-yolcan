@@ -199,39 +199,11 @@
 						<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
 							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
-						<h2 class="[ text-center color-dark ][ no-margin--top ]">Canasta mediana</h2>
-						<div class="[ row ]">
-							<?php $ingredientes = new WP_Query( array('posts_per_page' => 10, 'post_type' => array( 'ingredientes' ), 'orderby' => 'rand' ) );
-							if ( $ingredientes->have_posts() ) :
-								while ( $ingredientes->have_posts() ) :
-									$ingredientes->the_post();?>
-									<div class="[ col-xs-3 col-md-2 ]">
-										<a class="[ box-content ]" href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name; ?>">
-											<?php $url_img = attachment_image_url($post->ID, 'medium'); ?>
-											<img class="[ image-responsive ]" alt="" src="<?php echo $url_img; ?>">
-											<p class="[ text-center ]"><?php the_title(); ?></p>
-										</a>
-									</div>
-								<?php endwhile;
-							endif; ?>
+						<div id="content-ingredientes-canasta">
+							
+							
 						</div>
-						<div class="[ card__radio-options ][ text-center color-dark ]">
-							<div class="[ radio-options__label ]">
-								Entregas semanales durante:
-							</div>
-							<label class="[ radio-options__selector__label ]" for="c9_meals">
-								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c9"> 1 mes
-							</label>
-							<label class="[ radio-options__selector__label ]" for="c10_meals">
-								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c10"> 3 meses
-							</label>
-							<label class="[ radio-options__selector__label ]" for="c12_meals">
-								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c12" checked=""> 6 meses
-							</label>
-						</div>
-						<form class="[ card__form ][ text-center ]" action="">
-							<button type="submit" class="[ btn btn-secondary ]">Seleccionar</button>
-						</form>
+						
 					</div><!-- end modal-body -->
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->

@@ -104,7 +104,7 @@ the_post(); ?>
                                             </span>
                                         </div>
                                     </div>
-                                    <button type="button" data-toggle="modal" data-target="#ingredientes" class="[ btn btn-link ][ width-100 block ]">Ver ingredientes</button>
+                                    <button type="button"  data-producto="<?php echo get_the_ID(); ?>" class="[ btn btn-link ][ width-100 block ] [ btn-ingredientes-producto ]">Ver ingredientes</button>
 
                                     <?php if ( $product->is_in_stock() ) : ?>
                                     <div class="text-center">
