@@ -3320,6 +3320,18 @@ input[type="radio"]:checked + label span {
 .select-club tr:nth-child(even) {
   background-color: #dddddd;
 }
+.form-delete-aditional {
+  display: inline-block;
+}
+.form-delete-aditional input[type="submit"] {
+  font-size: 15px;
+  padding: 2px;
+  margin-bottom: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #b14464;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
@@ -8434,6 +8446,9 @@ header {
     height: 130px;
   }
 }
+header a {
+  cursor: pointer;
+}
 .width-logo {
   width: 180px;
 }
@@ -8705,17 +8720,3 @@ footer h3 {
   margin: 0;
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
-.form-delete-aditional{
-  display: inline-block;
-}
-
-.form-delete-aditional input[type="submit"]{
-    font-size: 15px;
-    padding: 2px;
-    margin-bottom: 0;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    color: #b14464;
-  }
