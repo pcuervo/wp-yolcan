@@ -3336,6 +3336,9 @@ input[name=adicional-periodo],
 input[name=suspension] {
   display: none!important;
 }
+.bg-primary-darken form.login .parsley-required {
+  color: #3ac6b1;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
