@@ -24,7 +24,7 @@ class ClientesModel {
 		if ($club != 0) {
 			$ext .= ' AND club_id = '.$club;
 		}
-		return $this->_wpdb->get_results( "SELECT oc.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%') as um
+		return $this->_wpdb->get_results( "SELECT oc.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
 			INNER JOIN {$this->_prefix}opciones_clientes as oc
 			ON um.user_id = oc.cliente_id
 			WHERE suspendido = 0 $ext
@@ -39,7 +39,7 @@ class ClientesModel {
 	 */
 	public function getClientesInactivos(){
 		return $this->_wpdb->get_results( "SELECT user_id as cliente_id FROM {$this->_prefix}usermeta 
-			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%' AND user_id NOT IN (SELECT cliente_id FROM {$this->_prefix}opciones_clientes)", 
+			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%' AND user_id NOT IN (SELECT cliente_id FROM {$this->_prefix}opciones_clientes)", 
 	 	 OBJECT );
 	}
 
@@ -51,7 +51,7 @@ class ClientesModel {
 		if ($club != 0) {
 			$ext .= ' AND club_id = '.$club;
 		}
-		return $this->_wpdb->get_results( "SELECT oc.*, se.tiempo_suspension, se.fecha_inicio_suspension as fecha_suspension, se.fecha_proximo_cobro  FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%') as um
+		return $this->_wpdb->get_results( "SELECT oc.*, se.tiempo_suspension, se.fecha_inicio_suspension as fecha_suspension, se.fecha_proximo_cobro  FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
 			INNER JOIN {$this->_prefix}opciones_clientes as oc
 			ON um.user_id = oc.cliente_id
 			LEFT JOIN {$this->_prefix}suspension_entregas as se
@@ -69,7 +69,7 @@ class ClientesModel {
 		if ($club != 0) {
 			$ext .= ' WHERE club_id = '.$club;
 		}
-		return $this->_wpdb->get_results( "SELECT oc.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%') as um
+		return $this->_wpdb->get_results( "SELECT oc.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
 			INNER JOIN {$this->_prefix}opciones_clientes as oc
 			ON um.user_id = oc.cliente_id $ext
 			HAVING saldo >= costo_semanal_canasta AND saldo < dos_semanas;", 
@@ -86,7 +86,7 @@ class ClientesModel {
 		if ($club != 0) {
 			$ext .= ' WHERE club_id = '.$club;
 		}
-		return $this->_wpdb->get_results( "SELECT oc.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%') as um
+		return $this->_wpdb->get_results( "SELECT oc.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
 			INNER JOIN {$this->_prefix}opciones_clientes as oc
 			ON um.user_id = oc.cliente_id $ext
 			HAVING saldo < costo_semanal_canasta;", 
@@ -99,7 +99,7 @@ class ClientesModel {
 	 * @return [type] [description]
 	 */
 	public function getCountClientesPorClub(){
-		return $this->_wpdb->get_results( "SELECT club_id, count(club_id) as total FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%cliente%') as um
+		return $this->_wpdb->get_results( "SELECT club_id, count(club_id) as total FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
 			INNER JOIN {$this->_prefix}opciones_clientes as oc
 			ON um.user_id = oc.cliente_id
 			GROUP BY club_id;", 

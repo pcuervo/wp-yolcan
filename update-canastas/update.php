@@ -11,5 +11,6 @@
  */
 
 require("../../wp-load.php");
+error_log('running cron...');
 
 getClientUpdate();
