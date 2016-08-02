@@ -561,10 +561,23 @@
 			var precio = $(this).data('costo');
 			var variacion = $(this).data('variacion');
 			var producto = $(this).data('producto');
+			var semanal = $(this).data('semanal');
+
 			var url = site_url+'mi-carrito/?add-to-cart='+variacion;
 
 			$('.url-add-cart-product-'+producto).attr('href', url);
 			$('.precio-producto-check-'+producto).text('$' + precio);
+			$('.precio-semanal-check-'+producto).text('$' + semanal);
+			
+		});
+
+		$(document).on('click', '.check-compra-modal', function(){
+			var variacion = $(this).data('variacion');
+			var producto = $(this).data('producto');
+
+			var url = site_url+'mi-carrito/?add-to-cart='+variacion;
+
+			$('.url-add-cart-product-modal-00'+producto).attr('href', url);
 		});
 
 		// --- VALIDATE ADD PRODUCT ADDITIONAL ---- //
@@ -588,6 +601,56 @@
 			
 		});
 
+		$('.btn-ingredientes-producto').on('click', function(){
+			var producto = $(this).attr('data-producto');
+			$.post(ajax_url,{
+				producto : producto,
+				action   : 'ajax_html_ingredientes_producto'
+			}, 'json')
+			.done(function (data){
+				$('#content-ingredientes-canasta').empty().html(data);
+				$('#ingredientes').modal('show');
+			});
+
+		});
+
+		/** FILTER **/
+
+		var $grid = $('.grid').isotope({
+		  	itemSelector: '.element-item',
+		  	layoutMode: 'fitRows'
+		});
+
+
+		$('.filter-ingrediente').on('click', function() {
+			if($(this).hasClass('active-ing')){
+				$(this).removeClass('active-ing');
+			}else{
+				// var filterValue = $( this ).attr('data-filter');
+		  // 		$grid.isotope({ filter: filterValue });
+		  		$(this).addClass('active-ing');
+			}
+
+			getFilterCombo();
+
+		});
+
+		function getFilterCombo(){
+			var ingredientes = $('.active-ing');
+			var filters = '';
+			$.each(ingredientes, function( index, value ) {
+			  	// var filt = $value.attr('data-filter');
+			  	// console.log(value.getAttribute('data-filter'));
+			  	if(index == 0){
+			  		filters += value.getAttribute('data-filter');
+			  	}else{
+			  		filters += ', '+value.getAttribute('data-filter');
+			  	}
+			});
+			$grid.isotope({ filter: filters });
+			console.log(filters);
+		}
+		
 	});
 
 })(jQuery);

@@ -41,7 +41,11 @@ the_post(); ?>
                     while ( $productos->have_posts() ) : $productos->the_post();
                         $producto = wc_get_product( get_the_ID() );
                         $variations = $producto->get_available_variations(); 
-                         ?>
+                        $addToCart = '';
+                        $costoVariationSemanal = 0;
+                        $costoTotal = 0;
+                        $imagen = attachment_image_url(get_the_ID(), 'img_productos');
+                        $imagen_prod = $imagen != '' ? $imagen : ''; ?>
                         <article class="[ col-xs-12 col-sm-4 ]">
                             <div class="[ card ]">
                                 <div class="[ card__header ]">
@@ -49,7 +53,7 @@ the_post(); ?>
                                         <h5 class="[ card__subtitle ]">para 1 persona</h5>
                                 </div>
                                 <div class="[ card__image ]">
-                                        <img class="[ img-responsive ]" src="https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?crop=entropy&dpr=2&fit=crop&fm=jpg&h=200&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=300">
+                                        <img class="[ img-responsive ]" src="<?php echo $imagen; ?>">
                                 </div>
                                 <div class="[ card__footer ]">
 
@@ -58,43 +62,53 @@ the_post(); ?>
                                                 Entregas semanales durante:
                                         </div>
                                         <?php if (!empty($variations)):
+                                        $count = 1;
                                             foreach($variations as $variation):
-                                                $name = getNameVariation($variation['variation_id']); ?>
+                                                $name = getNameVariation($variation['variation_id']);
+                                                $check = $count == 1 ? 'checked' : '';
+                                                $nombreVariacion = getNameOriginVariation($variation['variation_id']);
+                                                $cansatSemanal = getCostoCanastaTemporalidad($nombreVariacion, $variation['display_price']);
+                                                if($count == 1): 
+                                                    $addToCart = site_url('/mi-carrito/?add-to-cart=').$variation['variation_id'];
+                                                    $costoVariationSemanal = $cansatSemanal;
+                                                    $costoTotal = $variation['display_price'];
+                                                endif; ?>
                                                 <label class="[ radio-options__selector__label ]" for="c9_meals-<?php echo $variation['variation_id']; ?>">
                                                     <input 
                                                         id="c9_meals-<?php echo $variation['variation_id']; ?>" 
                                                         data-costo="<?php echo number_format($variation['display_price']); ?>"
                                                         data-producto="<?php echo get_the_ID(); ?>"
                                                         data-variacion="<?php echo $variation['variation_id']; ?>"
+                                                        data-semanal="<?php echo $cansatSemanal; ?>"
                                                         class="[ radio-options__selector ][ check-compra ]" 
                                                         type="radio" 
-                                                        name="entregas" 
+                                                        name="variaciones-<?php echo get_the_ID(); ?>" 
                                                         value="c9"
+                                                        <?php echo $check; ?>
                                                     > <?php echo $name; ?>
                                                 </label>
-                                            <?php endforeach;
+                                                <?php $count++; 
+                                            endforeach;
                                         endif; ?>
                                        
                                     </div>
                                     <div class="[ card__price-table ]">
                                         <div class="[ price-table__set ][ clearfix ]">
                                             <span class="[ price-table__text ]">Precio total:</span>
-                                            <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]"></span>
+                                            <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]">$<?php echo number_format($costoTotal) ?></span>
                                         </div>
                                         <div class="[ price-table__set ][ clearfix ]">
                                             <span class="[ price-table__text ]">Precio por canasta:</span>
-                                            <span class="[ price-table__value ]">
-                                                <?php if ($price_html = $product->get_price_html()):
-                                                        echo $price_html;
-                                                endif; ?>
+                                            <span class="[ price-table__value ][ precio-semanal-check-<?php echo get_the_ID(); ?> ]">
+                                                $<?php echo $costoVariationSemanal ?>
                                             </span>
                                         </div>
                                     </div>
-                                    <button type="button" data-toggle="modal" data-target="#ingredientes" class="[ btn btn-link ][ width-100 block ]">Ver ingredientes</button>
+                                    <button type="button"  data-producto="<?php echo get_the_ID(); ?>" class="[ btn btn-link ][ width-100 block ] [ btn-ingredientes-producto ]">Ver ingredientes</button>
 
                                     <?php if ( $product->is_in_stock() ) : ?>
                                     <div class="text-center">
-                                        <a class="[ btn btn-secondary ] url-add-cart-product-<?php echo get_the_ID(); ?>" href="">Añadir al carrito</a>
+                                        <a class="[ btn btn-secondary ] url-add-cart-product-<?php echo get_the_ID(); ?>" href="<?php echo $addToCart; ?>">Añadir al carrito</a>
                                     </div>
                                         
                                     <?php endif; ?>

@@ -1,7 +1,6 @@
 <?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
 
-
 global $result;
 
 // DEFINIR LOS PATHS A LOS DIRECTORIOS DE JAVASCRIPT Y CSS ///////////////////////////
@@ -114,6 +113,7 @@ if ( function_exists('add_theme_support') ){
 if ( function_exists('add_image_size') ){
 
 	add_image_size( 'img_blog', 305, 182, true );
+	add_image_size( 'img_productos', 600, 400, true );
 
 	// cambiar el tamaño del thumbnail
 
@@ -146,6 +146,8 @@ require_once('inc/queries.php');
 require_once('inc/queries-clientes.php');
 
 require_once('inc/functions-clientes.php');
+
+require_once('inc/functions-update-canastas.php');
 
 require_once('inc/functions-newsletter.php');
 
@@ -692,19 +694,18 @@ function call_restaurant($order_id) {
 	$customer = new WC_Customer( $order_id );
 	
 	$items = $order->get_items();
-	$user_id = $order->post->post_author;
+	$user_id =  get_post_meta( $order->post->ID, '_customer_user', true );
 
 	if(!empty($items)){
-		global $current_user;
 		foreach ( $items as $item ) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			$opCliente = getOpcionesCliente($user_id);
-
+			$costoSemanal = getCostoVariationID($item['variation_id']);
 	    	if (!empty($opCliente)) {
 	    		$total = $item['line_total'] + $opCliente->saldo;
-	    		updateOpcionesCliente($club, $item['variation_id'], $total, $user_id);
+	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $user_id);
+	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $costoSemanal->costoSemanal, $user_id);
 	    	}
 
 		}

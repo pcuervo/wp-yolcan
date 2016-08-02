@@ -45,46 +45,23 @@
 				<h3 class="">Filtra nuestras recetas</h3>
 				<div class="[ filter-ingredientes ]">
 					<h4><a class="[ text-center ]" data-filter="ingredientes">Ingredientes</a></h4>
-					<div class="[ row ]">
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c1" name="cc">
-							<label for="c1"><span></span>desayuno largo largo largo orale sí está largo eh de veritas</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c2" name="cc">
-							<label for="c2"><span></span>botana</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c3" name="cc">
-							<label for="c3"><span></span>plato fuerte</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c4" name="cc">
-							<label for="c4"><span></span>sopa</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c5" name="cc">
-							<label for="c5"><span></span>entrada</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c6" name="cc">
-							<label for="c6"><span></span>cena</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c7" name="cc">
-							<label for="c7"><span></span>sandwich</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c8" name="cc">
-							<label for="c8"><span></span>guarnición</label>
-						</div>
-						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-							<input type="checkbox" id="c9" name="cc">
-							<label for="c9"><span></span>postre</label>
-						</div>
+					<div class="[ row ] filters-ingredientes">
+						<?php $ingredientes = new WP_Query( array('posts_per_page' => -1, 'post_type' => array( 'ingredientes' ) ) );
+
+						if ( $ingredientes->have_posts() ) :
+							while ( $ingredientes->have_posts() ) :
+								$ingredientes->the_post(); ?>
+
+								<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+									<input type="checkbox" class="" id="c<?php echo get_the_ID(); ?>" name="cc">
+									<label for="c<?php echo get_the_ID(); ?>" class="filter-ingrediente" data-filter=".ingrediente-<?php echo get_the_ID(); ?>"><span></span><?php echo the_title(); ?>  </label>
+								</div>
+							<?php endwhile;
+						endif; ?>
+						
 					</div>
 				</div><!-- .filter-colecciones -->
-				<div class="[ filter-temporada ]">
+				<!-- <div class="[ filter-temporada ]">
 					<h4><a class="[ text-center ]" data-filter="temporada">Temporada</a></h4>
 					<div class="[ row ]">
 						<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
@@ -165,7 +142,7 @@
 							<label for="c29"><span></span>postre</label>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</article>
 			<article class="[ col-xs-12 col-md-8 ]">
 				<?php

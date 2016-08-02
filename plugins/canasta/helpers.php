@@ -102,3 +102,16 @@ function getObjetAdicionales(){
 	 ];
 	return $adicional;
 }
+
+
+/**
+ * REGRESA LA FECHA PARA APLICAR LA CANASTA
+ * @param  [type] $historia->fecha_creacion [description]
+ * @return [type]                           [description]
+ */
+function getCorteCanasta($fecha_creacion){
+	$dia = date('w',strtotime($fecha_creacion));
+	$proximo_viernes=date ("Y-m-d",strtotime("next Friday", strtotime($fecha_creacion)));
+	
+	return getDateTransformFormat($proximo_viernes);
+}

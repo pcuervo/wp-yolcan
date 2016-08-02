@@ -8705,3 +8705,17 @@ footer h3 {
   margin: 0;
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.form-delete-aditional{
+  display: inline-block;
+}
+
+.form-delete-aditional input[type="submit"]{
+    font-size: 15px;
+    padding: 2px;
+    margin-bottom: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: #b14464;
+  }

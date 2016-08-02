@@ -1,3 +1,4 @@
+<?php global $procesoRegistro;?>
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
 				<section class="[ row ]">
@@ -131,10 +132,15 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
-
-
+		
 		<!-- modal unete -->
-		<div id="unete" class="[ modal fade ]" role="dialog">
+		<?php if(isset($procesoRegistro['error'])): ?>
+			<div id="unete" class="[ modal fade ] in" role="dialog" aria-hidden="false" style="display: block;">
+		<?php else: ?>	
+			<div id="unete" class="[ modal fade ]" role="dialog">
+		<?php endif; 
+		$nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
+		$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
@@ -146,21 +152,25 @@
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
-									<form id="form-unete" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
+									<?php if(isset($procesoRegistro['error'])): ?>
+										<p class="text-danger">El <strong>Email</strong> <?php echo $emailCliente; ?> ya esta en uso.</p>
+									<?php endif; ?>
+									<form id="form-unete" method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+											<input type="text" name="nombreCliente" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio." value="<?php echo $nombreCliente ?>">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+											<input type="email" name="emailCliente" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio." value="<?php echo $emailCliente ?>">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+											<label class="[ sans-serif ][ no-margin ]">Contraseña</label>
+											<input id="password" name="passwordCliente" type="password" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="Favor de ingresar una contraseña.">
 										</div>
+										<input type="hidden" name="action" value="create-client">
 										<div class="[ text-center ]">
-											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]">únete</button>
+											<input type="submit" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ][ margin-bottom ]" value="únete">
 										</div>
 									</form>
 									<div class="[ text-center ]">
@@ -189,39 +199,11 @@
 						<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
 							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
-						<h2 class="[ text-center color-dark ][ no-margin--top ]">Canasta mediana</h2>
-						<div class="[ row ]">
-							<?php $ingredientes = new WP_Query( array('posts_per_page' => 10, 'post_type' => array( 'ingredientes' ), 'orderby' => 'rand' ) );
-							if ( $ingredientes->have_posts() ) :
-								while ( $ingredientes->have_posts() ) :
-									$ingredientes->the_post();?>
-									<div class="[ col-xs-3 col-md-2 ]">
-										<a class="[ box-content ]" href="<?php echo site_url('/recetas/').'?ingrediente='.$post->post_name; ?>">
-											<?php $url_img = attachment_image_url($post->ID, 'medium'); ?>
-											<img class="[ image-responsive ]" alt="" src="<?php echo $url_img; ?>">
-											<p class="[ text-center ]"><?php the_title(); ?></p>
-										</a>
-									</div>
-								<?php endwhile;
-							endif; ?>
+						<div id="content-ingredientes-canasta">
+							
+							
 						</div>
-						<div class="[ card__radio-options ][ text-center color-dark ]">
-							<div class="[ radio-options__label ]">
-								Entregas semanales durante:
-							</div>
-							<label class="[ radio-options__selector__label ]" for="c9_meals">
-								<input id="c9_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c9"> 1 mes
-							</label>
-							<label class="[ radio-options__selector__label ]" for="c10_meals">
-								<input id="c10_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c10"> 3 meses
-							</label>
-							<label class="[ radio-options__selector__label ]" for="c12_meals">
-								<input id="c12_meals" class="[ radio-options__selector ]" type="radio" name="entrega" value="c12" checked=""> 6 meses
-							</label>
-						</div>
-						<form class="[ card__form ][ text-center ]" action="">
-							<button type="submit" class="[ btn btn-secondary ]">Seleccionar</button>
-						</form>
+						
 					</div><!-- end modal-body -->
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->

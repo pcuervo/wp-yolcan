@@ -26,7 +26,7 @@
                 endif; ?>
             </tbody>
         </table>
-
+        <input type="hidden" name="clubes[0]" value="0">
         <input class="button button-primary" type="submit" name="" id="" value="Guardar configuración">
     </form>
 </div>

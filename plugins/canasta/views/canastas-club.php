@@ -2,15 +2,33 @@
     <h1>
         <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
     </h1>
-    <h3>Canastas Activas</h3>
+    <?php if (!isset($historial)): ?>
+        <h3>Canastas Activas</h3>
+    <?php endif; ?>
     
     <!-- CANASTAS ACTIVAS -->
     <?php if (!empty($canastasActivas)):
         $canastas = $canastasActivas['canastas']; 
-        $actualizacion = $canastasActivas['actualizacion']; ?>
-        <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=editar_canastas&id_club='.$idClub; ?>">
-            Editar canastas
-        </a><br><br>
+        $actualizacion = $canastasActivas['actualizacion'];
+        if (!isset($historial)): ?>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=canasta'; ?>">
+                << Regresar clubes
+            </a>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=editar_canastas&id_club='.$idClub; ?>">
+                Editar canastas
+            </a>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+                Ver historial canastas
+            </a><br><br>
+        <?php else: ?>
+            <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+                Regresar historial de canastas
+            </a><br><br>
+        <?php endif; ?>
+        <p>
+            <strong>Fecha de creación:</strong> <?php echo getDateTransformFormat($actualizacion->fecha_creacion); ?><br>
+            <strong>Fecha de aplicación:</strong> <?php echo getCorteCanasta($actualizacion->fecha_creacion); ?><br>
+        </p>
         <div class="content-canastas">
             <?php if (!empty($productos)): 
 
@@ -18,12 +36,13 @@
                     $idCanasta = $idClub.$product->ID;
                     $ingredientes = isset($canastas[$idCanasta]) ? $canastas[$idCanasta] : []; ?>
                     <div class="content-ingredientes bg">
-                        <h3 class="text-center"><?php echo $product->post_title; ?> </h3>
+                        <h3 class="text-center"><?php echo $product->post_title; ?>  </h3>
                         <div class="body-canasta">
                             <ul>
                                 <?php if (!empty($ingredientes)): 
-                                    foreach ($ingredientes as $key => $ingrediente): ?>
-                                        <li>- <?php echo get_the_title($ingrediente->ingrediente_id); ?></li>
+                                    foreach ($ingredientes as $key => $ingrediente):
+                                        $terms = wp_get_post_terms( $ingrediente->ingrediente_id, 'unidades' ); ?>
+                                        <li>- <?php echo get_the_title($ingrediente->ingrediente_id); ?> (<?php echo $ingrediente->cantidad; ?> <?php echo isset($terms[0]) ? $terms[0]->name : ''; ?> )</li>
                                     <?php endforeach;
                                 endif; ?>
                             </ul>
@@ -39,6 +58,9 @@
 
         <div class="mensaje mensaje-error">No tiene canastas activas</div>
         <br>
+        <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=historial_canastas&id_club='.$idClub; ?>">
+            Regresar historial de canastas
+        </a>
         <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=crear_canastas&id_club='.$idClub; ?>">
             Crear primera canasta
         </a>
@@ -47,7 +69,7 @@
 
     <hr>
 
-    <!-- CANASTAS PROGRAMADAS -->
+    <!-- CANASTAS PROGRAMADAS
     <h3>Canastas Programadas</h3>
     <?php if (!empty($canastasProgramadas)):
         $canastasP = $canastasProgramadas['canastas']; 
@@ -92,6 +114,6 @@
         <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=programar_canastas&id_club='.$idClub; ?>">
             Programar próxima canasta
         </a>
-   <?php endif; ?>
+   <?php endif; ?> -->
    
 </div>
