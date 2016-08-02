@@ -175,5 +175,37 @@ class ClientesController {
 		wp_redirect($urlRedirect);
 	}
 	
+	/**
+	 * HISTORIAL DE CANASTAS DEL CLIENTE
+	 * @return [type] [description]
+	 */
+	public function historialCanastas()
+	{
+		$historial = $this->modelClientes->getHistorialCanastas($this->clienteId);
+
+		return viewCliente('historial-cliente', [
+			'historial' => $historial,
+			'clienteId' => $this->clienteId
+		]);
+	}
+
+	/**
+	 * INGREDIENTES DE LA CANASTA DEL CLIENTE
+	 * @return [type] [description]
+	 */
+	public function ingredientesCanasta()
+	{
+		$idActualizacion = isset($_GET['id_actualizacion']) ? $_GET['id_actualizacion'] : 0;
+		$idCanasta = isset($_GET['id_canasta']) ? $_GET['id_canasta'] : 0;
+
+		$ingredientes = $this->modelClientes->getIngredientesCanasta($idCanasta, $idActualizacion);
+		$canasta = $this->modelClientes->getCanastaCliente($this->clienteId, $idActualizacion);
+
+		return viewCliente('ingredientes-canasta', [
+			'ingredientes' => $ingredientes,
+			'canasta' => $canasta,
+			'clienteId' => $this->clienteId
+		]);
+	}
 
 }

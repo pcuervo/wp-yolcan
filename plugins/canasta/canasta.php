@@ -67,3 +67,11 @@ if (isset($_GET['page']) AND $_GET['page'] == 'editar_canastas_programadas'){
 if (isset($_GET['page']) AND $_GET['page'] == 'configuaracion_canasta_base'){
 	add_action( 'admin_menu', create_function( '', 'CanastaController::index("configCanastaBase", "Configuracion canasta base", "configuaracion_canasta_base");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'historial_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("historialCanasta", "Historial de canastas", "historial_canastas");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'ingredientes_canastas'){
+	add_action( 'admin_menu', create_function( '', 'CanastaController::index("showCanastas", "Ingredientes de canastas", "ingredientes_canastas");' ) );
+}

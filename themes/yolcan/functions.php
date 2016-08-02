@@ -113,6 +113,7 @@ if ( function_exists('add_theme_support') ){
 if ( function_exists('add_image_size') ){
 
 	add_image_size( 'img_blog', 305, 182, true );
+	add_image_size( 'img_productos', 600, 400, true );
 
 	// cambiar el tamaño del thumbnail
 

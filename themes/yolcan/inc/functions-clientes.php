@@ -27,6 +27,8 @@ function setNuevoCliente($data){
 		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
 		if(!is_wp_error($user_id)){
+			$wp_user = get_user_by( 'id', $user_id );
+			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id); 
 		    wp_safe_redirect( site_url('/mi-cuenta') );

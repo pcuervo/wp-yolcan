@@ -3,12 +3,13 @@ $producto_id = wp_get_post_parent_id( $cliente->producto_id );
 $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : []; ?>
 <div class="wrap content-cliente">
     <h1>
-        Cliente
+        Cliente - <?php echo $user->user_login; ?>
     </h1>
     <hr>
-    <h2>
-		<?php echo $user->user_login; ?>
-	</h2>
+    <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>">
+        << Regresar perfil
+    </a>
+    <br>
 	<div class="side-cliente">
 		<p><strong>Email:</strong> <?php echo $user->user_email; ?><br>
 		<strong>Club:</strong> <?php echo get_the_title($cliente->club_id); ?></p>

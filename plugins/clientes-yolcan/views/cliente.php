@@ -7,12 +7,13 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : []; ?>
 <div class="wrap content-cliente">
     <h1>
-        Cliente
+        Cliente - <?php echo $user->user_login; ?>
     </h1>
     <hr>
-    <h2>
-		<?php echo $user->user_login; ?>
-	</h2>
+     <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=activos'; ?>">
+        << Regresar clientes
+    </a>
+    <br>
 	<div class="side-cliente">
 		<p><strong>Email:</strong> <?php echo $user->user_email; ?><br>
 		<strong>Club:</strong> <?php echo get_the_title($cliente->club_id); ?></p>
@@ -88,6 +89,7 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 		<?php elseif($cliente->saldo < $variationAttr->costoSemanal): ?>
 			<p>El saldo del cliente es de <strong>$<?php echo $cliente->saldo ?></strong>.<br> Saldo insuficiente para adquirir la próxima canasta.</p>
 		<?php endif; ?>
+		<a href="<?php echo admin_url().'admin.php?page=historial_cliente&id_cliente='.$cliente->cliente_id; ?>" class="button-primary">Historial de canastas</a>
 	</div>
 
 	

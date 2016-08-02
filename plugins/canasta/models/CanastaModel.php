@@ -128,10 +128,24 @@ class CanastaModel {
 	public function getCanastasClub($idClub, $status = 1)
 	{
 		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}actualizaciones_canasta as ac
-		  INNER JOIN {$this->_prefix}canasta_relationships as cr
-		  ON ac.id = cr.actualizacion_id
-		  WHERE club_id = $idClub AND status = $status;", 
-	  OBJECT );
+		  	INNER JOIN {$this->_prefix}canasta_relationships as cr
+		  	ON ac.id = cr.actualizacion_id
+		  	WHERE club_id = $idClub AND status = $status;", 
+	  	OBJECT );
+	}
+
+	/**
+	 * REGRESA LAS CANASTAS DE LA ACTUALIZACIOM
+	 * @param  [int] $idClub [id del club]
+	 * @return [object]      [ingredientes canastas]
+	 */
+	public function getCanastasClubByActualizacion($idActualizacion)
+	{
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}actualizaciones_canasta as ac
+		  	INNER JOIN {$this->_prefix}canasta_relationships as cr
+		  	ON ac.id = cr.actualizacion_id
+		  	WHERE ac.id = $idActualizacion;", 
+	  	OBJECT );
 	}
 
 	/**
@@ -154,6 +168,21 @@ class CanastaModel {
 		 	), 
 		  	array( '%d' ) 
 		);
+	}
+
+	/**
+	 * REGRESA LAS ULTIMAS 20 ACTUALIZACIONES DE LA CANASTA
+	 * @param  integer  $this->idClub [id del club]
+	 * @param  integer $limit        [limite de actualizaciones]
+	 * @return [object]                [ultimas actualizaciones]
+	 */
+	public function getHistorialCanastasByClub($idClub, $limit = 20)
+	{
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}actualizaciones_canasta
+			WHERE club_id = $idClub
+			ORDER BY id DESC
+			LIMIT $limit;", 
+	 	OBJECT );
 	}
 
 
