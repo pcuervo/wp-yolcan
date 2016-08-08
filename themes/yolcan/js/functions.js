@@ -627,8 +627,6 @@
 			if($(this).hasClass('active-ing')){
 				$(this).removeClass('active-ing');
 			}else{
-				// var filterValue = $( this ).attr('data-filter');
-		  // 		$grid.isotope({ filter: filterValue });
 		  		$(this).addClass('active-ing');
 			}
 
@@ -640,8 +638,6 @@
 			var ingredientes = $('.active-ing');
 			var filters = '';
 			$.each(ingredientes, function( index, value ) {
-			  	// var filt = $value.attr('data-filter');
-			  	// console.log(value.getAttribute('data-filter'));
 			  	if(index == 0){
 			  		filters += value.getAttribute('data-filter');
 			  	}else{
