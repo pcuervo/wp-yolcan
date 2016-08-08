@@ -21,10 +21,11 @@
 		/**
 		 * home
 		**/
-		if (is_home == 1 || is_conocenos == 1) {
+		if ( is_home == 1 || is_conocenos == 1 ) {
 			/**
 			 * On ready
 			**/
+            $('#form-unete').parsley();
 
 			$('.js-video-wrapper').fitVids();
 			/**

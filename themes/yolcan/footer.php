@@ -256,9 +256,5 @@
 		</div>
 
 		<?php wp_footer(); ?>
-		<script type="text/javascript">
-			$('#form-unete').parsley();
-		</script>
-
 	</body>
 </html>
