@@ -6,7 +6,6 @@ class CanastaController {
 	public $idClub;
 	public $dataPost;
 
-
 	function __construct() {
 	    $this->modelIngredientes = model('IngredientesModel');
         $this->idClub = isset($_GET['id_club']) ? $_GET['id_club'] : 0;

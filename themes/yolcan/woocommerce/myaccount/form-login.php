@@ -37,17 +37,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 ][ bg-primary-darken ][ margin-top-bottom--large padding ][ color-light ]">
 					<h2><?php _e( 'Login', 'woocommerce' ); ?></h2>
 
-					<form method="post" class="login [ no-border ]">
+					<form method="post" class="login [ no-border ]" data-parsley-validate>
 
 						<?php do_action( 'woocommerce_login_form_start' ); ?>
 
 						<p class="form-row form-row-wide">
 							<label class="[ sans-serif ]" for="username"><?php _e( 'Username or email address', 'woocommerce' ); ?> <span class="required">*</span></label>
-							<input type="text" class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ] " name="username" id="username" value="<?php if ( ! empty( $_POST['username'] ) ) echo esc_attr( $_POST['username'] ); ?>" />
+							<input type="text" class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ] " name="username" id="username" required data-parsley-error-message="El nombre de usuario o email es obligatorio." value="<?php if ( ! empty( $_POST['username'] ) ) echo esc_attr( $_POST['username'] ); ?>" />
 						</p>
 						<p class="form-row form-row-wide">
 							<label class="[ sans-serif ]" for="password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
-							<input class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ]" type="password" name="password" id="password" />
+							<input class="input-text [ form-control no-border-radius color-gray-xlight height-30 bg-light ]" type="password" name="password" id="password" required data-parsley-required-message="Favor de ingresar una contraseña."/>
 						</p>
 
 						<?php do_action( 'woocommerce_login_form' ); ?>
