@@ -50,7 +50,7 @@ the_post(); ?>
                             <div class="[ card ]">
                                 <div class="[ card__header ]">
                                         <h3 class="[ card__title ]"><?php the_title(); ?></h3>
-                                        <h5 class="[ card__subtitle ]">para 1 persona</h5>
+                                        <h5 class="[ card__subtitle ][ hidden ]">para 1 persona</h5>
                                 </div>
                                 <div class="[ card__image ]">
                                         <img class="[ img-responsive ]" src="<?php echo $imagen; ?>">
