@@ -1,9 +1,9 @@
 === WP Simple Pay Lite for Stripe ===
 Contributors: moonstonemedia, pderksen, nickyoung87, nekojira
 Tags: stripe, stripe checkout, payments, simple stripe checkout, ecommerce, e-commerce
-Requires at least: 4.1
-Tested up to: 4.5
-Stable tag: 1.5.1
+Requires at least: 4.2
+Tested up to: 4.6
+Stable tag: 1.5.2
 License: GPLv2 or later
 
 Add high conversion Stripe checkout forms to your WordPress site and start accepting payments in minutes.
@@ -26,7 +26,7 @@ That's it. **No other plugins required.**
 
 >**[Check out our demos & PRO version](https://wpsimplepay.com/?utm_source=wordpress.org&utm_medium=link&utm_campaign=simple-pay-lite-readme&utm_content=description)**
 
-SSL note: Stripe now requires that any page hosting a live checkout form be SSL (they should start with `https://`).
+SSL note: Stripe requires that any page hosting a live checkout form be SSL (they should start with `https://`). [See system requirements.](https://wpsimplepay.com/docs/getting-started/system-requirements/?utm_source=wordpress.org&utm_medium=link&utm_campaign=simple-pay-lite-readme&utm_content=description)
 
 = LITE VERSION FEATURES =
 
@@ -68,6 +68,10 @@ SSL note: Stripe now requires that any page hosting a live checkout form be SSL 
 
 Find our docs at [wpsimplepay.com/docs](https://wpsimplepay.com/docs/?utm_source=wordpress.org&utm_medium=link&utm_campaign=simple-pay-lite-readme&utm_content=faq)
 
+= What are the system requirements? =
+
+SSL is required on live checkout pages, and we recommend staying current with both PHP and WP for security reasons and PCI-DSS compliance. [See system requirements.](https://wpsimplepay.com/docs/getting-started/system-requirements/?utm_source=wordpress.org&utm_medium=link&utm_campaign=simple-pay-lite-readme&utm_content=description)
+
 = Can I get notified by email of new releases? =
 
 [Subscribe here](https://www.getdrip.com/forms/6606935/submissions/new) to be notified by email of major features or updates.
@@ -89,6 +93,13 @@ We'd love your help! Here's a few things you can do:
 4. Settings: Site-wide defaults
 
 == Changelog ==
+
+= 1.5.2 - July 29, 2016 =
+
+* Fix: Extra TLS compatibilty check via updated Stripe PHP library (v3.19.0).
+* Feature: Added Stripe TLS requirement to system report.
+* Dev: System report tweaks for PHP 7 compatibility.
+* Dev: Tested up to WordPress 4.6.
 
 = 1.5.1 - June 18, 2016 =
 

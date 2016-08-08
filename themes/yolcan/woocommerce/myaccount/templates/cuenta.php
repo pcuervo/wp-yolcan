@@ -1,5 +1,5 @@
 <?php global $current_user;
-global $opCliente; 
+global $opCliente;
 global $clubCanasta; ?>
 <article class="[ padding--bottom margin-bottom ]">
 	<h4>Tu cuenta</h4>
@@ -17,23 +17,23 @@ global $clubCanasta; ?>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
     <?php if ($opCliente->suspendido != 1): ?>
     	<p>Desea <strong>suspender</strong> sus entregas?</p>
-    	
+
         <form method="post" id="contactus_form" action="">
             <div class="[ margin-bottom--small ]">
-                <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1" checked="checked">
-                <label for="suspender-1">1 Semana</label>
+                <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1" checked>
+                <label for="suspender-1"><span class="[ margin-right--xxsmall ]"></span>1 Semana</label>
             </div>
             <div class="[ margin-bottom--small ]">
                 <input id="suspender-2" type="radio" class="input-radio" name="suspension" value="2">
-                <label for="suspender-2">2 Semanas</label>
+                <label for="suspender-2"><span class="[ margin-right--xxsmall ]"></span>2 Semanas</label>
             </div>
             <div class="[ margin-bottom--small ]">
                 <input id="suspender-3" type="radio" class="input-radio" name="suspension" value="3">
-                <label for="suspender-3">3 Semanas</label>
+                <label for="suspender-3"><span class="[ margin-right--xxsmall ]"></span>3 Semanas</label>
             </div>
             <div class="[ margin-bottom--small ]">
                 <input id="suspender-4" type="radio" class="input-radio" name="suspension" value="4">
-                <label for="suspender-4">4 Semanas</label>
+                <label for="suspender-4"><span class="[ margin-right--xxsmall ]"></span>4 Semanas</label>
             </div>
             <input type="hidden" name="action" value="suspender-canasta">
             <input type="submit" name="enviar" id="submit" class="[ btn btn-secondary btn-small ][ margin-bottom ]" value="suspender entrega"/>
@@ -52,12 +52,12 @@ global $clubCanasta; ?>
             <input type="submit" name="enviar" id="submit" class="[ btn btn-secondary btn-small ][ margin-bottom ]" value="Reanudar entregas"/>
         </form>
     <?php endif ?>
-        
+
 </article>
 
 <?php $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
 if ($opCliente->saldo > $costoSemanal AND $opCliente->suspendido != 1):
-    get_template_part('woocommerce/myaccount/templates/canastas-cliente'); 
+    get_template_part('woocommerce/myaccount/templates/canastas-cliente');
 elseif($opCliente->saldo < $costoSemanal): ?>
     <article class="[ padding--bottom border-bottom margin-bottom ]">
         <h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal; ?></span></h4>
