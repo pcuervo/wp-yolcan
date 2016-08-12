@@ -15,6 +15,7 @@ add_action('add_meta_boxes', function(){
 	add_meta_box( 'meta-box-informacion_ingrediente', 'Valor producto adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
     // add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-precio_ingrediente', 'Valor producto adicional restaurante', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-productor_ingrediente', 'Productor', 'show_metabox_productor_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
 	if ($post->post_name == 'visitanos'){
@@ -240,6 +241,13 @@ function show_metabox_precio_ingrediente($post){
 	echo "<input type='text' class='widefat' id='precio_ingrediente' name='precio_ingrediente' value='$precio_ingrediente'/><br><br>";
 }
 
+function show_metabox_productor_ingrediente($post){
+	wp_nonce_field(__FILE__, '_productor_ingrediente_nonce');
+
+	$productor_ingrediente = get_post_meta($post->ID, 'productor_ingrediente', true);
+	echo "<input type='text' class='widefat' id='productor_ingrediente' name='productor_ingrediente' value='$productor_ingrediente'/><br><br>";
+}
+
 
 
 // SAVE METABOXES DATA ///////////////////////////////////////////////////////////////
@@ -324,6 +332,10 @@ add_action('save_post', function($post_id){
     
     if ( isset($_POST['precio_ingrediente']) and check_admin_referer(__FILE__, '_precio_ingrediente_nonce') ){
 		update_post_meta($post_id, 'precio_ingrediente', $_POST['precio_ingrediente']);
+	}
+
+	if ( isset($_POST['productor_ingrediente']) and check_admin_referer(__FILE__, '_productor_ingrediente_nonce') ){
+		update_post_meta($post_id, 'productor_ingrediente', $_POST['productor_ingrediente']);
 	}
 
 
