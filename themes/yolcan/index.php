@@ -142,7 +142,7 @@
 				<div class="[ text-center ]">
 					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
-					<a  href="<?php echo site_url('/productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
+					<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
 				</div>
 			</div>
 		</div>
