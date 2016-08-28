@@ -119,13 +119,14 @@ function show_metabox_datos_visita($post){
 
 
 function show_metabox_ubicacion($post){
+	$direccion_contacto = get_post_meta($post->ID, 'direccion_contacto', true);
 	$latitud_contacto = get_post_meta($post->ID, 'latitud_contacto', true);
 	$longitud_contacto = get_post_meta($post->ID, 'longitud_contacto', true);
 
 	wp_nonce_field(__FILE__, '_latlong_nonce');
 
 	echo "<label for='addresscontacto' class='label-paquetes'>Ingresa la dirección: </label>";
-	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value=''/>";
+	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value='$direccion_contacto'/>";
 
 	echo "<br><br><label for='latitud_contacto' class='label-paquetes'>Latitud: </label>";
 	echo "<input type='text' class='widefat' id='latitud_contacto' name='latitud_contacto' value='$latitud_contacto'/>";
@@ -301,6 +302,7 @@ add_action('save_post', function($post_id){
 	if ( isset($_POST['latitud_contacto']) and check_admin_referer(__FILE__, '_latlong_nonce') ){
 		update_post_meta($post_id, 'latitud_contacto', $_POST['latitud_contacto']);
 		update_post_meta($post_id, 'longitud_contacto', $_POST['longitud_contacto']);
+		update_post_meta($post_id, 'direccion_contacto', $_POST['addresscontacto']);
 	}
 
 
