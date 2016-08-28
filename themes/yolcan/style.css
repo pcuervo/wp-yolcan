@@ -8227,6 +8227,19 @@ a .active {
 #customer_details #billing_consumer_club_field {
   padding-left: 15px!important;
 }
+.map {
+  width: 100%;
+  height: 215px;
+}
+.map-wrap {
+  position: relative;
+}
+.overlay {
+  width: 100%;
+  min-height: 215px;
+  position: absolute;
+  top: 0;
+}
 @-ms-viewport {
   width: device-width;
 }
