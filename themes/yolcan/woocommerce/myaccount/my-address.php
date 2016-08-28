@@ -40,6 +40,7 @@ $col = 1;
 $clubId = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'A un no cuentas con un club'; ?>
 
 <h3>Club:<br> <?php echo $clubId; ?></h3>
+<a class="[ btn btn-secondary ]" href="<?php echo site_url('/mi-cuenta'); ?>?update_clube=si">Cambiar de club</a><br><br>
 
 <p class="myaccount_address">
 	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', __( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); ?>

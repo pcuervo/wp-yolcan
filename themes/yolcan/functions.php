@@ -699,6 +699,7 @@ function call_restaurant($order_id) {
 	if(!empty($items)){
 		foreach ( $items as $item ) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
+			getClientUpdateClub($user_id, $club);
 			$opCliente = getOpcionesCliente($user_id);
 			$costoSemanal = getCostoVariationID($item['variation_id']);
 	    	if (!empty($opCliente)) {

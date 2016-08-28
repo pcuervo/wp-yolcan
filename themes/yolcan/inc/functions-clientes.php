@@ -140,13 +140,14 @@ function saveClubCliente($clubId){
 
 	global $current_user;
 	$opCliente = getOpcionesCliente($current_user->ID);
-
+	
 	if (!empty($opCliente)) {
+		getClientUpdateClub($current_user->ID, $clubId);
 		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
-	}else{
-		setOpcionesCliente($clubId, 0, 0.00, 0.00, $current_user->ID);
 	}
-	return true;
+
+	wp_redirect( site_url('/mi-cuenta') );
+	exit;
 }
 
 /**	
@@ -158,7 +159,12 @@ function clubesDeConsumo(){
 	$newArr = [];
 	if (!empty($clubes)) {
 		foreach ($clubes as $key => $club) {
-			$newArr[$club->ID] = $club->post_title;
+			$capacidad_del_club = get_post_meta($club->ID, 'capacidad-del-club', true);
+			$cupo_actual = get_post_meta($club->ID, 'cupo-actual', true); 
+            $cupo_actual = $cupo_actual != '' ? $cupo_actual : 0;
+            if ($cupo_actual < $capacidad_del_club){
+				$newArr[$club->ID] = $club->post_title;
+			}
 		}
 	}
 
@@ -354,4 +360,28 @@ function getCostoCanastaTemporalidad( $temporalidad, $costo ){
  */
 function getProximoCorte(){
 	return date("Y-m-d",strtotime("next Friday"));
+}
+
+
+function getClientUpdateClub($clienteId, $club_nuevo){
+	$opCliente = getOpcionesCliente($clienteId);
+
+	$club_actual = $opCliente->club_id;
+
+	if ($club_actual == '' ) {
+		$cupo_actual = get_post_meta( $club_nuevo, 'cupo-actual', true );
+		$crece_a = $cupo_actual + 1;
+		update_post_meta($club_nuevo, 'cupo-actual', $crece_a);
+	}elseif($club_actual != $club_nuevo){
+		
+		$cupo_actual = get_post_meta( $club_actual, 'cupo-actual', true );
+		$disminuye_a = $cupo_actual - 1;
+		update_post_meta($club_actual, 'cupo-actual', $disminuye_a);
+
+		$cupo_nuevo = get_post_meta( $club_nuevo, 'cupo-actual', true );
+		$crece_a = $cupo_nuevo + 1;
+		update_post_meta($club_nuevo, 'cupo-actual', $crece_a);
+
+	}
+
 }
