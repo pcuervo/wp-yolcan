@@ -253,12 +253,14 @@ function getIdCanastaAdicionalesClube($clubId, $producto){
 function getCostoVariationID($variant_id){
 	$temporalidad = get_post_meta( $variant_id, 'attribute_pa_temporalidad', true );
 	$regular_price = get_post_meta( $variant_id, '_regular_price', true );
+	$saldo_a_abonar = get_post_meta( $variant_id, '_saldo_a_abonar_field', true );
 
-	$costo = getCostoCanastaTemporalidad($temporalidad, $regular_price);
+	$costo = getCostoCanastaTemporalidad($temporalidad, $saldo_a_abonar);
 	return (object) [
 		'temporalidad' => $temporalidad,
 		'costo' => $regular_price,
-		'costoSemanal' => $costo
+		'costoSemanal' => $costo,
+		'saldoAbonar' => $saldo_a_abonar
 	];
 }
 
