@@ -129,7 +129,8 @@ class ClientesController {
 	{
 		return viewCliente('cliente', [
 			'clubes' => method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [],
-			'cliente' => $this->modelClientes->getOpcionesClienteById($this->clienteId)
+			'cliente' => $this->modelClientes->getOpcionesClienteById($this->clienteId),
+			'historySaldo' => $this->modelClientes->getHistorySaldoClienteById($this->clienteId)
 		]);
 	}
 
@@ -141,7 +142,8 @@ class ClientesController {
 	{
 		return viewCliente('editar-cliente', [
 			'clubes' => method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [],
-			'cliente' => $this->modelClientes->getOpcionesClienteById($this->clienteId)
+			'cliente' => $this->modelClientes->getOpcionesClienteById($this->clienteId),
+			'historySaldo' => $this->modelClientes->getHistorySaldoClienteById($this->clienteId)
 		]);
 	}
 
@@ -153,6 +155,9 @@ class ClientesController {
 	{
 		if (isset($this->dataPost['saldo']) AND function_exists('updateSaldoCliente')) {
 			updateSaldoCliente($this->clienteId, $this->dataPost['saldo']);
+			if ($this->dataPost['saldo'] != $this->dataPost['saldo-anterior']) {
+				$this->modelClientes->storeHistoryUpdateSaldoAdmin($this->clienteId, $this->dataPost['saldo'], $this->dataPost['saldo-anterior']);
+			}
 		}
 
 		if (isset($this->dataPost['suspension']) AND function_exists('suspenderCanastaTemporal')) {
