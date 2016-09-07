@@ -92,15 +92,9 @@
 				action   : 'ajax_info_yolcan_fb_login'
 			}, 'json')
 			.done(function (data){
-				console.log(data);
 				if (data == 'creado') {
-					
 					location.replace(site_url+"mi-cuenta");
-
-				}else{
-					$('.pop-style .error').empty().text('ERROR:'+data);
-					$('.pop-style .error').css({'display': 'inline-block'});
-				};
+				}
 
 			});
 
