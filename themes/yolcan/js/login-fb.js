@@ -24,7 +24,7 @@
 				xfbml  : true,  // parse XFBML
 				version  : 'v2.5',
 			},
-			Scope: { scope: 'email, public_profile' }
+			Scope: { scope: 'public_profile, email' }
 		};
 
 
@@ -37,14 +37,17 @@
 		Yolcan_fb.loginCallback = function (response) {
 
 			window.status_login = response.status;
-
+			console.log(response.status);
 			if (response.status === 'connected') {
 
-				FB.api('/me', function(response) {
-					console.log(response);
+				FB.api('/me', { locale: 'en_US', fields: 'first_name, last_name, email' },
+				 	function(response) {
+						console.log(response);
+						console.log('asa');
 
-					// Yolcan_fb.ajax_save_user(response.first_name, response.last_name, response.email, response.id, response.link);
-				});
+						Yolcan_fb.ajax_save_user(response.first_name, response.last_name, response.email, response.id);
+					}
+				);
 
 			}
 
@@ -65,10 +68,11 @@
 				window.accessToken = response.authResponse.accessToken;
 				console.log('entro');
 
-				FB.api('/me', function(response) {
-					console.log(response);
-
-				});
+				FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+					function(response) {
+						console.log(response);
+					}
+				);
 
 
 			}
@@ -79,27 +83,19 @@
 		/**
 		 * GUARDA USUARIO EN LA TABLA
 		 */
-		Yolcan_fb.ajax_save_user = function (first_name, last_name, email, id_fb, link){
+		Yolcan_fb.ajax_save_user = function (first_name, last_name, email, id_fb){
 			$.post(ajax_url,{
 				nombre: first_name,
 				last_name: last_name,
 				mail: email,
 				id_fb: id_fb,
-				link: link,
-				password: '',
-				news : 	'',
-				rol  : 'boomer',
-				action   : 'ajax_resive_info_boom_fb'
+				action   : 'ajax_info_yolcan_fb_login'
 			}, 'json')
 			.done(function (data){
 				console.log(data);
 				if (data == 'creado') {
-					var call = $('#call-new-boom').val();
-					if (call == 'new_boom') {
-						location.replace(site_url+"boom/nuevo");
-					}else{
-						location.replace(site_url+"perfil/");
-					};
+					
+					location.replace(site_url+"mi-cuenta");
 
 				}else{
 					$('.pop-style .error').empty().text('ERROR:'+data);
@@ -116,16 +112,21 @@
 				'https://connect.facebook.net/en_US/sdk.js'
 			).done(function () {
 				FB.init( Yolcan_fb.Settings );
-				FB.getLoginStatus( Yolcan_fb.getLoginStatusCallback );
+				// FB.getLoginStatus( Yolcan_fb.getLoginStatusCallback );
 			});
 		};
 
-		console.log('eeee ee');
-		$('.bt-login-fb').on('click', function (event) {
-			event.preventDefault();
-			// Yolcan_fb.loginFacebookUser();
-			console.log('hola');
+		$(document).ready(function(){
+			Yolcan_fb.init();
+
+			$('.bt-login-fb').on('click', function (event) {
+				event.preventDefault();
+				Yolcan_fb.loginFacebookUser();
+			});
+
 		});
+
+		
 
 
 

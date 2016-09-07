@@ -387,3 +387,46 @@ function getClientUpdateClub($clienteId, $club_nuevo){
 	}
 
 }
+
+
+/**
+ * LOGIN CLIENTE CON FB
+ */
+/**
+ * RESIVE INFORMACION PARA CREAR UN CLIENTE CON FB
+ */
+function ajax_info_yolcan_fb_login(){
+	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+	$emailCliente = isset($_POST['mail']) ? $_POST['mail'] : '';
+	$passwordCliente  = wp_generate_password();
+
+	$exist_mail = email_exists($emailCliente);
+
+  	if ( $exist_mail ){
+		$wpUser = get_user_by('email', $emailCliente);
+		if( $wpUser ){
+			wp_set_auth_cookie( $wpUser->ID, 0, 0 );
+			wp_set_current_user( $wpUser->ID );
+		}
+		
+  		wp_send_json('creado');
+
+  	}else{
+		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+		if(!is_wp_error($user_id)){
+			$wp_user = get_user_by( 'id', $user_id );
+			$wp_user->set_role( 'customer' );
+		    wp_set_current_user($user_id);
+		    wp_set_auth_cookie($user_id);
+		}
+		wp_send_json('creado');
+	}
+	
+
+	wp_send_json('error');
+
+
+}
+
+add_action('wp_ajax_ajax_info_yolcan_fb_login', 'ajax_info_yolcan_fb_login');
+add_action('wp_ajax_nopriv_ajax_info_yolcan_fb_login', 'ajax_info_yolcan_fb_login');
