@@ -174,13 +174,11 @@
 										</div>
 									</form>
 									<div class="[ text-center ]">
-										<a href="https://www.facebook.com">
-											<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
-											<button type="submit" class="[ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
-												<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
-												<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
-											</button>
-										</a>
+										<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
+										<button type="submit" class="bt-login-fb [ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
+											<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
+											<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
+										</button>
 									</div>
 								</div>
 							</div>

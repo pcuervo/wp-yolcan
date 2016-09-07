@@ -33,6 +33,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
+	wp_enqueue_script( 'login-fb', JSPATH.'login-fb.js', array('functions'), '1.0', true );
 
 
 	// localize scripts

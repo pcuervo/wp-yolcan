@@ -647,6 +647,8 @@
 			$grid.isotope({ filter: filters });
 			console.log(filters);
 		}
+
+		console.log('asfdsdf');
 		
 	});
 
