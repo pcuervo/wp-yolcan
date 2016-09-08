@@ -1,4 +1,4 @@
-<?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
+xr<?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
 
 global $result;
@@ -33,6 +33,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
+	wp_enqueue_script( 'login-fb', JSPATH.'login-fb.js', array('functions'), '1.0', true );
 
 
 	// localize scripts
@@ -699,15 +700,54 @@ function call_restaurant($order_id) {
 	if(!empty($items)){
 		foreach ( $items as $item ) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
+			getClientUpdateClub($user_id, $club);
 			$opCliente = getOpcionesCliente($user_id);
+			$saldoAbonar = get_post_meta( $item['variation_id'], '_saldo_a_abonar_field', true );
 			$costoSemanal = getCostoVariationID($item['variation_id']);
 	    	if (!empty($opCliente)) {
-	    		$total = $item['line_total'] + $opCliente->saldo;
+	    		$total = $saldoAbonar + $opCliente->saldo;
 	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $item['line_total'], $costoSemanal->costoSemanal, $user_id);
+	    		setOpcionesCliente($club, $item['variation_id'], $saldoAbonar, $costoSemanal->costoSemanal, $user_id);
 	    	}
 
 		}
 	}	
+}
+
+// Add Variation Settings
+add_action( 'woocommerce_product_after_variable_attributes', 'variation_settings_fields', 10, 3 );
+
+/**
+ * Create new fields for variations
+ *
+*/
+function variation_settings_fields( $loop, $variation_data, $variation ) {
+	// Text Field
+	woocommerce_wp_text_input( 
+		array( 
+			'id'          => '_saldo_a_abonar_field[' . $variation->ID . ']', 
+			'label'       => __( 'Saldo a abonar', 'woocommerce' ), 
+			'placeholder' => '',
+			'desc_tip'    => 'true',
+			'description' => __( 'IMPORTANTE: ingresar saldo a abonar.', 'woocommerce' ),
+			'value'       => get_post_meta( $variation->ID, '_saldo_a_abonar_field', true )
+		)
+	);
+	
+}
+
+// Save Variation Settings
+add_action( 'woocommerce_save_product_variation', 'save_variation_settings_fields', 10, 2 );
+/**
+ * Save new fields for variations
+ *
+*/
+function save_variation_settings_fields( $post_id ) {
+	// Text Field
+	$saldo_abonar = $_POST['_saldo_a_abonar_field'][ $post_id ];
+	if( ! empty( $saldo_abonar ) ) {
+		update_post_meta( $post_id, '_saldo_a_abonar_field', esc_attr( $saldo_abonar ) );
+	}
+	
 }

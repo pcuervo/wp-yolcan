@@ -140,13 +140,14 @@ function saveClubCliente($clubId){
 
 	global $current_user;
 	$opCliente = getOpcionesCliente($current_user->ID);
-
+	
 	if (!empty($opCliente)) {
+		getClientUpdateClub($current_user->ID, $clubId);
 		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
-	}else{
-		setOpcionesCliente($clubId, 0, 0.00, 0.00, $current_user->ID);
 	}
-	return true;
+
+	wp_redirect( site_url('/mi-cuenta') );
+	exit;
 }
 
 /**	
@@ -158,7 +159,12 @@ function clubesDeConsumo(){
 	$newArr = [];
 	if (!empty($clubes)) {
 		foreach ($clubes as $key => $club) {
-			$newArr[$club->ID] = $club->post_title;
+			$capacidad_del_club = get_post_meta($club->ID, 'capacidad-del-club', true);
+			$cupo_actual = get_post_meta($club->ID, 'cupo-actual', true); 
+            $cupo_actual = $cupo_actual != '' ? $cupo_actual : 0;
+            if ($cupo_actual < $capacidad_del_club){
+				$newArr[$club->ID] = $club->post_title;
+			}
 		}
 	}
 
@@ -247,12 +253,14 @@ function getIdCanastaAdicionalesClube($clubId, $producto){
 function getCostoVariationID($variant_id){
 	$temporalidad = get_post_meta( $variant_id, 'attribute_pa_temporalidad', true );
 	$regular_price = get_post_meta( $variant_id, '_regular_price', true );
+	$saldo_a_abonar = get_post_meta( $variant_id, '_saldo_a_abonar_field', true );
 
-	$costo = getCostoCanastaTemporalidad($temporalidad, $regular_price);
+	$costo = getCostoCanastaTemporalidad($temporalidad, $saldo_a_abonar);
 	return (object) [
 		'temporalidad' => $temporalidad,
 		'costo' => $regular_price,
-		'costoSemanal' => $costo
+		'costoSemanal' => $costo,
+		'saldoAbonar' => $saldo_a_abonar
 	];
 }
 
@@ -355,3 +363,70 @@ function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 function getProximoCorte(){
 	return date("Y-m-d",strtotime("next Friday"));
 }
+
+
+function getClientUpdateClub($clienteId, $club_nuevo){
+	$opCliente = getOpcionesCliente($clienteId);
+
+	$club_actual = $opCliente->club_id;
+
+	if ($club_actual == '' ) {
+		$cupo_actual = get_post_meta( $club_nuevo, 'cupo-actual', true );
+		$crece_a = $cupo_actual + 1;
+		update_post_meta($club_nuevo, 'cupo-actual', $crece_a);
+	}elseif($club_actual != $club_nuevo){
+		
+		$cupo_actual = get_post_meta( $club_actual, 'cupo-actual', true );
+		$disminuye_a = $cupo_actual - 1;
+		update_post_meta($club_actual, 'cupo-actual', $disminuye_a);
+
+		$cupo_nuevo = get_post_meta( $club_nuevo, 'cupo-actual', true );
+		$crece_a = $cupo_nuevo + 1;
+		update_post_meta($club_nuevo, 'cupo-actual', $crece_a);
+
+	}
+
+}
+
+
+/**
+ * LOGIN CLIENTE CON FB
+ */
+/**
+ * RESIVE INFORMACION PARA CREAR UN CLIENTE CON FB
+ */
+function ajax_info_yolcan_fb_login(){
+	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+	$emailCliente = isset($_POST['mail']) ? $_POST['mail'] : '';
+	$passwordCliente  = wp_generate_password();
+
+	$exist_mail = email_exists($emailCliente);
+
+  	if ( $exist_mail ){
+		$wpUser = get_user_by('email', $emailCliente);
+		if( $wpUser ){
+			wp_set_auth_cookie( $wpUser->ID, 0, 0 );
+			wp_set_current_user( $wpUser->ID );
+		}
+		
+  		wp_send_json('creado');
+
+  	}else{
+		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+		if(!is_wp_error($user_id)){
+			$wp_user = get_user_by( 'id', $user_id );
+			$wp_user->set_role( 'customer' );
+		    wp_set_current_user($user_id);
+		    wp_set_auth_cookie($user_id);
+		}
+		wp_send_json('creado');
+	}
+	
+
+	wp_send_json('error');
+
+
+}
+
+add_action('wp_ajax_ajax_info_yolcan_fb_login', 'ajax_info_yolcan_fb_login');
+add_action('wp_ajax_nopriv_ajax_info_yolcan_fb_login', 'ajax_info_yolcan_fb_login');

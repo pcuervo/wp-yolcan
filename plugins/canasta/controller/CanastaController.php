@@ -240,8 +240,9 @@ class CanastaController {
 	 */
 	public function updateConfigCanastaBase($dataPost)
 	{
+		$mCanasta = model('CanastaModel');
 		$optionName = 'clubes_usan_canasta_base';
-		$newValue = $dataPost['clubes'];
+		$clubes = $dataPost['clubes'];
 
 		if (get_option( $optionName ) !== false){
 		    update_option( $optionName, $newValue );

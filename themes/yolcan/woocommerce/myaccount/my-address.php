@@ -40,6 +40,7 @@ $col = 1;
 $clubId = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'Aún no cuentas con un club'; ?>
 
 <h3>Club:<br> <?php echo $clubId; ?></h3>
+<a class="[ btn btn-secondary ]" href="<?php echo site_url('/mi-cuenta'); ?>?update_clube=si">Cambiar de club</a><br><br>
 
 <div class="[ margin-bottom--large ]">
 	<?php $clubes = new WP_Query([
