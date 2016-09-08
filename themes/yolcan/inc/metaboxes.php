@@ -119,13 +119,14 @@ function show_metabox_datos_visita($post){
 
 
 function show_metabox_ubicacion($post){
+	$direccion_contacto = get_post_meta($post->ID, 'direccion_contacto', true);
 	$latitud_contacto = get_post_meta($post->ID, 'latitud_contacto', true);
 	$longitud_contacto = get_post_meta($post->ID, 'longitud_contacto', true);
 
 	wp_nonce_field(__FILE__, '_latlong_nonce');
 
 	echo "<label for='addresscontacto' class='label-paquetes'>Ingresa la dirección: </label>";
-	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value=''/>";
+	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value='$direccion_contacto'/>";
 
 	echo "<br><br><label for='latitud_contacto' class='label-paquetes'>Latitud: </label>";
 	echo "<input type='text' class='widefat' id='latitud_contacto' name='latitud_contacto' value='$latitud_contacto'/>";
@@ -171,6 +172,9 @@ function show_metabox_info_extra($post){
 	$horarios_de_recoleccion = get_post_meta($post->ID, 'horarios-de-recoleccion', true);
 	$capacidad_del_club = get_post_meta($post->ID, 'capacidad-del-club', true);
 	$puede_dejar_efectivo = get_post_meta( $post->ID, 'puede-dejar-efectivo', true );
+	$cupo_actual = get_post_meta( $post->ID, 'cupo-actual', true );
+	$cupo_actual = $cupo_actual != '' ? $cupo_actual : 0;
+
 
 	echo "<label for='ubicacion_club' class='label-paquetes'>Ingresa la dirección: </label><br><br>";
 	echo "<input type='text' class='widefat' id='ubicacion_club' name='ubicacion_club' value='$club'/>";
@@ -197,7 +201,9 @@ function show_metabox_info_extra($post){
 	echo "<input type='text' class='widefat' id='horarios_de_recoleccion' name='horarios_de_recoleccion' value='$horarios_de_recoleccion'/><br><br>";
 
 	echo "<label for='capacidad_del_club' class='label-paquetes'>Capacidad del club de consumo: </label>";
-	echo "<input type='text' class='widefat' id='capacidad_del_club' name='capacidad_del_club' value='$capacidad_del_club'/><br><br>";
+	echo "<input type='text' class='widefat' id='capacidad_del_club' name='capacidad_del_club' placeholder='cupo' value='$capacidad_del_club'/><br>";
+
+	echo "<p>Total de clientes actuamente: <strong>".$cupo_actual."</strong></p>";
 
 	$checked_1 = $puede_dejar_efectivo == 'si' ? 'checked' : '';
 	$checked_2 = $puede_dejar_efectivo == 'no' ? 'checked' : '';
@@ -296,6 +302,7 @@ add_action('save_post', function($post_id){
 	if ( isset($_POST['latitud_contacto']) and check_admin_referer(__FILE__, '_latlong_nonce') ){
 		update_post_meta($post_id, 'latitud_contacto', $_POST['latitud_contacto']);
 		update_post_meta($post_id, 'longitud_contacto', $_POST['longitud_contacto']);
+		update_post_meta($post_id, 'direccion_contacto', $_POST['addresscontacto']);
 	}
 
 
