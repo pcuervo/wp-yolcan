@@ -12,7 +12,7 @@ add_action('add_meta_boxes', function(){
 
 	add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 	add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
-	add_meta_box( 'meta-box-informacion_ingrediente', 'Valor producto adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
+	add_meta_box( 'meta-box-informacion_ingrediente', 'Valor producto adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high' );
     // add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-precio_ingrediente', 'Valor producto adicional restaurante', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-productor_ingrediente', 'Productor', 'show_metabox_productor_ingrediente', 'ingredientes', 'side', 'high');
