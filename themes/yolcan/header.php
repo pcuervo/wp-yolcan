@@ -63,7 +63,7 @@
 												<?php if ( ! empty($user->ID) ): ?>
 													<li><a href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a></li>
 												<?php else: ?>
-													<li><a data-toggle="modal" data-target="#ingresa">ingresa</a></li>
+													<li><button data-toggle="modal" data-target="#ingresa">ingresa</button></li>
 												<?php endif; ?>
 												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
@@ -128,4 +128,3 @@
 			</div> <!-- /container -->
 		</header>
 		<div class="[ main ]"><!-- Fijar footer. Cierra en footer -->
-			
