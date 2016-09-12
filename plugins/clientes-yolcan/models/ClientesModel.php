@@ -165,4 +165,36 @@ class ClientesModel {
 	 	 OBJECT );
 	}
 
+	/**
+	 * GUARDA EL HISTORIAL DE SALDO MODIFICADO POR EL ADMIN
+	 * @param  [integer] $clienteId     [id del cliente]
+	 * @param  [integer] $saldo         [saldo actualizado]
+	 * @param  [integer] $saldoAnterior [saldo anterior]
+	 * @return [type]                [description]
+	 */
+	public function storeHistoryUpdateSaldoAdmin($clienteId, $saldo, $saldoAnterior)
+	{
+		global $current_user;
+      	get_currentuserinfo();
+		$this->_wpdb->insert(
+			$this->_wpdb->prefix.'saldo_modificado_por_admin',
+			array(
+				'cliente_id'      => $clienteId,
+				'saldo_anterior' => $saldoAnterior,
+				'saldo_agregado' => $saldo,
+				'fecha' => date('Y-m-d'),
+				'user_id' => $current_user->ID,
+			)
+		);
+
+		return $this->_wpdb->insert_id;
+	}
+
+
+	public function getHistorySaldoClienteById($clienteId){
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}saldo_modificado_por_admin 
+			WHERE cliente_id = $clienteId ORDER BY id DESC ;", 
+	 	 OBJECT );
+	}
+
 }

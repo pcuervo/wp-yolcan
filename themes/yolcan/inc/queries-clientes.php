@@ -62,6 +62,20 @@ add_action('init', function() use (&$wpdb){
 	);
 });	
 
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}saldo_modificado_por_admin (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			cliente_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			saldo_anterior double(8,2) DEFAULT NULL,
+			saldo_agregado double(8,2) DEFAULT NULL,
+			fecha date NOT NULL DEFAULT '0000-00-00',
+			UNIQUE KEY `id` (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+	);
+});
+
 
 
 /**

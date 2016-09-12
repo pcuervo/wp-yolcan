@@ -12,9 +12,10 @@ add_action('add_meta_boxes', function(){
 
 	add_meta_box( 'meta-box-extras_receta', 'Extras Receta', 'show_metabox_extras_receta', 'recetas');
 	add_meta_box( 'meta-box-ingredientes_receta', 'Ingredientes', 'show_metabox_ingredientes_receta', 'recetas', 'side', 'high');
-	add_meta_box( 'meta-box-informacion_ingrediente', 'Info. Adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high');
+	add_meta_box( 'meta-box-informacion_ingrediente', 'Valor producto adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high' );
     // add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
-    add_meta_box( 'meta-box-precio_ingrediente', 'Precio', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-precio_ingrediente', 'Valor producto adicional restaurante', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-productor_ingrediente', 'Productor', 'show_metabox_productor_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
 
 	if ($post->post_name == 'visitanos'){
@@ -118,13 +119,14 @@ function show_metabox_datos_visita($post){
 
 
 function show_metabox_ubicacion($post){
+	$direccion_contacto = get_post_meta($post->ID, 'direccion_contacto', true);
 	$latitud_contacto = get_post_meta($post->ID, 'latitud_contacto', true);
 	$longitud_contacto = get_post_meta($post->ID, 'longitud_contacto', true);
 
 	wp_nonce_field(__FILE__, '_latlong_nonce');
 
 	echo "<label for='addresscontacto' class='label-paquetes'>Ingresa la dirección: </label>";
-	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value=''/>";
+	echo "<input type='text' class='widefat' id='addresscontacto' name='addresscontacto' value='$direccion_contacto'/>";
 
 	echo "<br><br><label for='latitud_contacto' class='label-paquetes'>Latitud: </label>";
 	echo "<input type='text' class='widefat' id='latitud_contacto' name='latitud_contacto' value='$latitud_contacto'/>";
@@ -170,6 +172,9 @@ function show_metabox_info_extra($post){
 	$horarios_de_recoleccion = get_post_meta($post->ID, 'horarios-de-recoleccion', true);
 	$capacidad_del_club = get_post_meta($post->ID, 'capacidad-del-club', true);
 	$puede_dejar_efectivo = get_post_meta( $post->ID, 'puede-dejar-efectivo', true );
+	$cupo_actual = get_post_meta( $post->ID, 'cupo-actual', true );
+	$cupo_actual = $cupo_actual != '' ? $cupo_actual : 0;
+
 
 	echo "<label for='ubicacion_club' class='label-paquetes'>Ingresa la dirección: </label><br><br>";
 	echo "<input type='text' class='widefat' id='ubicacion_club' name='ubicacion_club' value='$club'/>";
@@ -196,7 +201,9 @@ function show_metabox_info_extra($post){
 	echo "<input type='text' class='widefat' id='horarios_de_recoleccion' name='horarios_de_recoleccion' value='$horarios_de_recoleccion'/><br><br>";
 
 	echo "<label for='capacidad_del_club' class='label-paquetes'>Capacidad del club de consumo: </label>";
-	echo "<input type='text' class='widefat' id='capacidad_del_club' name='capacidad_del_club' value='$capacidad_del_club'/><br><br>";
+	echo "<input type='text' class='widefat' id='capacidad_del_club' name='capacidad_del_club' placeholder='cupo' value='$capacidad_del_club'/><br>";
+
+	echo "<p>Total de clientes actuamente: <strong>".$cupo_actual."</strong></p>";
 
 	$checked_1 = $puede_dejar_efectivo == 'si' ? 'checked' : '';
 	$checked_2 = $puede_dejar_efectivo == 'no' ? 'checked' : '';
@@ -217,7 +224,6 @@ function show_metabox_informacion_ingrediente($post){
 	// $checked = $adicional_canasta == 'si' ? 'checked' : '';
 	// echo '<input type="radio" name="adicional_canasta" value="si" '.$checked.'> Adicional en canasta<br><br>';
 
-	echo "<label for='valor_en_puntos' class='label-paquetes'>Valor en puntos: </label>";
 	echo "<input type='text' class='widefat' id='valor_en_puntos' name='valor_en_puntos' value='$valor_en_puntos'/><br><br>";
 }
 
@@ -239,6 +245,13 @@ function show_metabox_precio_ingrediente($post){
 	$precio_ingrediente = get_post_meta($post->ID, 'precio_ingrediente', true);
 
 	echo "<input type='text' class='widefat' id='precio_ingrediente' name='precio_ingrediente' value='$precio_ingrediente'/><br><br>";
+}
+
+function show_metabox_productor_ingrediente($post){
+	wp_nonce_field(__FILE__, '_productor_ingrediente_nonce');
+
+	$productor_ingrediente = get_post_meta($post->ID, 'productor_ingrediente', true);
+	echo "<input type='text' class='widefat' id='productor_ingrediente' name='productor_ingrediente' value='$productor_ingrediente'/><br><br>";
 }
 
 
@@ -289,6 +302,7 @@ add_action('save_post', function($post_id){
 	if ( isset($_POST['latitud_contacto']) and check_admin_referer(__FILE__, '_latlong_nonce') ){
 		update_post_meta($post_id, 'latitud_contacto', $_POST['latitud_contacto']);
 		update_post_meta($post_id, 'longitud_contacto', $_POST['longitud_contacto']);
+		update_post_meta($post_id, 'direccion_contacto', $_POST['addresscontacto']);
 	}
 
 
@@ -325,6 +339,10 @@ add_action('save_post', function($post_id){
     
     if ( isset($_POST['precio_ingrediente']) and check_admin_referer(__FILE__, '_precio_ingrediente_nonce') ){
 		update_post_meta($post_id, 'precio_ingrediente', $_POST['precio_ingrediente']);
+	}
+
+	if ( isset($_POST['productor_ingrediente']) and check_admin_referer(__FILE__, '_productor_ingrediente_nonce') ){
+		update_post_meta($post_id, 'productor_ingrediente', $_POST['productor_ingrediente']);
 	}
 
 

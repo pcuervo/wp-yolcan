@@ -6,7 +6,6 @@ class CanastaController {
 	public $idClub;
 	public $dataPost;
 
-
 	function __construct() {
 	    $this->modelIngredientes = model('IngredientesModel');
         $this->idClub = isset($_GET['id_club']) ? $_GET['id_club'] : 0;
@@ -241,8 +240,9 @@ class CanastaController {
 	 */
 	public function updateConfigCanastaBase($dataPost)
 	{
+		$mCanasta = model('CanastaModel');
 		$optionName = 'clubes_usan_canasta_base';
-		$newValue = $dataPost['clubes'];
+		$clubes = $dataPost['clubes'];
 
 		if (get_option( $optionName ) !== false){
 		    update_option( $optionName, $newValue );

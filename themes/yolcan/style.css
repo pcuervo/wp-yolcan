@@ -3320,6 +3320,25 @@ input[type="radio"]:checked + label span {
 .select-club tr:nth-child(even) {
   background-color: #dddddd;
 }
+.form-delete-aditional {
+  display: inline-block;
+}
+.form-delete-aditional input[type="submit"] {
+  font-size: 15px;
+  padding: 2px;
+  margin-bottom: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #b14464;
+}
+input[name=adicional-periodo],
+input[name=suspension] {
+  display: none!important;
+}
+.bg-primary-darken form.login .parsley-required {
+  color: #3ac6b1;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
@@ -8208,6 +8227,19 @@ a .active {
 #customer_details #billing_consumer_club_field {
   padding-left: 15px!important;
 }
+.map {
+  width: 100%;
+  height: 215px;
+}
+.map-wrap {
+  position: relative;
+}
+.overlay {
+  width: 100%;
+  min-height: 215px;
+  position: absolute;
+  top: 0;
+}
 @-ms-viewport {
   width: device-width;
 }
@@ -8433,6 +8465,9 @@ header {
   header {
     height: 130px;
   }
+}
+header a {
+  cursor: pointer;
 }
 .width-logo {
   width: 180px;
@@ -8705,17 +8740,3 @@ footer h3 {
   margin: 0;
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
-.form-delete-aditional{
-  display: inline-block;
-}
-
-.form-delete-aditional input[type="submit"]{
-    font-size: 15px;
-    padding: 2px;
-    margin-bottom: 0;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    color: #b14464;
-  }

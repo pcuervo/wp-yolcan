@@ -96,7 +96,59 @@
 
 	</div> <!--/container-->
 
-	<!-- Consumir local -->
+	<section class="[ container ]">
+		<h2 class="[ text-center ][ margin-top margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
+		<div class="[ row ]">
+			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
+				<div class="[ text-center ]">
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
+					<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
+				</div>
+				<div class="[ margin-bottom--large ][ text-center ]">
+					<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
+				</div>
+				<div class="[ text-center ]">
+					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
+					<a data-toggle="modal" data-target="#club-consumo" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
+				</div>
+			</div>
+			<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
+				<div class="">
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
+					<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
+				</div>
+				<div class="[ row ]">
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
+						<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
+						<p class="[ no-margin ]">3-4.5 KG</p>
+						<p>Ensalada Gourmet (200 gr.)</p>
+						<p><strong class="[ color-primary ]">$250</strong> semanales</p>
+					</div>
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
+						<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
+						<p class="[ no-margin ]">4.5-6.5 KG</p>
+						<p>Ensalada Gourmet (300 gr.)</p>
+						<p><strong class="[ color-primary ]">$375</strong> semanales</p>
+					</div>
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom ]">
+						<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
+						<p class="[ no-margin ]">6.5-8.5 KG</p>
+						<p>Ensalada Gourmet (500 gr.)</p>
+						<p><strong class="[ color-primary ]">$500</strong> semanales</p>
+					</div>
+				</div>
+			</div>
+			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
+				<div class="[ text-center ]">
+					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
+					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
+					<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 	<!-- Consumir local -->
 	<?php get_template_part('templates/consumir', 'local'); ?>
 
@@ -122,9 +174,12 @@
 				</div>
 			</div>
 			<div class="[ col-xs-12 col-sm-7 ]">
-				<div id="map_canvas" class="mapping" style="width: 100%; height: 215px;"></div>
-				<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-			</div>
+				<!-- <div id="map_canvas" class="mapping" style="width: 100%; height: 215px;"></div> -->
+				<div class="map-wrap">
+					<div class="overlay" onClick="style.pointerEvents='none'"></div><!-- wrap map iframe to turn off mouse scroll and turn it back on on click -->
+					<iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+				</div>
 			<div class="[ col-xs-12 ][ visible-xs ]">
 				<?php if ( ! is_user_logged_in() ){ ?>
 					<div class="[ text-center ]">
@@ -153,7 +208,7 @@
 						$entrada->the_post();
 						$url_img = attachment_image_url($post->ID, 'full'); ?>
 
-						<div class="[ col-xs-12 col-sm-4 ][ margin-bottom ]">
+						<div class="[ col-xs-12 col-md-3 ][ margin-bottom ]">
 							<div class="[ text-center ]">
 								<img class="[ margin-top ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>">
 								<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i><?php the_title(); ?></i></h3>
@@ -168,7 +223,7 @@
 	</section>
 
 	<section class="[ container ]">
-		<h2 class="[ text-center ][ margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
+		<h2 class="[ text-center ][ margin-top margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
 		<div class="[ row ]">
 			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
 				<div class="[ text-center ]">
@@ -183,19 +238,19 @@
 					<a data-toggle="modal" data-target="#club-consumo" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
 				</div>
 			</div>
-			<div class="[ col-xs-12 col-sm-6 ][ text-center ][ margin-bottom--xlarge ]">
+			<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
 				<div class="">
 					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
 					<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
 				</div>
 				<div class="[ row ]">
-					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
 						<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
 						<p class="[ no-margin ]">3-4.5 KG</p>
 						<p>Ensalada Gourmet (200 gr.)</p>
 						<p><strong class="[ color-primary ]">$250</strong> semanales</p>
 					</div>
-					<div class="[ col-xs-12 col-md-6 ][ margin-bottom--large ]">
+					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
 						<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
 						<p class="[ no-margin ]">4.5-6.5 KG</p>
 						<p>Ensalada Gourmet (300 gr.)</p>
@@ -213,9 +268,9 @@
 				<div class="[ text-center ]">
 					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
+					<a  href="<?php echo site_url('/productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
 				</div>
 			</div>
 		</div>
 	</section>
-
 <?php get_footer(); ?>
