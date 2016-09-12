@@ -1,4 +1,4 @@
-xr<?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
+<?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
 
 global $result;
