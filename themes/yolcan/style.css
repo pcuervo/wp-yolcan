@@ -8240,6 +8240,9 @@ a .active {
   position: absolute;
   top: 0;
 }
+.normal-wrap {
+  white-space: normal;
+}
 @-ms-viewport {
   width: device-width;
 }
