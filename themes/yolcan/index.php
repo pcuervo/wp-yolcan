@@ -2,10 +2,16 @@
 
 	<div class="[ container ]">
 		<!-- video	-->
+
 		<section class="[ row ]">
+			<?php
+				$video = get_page_by_title( 'Video Home' );
+				$videoContent = $video->post_content;
+				$videoURL = wp_extract_urls( $videoContent ); //https://www.youtube.com/embed/HCj_EUKAis4
+			?>
 			<div class="[ col-xs-12 ][ margin-bottom--large ]">
 				<div class="[ js-video-wrapper ]">
-					<iframe class="[ embed-responsive-item ]" src="https://www.youtube.com/embed/HCj_EUKAis4" frameborder="0" allowfullscreen></iframe>
+					<iframe class="[ embed-responsive-item ]" src="<?php echo ( empty($videoURL[0]) ) ? 'https://www.youtube.com/embed/HCj_EUKAis4' : $videoURL[0]; ?>" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="[ col-xs-12 ]">
@@ -14,9 +20,25 @@
 		</section>
 
 		<section class="[ row ]">
+
+			<?php
+				$CTACanastas = get_page_by_path('cta-canastas');
+				$CTAVisitanos = get_page_by_path('cta-visitanos');
+
+				$CTACanastasID = $CTACanastas->ID;
+				$CTAVisitanosID = $CTAVisitanos->ID;
+
+				$CTACanastasIMGID = get_post_thumbnail_id($CTACanastasID);
+				$CTAVisitanosIMGID = get_post_thumbnail_id($CTAVisitanosID);
+
+				$CTACanastasURL = wp_get_attachment_url( $CTACanastasIMGID, 'full' );
+				$CTAVisitanosURL = wp_get_attachment_url( $CTAVisitanosIMGID, 'full' );
+
+			?>
+
 			<!-- banner	desktop -->
 			<article class="[ col-sm-6 ]">
-				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/IMG_1023.jpg');">
+				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo $CTACanastasURL; ?>');">
 					<h2>Canastas de verduras y frutas organicas a domicilio</h2>
 					<div class="[ btn-absolute-bottom ]">
 						<div class="[ text-center ]" >
@@ -29,7 +51,7 @@
 				</div>
 			</article>
 			<article class="[ col-sm-6 ]">
-				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/_DSC0010.jpg');">
+				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo $CTAVisitanosURL; ?>');">
 					<h2>Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 					<div class="[ text-center ]" >
 						<div class="[ btn-absolute-bottom ]">
@@ -156,9 +178,6 @@
 		</div>
 	</section>
 
-	<!-- Consumir local -->
-	<?php get_template_part('templates/consumir', 'local'); ?>
-
 	<section class="[ container ]">
 		<div class="row">
 			<div class="[ col-xs-12 ]">
@@ -228,5 +247,8 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- Consumir local -->
+	<?php get_template_part('templates/consumir', 'local'); ?>
 
 <?php get_footer(); ?>
