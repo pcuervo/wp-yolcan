@@ -156,6 +156,9 @@ require_once('inc/function-productos.php');
 
 require_once('inc/usuarios.php');
 
+require_once('inc/functions-instagram.php');
+
+
 
 
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
