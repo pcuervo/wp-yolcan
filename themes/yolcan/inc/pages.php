@@ -31,7 +31,7 @@
 			wp_insert_post( $page, true );
 		}
 
-		// Conócenos
+		// Blog
 		if( ! get_page_by_path('blog') ){
 			$page = array(
 				'post_author' => 1,
@@ -55,6 +55,7 @@
 			wp_insert_post( $page, true );
 		}
 
+		// Xochimilco
 		if( ! get_page_by_path('xochimilco') ){
 			$page = array(
 				'post_author' => 1,
@@ -131,6 +132,41 @@
 			);
 			wp_insert_post( $page, true );
 		}
-		
+
+		//Video home
+		if( ! get_page_by_path('video-home') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'Video Home',
+				'post_name'   => 'video-home',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
+
+		// CTA Canastas
+		if( ! get_page_by_path('cta-canastas') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'CTA Canastas',
+				'post_name'   => 'cta-canastas',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
+
+		// CTA Visítanos
+		if( ! get_page_by_path('cta-visitanos') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'CTA Visítanos',
+				'post_name'   => 'cta-visitanos',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
 
 	});

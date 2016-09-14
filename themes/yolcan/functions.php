@@ -696,7 +696,7 @@ add_action('woocommerce_order_status_completed', 'call_restaurant');
 function call_restaurant($order_id) {
 	$order = new WC_Order( $order_id );
 	$customer = new WC_Customer( $order_id );
-	
+
 	$items = $order->get_items();
 	$user_id =  get_post_meta( $order->post->ID, '_customer_user', true );
 
@@ -715,7 +715,7 @@ function call_restaurant($order_id) {
 	    	}
 
 		}
-	}	
+	}
 }
 
 // Add Variation Settings
@@ -727,17 +727,17 @@ add_action( 'woocommerce_product_after_variable_attributes', 'variation_settings
 */
 function variation_settings_fields( $loop, $variation_data, $variation ) {
 	// Text Field
-	woocommerce_wp_text_input( 
-		array( 
-			'id'          => '_saldo_a_abonar_field[' . $variation->ID . ']', 
-			'label'       => __( 'Saldo a abonar', 'woocommerce' ), 
+	woocommerce_wp_text_input(
+		array(
+			'id'          => '_saldo_a_abonar_field[' . $variation->ID . ']',
+			'label'       => __( 'Saldo a abonar', 'woocommerce' ),
 			'placeholder' => '',
 			'desc_tip'    => 'true',
 			'description' => __( 'IMPORTANTE: ingresar saldo a abonar.', 'woocommerce' ),
 			'value'       => get_post_meta( $variation->ID, '_saldo_a_abonar_field', true )
 		)
 	);
-	
+
 }
 
 // Save Variation Settings
@@ -752,5 +752,5 @@ function save_variation_settings_fields( $post_id ) {
 	if( ! empty( $saldo_abonar ) ) {
 		update_post_meta( $post_id, '_saldo_a_abonar_field', esc_attr( $saldo_abonar ) );
 	}
-	
+
 }

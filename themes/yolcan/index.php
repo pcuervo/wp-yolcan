@@ -2,10 +2,16 @@
 
 	<div class="[ container ]">
 		<!-- video	-->
+
 		<section class="[ row ]">
+			<?php
+				$video = get_page_by_title( 'Video Home' );
+				$videoContent = $video->post_content;
+				$videoURL = wp_extract_urls( $videoContent ); //https://www.youtube.com/embed/HCj_EUKAis4
+			?>
 			<div class="[ col-xs-12 ][ margin-bottom--large ]">
 				<div class="[ js-video-wrapper ]">
-					<iframe class="[ embed-responsive-item ]" src="https://www.youtube.com/embed/HCj_EUKAis4" frameborder="0" allowfullscreen></iframe>
+					<iframe class="[ embed-responsive-item ]" src="<?php echo ( empty($videoURL[0]) ) ? 'https://www.youtube.com/embed/HCj_EUKAis4' : $videoURL[0]; ?>" frameborder="0" allowfullscreen></iframe>
 				</div>
 			</div>
 			<div class="[ col-xs-12 ]">
@@ -14,9 +20,25 @@
 		</section>
 
 		<section class="[ row ]">
+
+			<?php
+				$CTACanastas = get_page_by_path('cta-canastas');
+				$CTAVisitanos = get_page_by_path('cta-visitanos');
+
+				$CTACanastasID = $CTACanastas->ID;
+				$CTAVisitanosID = $CTAVisitanos->ID;
+
+				$CTACanastasIMGID = get_post_thumbnail_id($CTACanastasID);
+				$CTAVisitanosIMGID = get_post_thumbnail_id($CTAVisitanosID);
+
+				$CTACanastasURL = wp_get_attachment_url( $CTACanastasIMGID, 'full' );
+				$CTAVisitanosURL = wp_get_attachment_url( $CTAVisitanosIMGID, 'full' );
+
+			?>
+
 			<!-- banner	desktop -->
 			<article class="[ col-sm-6 ]">
-				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/IMG_1023.jpg');">
+				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo $CTACanastasURL; ?>');">
 					<h2>Canastas de verduras y frutas organicas a domicilio</h2>
 					<div class="[ btn-absolute-bottom ]">
 						<div class="[ text-center ]" >
@@ -29,7 +51,7 @@
 				</div>
 			</article>
 			<article class="[ col-sm-6 ]">
-				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo THEMEPATH; ?>images/_DSC0010.jpg');">
+				<div class="[ bg-image rectangle ][ padding ][ color-light text-shadow ]" style="background-image: url('<?php echo $CTAVisitanosURL; ?>');">
 					<h2>Conoce como se cosechan nuestros productos y a quienes los producen</h2>
 					<div class="[ text-center ]" >
 						<div class="[ btn-absolute-bottom ]">
@@ -96,61 +118,65 @@
 
 	</div> <!--/container-->
 
-	<section class="[ container ]">
-		<h2 class="[ text-center ][ margin-top margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
-		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
-					<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
-				</div>
-				<div class="[ margin-bottom--large ][ text-center ]">
-					<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
-				</div>
-				<div class="[ text-center ]">
-					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
-					<a data-toggle="modal" data-target="#club-consumo" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
-				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
-				<div class="">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
-					<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
-				</div>
-				<div class="[ row ]">
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
-						<p class="[ no-margin ]">3-4.5 KG</p>
-						<p>Ensalada Gourmet (200 gr.)</p>
-						<p><strong class="[ color-primary ]">$250</strong> semanales</p>
+	<section class="[ bg-gray-lighter ]">
+		<div class="[ container ]">
+			<h2 class="[ text-center ][ margin-top margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
+			<div class="[ row ]">
+				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
+					<div class="[ text-center ]">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
+						<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 					</div>
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
-						<p class="[ no-margin ]">4.5-6.5 KG</p>
-						<p>Ensalada Gourmet (300 gr.)</p>
-						<p><strong class="[ color-primary ]">$375</strong> semanales</p>
+					<div class="[ margin-bottom--large ][ text-center ]">
+						<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
 					</div>
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom ]">
-						<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
-						<p class="[ no-margin ]">6.5-8.5 KG</p>
-						<p>Ensalada Gourmet (500 gr.)</p>
-						<p><strong class="[ color-primary ]">$500</strong> semanales</p>
+					<div class="[ text-center ]">
+						<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
+						<button data-toggle="modal" data-target="#club-consumo" class="[ btn btn-secondary ][ normal-wrap ]">crea un club de consumo</button>
 					</div>
 				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
-					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
-					<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
+				<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
+					<div class="">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
+						<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
+					</div>
+					<div class="[ row ]">
+						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
+							<div class="[ card__header ]">
+								<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
+								<p class="[ no-margin ]">3-4.5 KG</p>
+								<p>Ensalada Gourmet (200 gr.)</p>
+								<p class="[ no-margin ]"><strong class="[ color-primary ]">$250</strong> semanales</p>
+							</div>
+						</div>
+						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
+							<div class="[ card__header ]">
+								<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
+								<p class="[ no-margin ]">4.5-6.5 KG</p>
+								<p>Ensalada Gourmet (300 gr.)</p>
+								<p class="[ no-margin ]"><strong class="[ color-primary ]">$375</strong> semanales</p>
+							</div>
+						</div>
+						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
+							<div class="[ card__header ]">
+								<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
+								<p class="[ no-margin ]">6.5-8.5 KG</p>
+								<p>Ensalada Gourmet (500 gr.)</p>
+								<p class="[ no-margin ]"><strong class="[ color-primary ]">$500</strong> semanales</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
+					<div class="[ text-center ]">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
+						<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
+						<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
-
-	<!-- Consumir local -->
-	<?php get_template_part('templates/consumir', 'local'); ?>
 
 	<section class="[ container ]">
 		<div class="row">
@@ -222,55 +248,7 @@
 		</div>
 	</section>
 
-	<section class="[ container ]">
-		<h2 class="[ text-center ][ margin-top margin-bottom--large ]">Estos son los tres sencillos pasos para obtener tu canasta</h2>
-		<div class="[ row ]">
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
-					<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
-				</div>
-				<div class="[ margin-bottom--large ][ text-center ]">
-					<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
-				</div>
-				<div class="[ text-center ]">
-					<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
-					<a data-toggle="modal" data-target="#club-consumo" ><button class="[ btn btn-secondary ]">crea un club de consumo</button></a>
-				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
-				<div class="">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
-					<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
-				</div>
-				<div class="[ row ]">
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
-						<p class="[ no-margin ]">3-4.5 KG</p>
-						<p>Ensalada Gourmet (200 gr.)</p>
-						<p><strong class="[ color-primary ]">$250</strong> semanales</p>
-					</div>
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
-						<p class="[ no-margin ]">4.5-6.5 KG</p>
-						<p>Ensalada Gourmet (300 gr.)</p>
-						<p><strong class="[ color-primary ]">$375</strong> semanales</p>
-					</div>
-					<div class="[ col-xs-12 col-md-6 col-md-offset-3 ][ margin-bottom--large ]">
-						<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
-						<p class="[ no-margin ]">6.5-8.5 KG</p>
-						<p>Ensalada Gourmet (500 gr.)</p>
-						<p><strong class="[ color-primary ]">$500</strong> semanales</p>
-					</div>
-				</div>
-			</div>
-			<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
-				<div class="[ text-center ]">
-					<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
-					<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
-					<a  href="<?php echo site_url('/productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- Consumir local -->
+	<?php get_template_part('templates/consumir', 'local'); ?>
+
 <?php get_footer(); ?>
