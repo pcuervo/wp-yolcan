@@ -2,13 +2,9 @@
 global $opCliente;
 global $clubCanasta;
 
-echo '<pre>';
-print_r($clubCanasta);
-echo '</pre>';
-
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
 $adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
-$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0; ?>
+$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotalAdicionalesSemana($adicionalesAgregados) : 0; ?>
 <span id="productos-canasta"></span>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
 
@@ -39,7 +35,8 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 		<?php if (! empty($adicionalesAgregados)): 
 			foreach ($adicionalesAgregados['ingredientes'] as $key => $ingrediente): 
 				$terms = wp_get_post_terms( $ingrediente['ingredienteID'], 'unidades' );
-				$unidad = isset($terms[0]) ? $terms[0]->name : '';?>
+				$unidad = isset($terms[0]) ? $terms[0]->name : '';
+				$entrega_adicional = $ingrediente['toca-quincenal'] == 0 ? 'En esta semana no se entrega este ingrediente hasta la próxima' : '';?>
 				<li>
 		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
 		            <small>
@@ -50,7 +47,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 		            	</form>
 		            </small>
 
-		           <small>* <?php echo $ingrediente['periodo']; ?></small>
+		           <small>* <?php echo $ingrediente['periodo']; ?> <span class="color-danger"><?php echo $entrega_adicional ; ?></span></small>
 		        </li>
 			<?php endforeach;
 		else:

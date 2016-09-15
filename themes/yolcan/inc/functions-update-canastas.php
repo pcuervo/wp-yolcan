@@ -31,7 +31,8 @@ function descontarSaldoClientes(){
 			$variacion = getCostoVariationID($cliente->producto_id);
 			$adicionales = unserialize(getIngredientesAdicionales($cliente->cliente_id));
 
-			$porCobrar = $variacion->costoSemanal + $adicionales['total_adicionales'];
+			$porCobrar = $variacion->costoSemanal + getTotalAdicionalesSemana($adicionales);
+
 			$saldoFinal = $cliente->saldo - $porCobrar;
 			if($porCobrar <= $cliente->saldo){
 				updateSaldoCliente($cliente->cliente_id, $saldoFinal);
@@ -71,6 +72,9 @@ function destroyAdicionalesCliente($clienteId, $adicionales){
 		foreach ($ingredientes as $key => $ingrediente) {
 			if ($ingrediente['periodo'] == 'Sólo esta ocación') {
 				unset($adicionales['ingredientes'][$ingrediente['ingredienteID']]);
+			}elseif ($ingrediente['periodo'] == 'Cada 15 dias') {
+				$adicionales['ingredientes'][$key]['toca-quincenal'] = $ingrediente['toca-quincenal'] == 1 ? 0 : 1;
+				$total = $total + $ingrediente['total'];
 			}else{
 				$total = $total + $ingrediente['total'];
 			}
@@ -136,6 +140,18 @@ function nuevasCanastasSemanales(){
 		}
 
 	}
+}
+
+function getTotalAdicionalesSemana($adicionales){
+	$total = 0;
+	if (!empty($adicionales['ingredientes'])) {
+		foreach ($adicionales['ingredientes'] as $key => $adicional) {
+			if ($adicional['toca-quincenal'] == 1) {
+				$total = $total + $adicional['total'];
+			}
+		}
+	}
+	return $total;
 }
 
 
