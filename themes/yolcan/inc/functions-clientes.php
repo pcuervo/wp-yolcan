@@ -78,7 +78,8 @@ function storeIngredientesAdicionales($clienteId, $data){
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $total,
 		'cantidad' => $data['adicional-numero-productos'],
-		'periodo' => $data['adicional-periodo']
+		'periodo' => $data['adicional-periodo'],
+		'toca-quincenal' => 1
 	];
 
 	return saveIngredientesAdicionales(serialize($newArr), $clienteId);
@@ -95,12 +96,14 @@ function editIngredientesAdicionales($clienteId, $data, $adicionales){
 	$cantidadOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['cantidad'] : 0;
 	$totalIngrediente = $totalOld + $total;
 	$cantidadIngrediente = $cantidadOld + $data['adicional-numero-productos'];
+	$tocaQuinsenal = isset($adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal']) ? $adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal'] : 1;
 	$adicionales['ingredientes'][$data['adicional-id']] = [
 		'ingredienteID' => $data['adicional-id'],
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $totalIngrediente,
 		'cantidad' => $cantidadIngrediente ,
-		'periodo' => $data['adicional-periodo']
+		'periodo' => $data['adicional-periodo'],
+		'toca-quincenal' => $tocaQuinsenal
 	];
 
 	return updateIngredientesAdicionales(serialize($adicionales), $clienteId);

@@ -2,6 +2,10 @@
 global $opCliente;
 global $clubCanasta;
 
+echo '<pre>';
+print_r($clubCanasta);
+echo '</pre>';
+
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
 $adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
 $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0; ?>
@@ -99,6 +103,10 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 									<div>
 										<input type="radio" id="option<?php echo $adicional->ingrediente_id; ?>2" name="adicional-periodo" value="Cada semana">
 										<label for="option<?php echo $adicional->ingrediente_id; ?>2"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
+									</div>
+									<div>
+										<input type="radio" id="option<?php echo $adicional->ingrediente_id; ?>3" name="adicional-periodo" value="Cada 15 dias">
+										<label for="option<?php echo $adicional->ingrediente_id; ?>3"><span class="[ margin-right--xxsmall ]"></span> Cada 15 dias</label>
 									</div>
 								</div>
 								<input type="hidden" name="action" value="save-additional-ingredient">
