@@ -10,7 +10,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 
 	<!-- PROCIMA CANASTA -->
 
-	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal;?></span></h4>
+	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo number_format($costoSemanal, 2, ".", ",");?></span></h4>
 	<p><?php echo isset($clubCanasta->producto_name) ? $clubCanasta->producto_name : ''; ?> para el 10 de junio:</p>
 	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
@@ -29,7 +29,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 	
 	<!-- ADICIONALES AGREGADOS -->
 
-	<h5>Productos agregados: <span class="[ color-primary ]"> $<?php echo $totalAdicionales; ?></span> </h5>
+	<h5>Productos agregados: <span class="[ color-primary ]"> $<?php echo number_format($totalAdicionales, 2, ".", ","); ?></span> </h5>
 	
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (! empty($adicionalesAgregados)): 
@@ -55,7 +55,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 		endif; ?>
 		
 	</ul>
-	<h5>Total a descontar el proximo corte: <span class="[ color-danger ]">$<?php echo $totalAdicionales + $costoSemanal; ?></span>  </h5>
+	<h5>Total a descontar el proximo corte: <span class="[ color-danger ]">$<?php echo number_format($totalAdicionales + $costoSemanal, 2, ".", ","); ?></span>  </h5>
 
 	<a href="<?php echo site_url('/recetas/'); ?>" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
 </article>
@@ -67,7 +67,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 	<h4>Agrega productos</h4>
 	<?php if (!empty($clubCanasta->adicionales) AND $costoSemanal < $opCliente->saldo): 
 		$saldoDisponible = ( $opCliente->saldo - $costoSemanal ) - $totalAdicionales; ?>
-		<h5>Saldo disponible para adicionales <strong class="[ color-primary ]">$<?php echo $saldoDisponible;?></strong></h5>
+		<h5>Saldo disponible para adicionales <strong class="[ color-primary ]">$<?php echo number_format($saldoDisponible, 2, ".", ",");?></strong></h5>
 		<input type="hidden" id="saldo-libre" value="<?php echo $saldoDisponible; ?>">
 		
 		<p>Selecciona los productos que deseas agregar a tu canasta:</p>
