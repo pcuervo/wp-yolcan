@@ -167,7 +167,6 @@ function show_metabox_info_extra($post){
 	$nombre_encargado_club = get_post_meta($post->ID, 'nombre-encargado-club', true);
 	$telefono_encargado_club = get_post_meta($post->ID, 'telefono-encargado-club', true);
 	$dias_de_recoleccion = get_post_meta($post->ID, 'dias-de-recoleccion', true);
-	$dias_de_recoleccion_a = get_post_meta($post->ID, 'dias-de-recoleccion-a', true);
 
 	$horarios_de_recoleccion = get_post_meta($post->ID, 'horarios-de-recoleccion', true);
 	$capacidad_del_club = get_post_meta($post->ID, 'capacidad-del-club', true);
@@ -194,8 +193,7 @@ function show_metabox_info_extra($post){
 	echo "<input type='text' class='widefat' id='telefono_encargado_club' name='telefono_encargado_club' value='$telefono_encargado_club'/><br><br>";
 
 	echo "<label for='dias_de_recoleccion' class='label-paquetes'>Días de recolección: </label><br>";
-	echo "de: <input type='text' class='date-picker' id='dias_de_recoleccion' name='dias_de_recoleccion' value='$dias_de_recoleccion'/>";
-	echo " a: <input type='text' class='date-picker' id='dias_de_recoleccion_a' name='dias_de_recoleccion_a' value='$dias_de_recoleccion_a'/><br><br>";
+	echo "<input type='text' class='widefat' id='dias_de_recoleccion' name='dias_de_recoleccion' placeholder='ej. Lunes a Miércoles' value='$dias_de_recoleccion'/><br><br>";
 
 	echo "<label for='horarios_de_recoleccion' class='label-paquetes'>Horarios de recolección: </label>";
 	echo "<input type='text' class='widefat' id='horarios_de_recoleccion' name='horarios_de_recoleccion' value='$horarios_de_recoleccion'/><br><br>";
