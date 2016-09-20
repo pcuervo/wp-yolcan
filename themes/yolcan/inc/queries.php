@@ -24,6 +24,18 @@ add_action('init', function() use (&$wpdb){
 	);
 });
 
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}corte_general_clientes (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			fecha_corte datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			UNIQUE KEY `id` (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+	);
+});
+
+
 /**
  * REGRESA LOS INGREDIENTES DE LA RECETA
  * @param  [integer] $receta_id [id de la receta]
@@ -121,4 +133,25 @@ function recipesBySearchCount($search, $post_page){
 
 	return ceil($pages);
 
+}
+
+/**
+ * GUARDA LOS DATOS DEL CORTE, FECHA Y USUARIO QUE GENERO EL CORTE
+ */
+function storeCorteClientes(){
+	global $wpdb;
+	global $current_user;
+	$wpdb->insert(
+		$wpdb->prefix.'corte_general_clientes',
+		array(
+			'user_id' => $current_user->ID,
+			'fecha_corte' => date('Y-m-d h:i:s'),
+		),
+		array(
+			'%d',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
 }

@@ -16,6 +16,7 @@ function getClientUpdate(){
 	descontarSaldoClientes();
 	nuevasCanastasSemanales();
 	cambioStatusSuspenciones();
+	storeCorteClientes();
 }
 
 

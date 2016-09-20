@@ -213,4 +213,25 @@ class ClientesController {
 		]);
 	}
 
+	/**	
+	 * CORTE DE COMPRAS CLIENTE
+	 */
+	public function corteSemanal()
+	{
+		if (isset($this->dataPost['action']) AND $this->dataPost['action'] == 'realizar-corte') {
+			
+			if (function_exists('getClientUpdate')) {
+				getClientUpdate();
+
+				$urlRedirect = admin_url().'admin.php?page=corte_semanal&corte=ok';
+				wp_redirect($urlRedirect);
+				exit;
+			}
+		}
+		
+		return viewCliente('corte-semanal', [
+			'cortes' => $this->modelClientes->getHistorialCortes(),
+		]);
+	}
+
 }

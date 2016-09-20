@@ -20,7 +20,7 @@ define( 'PATH_VERSION_CLIENTES', "1.0");
 add_action( 'admin_enqueue_scripts', function(){
 	// scripts
 	wp_enqueue_style('clientes-css', PATH_CLIENTESURL . 'resources/style.css');
-
+	wp_enqueue_script( 'clientes-js', PATH_CLIENTESURL . 'resources/functions-clientes.js', array('jquery'), '1.0', true );
 });
 
 require(PATH_CLIENTES."/helpers.php");
@@ -31,6 +31,8 @@ register_activation_hook( __FILE__, array( 'ClientesModel', 'install' ) );
 
 
 add_action( 'admin_menu', create_function( '', 'ClientesController::index("activos", "Clientes", "activos");' ) );
+
+add_action( 'admin_menu', create_function( '', 'ClientesController::index("corteSemanal", "Corte semanal", "corte_semanal");' ) );
 
 if (isset($_GET['page']) AND $_GET['page'] == 'no_activos'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("noActivos", "Cliestes No Activos", "no_activos");' ) );

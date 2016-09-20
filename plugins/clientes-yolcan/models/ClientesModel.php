@@ -11,7 +11,7 @@ class ClientesModel {
 
 	static function install()
 	{
-		
+
 	}
 
 
@@ -195,6 +195,17 @@ class ClientesModel {
 		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}saldo_modificado_por_admin 
 			WHERE cliente_id = $clienteId ORDER BY id DESC ;", 
 	 	 OBJECT );
+	}
+
+	/**	
+	 * REGRESA EL HISTORIAL DE RECORTES
+	 * @return [type] [description]
+	 */
+	public function getHistorialCortes(){
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}corte_general_clientes
+			ORDER BY id DESC
+			LIMIT 10;", 
+	 	OBJECT );
 	}
 
 }
