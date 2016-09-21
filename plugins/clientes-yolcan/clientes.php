@@ -34,6 +34,8 @@ add_action( 'admin_menu', create_function( '', 'ClientesController::index("activ
 
 add_action( 'admin_menu', create_function( '', 'ClientesController::index("corteSemanal", "Corte semanal", "corte_semanal");' ) );
 
+add_action( 'admin_menu', create_function( '', 'ClientesController::index("clientesPorCanasta", "Clientes por canasta", "clientes_canasta");' ) );
+
 if (isset($_GET['page']) AND $_GET['page'] == 'no_activos'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("noActivos", "Cliestes No Activos", "no_activos");' ) );
 }
@@ -52,6 +54,10 @@ if (isset($_GET['page']) AND $_GET['page'] == 'saldo_insuficiente'){
 
 if (isset($_GET['page']) AND $_GET['page'] == 'por_club'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clubes", "Cliestes por Club", "por_club");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'por_canasta'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("porCanastas", "Cliestes por Canasta", "por_canasta");' ) );
 }
 
 if (isset($_GET['page']) AND $_GET['page'] == 'cliente'){

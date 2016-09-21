@@ -238,4 +238,17 @@ class ClientesController {
 		]);
 	}
 
+	public function clientesPorCanasta()
+	{
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12
+            );
+        $productos = new WP_Query( $args );
+        
+		return viewCliente('clientes-canasta', [
+			'canastas' =>  $productos->posts
+		]);
+	}
+
 }

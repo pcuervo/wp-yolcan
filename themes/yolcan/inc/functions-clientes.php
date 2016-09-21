@@ -276,10 +276,6 @@ function suspenderCanastaTemporal($data, $clientId){
 	extract($data);
 
 	if (isset($data['suspensionHasta']) AND $data['suspensionHasta'] != '') {
-		file_put_contents(
-			'/Users/alejandrosandoval/Desktop/php.txt',
-			var_export( $data, true )
-		);
 		suspenderCanastaTemporalFecha($clientId, $data);
 	}else{
 		$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
