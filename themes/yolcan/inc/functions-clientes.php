@@ -274,13 +274,39 @@ function getCostoVariationID($variant_id){
  */
 function suspenderCanastaTemporal($data, $clientId){
 	extract($data);
-	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+
+	if (isset($data['suspensionHasta']) AND $data['suspensionHasta'] != '') {
+		file_put_contents(
+			'/Users/alejandrosandoval/Desktop/php.txt',
+			var_export( $data, true )
+		);
+		suspenderCanastaTemporalFecha($clientId, $data);
+	}else{
+		$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+		$fecha_inicio = date('Y-m-d');
+
+		$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
+		$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
+	
+		$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+
+		updateSuspensionOpcionesCliente($clientId, $idSuspension);
+	}
+	
+}
+
+
+/**	
+ * SUSPENDE LA ENTREGA Y CORTE HASTA DESPUES DE LA FECHA INDICADA
+ */
+function suspenderCanastaTemporalFecha($clientId, $data){
+	extract($data);
+
+	$fechaProximoCobro = getFechaProximoCobro($suspensionHasta, 1);
+	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
 	$fecha_inicio = date('Y-m-d');
 
-	$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
-	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
-	
-	$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+	$idSuspension = updateSuspensionCanasta($clientId, 0, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
 
 	updateSuspensionOpcionesCliente($clientId, $idSuspension);
 }

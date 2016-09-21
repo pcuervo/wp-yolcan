@@ -160,6 +160,10 @@ class ClientesController {
 			}
 		}
 
+		if (isset($this->dataPost['suspensionHasta']) AND function_exists('suspenderCanastaTemporal')) {
+			suspenderCanastaTemporal($this->dataPost, $this->clienteId);
+		}
+
 		if (isset($this->dataPost['suspension']) AND function_exists('suspenderCanastaTemporal')) {
 			suspenderCanastaTemporal($this->dataPost, $this->clienteId);
 		}

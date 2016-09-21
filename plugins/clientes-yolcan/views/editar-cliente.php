@@ -51,6 +51,11 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 		            <input id="suspender-4" type="radio" class="input-radio" name="suspension" value="4">
 		            <label for="suspender-4">4 Semanas</label>
 		        </div>
+		        <div>
+		        	<label for="suspender-hasta">Suspender hasta</label><br>
+		            <input id="suspender-hasta" type="text" class="date-piker" name="suspensionHasta">
+		            
+		        </div>
 		    <?php else: ?>
 				<p><strong>Ya esta suspendida la entrega</strong></p>
 			<?php endif; ?>
