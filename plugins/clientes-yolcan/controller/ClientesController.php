@@ -154,9 +154,11 @@ class ClientesController {
 	 */
 	public function updateCliente()
 	{
+		$urlRedirect = admin_url().'admin.php?page=cliente&id_cliente='.$this->clienteId;
+
 		if (isset($this->dataPost['saldo']) AND function_exists('updateSaldoCliente')) {
-			updateSaldoCliente($this->clienteId, $this->dataPost['saldo']);
 			if ($this->dataPost['saldo'] != $this->dataPost['saldo-anterior']) {
+				updateSaldoCliente($this->clienteId, $this->dataPost['saldo']);
 				$this->modelClientes->storeHistoryUpdateSaldoAdmin($this->clienteId, $this->dataPost['saldo'], $this->dataPost['saldo-anterior']);
 			}
 		}
@@ -168,8 +170,13 @@ class ClientesController {
 		if (isset($this->dataPost['suspension']) AND function_exists('suspenderCanastaTemporal')) {
 			suspenderCanastaTemporal($this->dataPost, $this->clienteId);
 		}
+		
+		if (isset($this->dataPost['club']) AND function_exists('saveClubCliente')) {
+			if ($this->dataPost['club'] != $this->dataPost['club-anterior']) {
+				saveClubCliente($this->dataPost['club'], $this->clienteId, $urlRedirect);
+			}
+		}
 
-		$urlRedirect = admin_url().'admin.php?page=cliente&id_cliente='.$this->clienteId;
 		wp_redirect($urlRedirect);
 	}
 

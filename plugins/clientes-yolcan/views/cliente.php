@@ -92,33 +92,36 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 		<a href="<?php echo admin_url().'admin.php?page=historial_cliente&id_cliente='.$cliente->cliente_id; ?>" class="button-primary">Historial de canastas</a>
 	</div>
 	<br>
-	<hr>
-	<h3>Historial de actualizaciones de saldo por el administrador</h3>
-	<?php if(!empty($historySaldo)): ?>
-		<table class="wp-list-table widefat fixed striped users">
-			<thead>
-				<tr>
-					<th scope="col" class="manage-column column-primary"><span>Fecha actualización</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Lo actualizó</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Saldo Anterior</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Saldo Actualizado</span></th>
-				</tr>
-			</thead>
+	<br>
+	<div style="position: relative;overflow: hidden;width: 100%;">
+		<hr>
+		<h3>Historial de actualizaciones de saldo por el administrador</h3>
+		<?php if(!empty($historySaldo)): ?>
+			<table class="wp-list-table widefat fixed striped users">
+				<thead>
+					<tr>
+						<th scope="col" class="manage-column column-primary"><span>Fecha actualización</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Lo actualizó</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Anterior</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Actualizado</span></th>
+					</tr>
+				</thead>
 
-			<tbody id="the-list">
-				
-					<?php foreach ($historySaldo as $history):
-						$user = get_user_by( 'ID', $history->user_id ); ?>
-						<tr>
-							<td><?php echo $history->fecha; ?></td>
-							<td><?php echo $user->user_login; ?></td>
-							<td><?php echo $history->saldo_anterior; ?></td>
-							<td><?php echo $history->saldo_agregado; ?></td>
-						</tr>
-					<?php endforeach; ?>
-			</tbody>
+				<tbody id="the-list">
+					
+						<?php foreach ($historySaldo as $history):
+							$user = get_user_by( 'ID', $history->user_id ); ?>
+							<tr>
+								<td><?php echo $history->fecha; ?></td>
+								<td><?php echo $user->user_login; ?></td>
+								<td><?php echo $history->saldo_anterior; ?></td>
+								<td><?php echo $history->saldo_agregado; ?></td>
+							</tr>
+						<?php endforeach; ?>
+				</tbody>
 
-		</table>
+			</table>
+		</div>
 	<?php else: ?>
 		<p class="color-primar">No existen actualizaciones por el Administrador</p>
 	<?php endif; ?>

@@ -32,8 +32,22 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 			<label for="">Saldo</label>
 			<input type="text" name="saldo" value="<?php echo $cliente->saldo; ?>">
 			<input type="hidden" name="saldo-anterior" value="<?php echo $cliente->saldo; ?>">
+			<input type="hidden" name="club-anterior" value="<?php echo $cliente->club_id; ?>">
 
-			<p>Suspender entrega de canasta</p>
+			<hr>
+			<p><strong>Cambiar de club</strong></p>
+			<label for="">Seleccione un club</label>
+			<select name="club" id="">
+				<?php if (!empty($clubes)):
+					foreach ($clubes as $key => $club) : 
+						$selected = $club->ID == $cliente->club_id ? 'selected' : ''; ?>
+						<option value="<?php echo $club->ID ?>" <?php echo $selected ?>><?php echo $club->post_title ?></option>
+					<?php endforeach; 
+				endif; ?>
+				
+			</select>
+			<hr>
+			<p><strong>Suspender entrega de canasta</strong></p>
 			<?php if($cliente->suspendido != 1): ?>
 				<div>
 		            <input id="suspender-1" type="radio" class="input-radio" name="suspension" value="1">

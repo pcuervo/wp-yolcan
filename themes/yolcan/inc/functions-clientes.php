@@ -138,18 +138,20 @@ function checkStatusCliente(){
 /**
  * GUARDA EL CLUB DONDE QUIERE SU CANASTA EL CLIENTE
  */
-function saveClubCliente($clubId){
+function saveClubCliente($clubId, $clienteID = '', $url_return = ''){
 	if ($clubId == '') return false;
 
 	global $current_user;
-	$opCliente = getOpcionesCliente($current_user->ID);
+	$clienteID = $clienteID == '' ? $current_user->ID : $clienteID;
+	$url_return = $url_return == '' ? site_url('/mi-cuenta') : $url_return;
+	$opCliente = getOpcionesCliente($clienteID);
 	
 	if (!empty($opCliente)) {
-		getClientUpdateClub($current_user->ID, $clubId);
-		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
+		getClientUpdateClub($clienteID, $clubId);
+		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $clienteID);
 	}
 
-	wp_redirect( site_url('/mi-cuenta') );
+	wp_redirect( $url_return );
 	exit;
 }
 
@@ -301,10 +303,25 @@ function suspenderCanastaTemporalFecha($clientId, $data){
 	$fechaProximoCobro = getFechaProximoCobro($suspensionHasta, 1);
 	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
 	$fecha_inicio = date('Y-m-d');
+	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
 
-	$idSuspension = updateSuspensionCanasta($clientId, 0, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+	$semanas = dateDifference($proximo_viernes, $fechaProximoCobro);
+
+	$idSuspension = updateSuspensionCanasta($clientId, $semanas, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
 
 	updateSuspensionOpcionesCliente($clientId, $idSuspension);
+}
+
+function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
+{
+    $datetime1 = date_create($date_1);
+    $datetime2 = date_create($date_2);
+   
+    $interval = date_diff($datetime1, $datetime2);
+
+   	$dias = $interval->format($differenceFormat);
+    return $dias / 7;
+   
 }
 
 /**	
