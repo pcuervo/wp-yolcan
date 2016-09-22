@@ -738,6 +738,17 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
 		)
 	);
 
+	woocommerce_wp_text_input(
+		array(
+			'id'          => '_semanas_field[' . $variation->ID . ']',
+			'label'       => __( 'Semanas', 'woocommerce' ),
+			'placeholder' => '',
+			'desc_tip'    => 'true',
+			'description' => __( 'IMPORTANTE: ingresar numero de semanas.', 'woocommerce' ),
+			'value'       => get_post_meta( $variation->ID, '_semanas_field', true )
+		)
+	);
+
 }
 
 // Save Variation Settings
@@ -751,6 +762,11 @@ function save_variation_settings_fields( $post_id ) {
 	$saldo_abonar = $_POST['_saldo_a_abonar_field'][ $post_id ];
 	if( ! empty( $saldo_abonar ) ) {
 		update_post_meta( $post_id, '_saldo_a_abonar_field', esc_attr( $saldo_abonar ) );
+	}
+
+	$saldo_abonar = $_POST['_semanas_field'][ $post_id ];
+	if( ! empty( $saldo_abonar ) ) {
+		update_post_meta( $post_id, '_semanas_field', esc_attr( $saldo_abonar ) );
 	}
 
 }

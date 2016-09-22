@@ -7,13 +7,13 @@ function getNameVariation($variationId){
 	
 	switch ($porciones[6]) {
 	    case 'Mensual':
-	        return "1 mes";
+	        return "4 semanas";
 	        break;
 	    case 'Trimestral':
-	        return "3 meses";
+	        return "12 semanas";
 	        break;
 	    case 'Semestral':
-	        return "6 meses";
+	        return "24 semanas";
 	        break;
 	}
 }

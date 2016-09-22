@@ -1,5 +1,4 @@
 <?php 
-$arr_ins = feedInstagram();
 
 /**
  * FEED INSTAGRAM
@@ -18,7 +17,7 @@ function feedInstagram($tag = 'yolcan'){
 
   $new_arr = array();
 
-  foreach ($decoded_results['data'] as $key => $item):
+  // foreach ($decoded_results['data'] as $key => $item):
 
     // if ( $key <= 8):
     //   $time = $item['caption']['created_time'];
@@ -32,7 +31,7 @@ function feedInstagram($tag = 'yolcan'){
     //   $new_arr[$time.'-'.$key]['media'] = $item['images']['standard_resolution']['url'];
     //   $new_arr[$time.'-'.$key]['url_user_profile'] = 'https://instagram.com/'.$item['caption']['from']['username'];
     // endif;
-  endforeach;
+  // end(array)dforeach;
 
   return $new_arr;
   
