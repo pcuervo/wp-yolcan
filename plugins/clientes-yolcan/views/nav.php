@@ -25,9 +25,6 @@
 		<li class="por-clube"><a href="<?php echo admin_url().'admin.php?page=por_club'; ?>" class="<?php echo $current_por_club; ?>">Ver otro club</a>  |</li>
 	<?php endif; ?>
 
-	<?php if(!isset($_GET['tamano-canasta'])):?>
-		<li class="por-canasta"><a href="<?php echo admin_url().'admin.php?page=por_canasta'; ?>" class="<?php echo $current_por_canasta; ?>">Por canasta</a></li>
-	<?php else: ?>
-		<li class="por-canasta"><a href="<?php echo admin_url().'admin.php?page=por_canasta'; ?>" class="<?php echo $current_por_canasta; ?>">Ver otra canasta</a></li>
-	<?php endif; ?>
+	<li class="por-canasta"><a href="<?php echo admin_url().'admin.php?page=clientes_canasta'; ?>">Por canasta</a></li>
+
 </ul>

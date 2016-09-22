@@ -8,6 +8,7 @@ class ClientesController {
 
 	function __construct() {
         $this->dataPost = !empty($_POST) ? $_POST : [];
+        $this->dataGet = !empty($_GET) ? $_GET : [];
         $this->club = isset($_GET['club']) ? $_GET['club'] : 0;
         $this->clienteId = isset($_GET['id_cliente']) ? $_GET['id_cliente'] : 0;
         $this->modelClientes = modelCliente('ClientesModel');
@@ -160,7 +161,7 @@ class ClientesController {
 			}
 		}
 
-		if (isset($this->dataPost['suspensionHasta']) AND function_exists('suspenderCanastaTemporal')) {
+		if (isset($this->dataPost['suspensionHasta']) AND $this->dataPost['suspensionHasta'] != '' AND function_exists('suspenderCanastaTemporal')) {
 			suspenderCanastaTemporal($this->dataPost, $this->clienteId);
 		}
 
@@ -245,9 +246,84 @@ class ClientesController {
             'posts_per_page' => 12
             );
         $productos = new WP_Query( $args );
+
+        $canasta_id = $this->getClientesCanastas($productos->posts);
+        $clientesCanasta = $this->modelClientes->getClientesPorCanasta($canasta_id);
         
 		return viewCliente('clientes-canasta', [
-			'canastas' =>  $productos->posts
+			'canastas' =>  $productos->posts,
+			'clientes' => $clientesCanasta,
+			'total' => count($clientesCanasta)
+		]);
+	}
+
+	private function getClientesCanastas($canastas){
+		$canasta_id = isset($this->dataGet['canasta']) ? $this->dataGet['canasta'] : '';
+		$canasta_id = ( $canasta_id == '' AND isset($canastas[0]) ) ? $canastas[0]->ID : $canasta_id;
+
+		return $canasta_id;
+	}
+
+	/**	
+	 * CLIENTES POR CANASTA SUSPENDIDOS
+	 * @return [type] [description]
+	 */
+	public function clientesCanastaSuspendidos(){
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12
+            );
+        $productos = new WP_Query( $args );
+
+        $canasta_id = $this->getClientesCanastas($productos->posts);
+        $clientesCanasta = $this->modelClientes->getClientesPorCanastaSuspendidos($canasta_id);
+        
+		return viewCliente('clientes-canasta', [
+			'canastas' =>  $productos->posts,
+			'clientes' => $clientesCanasta,
+			'total' => count($clientesCanasta)
+		]);
+	}
+
+	/**
+	 * CLIENTES POR CANASTA PROXIMOS A CADUCAR
+	 * @return [type] [description]
+	 */
+	public function clientesCanastaproximosCaducar(){
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12
+            );
+        $productos = new WP_Query( $args );
+
+        $canasta_id = $this->getClientesCanastas($productos->posts);
+        $clientesCanasta = $this->modelClientes->getClientesPorCanastaProximosCaducar($canasta_id);
+        
+		return viewCliente('clientes-canasta', [
+			'canastas' =>  $productos->posts,
+			'clientes' => $clientesCanasta,
+			'total' => count($clientesCanasta)
+		]);
+	}
+
+	/**
+	 * Saldo insuficiente
+	 * @return [type] [description]
+	 */
+	public function clientesCanastaSaldoInsuficiente(){
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12
+            );
+        $productos = new WP_Query( $args );
+
+        $canasta_id = $this->getClientesCanastas($productos->posts);
+        $clientesCanasta = $this->modelClientes->getClientesPorCanastaSaldoInsuficiente($canasta_id);
+        
+		return viewCliente('clientes-canasta', [
+			'canastas' =>  $productos->posts,
+			'clientes' => $clientesCanasta,
+			'total' => count($clientesCanasta)
 		]);
 	}
 

@@ -32,9 +32,9 @@ register_activation_hook( __FILE__, array( 'ClientesModel', 'install' ) );
 
 add_action( 'admin_menu', create_function( '', 'ClientesController::index("activos", "Clientes", "activos");' ) );
 
-add_action( 'admin_menu', create_function( '', 'ClientesController::index("corteSemanal", "Corte semanal", "corte_semanal");' ) );
-
 add_action( 'admin_menu', create_function( '', 'ClientesController::index("clientesPorCanasta", "Clientes por canasta", "clientes_canasta");' ) );
+
+add_action( 'admin_menu', create_function( '', 'ClientesController::index("corteSemanal", "Corte semanal", "corte_semanal");' ) );
 
 if (isset($_GET['page']) AND $_GET['page'] == 'no_activos'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("noActivos", "Cliestes No Activos", "no_activos");' ) );
@@ -82,5 +82,17 @@ if (isset($_GET['page']) AND $_GET['page'] == 'historial_cliente'){
 
 if (isset($_GET['page']) AND $_GET['page'] == 'ingredientes_canasta_cliente'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("ingredientesCanasta", "Historial cliente", "ingredientes_canasta_cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'clientes_canasta_suspendidos'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clientesCanastaSuspendidos", "Cliestes de Canasta Suspendidos", "clientes_canasta_suspendidos");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'clientes_canasta_proximos_caducar'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clientesCanastaproximosCaducar", "Cliestes de Canasta Proximos a caducar", "clientes_canasta_proximos_caducar");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'clientes_canasta_saldo_insuficiente'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clientesCanastaSaldoInsuficiente", "Cliestes de Canasta Saldo insuficiente", "clientes_canasta_saldo_insuficiente");' ) );
 }
 
