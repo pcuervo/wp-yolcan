@@ -15,12 +15,12 @@ class RestaurantesController {
 
 	static function index($method, $name_menu, $slug_page)
 	{
-		$clientes = new RestaurantesController;
+		$restaurantes_m = new RestaurantesController;
 
 		if ($slug_page == 'restaurantes_activos'){
-			add_menu_page( $name_menu, $name_menu, 'edit_pages', $slug_page, array($clientes, $method), '', 13 );
+			add_menu_page( $name_menu, $name_menu, 'edit_pages', $slug_page, array($restaurantes_m, $method), '', 13 );
 		}else{
-			add_submenu_page('restaurantes_activos', $name_menu, $name_menu, 'edit_pages', $slug_page, array($clientes, $method));          
+			add_submenu_page('restaurantes_activos', $name_menu, $name_menu, 'edit_pages', $slug_page, array($restaurantes_m, $method));          
 		}
 	}
 
@@ -31,12 +31,38 @@ class RestaurantesController {
 	 */
 	public function activos()
 	{
-		// $clinetes = $this->modelClientes->getClientesActivos($this->club);
-		$restaurantes = [];
+		$restaurantes = $this->modelRestaurantes->getActivos();
 
 		return viewRestaurantes('show', [
 			'restaurantes' => $restaurantes,
 			'total' => count($restaurantes)
+		]);
+	}
+
+
+	/**	
+	 * MUESTRA RESTAURANTES NO ACTIVOS
+	 * @return [type] [description]
+	 */
+	public function noActivos()
+	{
+		$restaurantes = $this->modelRestaurantes->getInactivos();
+		return viewRestaurantes('no-activos', [
+			'restaurantes' => $restaurantes,
+			'total' => count($restaurantes)
+		]);
+	}
+
+	/**	
+	 * MUESTRA EL RESTAURANTE
+	 * @return [type] [description]
+	 */
+	public function restaurante()
+	{
+		return viewRestaurantes('restaurante', [
+			'restauranteId' => $this->restauranteId,
+			'restaurante' => $this->modelRestaurantes->getDataRestauranteById($this->restauranteId),
+			'historySaldo' => $this->modelRestaurantes->getHistorySaldoRestauranteById($this->restauranteId)
 		]);
 	}
 

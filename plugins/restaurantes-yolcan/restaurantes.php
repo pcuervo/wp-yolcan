@@ -33,6 +33,10 @@ register_activation_hook( __FILE__, array( 'RestaurantesModel', 'install' ) );
 add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("activos", "Restaurantes", "restaurantes_activos");' ) );
 
 
-// if (isset($_GET['page']) AND $_GET['page'] == 'no_activos'){
-// 	add_action( 'admin_menu', create_function( '', RestaurantesController::index("noActivos", "Cliestes No Activos", "no_activos");' ) );
-// }
+if (isset($_GET['page']) AND $_GET['page'] == 'restaurantes_no_activos'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("noActivos", "Restaurantes No Activos", "restaurantes_no_activos");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("restaurante", "Restaurante", "restaurante");' ) );
+}

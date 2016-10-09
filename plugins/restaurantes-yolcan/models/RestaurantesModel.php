@@ -77,7 +77,53 @@ class RestaurantesModel {
 		);
 	}
 
+	/**
+	 * REGRESA LOS RESTAURANTES ACTIVOS
+	 * @return [type] [description]
+	 */
+	public function getActivos()
+	{
+		return $this->_wpdb->get_results( "SELECT sc.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%restaurante%') as um
+			INNER JOIN {$this->_prefix}saldo_restaurantes as sc
+			ON um.user_id = sc.restaurante_id
+			WHERE suspendido = 0 AND saldo > 0;", 
+	  OBJECT );
+	}
 
+	/**	
+	 * REGRESA LOS RESTAURANTES QUE NUEVOS
+	 * @return [type] [description]
+	 */
+	public function getInactivos()
+	{
+		return $this->_wpdb->get_results( "SELECT user_id as restaurante_id FROM {$this->_prefix}usermeta as um
+			INNER JOIN  {$this->_prefix}users as u
+			ON um.user_id = u.ID
+			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%restaurante%' AND user_id NOT IN (SELECT restaurante_id FROM {$this->_prefix}saldo_restaurantes)", 
+	 	 OBJECT );
+	}
 
+	/**	
+	 * INFORMACION DEL RESTAURANTE
+	 * @param  [type] $restauranteId [description]
+	 * @return [type]                [description]
+	 */
+	public function getDataRestauranteById($restauranteId)
+	{
+		return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}saldo_restaurantes WHERE restaurante_id = $restauranteId;", 
+	 	 OBJECT );
+
+	}
+
+	/**
+	 * HISTORIALD E CARGAS DE SALDO RESTAURANTE
+	 * @param  [type] $restauranteId [description]
+	 * @return [type]                [description]
+	 */
+	public function getHistorySaldoRestauranteById($restauranteId){
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}historial_saldo_restaurantes 
+			WHERE restaurante_id = $restauranteId ORDER BY id DESC ;", 
+	 	 OBJECT );
+	}
 
 }
