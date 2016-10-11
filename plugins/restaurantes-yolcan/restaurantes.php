@@ -48,3 +48,11 @@ if (isset($_GET['page']) AND $_GET['page'] == 'cargar_saldo_restaurante'){
 if (isset($_GET['page']) AND $_GET['page'] == 'update_saldo_restaurante'){
 	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("updateSaldoRestaurante", "Actualizar Saldo Restaurante", "update_saldo_restaurante");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'comprar_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("comprar", "Comprar", "comprar_restaurante");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'save_compra_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("saveCompra", "Guardar Comprar", "save_compra_restaurante");' ) );
+}

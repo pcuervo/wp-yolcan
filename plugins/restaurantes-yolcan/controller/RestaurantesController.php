@@ -98,4 +98,27 @@ class RestaurantesController {
 		wp_redirect($urlRedirect);
 	}
 
+	/**
+	 * VIST PARA COMPRAR PRODUCTOS
+	 * @return [type] [description]
+	 */
+	public function comprar()
+	{
+		return viewRestaurantes('comprar', [
+			'restauranteId' => $this->restauranteId,
+			'ingredientes' => $this->modelRestaurantes->getIngredientesRestaurantes()
+		]);
+	}
+
+
+	/**
+	 * GUARDA LA COMPRA
+	 */
+	public function saveCompra()
+	{
+		echo '<pre>';
+		print_r($this->dataPost);
+		echo '</pre>';
+	}
+
 }

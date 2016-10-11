@@ -6,3 +6,79 @@
 .side-cliente{position: relative;overflow: hidden;width: 300px;padding-right: 10px;float: left;}
 .body-cliente{position: relative;overflow: hidden;width: 600px;padding-right: 10px;}
 .mensaje-susses{border-left: 4px solid green;}
+.content-ingredientes-restaurante{
+	position: relative;
+	overflow: hidden;
+	width: 75%;
+	float: right;
+	padding-top: 15px;
+}
+.content-agregados-compra{
+	position: relative;
+	width: 23%;
+	float: left;
+}
+.content-ingredientes-restaurante .caja-ingrediente{
+	position: relative;
+	overflow: hidden;
+	width: 32%;
+	float: left;
+	padding: 5px;
+}
+
+.content-ingredientes-restaurante .caja-ingrediente img{
+	width: 80px;
+    height: auto;
+    float: left;
+    margin-right: 10px;
+}
+.content-ingredientes-restaurante .caja-ingrediente p{
+	margin-top: 0;
+	margin-bottom: 3px;
+}
+.content-ingredientes-restaurante .caja-ingrediente input{
+	width: 120px;
+}
+.add-ingrediente{
+	padding: 2px 8px;
+    background: #23282d;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-ingrediente:hover{
+	background: #3e4953;
+}
+
+.borrar-ingrediente{
+	padding: 1px 6px 4px;
+    background: red;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: left;
+    margin-right: 7px;
+    line-height: 14px;
+}
+
+@media only screen and (max-width: 1240px){
+	.content-ingredientes-restaurante .caja-ingrediente{
+		width: 48%;
+	}
+}
+@media only screen and (max-width: 745px){
+	.content-ingredientes-restaurante .caja-ingrediente{
+		width: 100%;
+	}
+	.content-agregados-compra{
+		width: 30%;
+	}
+	.content-ingredientes-restaurante{
+		width: 67%;
+	}
+}

@@ -190,10 +190,33 @@ class RestaurantesModel {
 		return $this->_wpdb->insert_id;
 	}
 
+	/**
+	 * VERIFICA QUE EXITA REGISTO DE EL RESTAURANTE
+	 */
 	public function existRegistroRestaurante($restauranteId)
 	{
 		return $this->_wpdb->get_var( "SELECT COUNT(*) FROM {$this->_wpdb->prefix}saldo_restaurantes
 			WHERE restaurante_id = $restauranteId" );
+	}
+
+	/**	
+	 * REGRESA LO INGREDIENTES PARA LOS RESTAURANTES
+	 * @return [type] [description]
+	 */
+	public function getIngredientesRestaurantes()
+	{
+		$args = array(
+			'post_type'  => 'ingredientes',
+			'meta_key'   => 'precio_ingrediente_restaurante',
+			'meta_query' => array(
+				array(
+					'key'     => 'precio_ingrediente_restaurante',
+					'value'   => '',
+					'compare' => '!=',
+				),
+			),
+		);
+		return new WP_Query( $args );
 	}
 
 }
