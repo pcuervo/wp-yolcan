@@ -106,6 +106,7 @@ class RestaurantesController {
 	{
 		return viewRestaurantes('comprar', [
 			'restauranteId' => $this->restauranteId,
+			'restaurante' => $this->modelRestaurantes->getDataRestauranteById($this->restauranteId),
 			'ingredientes' => $this->modelRestaurantes->getIngredientesRestaurantes()
 		]);
 	}
@@ -116,9 +117,12 @@ class RestaurantesController {
 	 */
 	public function saveCompra()
 	{
-		echo '<pre>';
-		print_r($this->dataPost);
-		echo '</pre>';
+		$saldo_final = $this->dataPost['saldo-actual'] - $this->dataPost['total']; 
+		$this->modelRestaurantes->updateSaldoRestaurante($this->restauranteId, $saldo_final);
+		$this->modelRestaurantes->storeHistorialCompra($this->restauranteId, $this->dataPost);
+
+		$urlRedirect = admin_url().'admin.php?page=historial_restaurante&id_restaurante='.$this->restauranteId;
+		wp_redirect($urlRedirect);
 	}
 
 }

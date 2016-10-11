@@ -130,7 +130,7 @@ class RestaurantesModel {
 	 * ACTUALIZA EL SALDO DEL RESTAURANTE
 	 * @return [type]                [description]
 	 */
-	public function updateSaldoRestaurante($restauranteId, $saldo, $saldoAnterior)
+	public function updateSaldoRestaurante($restauranteId, $saldo, $saldoAnterior = 0)
 	{
 		$this->_wpdb->update( 
 			$this->_prefix.'saldo_restaurantes', 
@@ -182,7 +182,7 @@ class RestaurantesModel {
 				'saldo_anterior' => $saldoAnterior,
 				'saldo_agregado' => $saldo,
 				'saldo_a_la_fecha' => $saldoAnterior + $saldo,
-				'fecha' => date('Y-m-d'),
+				'fecha' => date('Y-m-d h:i:s'),
 				'user_id' => $current_user->ID,
 			)
 		);
@@ -217,6 +217,30 @@ class RestaurantesModel {
 			),
 		);
 		return new WP_Query( $args );
+	}
+
+
+	/**	
+	 * GUARDAR HISTORIAL DE COMPRA
+	 */
+	public function storeHistorialCompra($restauranteId, $dataPost)
+	{
+		global $current_user;
+      	get_currentuserinfo();
+		$this->_wpdb->insert(
+			$this->_wpdb->prefix.'historial_cortes_restaurantes',
+			array(
+				'restaurante_id' => $restauranteId,
+				'saldo_anterior' => $dataPost['saldo-actual'],
+				'total_corte' => $dataPost['total'],
+				'saldo_despues_del_corte' => $dataPost['saldo-actual'] - $dataPost['total'],
+				'ingredientes' => serialize($dataPost['ingredientes']),
+				'fecha_corte' => date('Y-m-d h:i:s'),
+				'user_id' => $current_user->ID,
+			)
+		);
+
+		return $this->_wpdb->insert_id;
 	}
 
 }

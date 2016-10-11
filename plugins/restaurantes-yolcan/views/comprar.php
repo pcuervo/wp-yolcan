@@ -9,12 +9,17 @@
     </a>
     <br>
     <div class="content-agregados-compra">
+        <p>Saldo disponible: $<span id="saldo-disponible"><?php echo isset($restaurante->saldo) ? $restaurante->saldo : 0; ?></span></p>
         <p><strong>Ingredientes agregados</strong></p>
         <form id="form-corte-restaurant" action="<?php echo admin_url().'admin.php?page=save_compra_restaurante&id_restaurante='.$restauranteId; ?>" method="POST">
             <div class="ingredientes-agregados-compra">
             
             </div>
             <p>Total: $<span id="total-compra">0</span></p>
+            <input type="hidden" class="total-compra-input" name="total" value="0">
+            <input type="hidden" class="saldo-actual" name="saldo-actual" value="<?php echo isset($restaurante->saldo) ? $restaurante->saldo : 0; ?>">
+
+
             <input class="bt-corte-restaurant" type="submit" value="Generar compra">
         </form>
         
