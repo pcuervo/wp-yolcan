@@ -243,4 +243,20 @@ class RestaurantesModel {
 		return $this->_wpdb->insert_id;
 	}
 
+	/**
+	 * HISTORIALD E COMPRAS
+	 */
+	public function getHistorialComprasRestaurantes($restauranteId)
+	{
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}historial_cortes_restaurantes 
+			WHERE restaurante_id = $restauranteId ORDER BY id DESC ;", 
+	 	 OBJECT );
+	}
+
+	public function getCompraRestaurantes($restauranteId, $compraId){
+		return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}historial_cortes_restaurantes 
+			WHERE restaurante_id = $restauranteId AND id = $compraId;", 
+	 	 OBJECT );
+	}
+
 }

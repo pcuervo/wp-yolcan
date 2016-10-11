@@ -56,3 +56,11 @@ if (isset($_GET['page']) AND $_GET['page'] == 'comprar_restaurante'){
 if (isset($_GET['page']) AND $_GET['page'] == 'save_compra_restaurante'){
 	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("saveCompra", "Guardar Comprar", "save_compra_restaurante");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'historial_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("historialCompras", "Historial compras", "historial_restaurante");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'compra_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("compraRestaurante", "Historial compras", "compra_restaurante");' ) );
+}

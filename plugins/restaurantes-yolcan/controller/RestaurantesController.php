@@ -5,11 +5,14 @@ class RestaurantesController {
 	public $dataGet;
 	public $restauranteId;
 	public $modelRestaurantes;
+	public $compraId;
 
 	function __construct() {
         $this->dataPost = !empty($_POST) ? $_POST : [];
         $this->dataGet = !empty($_GET) ? $_GET : [];
         $this->restauranteId = isset($_GET['id_restaurante']) ? $_GET['id_restaurante'] : 0;
+        $this->compraId = isset($_GET['id_compra']) ? $_GET['id_compra'] : 0;
+
         $this->modelRestaurantes = modelRestaurantes('RestaurantesModel');
     }
 
@@ -123,6 +126,29 @@ class RestaurantesController {
 
 		$urlRedirect = admin_url().'admin.php?page=historial_restaurante&id_restaurante='.$this->restauranteId;
 		wp_redirect($urlRedirect);
+	}
+
+	/**
+	 * HISTORIAL DE COMPRAS RESTAURANTE
+	 * @return [type] [description]
+	 */
+	public function historialCompras()
+	{
+		return viewRestaurantes('historial-compras', [
+			'restauranteId' => $this->restauranteId,
+			'restaurante' => $this->modelRestaurantes->getDataRestauranteById($this->restauranteId),
+			'historial' => $this->modelRestaurantes->getHistorialComprasRestaurantes($this->restauranteId)
+		]);
+	}
+
+
+	public function compraRestaurante()
+	{
+		return viewRestaurantes('compra-restaurante', [
+			'restauranteId' => $this->restauranteId,
+			'restaurante' => $this->modelRestaurantes->getDataRestauranteById($this->restauranteId),
+			'compra' => $this->modelRestaurantes->getCompraRestaurantes($this->restauranteId, $this->compraId)
+		]);
 	}
 
 }
