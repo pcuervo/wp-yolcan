@@ -126,4 +126,74 @@ class RestaurantesModel {
 	 	 OBJECT );
 	}
 
+	/**	
+	 * ACTUALIZA EL SALDO DEL RESTAURANTE
+	 * @return [type]                [description]
+	 */
+	public function updateSaldoRestaurante($restauranteId, $saldo, $saldoAnterior)
+	{
+		$this->_wpdb->update( 
+			$this->_prefix.'saldo_restaurantes', 
+			array( 
+				'saldo'  => $saldo + $saldoAnterior
+			), 
+			array( 'restaurante_id' => $restauranteId ), 
+			array( 
+				'%f'
+			), 
+			array( '%d' ) 
+		);
+	}
+
+	/**	
+	 * INSERT EL SALDO DEL RESTAURANTE
+	 * @return [type]                [description]
+	 */
+	public function insertSaldoRestaurante($restauranteId, $saldo)
+	{
+		$this->_wpdb->insert(
+			$this->_prefix.'saldo_restaurantes',
+			array(
+				'restaurante_id' => $restauranteId,
+				'saldo'  => $saldo,
+				'fecha_cambio_status' => date('Y-m-d')
+			),
+			array(
+				'%d',
+				'%f',
+				'%s'
+			)
+		);
+
+		return $this->_wpdb->insert_id;
+	}
+
+	/**	
+	 * GUARDA EL HISTORIAL DE LA CARGA DE SALDO
+	 */
+	public function storeHistoryUpdateSaldoAdmin($restauranteId, $saldo, $saldoAnterior)
+	{
+		global $current_user;
+      	get_currentuserinfo();
+		$this->_wpdb->insert(
+			$this->_wpdb->prefix.'historial_saldo_restaurantes',
+			array(
+				'restaurante_id' => $restauranteId,
+				'saldo_anterior' => $saldoAnterior,
+				'saldo_agregado' => $saldo,
+				'saldo_a_la_fecha' => $saldoAnterior + $saldo,
+				'fecha' => date('Y-m-d'),
+				'user_id' => $current_user->ID,
+			)
+		);
+
+		return $this->_wpdb->insert_id;
+	}
+
+	public function existRegistroRestaurante($restauranteId)
+	{
+		return $this->_wpdb->get_var( "SELECT COUNT(*) FROM {$this->_wpdb->prefix}saldo_restaurantes
+			WHERE restaurante_id = $restauranteId" );
+	}
+
 }

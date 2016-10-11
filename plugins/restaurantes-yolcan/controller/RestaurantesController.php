@@ -66,5 +66,36 @@ class RestaurantesController {
 		]);
 	}
 
+	/**	
+	 * AGREGR SALDO AL RESTAURANTE
+	 * @return [type] [description]
+	 */
+	public function saldoRestaurante()
+	{
+		return viewRestaurantes('cargar-saldo-restaurante', [
+			'restauranteId' => $this->restauranteId,
+			'restaurante' => $this->modelRestaurantes->getDataRestauranteById($this->restauranteId)
+		]);
+	}
+
+	/**
+	 * ACTUALIZA SALDO DEL RESTAURANTE 
+	 * @return [type] [description]
+	 */
+	public function updateSaldoRestaurante()
+	{
+		$exist = $this->modelRestaurantes->existRegistroRestaurante($this->restauranteId);
+		if ($exist > 0) {
+			$this->modelRestaurantes->updateSaldoRestaurante($this->restauranteId, $this->dataPost['saldo'], $this->dataPost['saldo-anterior']);
+		}else{
+			$this->modelRestaurantes->insertSaldoRestaurante($this->restauranteId, $this->dataPost['saldo']);
+		}
+		
+		$this->modelRestaurantes->storeHistoryUpdateSaldoAdmin($this->restauranteId, $this->dataPost['saldo'], $this->dataPost['saldo-anterior']);
+
+		$urlRedirect = admin_url().'admin.php?page=restaurante&id_restaurante='.$this->restauranteId;
+
+		wp_redirect($urlRedirect);
+	}
 
 }

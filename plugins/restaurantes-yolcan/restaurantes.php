@@ -40,3 +40,11 @@ if (isset($_GET['page']) AND $_GET['page'] == 'restaurantes_no_activos'){
 if (isset($_GET['page']) AND $_GET['page'] == 'restaurante'){
 	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("restaurante", "Restaurante", "restaurante");' ) );
 }
+
+if (isset($_GET['page']) AND $_GET['page'] == 'cargar_saldo_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("saldoRestaurante", "Saldo Restaurante", "cargar_saldo_restaurante");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'update_saldo_restaurante'){
+	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("updateSaldoRestaurante", "Actualizar Saldo Restaurante", "update_saldo_restaurante");' ) );
+}

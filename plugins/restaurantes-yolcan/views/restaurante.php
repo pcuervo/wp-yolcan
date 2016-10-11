@@ -11,11 +11,11 @@
 	<div class="side-cliente">
 		<p><strong>Email:</strong> <?php echo $user->user_email; ?><br>
 		<p><strong>Saldo actual: </strong> <?php echo isset($restaurante->saldo) ? $restaurante->saldo : 0; ?></p>
-
-		<a href="<?php echo admin_url().'admin.php?page=cargar_saldo_restaurante&id_restaurante='.$restauranteId; ?>" class="button-primary">Cargar saldo Restaurante</a>
-		<br>
-		<br>
+		
 		<a href="<?php echo admin_url().'admin.php?page=comprar_restaurante&id_restaurante='.$restauranteId; ?>" class="button-primary">Nueva compra</a>
+		<br>
+		<br>
+		<a href="<?php echo admin_url().'admin.php?page=cargar_saldo_restaurante&id_restaurante='.$restauranteId; ?>" class="button-primary">Cargar saldo Restaurante</a>
 		<br>
 		<br>
 		<a href="<?php echo admin_url().'admin.php?page=historial_restaurante&id_restaurante='.$restauranteId; ?>" class="button-primary">Historial de compras</a>
@@ -29,7 +29,8 @@
 						<th scope="col" class="manage-column column-primary"><span>Fecha actualización</span></th>
 						<th scope="col" class="manage-column column-primary"><span>Lo actualizó</span></th>
 						<th scope="col" class="manage-column column-primary"><span>Saldo Anterior</span></th>
-						<th scope="col" class="manage-column column-primary"><span>Saldo Actualizado</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Agregado</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Total</span></th>
 					</tr>
 				</thead>
 
@@ -42,6 +43,8 @@
 								<td><?php echo $user->user_login; ?></td>
 								<td><?php echo $history->saldo_anterior; ?></td>
 								<td><?php echo $history->saldo_agregado; ?></td>
+								<td><?php echo $history->saldo_a_la_fecha; ?></td>
+
 							</tr>
 						<?php endforeach; ?>
 				</tbody>
