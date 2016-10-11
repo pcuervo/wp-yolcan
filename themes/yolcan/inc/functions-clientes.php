@@ -438,7 +438,7 @@ function getClientUpdateClub($clienteId, $club_nuevo){
  * RESIVE INFORMACION PARA CREAR UN CLIENTE CON FB
  */
 function ajax_info_yolcan_fb_login(){
-	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'].' '.$_POST['last_name'] : '';
 	$emailCliente = isset($_POST['mail']) ? $_POST['mail'] : '';
 	$passwordCliente  = wp_generate_password();
 
@@ -449,10 +449,9 @@ function ajax_info_yolcan_fb_login(){
 		if( $wpUser ){
 			wp_set_auth_cookie( $wpUser->ID, 0, 0 );
 			wp_set_current_user( $wpUser->ID );
+			wp_send_json('creado');
 		}
 		
-  		wp_send_json('creado');
-
   	}else{
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
 		if(!is_wp_error($user_id)){
@@ -460,8 +459,10 @@ function ajax_info_yolcan_fb_login(){
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id);
+		    wp_send_json('creado');
 		}
-		wp_send_json('creado');
+		 wp_send_json($user_id);
+		
 	}
 	
 

@@ -95,6 +95,8 @@
 				console.log(data);
 				if (data == 'creado') {
 					location.replace(site_url+"mi-cuenta");
+				}else{
+					alert('Disculpa ya existe un usuario con el mismo correo');
 				}
 
 			});
