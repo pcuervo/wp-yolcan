@@ -34,37 +34,27 @@ if ( ! $checkout->enable_signup && ! $checkout->enable_guest_checkout && ! is_us
 <div class="[ container padding--sides--xsm ]">
 
 	<form name="checkout" method="post" class="checkout woocommerce-checkout [ container ]" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
-
-		<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
-
-			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
-
-			<div class="" id="customer_details">
-				<div class="[ row ]">
-					<?php do_action( 'woocommerce_checkout_billing' ); ?>
-				</div>
+		<div class="[ row ]">
+			<div class="[ col-sm-6  ][ margin-bottom ]">
+				<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
+					<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+					<div class="[ row ]" id="customer_details">
+						<?php do_action( 'woocommerce_checkout_billing' ); ?>
+					</div>
+					<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+				<?php endif; ?>
 			</div>
-
-			<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
-
-		<?php endif; ?>
-
-		<div class="[ row ][ margin-top--large ]">
-			<div class="[ col-xs-12 col-sm-6 col-sm-offset-6 ][ bg-gray-lighter ][ padding--top--large margin-bottom--large ]">
-
-				<h3 class="[ padding--left--small ]" id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
-
-				<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
-
-				<div id="order_review" class="woocommerce-checkout-review-order">
-					<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+			<div class="[ col-sm-6  ][ padding--top--large ]">
+				<div class="[ box-review ][ bg-gray-lighter ][ padding--top-bottom--large padding--sides margin-bottom--large ]">
+					<h3 class="[ padding--left--small ]" id="order_review_heading"><?php _e( 'Your order', 'woocommerce' ); ?></h3>
+					<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+					<div id="order_review" class="woocommerce-checkout-review-order">
+						<?php do_action( 'woocommerce_checkout_order_review' ); ?>
+					</div>
+					<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
 				</div>
-
-				<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
-
 			</div>
 		</div>
-
 	</form>
 
 </div>

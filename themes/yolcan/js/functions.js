@@ -11,6 +11,9 @@
 		imgToSvg();
 		init_masonry('#content', '.box-content');
 		footerBottom();
+		scrollCheckout();
+
+		$(window).scroll(function(){ scrollCheckout(); });
 
 		/**
 		 * Triggered events
@@ -52,7 +55,7 @@
 			//       show: 'yolcan',
 			//       button: false,
 			//       column: "mi-img"
-			// }); 
+			// });
 
 
 		};
@@ -535,7 +538,7 @@
 		}// getFooterHeight
 
 		// ---- PRODUCTOS ----//
-		
+
 		$('.check-compra').on('click', function(){
 			var precio = $(this).data('costo');
 			var variacion = $(this).data('variacion');
@@ -547,7 +550,7 @@
 			$('.url-add-cart-product-'+producto).attr('href', url);
 			$('.precio-producto-check-'+producto).text('$' + precio);
 			$('.precio-semanal-check-'+producto).text('$' + semanal);
-			
+
 		});
 
 		$(document).on('click', '.check-compra-modal', function(){
@@ -560,9 +563,9 @@
 		});
 
 		// --- VALIDATE ADD PRODUCT ADDITIONAL ---- //
-		
+
 		$('.add-additional').on('submit', function(event){
-			
+
 			var id = $(this).children('#adicional-id').val();
 			var saldoLibre = $('#saldo-libre').val();
 			var adicionalCosto = $('#adicional-costo-'+id).val();
@@ -577,7 +580,7 @@
 				event.preventDefault();
 				alert('No cuenta con saldo suficiente para agregar el ingrediente');
 			}
-			
+
 		});
 
 		$('.btn-ingredientes-producto').on('click', function(){
@@ -625,7 +628,19 @@
 			$grid.isotope({ filter: filters });
 			console.log(filters);
 		}
-		
+
+		function scrollCheckout() {
+			var ScrollTop = $("body").scrollTop();
+			// console.log(ScrollTop);
+			if (ScrollTop > 100){
+			     $( ".box-review" ).animate({ "top": "100px" }, 200 );
+			}
+			if (ScrollTop < 100){
+			     $( ".box-review" ).animate({ "top": "200px" }, 200 );
+			}
+		}
+
 	});
 
 })(jQuery);
+
