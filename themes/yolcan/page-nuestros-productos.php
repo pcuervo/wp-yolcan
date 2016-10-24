@@ -97,7 +97,7 @@ the_post(); ?>
                                             <span class="[ price-table__text ]">Precio total:</span>
                                             <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]">$<?php echo number_format($costoTotal) ?></span>
                                         </div>
-                                        <div class="[ price-table__set ][ clearfix ]">
+                                        <div class="[ price-table__set ][ clearfix ][ hidden ]">
                                             <span class="[ price-table__text ]">Precio por canasta:</span>
                                             <span class="[ price-table__value ][ precio-semanal-check-<?php echo get_the_ID(); ?> ]">
                                                 $<?php echo $costoVariationSemanal ?>
