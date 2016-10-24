@@ -26,9 +26,9 @@
 
 		<?php wp_head(); ?>
 
-		<!-- Typekit -->
+		<!-- Typekit 
 		<script src="https://use.typekit.net/upn0scl.js"></script>
-		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>-->
 	</head>
 
 	<body>

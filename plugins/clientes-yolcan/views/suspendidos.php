@@ -33,7 +33,7 @@
 								endif; ?>
 							</a>
 						</td>
-						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $cliente->tiempo_suspension; ?> meses</a></td>
+						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $cliente->tiempo_suspension; ?> semanas</a></td>
 						<td>
 							<a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>">
 								<?php if(function_exists('getCostoVariationID')):

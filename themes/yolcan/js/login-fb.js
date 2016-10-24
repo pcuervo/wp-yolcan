@@ -92,8 +92,11 @@
 				action   : 'ajax_info_yolcan_fb_login'
 			}, 'json')
 			.done(function (data){
+				console.log(data);
 				if (data == 'creado') {
 					location.replace(site_url+"mi-cuenta");
+				}else{
+					alert('Disculpa ya existe un usuario con el mismo correo');
 				}
 
 			});

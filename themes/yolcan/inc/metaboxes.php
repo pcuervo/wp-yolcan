@@ -167,7 +167,6 @@ function show_metabox_info_extra($post){
 	$nombre_encargado_club = get_post_meta($post->ID, 'nombre-encargado-club', true);
 	$telefono_encargado_club = get_post_meta($post->ID, 'telefono-encargado-club', true);
 	$dias_de_recoleccion = get_post_meta($post->ID, 'dias-de-recoleccion', true);
-	$dias_de_recoleccion_a = get_post_meta($post->ID, 'dias-de-recoleccion-a', true);
 
 	$horarios_de_recoleccion = get_post_meta($post->ID, 'horarios-de-recoleccion', true);
 	$capacidad_del_club = get_post_meta($post->ID, 'capacidad-del-club', true);
@@ -194,8 +193,7 @@ function show_metabox_info_extra($post){
 	echo "<input type='text' class='widefat' id='telefono_encargado_club' name='telefono_encargado_club' value='$telefono_encargado_club'/><br><br>";
 
 	echo "<label for='dias_de_recoleccion' class='label-paquetes'>Días de recolección: </label><br>";
-	echo "de: <input type='text' class='date-picker' id='dias_de_recoleccion' name='dias_de_recoleccion' value='$dias_de_recoleccion'/>";
-	echo " a: <input type='text' class='date-picker' id='dias_de_recoleccion_a' name='dias_de_recoleccion_a' value='$dias_de_recoleccion_a'/><br><br>";
+	echo "<input type='text' class='widefat' id='dias_de_recoleccion' name='dias_de_recoleccion' placeholder='ej. Lunes a Miércoles' value='$dias_de_recoleccion'/><br><br>";
 
 	echo "<label for='horarios_de_recoleccion' class='label-paquetes'>Horarios de recolección: </label>";
 	echo "<input type='text' class='widefat' id='horarios_de_recoleccion' name='horarios_de_recoleccion' value='$horarios_de_recoleccion'/><br><br>";
@@ -240,11 +238,11 @@ function show_metabox_cantidad_ingrediente($post){
 }
 
 function show_metabox_precio_ingrediente($post){
-	wp_nonce_field(__FILE__, '_precio_ingrediente_nonce');
+	wp_nonce_field(__FILE__, '_precio_ingrediente_restaurante_nonce');
 
-	$precio_ingrediente = get_post_meta($post->ID, 'precio_ingrediente', true);
+	$precio_ingrediente_restaurante = get_post_meta($post->ID, 'precio_ingrediente_restaurante', true);
 
-	echo "<input type='text' class='widefat' id='precio_ingrediente' name='precio_ingrediente' value='$precio_ingrediente'/><br><br>";
+	echo "<input type='text' class='widefat' id='precio_ingrediente_restaurante' name='precio_ingrediente_restaurante' value='$precio_ingrediente_restaurante'/><br><br>";
 }
 
 function show_metabox_productor_ingrediente($post){
@@ -337,8 +335,8 @@ add_action('save_post', function($post_id){
 		update_post_meta($post_id, 'tipo_en_peso', $_POST['tipo_en_peso']);
 	}
     
-    if ( isset($_POST['precio_ingrediente']) and check_admin_referer(__FILE__, '_precio_ingrediente_nonce') ){
-		update_post_meta($post_id, 'precio_ingrediente', $_POST['precio_ingrediente']);
+    if ( isset($_POST['precio_ingrediente_restaurante']) and check_admin_referer(__FILE__, '_precio_ingrediente_restaurante_nonce') ){
+		update_post_meta($post_id, 'precio_ingrediente_restaurante', $_POST['precio_ingrediente_restaurante']);
 	}
 
 	if ( isset($_POST['productor_ingrediente']) and check_admin_referer(__FILE__, '_productor_ingrediente_nonce') ){
