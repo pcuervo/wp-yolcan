@@ -82,7 +82,7 @@ $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 			$suspension = function_exists('getSuspensionCanastas') ? getSuspensionCanastas($cliente->cliente_id) : ''; ?>
 			<p>Las entregas al cliente estan suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension->temporalidad; ?> Semanas</strong></p>
 	        <p>Fecha suspensión: <strong> <?php echo getDateTransform($suspension->fechaSuspension); ?></strong>
-	        <br>Podras ver la próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
+	        <!-- <br>Podras ver la próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong> -->
 	        <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
 
 	        <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
