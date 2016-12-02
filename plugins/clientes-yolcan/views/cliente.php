@@ -4,10 +4,12 @@ $canasta = function_exists('getCostoVariationID') ? getIdCanastaClube($cliente->
 $ingredientesCanasta = function_exists('getIngredientesCanasta') ? getIngredientesCanasta($canasta) : [];
 $ingredientesAdicionales = function_exists('getIngredientesAdicionales') ? getIngredientesAdicionales($cliente->cliente_id) : [];
 $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0;
-$variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : []; ?>
+$variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : [];
+$firstName = get_user_meta($user->ID, 'first_name', true);
+$lastName = get_user_meta($user->ID, 'last_name', true); ?>
 <div class="wrap content-cliente">
     <h1>
-        Cliente - <?php echo $user->user_login; ?>
+        Cliente - <?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?>
     </h1>
     <hr>
      <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=activos'; ?>">
