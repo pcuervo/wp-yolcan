@@ -1,6 +1,7 @@
 <?php global $opCliente;
 global $clubCanasta;
 global $procesoRegistro;
+
 add_action('get_header', function() {
 	global $current_user;
 	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
@@ -70,6 +71,9 @@ function deleteIngredienteAdicional($data){
  * GUARDA LOS ADICIONALES DEL CLIENTE
  */
 function storeIngredientesAdicionales($clienteId, $data){
+	$cliente = getCliente($clienteId);
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+	$cantidad = $aditionalAttr->cantidad * $data['adicional-numero-productos'];
 	$newArr = [];
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 	$newArr['total_adicionales'] = $total;
@@ -77,7 +81,7 @@ function storeIngredientesAdicionales($clienteId, $data){
 		'ingredienteID' => $data['adicional-id'],
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $total,
-		'cantidad' => $data['adicional-numero-productos'],
+		'cantidad' => $cantidad,
 		'periodo' => $data['adicional-periodo'],
 		'toca-quincenal' => 1
 	];
@@ -87,15 +91,18 @@ function storeIngredientesAdicionales($clienteId, $data){
 
 
 function editIngredientesAdicionales($clienteId, $data, $adicionales){
+	$cliente = getCliente($clienteId);
 	$adicionales = unserialize($adicionales);
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 
 	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] + $total;
 
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+
 	$totalOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['total'] : 0;
 	$cantidadOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['cantidad'] : 0;
 	$totalIngrediente = $totalOld + $total;
-	$cantidadIngrediente = $cantidadOld + $data['adicional-numero-productos'];
+	$cantidadIngrediente = $cantidadOld + ($data['adicional-numero-productos'] * $aditionalAttr->cantidad);
 	$tocaQuinsenal = isset($adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal']) ? $adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal'] : 1;
 	$adicionales['ingredientes'][$data['adicional-id']] = [
 		'ingredienteID' => $data['adicional-id'],
