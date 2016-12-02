@@ -2,8 +2,9 @@
 $producto_id = wp_get_post_parent_id( $cliente->producto_id );
 $canasta = function_exists('getCostoVariationID') ? getIdCanastaClube($cliente->club_id, $producto_id) : [];
 $ingredientesCanasta = function_exists('getIngredientesCanasta') ? getIngredientesCanasta($canasta) : [];
-$ingredientesAdicionales = function_exists('getIngredientesAdicionales') ? getIngredientesAdicionales($cliente->cliente_id) : [];
-$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0;
+$ingredientesAdicionales = function_exists('getIngredientesAdicionales') ? unserialize(getIngredientesAdicionales($cliente->cliente_id) ) : [];
+
+$totalAdicionales = isset($ingredientesAdicionales['total_adicionales']) ? $ingredientesAdicionales['total_adicionales'] : 0;
 $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : [];
 $firstName = get_user_meta($user->ID, 'first_name', true);
 $lastName = get_user_meta($user->ID, 'last_name', true); ?>
