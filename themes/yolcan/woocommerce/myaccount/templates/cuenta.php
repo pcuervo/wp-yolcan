@@ -42,8 +42,9 @@ global $clubCanasta; ?>
             $suspension = $clubCanasta->suspension; ?>
             <p>Tus entregas estan suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension->temporalidad; ?> Semanas</strong></p>
             <p>Fecha suspensión: <strong> <?php echo getDateTransform($suspension->fechaSuspension); ?></strong>
-            <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
-            <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
+            <!-- <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
+            <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong> -->
+        </p>
 
             <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
             <form method="post" action="">
