@@ -6,9 +6,6 @@ global $clubCanasta; ?>
     <p>
         <?php echo "Tu saldo es de <strong>$ ".$opCliente->saldo." </strong>"; ?>
     </p>
-    <?php if ($opCliente->suspendido != 1 AND $opCliente->saldo != 0): ?>
-        <p>Fecha próximo corte: <strong> <?php echo getDateTransform(getProximoCorte()); ?></strong></p>
-     <?php endif ?>
 	<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
 
 </article>
