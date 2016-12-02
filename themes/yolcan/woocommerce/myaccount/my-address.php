@@ -60,7 +60,7 @@ $clubTitle = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'Aún 
 		    </div>
 		<?php endif; ?>
 	    <p><?php echo $direccion; ?></p>
-	    <?php echo $dias_de_recoleccion != '' ? '<p>Recolección del '.$dias_de_recoleccion.' al '.$dias_de_recoleccion_a.'</p>' : '';
+	    <?php echo $dias_de_recoleccion != '' ? '<p>Días de recolección '.$dias_de_recoleccion.'</p>' : '';
 	    echo $horarios_de_recoleccion != '' ? '<p>Horario de recolección: '.$horarios_de_recoleccion.'</p>' : '';
 	    echo $nombre_encargado_club != '' ? '<p>Encargado del Club: '.$nombre_encargado_club.'</p>' : '';
 	    echo $telefono_encargado_club != '' ? '<p>Teléfono del encargado: '.$telefono_encargado_club.'</p>' : '';
