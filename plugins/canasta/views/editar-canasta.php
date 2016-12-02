@@ -45,9 +45,9 @@
 			      	  	  				<input type="checkbox" name="ingredientes_canastas[ingredientes][<?php echo $idCanasta; ?>][]" value="<?php echo $ingrediente['ID']; ?>" <?php echo $check; ?>>
 
 			      	  	  				<?php if($producto->ID != 1): ?>
-			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="cantidad">
 										<?php else: ?>
-			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="cantidad">
 			      	  	  				<?php endif; ?>
 			      	  	  			</td>
 			      	  	  			
