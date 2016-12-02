@@ -64,7 +64,7 @@ the_post(); ?>
                                         <?php if (!empty($variations)):
                                         $count = 1;
                                             foreach($variations as $variation):
-                                                $name = getNameVariation($variation['variation_id']);
+                                                $name = getNameOriginVariation($variation['variation_id']);
                                                 $check = $count == 1 ? 'checked' : '';
                                                 $nombreVariacion = getNameOriginVariation($variation['variation_id']);
                                                 $cansatSemanal = getCostoCanastaTemporalidad($nombreVariacion, $variation['display_price']);
