@@ -2,10 +2,6 @@
 global $opCliente;
 global $clubCanasta;
 
-echo '<pre>';
-print_r($clubCanasta);
-echo '</pre>';
-
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
 $adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
 $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotalAdicionalesSemana($adicionalesAgregados) : 0; ?>
