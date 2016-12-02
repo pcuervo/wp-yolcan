@@ -47,7 +47,7 @@
 			      	  	  				<?php if($producto->ID != 1): ?>
 			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
 										<?php else: ?>
-			      	  	  					<input type="hidden" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
 			      	  	  				<?php endif; ?>
 			      	  	  			</td>
 			      	  	  			

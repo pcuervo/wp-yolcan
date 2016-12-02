@@ -69,5 +69,4 @@ $clubTitle = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'Aún 
 
 
 <p class="myaccount_address">
-	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', __( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); ?>
 </p>

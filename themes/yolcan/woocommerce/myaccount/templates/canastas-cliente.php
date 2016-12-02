@@ -82,7 +82,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 					<div class="[ margin-bottom ]">
 						<a data-toggle="collapse" href="#ingrediente<?php echo $adicional->ingrediente_id; ?>" class="[ no-decoration color-dark color-dark-hover ]">
 							<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
-							<p class="[ inline-block align-middle ][ no-margin ]"><?php echo get_the_title($adicional->ingrediente_id); ?> ( <?php echo $unidad; ?> )</p>
+							<p class="[ inline-block align-middle ][ no-margin ]"><?php echo get_the_title($adicional->ingrediente_id); ?> ( <?php echo $adicional->cantidad.' '.$unidad; ?> )</p>
 						</a>
 						<div id="ingrediente<?php echo $adicional->ingrediente_id; ?>" class="[ panel-collapse collapse ][ padding--top ]">
 							<p class="[ color-gray-xlight ]">Precio: $ <?php echo $precio != '' ? $precio : 0; ?>
