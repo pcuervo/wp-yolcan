@@ -592,6 +592,7 @@
 			});
 
 		});
+		
 		/** FILTER **/
 		$('#content-recetas-grid').imagesLoaded( function() {
 		  	var $grid = $('.grid').isotope({
