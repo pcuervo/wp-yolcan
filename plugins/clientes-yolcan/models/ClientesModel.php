@@ -11,7 +11,7 @@ class ClientesModel {
 
 	static function install()
 	{
-		
+
 	}
 
 
@@ -40,7 +40,9 @@ class ClientesModel {
 	 */
 	public function getClientesInactivos()
 	{
-		return $this->_wpdb->get_results( "SELECT user_id as cliente_id FROM {$this->_prefix}usermeta 
+		return $this->_wpdb->get_results( "SELECT user_id as cliente_id FROM {$this->_prefix}usermeta as um
+			INNER JOIN  {$this->_prefix}users as u
+			ON um.user_id = u.ID
 			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%' AND user_id NOT IN (SELECT cliente_id FROM {$this->_prefix}opciones_clientes)", 
 	 	 OBJECT );
 	}
@@ -195,6 +197,86 @@ class ClientesModel {
 		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}saldo_modificado_por_admin 
 			WHERE cliente_id = $clienteId ORDER BY id DESC ;", 
 	 	 OBJECT );
+	}
+
+	/**	
+	 * REGRESA EL HISTORIAL DE RECORTES
+	 * @return [type] [description]
+	 */
+	public function getHistorialCortes(){
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}corte_general_clientes
+			ORDER BY id DESC
+			LIMIT 10;", 
+	 	OBJECT );
+	}
+
+	/**
+	 * REGRESA LOS CLIENTES DE LA CANASTA
+	 * @param  [type] $canasta_id [id de la canasat]
+	 * @return [type]             [description]
+	 */
+	public function getClientesPorCanasta($canasta_id){
+		return $this->_wpdb->get_results( "SELECT ac.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
+			INNER JOIN {$this->_prefix}users as u
+			ON um.user_id = u.ID
+			INNER JOIN {$this->_prefix}opciones_clientes as ac
+			ON ac.cliente_id = u.ID
+			WHERE ac.producto_id IN (SELECT ID FROM {$this->_prefix}posts
+				WHERE post_parent = $canasta_id AND post_status = 'publish' AND post_type = 'product_variation') AND suspendido = 0
+			HAVING saldo >= costo_semanal_canasta;", 
+	 	OBJECT );
+	}
+
+
+	/**
+	 * REGRESA LOS CLIENTES DE LA CANASTA
+	 * @param  [type] $canasta_id [id de la canasat]
+	 * @return [type]             [description]
+	 */
+	public function getClientesPorCanastaSuspendidos($canasta_id){
+		return $this->_wpdb->get_results( "SELECT ac.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
+			INNER JOIN {$this->_prefix}users as u
+			ON um.user_id = u.ID
+			INNER JOIN {$this->_prefix}opciones_clientes as ac
+			ON ac.cliente_id = u.ID
+			WHERE ac.producto_id IN (SELECT ID FROM {$this->_prefix}posts
+				WHERE post_parent = $canasta_id AND post_status = 'publish' AND post_type = 'product_variation')
+				AND suspendido = 1;", 
+	 	OBJECT );
+	}
+
+	/**
+	 * REGRESA LOS CLIENTES DE LA CANASTA PROXIMOS A CADUCAR
+	 * @param  [type] $canasta_id [id de la canasat]
+	 * @return [type]             [description]
+	 */
+	public function getClientesPorCanastaProximosCaducar($canasta_id){
+		return $this->_wpdb->get_results( "SELECT ac.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
+			INNER JOIN {$this->_prefix}users as u
+			ON um.user_id = u.ID
+			INNER JOIN {$this->_prefix}opciones_clientes as ac
+			ON ac.cliente_id = u.ID
+			WHERE ac.producto_id IN (SELECT ID FROM {$this->_prefix}posts
+				WHERE post_parent = $canasta_id AND post_status = 'publish' AND post_type = 'product_variation')
+			HAVING saldo >= costo_semanal_canasta AND saldo < dos_semanas;", 
+	 	OBJECT );
+	}
+
+	/**
+	 * REGRESA LOS CLIENTES DE LA CANASTA SALDO INSUFICIENTE
+	 * @param  [type] $canasta_id [id de la canasat]
+	 * @return [type]             [description]
+	 */
+	public function getClientesPorCanastaSaldoInsuficiente($canasta_id){
+		return $this->_wpdb->get_results( "SELECT ac.*, ( costo_semanal_canasta * 2 ) as dos_semanas FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%') as um
+			INNER JOIN {$this->_prefix}users as u
+			ON um.user_id = u.ID
+			INNER JOIN {$this->_prefix}opciones_clientes as ac
+			ON ac.cliente_id = u.ID
+			WHERE ac.producto_id IN (SELECT ID FROM {$this->_prefix}posts
+				WHERE post_parent = $canasta_id AND post_status = 'publish' AND post_type = 'product_variation')
+			HAVING saldo < costo_semanal_canasta;", 
+	 	OBJECT );
 	}
 
 }

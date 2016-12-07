@@ -4,14 +4,14 @@ global $clubCanasta;
 
 $costoSemanal = isset($clubCanasta->attr_variation->costoSemanal) ? $clubCanasta->attr_variation->costoSemanal : 0;
 $adicionalesAgregados = isset($clubCanasta->adicionalesAgregados) ? $clubCanasta->adicionalesAgregados : array();
-$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0; ?>
+$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotalAdicionalesSemana($adicionalesAgregados) : 0; ?>
 <span id="productos-canasta"></span>
 <article class="[ padding--bottom border-bottom margin-bottom ]">
 
 	<!-- PROCIMA CANASTA -->
 
-	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo $costoSemanal;?></span></h4>
-	<p><?php echo isset($clubCanasta->producto_name) ? $clubCanasta->producto_name : ''; ?> para el 10 de junio:</p>
+	<h4>Tu próxima canasta - <span class="[ color-primary ]">$<?php echo number_format($costoSemanal, 2, ".", ",");?></span></h4>
+	<p><?php echo isset($clubCanasta->producto_name) ? $clubCanasta->producto_name : ''; ?></p>
 	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (!empty($clubCanasta->ingredientes)):
@@ -29,13 +29,14 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 	
 	<!-- ADICIONALES AGREGADOS -->
 
-	<h5>Productos agregados: <span class="[ color-primary ]"> $<?php echo $totalAdicionales; ?></span> </h5>
+	<h5>Productos agregados: <span class="[ color-primary ]"> $<?php echo number_format($totalAdicionales, 2, ".", ","); ?></span> </h5>
 	
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (! empty($adicionalesAgregados)): 
 			foreach ($adicionalesAgregados['ingredientes'] as $key => $ingrediente): 
 				$terms = wp_get_post_terms( $ingrediente['ingredienteID'], 'unidades' );
-				$unidad = isset($terms[0]) ? $terms[0]->name : '';?>
+				$unidad = isset($terms[0]) ? $terms[0]->name : '';
+				$entrega_adicional = $ingrediente['toca-quincenal'] == 0 ? 'En esta semana no se entrega este ingrediente hasta la próxima' : '';?>
 				<li>
 		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
 		            <small>
@@ -46,7 +47,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 		            	</form>
 		            </small>
 
-		           <small>* <?php echo $ingrediente['periodo']; ?></small>
+		           <small>* <?php echo $ingrediente['periodo']; ?> <span class="color-danger"><?php echo $entrega_adicional ; ?></span></small>
 		        </li>
 			<?php endforeach;
 		else:
@@ -54,7 +55,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 		endif; ?>
 		
 	</ul>
-	<h5>Total a descontar el proximo corte: <span class="[ color-danger ]">$<?php echo $totalAdicionales + $costoSemanal; ?></span>  </h5>
+	<h5>Total a descontar el proximo corte: <span class="[ color-danger ]">$<?php echo number_format($totalAdicionales + $costoSemanal, 2, ".", ","); ?></span>  </h5>
 
 	<a href="<?php echo site_url('/recetas/'); ?>" class="[ underline ][ color-secondary ]"><em>Consulta recetas con estos ingredientes</em></a>
 </article>
@@ -66,7 +67,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 	<h4>Agrega productos</h4>
 	<?php if (!empty($clubCanasta->adicionales) AND $costoSemanal < $opCliente->saldo): 
 		$saldoDisponible = ( $opCliente->saldo - $costoSemanal ) - $totalAdicionales; ?>
-		<h5>Saldo disponible para adicionales <strong class="[ color-primary ]">$<?php echo $saldoDisponible;?></strong></h5>
+		<h5>Saldo disponible para adicionales <strong class="[ color-primary ]">$<?php echo number_format($saldoDisponible, 2, ".", ",");?></strong></h5>
 		<input type="hidden" id="saldo-libre" value="<?php echo $saldoDisponible; ?>">
 		
 		<p>Selecciona los productos que deseas agregar a tu canasta:</p>
@@ -81,7 +82,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 					<div class="[ margin-bottom ]">
 						<a data-toggle="collapse" href="#ingrediente<?php echo $adicional->ingrediente_id; ?>" class="[ no-decoration color-dark color-dark-hover ]">
 							<button type="submit" class="[ inline-block align-middle ][ btn btn-secondary ]">+</button>
-							<p class="[ inline-block align-middle ][ no-margin ]"><?php echo get_the_title($adicional->ingrediente_id); ?> ( <?php echo $unidad; ?> )</p>
+							<p class="[ inline-block align-middle ][ no-margin ]"><?php echo get_the_title($adicional->ingrediente_id); ?> ( <?php echo $adicional->cantidad.' '.$unidad; ?> )</p>
 						</a>
 						<div id="ingrediente<?php echo $adicional->ingrediente_id; ?>" class="[ panel-collapse collapse ][ padding--top ]">
 							<p class="[ color-gray-xlight ]">Precio: $ <?php echo $precio != '' ? $precio : 0; ?>
@@ -99,6 +100,10 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicion
 									<div>
 										<input type="radio" id="option<?php echo $adicional->ingrediente_id; ?>2" name="adicional-periodo" value="Cada semana">
 										<label for="option<?php echo $adicional->ingrediente_id; ?>2"><span class="[ margin-right--xxsmall ]"></span> Cada semana</label>
+									</div>
+									<div>
+										<input type="radio" id="option<?php echo $adicional->ingrediente_id; ?>3" name="adicional-periodo" value="Cada 15 dias">
+										<label for="option<?php echo $adicional->ingrediente_id; ?>3"><span class="[ margin-right--xxsmall ]"></span> Cada 15 dias</label>
 									</div>
 								</div>
 								<input type="hidden" name="action" value="save-additional-ingredient">

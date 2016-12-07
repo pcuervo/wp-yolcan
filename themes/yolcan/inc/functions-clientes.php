@@ -1,6 +1,7 @@
 <?php global $opCliente;
 global $clubCanasta;
 global $procesoRegistro;
+
 add_action('get_header', function() {
 	global $current_user;
 	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
@@ -70,6 +71,9 @@ function deleteIngredienteAdicional($data){
  * GUARDA LOS ADICIONALES DEL CLIENTE
  */
 function storeIngredientesAdicionales($clienteId, $data){
+	$cliente = getCliente($clienteId);
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+	$cantidad = $aditionalAttr->cantidad * $data['adicional-numero-productos'];
 	$newArr = [];
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 	$newArr['total_adicionales'] = $total;
@@ -77,8 +81,9 @@ function storeIngredientesAdicionales($clienteId, $data){
 		'ingredienteID' => $data['adicional-id'],
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $total,
-		'cantidad' => $data['adicional-numero-productos'],
-		'periodo' => $data['adicional-periodo']
+		'cantidad' => $cantidad,
+		'periodo' => $data['adicional-periodo'],
+		'toca-quincenal' => 1
 	];
 
 	return saveIngredientesAdicionales(serialize($newArr), $clienteId);
@@ -86,21 +91,26 @@ function storeIngredientesAdicionales($clienteId, $data){
 
 
 function editIngredientesAdicionales($clienteId, $data, $adicionales){
+	$cliente = getCliente($clienteId);
 	$adicionales = unserialize($adicionales);
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 
 	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] + $total;
 
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+
 	$totalOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['total'] : 0;
 	$cantidadOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['cantidad'] : 0;
 	$totalIngrediente = $totalOld + $total;
-	$cantidadIngrediente = $cantidadOld + $data['adicional-numero-productos'];
+	$cantidadIngrediente = $cantidadOld + ($data['adicional-numero-productos'] * $aditionalAttr->cantidad);
+	$tocaQuinsenal = isset($adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal']) ? $adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal'] : 1;
 	$adicionales['ingredientes'][$data['adicional-id']] = [
 		'ingredienteID' => $data['adicional-id'],
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $totalIngrediente,
 		'cantidad' => $cantidadIngrediente ,
-		'periodo' => $data['adicional-periodo']
+		'periodo' => $data['adicional-periodo'],
+		'toca-quincenal' => $tocaQuinsenal
 	];
 
 	return updateIngredientesAdicionales(serialize($adicionales), $clienteId);
@@ -135,18 +145,20 @@ function checkStatusCliente(){
 /**
  * GUARDA EL CLUB DONDE QUIERE SU CANASTA EL CLIENTE
  */
-function saveClubCliente($clubId){
+function saveClubCliente($clubId, $clienteID = '', $url_return = ''){
 	if ($clubId == '') return false;
 
 	global $current_user;
-	$opCliente = getOpcionesCliente($current_user->ID);
+	$clienteID = $clienteID == '' ? $current_user->ID : $clienteID;
+	$url_return = $url_return == '' ? site_url('/mi-cuenta') : $url_return;
+	$opCliente = getOpcionesCliente($clienteID);
 	
 	if (!empty($opCliente)) {
-		getClientUpdateClub($current_user->ID, $clubId);
-		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $current_user->ID);
+		getClientUpdateClub($clienteID, $clubId);
+		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $clienteID);
 	}
 
-	wp_redirect( site_url('/mi-cuenta') );
+	wp_redirect( $url_return );
 	exit;
 }
 
@@ -271,15 +283,52 @@ function getCostoVariationID($variant_id){
  */
 function suspenderCanastaTemporal($data, $clientId){
 	extract($data);
-	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
-	$fecha_inicio = date('Y-m-d');
 
-	$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
-	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
+	if (isset($data['suspensionHasta']) AND $data['suspensionHasta'] != '') {
+		suspenderCanastaTemporalFecha($clientId, $data);
+	}else{
+		$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+		$fecha_inicio = date('Y-m-d');
+
+		$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
+		$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
 	
-	$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+		$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
+
+		updateSuspensionOpcionesCliente($clientId, $idSuspension);
+	}
+	
+}
+
+
+/**	
+ * SUSPENDE LA ENTREGA Y CORTE HASTA DESPUES DE LA FECHA INDICADA
+ */
+function suspenderCanastaTemporalFecha($clientId, $data){
+	extract($data);
+
+	$fechaProximoCobro = getFechaProximoCobro($suspensionHasta, 1);
+	$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
+	$fecha_inicio = date('Y-m-d');
+	$proximo_viernes = date ("Y-m-d",strtotime("next Friday"));
+
+	$semanas = dateDifference($proximo_viernes, $fechaProximoCobro);
+
+	$idSuspension = updateSuspensionCanasta($clientId, $semanas, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
 
 	updateSuspensionOpcionesCliente($clientId, $idSuspension);
+}
+
+function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
+{
+    $datetime1 = date_create($date_1);
+    $datetime2 = date_create($date_2);
+   
+    $interval = date_diff($datetime1, $datetime2);
+
+   	$dias = $interval->format($differenceFormat);
+    return $dias / 7;
+   
 }
 
 /**	
@@ -396,7 +445,7 @@ function getClientUpdateClub($clienteId, $club_nuevo){
  * RESIVE INFORMACION PARA CREAR UN CLIENTE CON FB
  */
 function ajax_info_yolcan_fb_login(){
-	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+	$nombreCliente = isset($_POST['nombre']) ? $_POST['nombre'].' '.$_POST['last_name'] : '';
 	$emailCliente = isset($_POST['mail']) ? $_POST['mail'] : '';
 	$passwordCliente  = wp_generate_password();
 
@@ -407,10 +456,9 @@ function ajax_info_yolcan_fb_login(){
 		if( $wpUser ){
 			wp_set_auth_cookie( $wpUser->ID, 0, 0 );
 			wp_set_current_user( $wpUser->ID );
+			wp_send_json('creado');
 		}
 		
-  		wp_send_json('creado');
-
   	}else{
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
 		if(!is_wp_error($user_id)){
@@ -418,8 +466,10 @@ function ajax_info_yolcan_fb_login(){
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id);
+		    wp_send_json('creado');
 		}
-		wp_send_json('creado');
+		 wp_send_json($user_id);
+		
 	}
 	
 

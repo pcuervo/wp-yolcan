@@ -28,54 +28,32 @@
             $('#form-unete').parsley();
 
 			$('.js-video-wrapper').fitVids();
-			/**
-			 * Triggered events
-			**/
 
+			//--------------------------------------------------------------------------------------
+	      	//api instagram image show
+			//--------------------------------------------------------------------------------------
+			console.log('aaa');
 
-			//Chart.js
-
-			//#mycanvas
-			var ctx = $("#mycanvas").get(0).getContext("2d");
-			//pie chart data
-			//sum of values = 360
-			var data = [
-				{
-					value: 46,
-					color: "#f99134",
-					highlight: "#f96234",
-					label: "Local"
-				},
-				{
-					value: 54,
-					color: "#fff",
-					highlight: "#fff",
-					label: ""
+			 var feed = new Instafeed({
+		        get: 'tagged',
+		        tagName: 'hoy',
+		        accessToken: '1490790081.113bc44.f051d1732c774cc89e88710fb54a2289',
+		        clientId: '113bc4484f5945cf979169f9a640dd6f',
+		        limit: 10,
+		        error: function(sss) {
+				    console.log(sss);
 				}
-			];
-			//draw
-			var piechart = new Chart(ctx).Pie(data);
+		    });
+		    feed.run();
+			// $('.content-instagram').pongstgrm({
+			//       accessId:     '113bc4484f5945cf979169f9a640dd6f',
+			//       accessToken:  '1490790081.113bc44.f051d1732c774cc89e88710fb54a2289',
+			//       count:6,
+			//       show: 'yolcan',
+			//       button: false,
+			//       column: "mi-img"
+			// }); 
 
-			//#mycanvas1
-			var ctx = $("#mycanvas1").get(0).getContext("2d");
-			//pie chart data
-			//sum of values = 360
-			var data = [
-				{
-					value: 14,
-					color: "#c4681c",
-					highlight: "#c4681c",
-					label: "Macrotiendas"
-				},
-				{
-					value: 54,
-					color: "#fff",
-					highlight: "#fff",
-					label: ""
-				}
-			];
-			//draw
-			var piechart = new Chart(ctx).Pie(data);
 
 		};
 
@@ -478,7 +456,7 @@
 		 */
 
 		if (is_home == 1) {
-			initialize();
+			// initialize();
 		};
 
 

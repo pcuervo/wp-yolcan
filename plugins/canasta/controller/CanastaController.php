@@ -230,7 +230,9 @@ class CanastaController {
 		return view('config-canasta-base', [
 			'titulo' => 'Configuración canasta base',
 			'clubes' => CanastaModel::clubes(),
-			'clubesAplica' => get_option('clubes_usan_canasta_base')
+			'clubesBase' => isset($this->dataPost['clubes']) ? $this->dataPost['clubes'] : [],
+			'clubesAplica' => get_option('clubes_usan_canasta_base'),
+			'messaje' => isset($this->dataPost['clubes']) ? true : false
 		]);
 	}
 
@@ -243,6 +245,9 @@ class CanastaController {
 		$mCanasta = model('CanastaModel');
 		$optionName = 'clubes_usan_canasta_base';
 		$clubes = $dataPost['clubes'];
+		$newValue = [];
+
+		$this->updateCanastaClubesWithBase($clubes);
 
 		if (get_option( $optionName ) !== false){
 		    update_option( $optionName, $newValue );
@@ -251,6 +256,64 @@ class CanastaController {
 		    $autoload = 'no';
 		    add_option( $optionName, $newValue, $deprecated, $autoload );
 		}
+	}
+
+	private function updateCanastaClubesWithBase($clubes)
+	{
+		if (!empty($clubes)) {
+			// 1.- IR POR INGREDIENTES CANASRTA BASE
+			$mCanasta = model('CanastaModel');
+			$ingredientesCanastaBase = getGroupCanastas($mCanasta->getCanastasClub(1));
+			
+			foreach ($clubes as $key => $club) {
+				if ($club != 0) {
+					// 2.- IR POR ID ACTUALIZACION CLUBE
+					$canastaClub = getGroupCanastas($mCanasta->getCanastasClub($club));
+					
+					if (isset($canastaClub['actualizacion']) ){
+						$idActualizacion = $canastaClub['actualizacion']->actualizacion_id;
+					}else{
+						$idActualizacion = $mCanasta->storeCanasta($club, 1, '0000-00-00');
+					}
+
+					$this->setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $club);
+
+					$mCanasta->updateDateEditCanasta($idActualizacion, '0000-00-00');
+
+				}
+				
+			}	
+		}
+
+		return true;
+	}
+
+
+	private function setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $idClub)
+	{
+		$productos = model('ProductosModel');
+		$productos = array_merge($productos->productos(), getObjetAdicionales() );
+		if (!empty($productos)) {
+			foreach ($productos as $producto) {
+				$idCanastaBase = '1'.$producto->ID;
+				$idCanasta = $idClub.$producto->ID;
+
+				// 3.- BORRAR INGREDIENTES DE LA ACTUALIZACION DEL CLUBE
+				$this->modelIngredientes->destroyIngredientesCanasta($idActualizacion, $idCanasta);
+
+				// 4.- ASIGNAR INGREDIENTES DE LA CANASTA BASE
+				
+				if (isset($ingredientesCanastaBase['canastas'][$idCanastaBase])) {
+			
+					foreach ($ingredientesCanastaBase['canastas'][$idCanastaBase] as $idIngrediente => $ingrediente) {
+						$cantidad = isset($ingrediente->cantidad) ? $ingrediente->cantidad : 0;
+						$this->modelIngredientes->storeIngredienteCanasta($idCanasta, $idActualizacion, $idIngrediente, $cantidad);
+					}
+				}
+			}
+		}
+		return true;
+
 	}
 
 

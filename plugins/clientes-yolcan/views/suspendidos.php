@@ -22,9 +22,15 @@
 		<tbody id="the-list">
 			<?php if(!empty($clientes)):
 				foreach ($clientes as $cliente): 
-					$user = get_user_by( 'id', $cliente->cliente_id ); ?>
+					$user = get_user_by( 'id', $cliente->cliente_id ); 
+					$firstName = get_user_meta($user->ID, 'first_name', true);
+                    $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 					<tr>
-						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $user->user_login; ?></a></td>
+						<td>
+							<a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>">
+								<?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?>
+							</a>
+						</td>
 						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo get_the_title($cliente->club_id); ?></a></td>
 						<td>
 							<a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>">
@@ -33,7 +39,7 @@
 								endif; ?>
 							</a>
 						</td>
-						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $cliente->tiempo_suspension; ?> meses</a></td>
+						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $cliente->tiempo_suspension; ?> semanas</a></td>
 						<td>
 							<a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>">
 								<?php if(function_exists('getCostoVariationID')):

@@ -2,12 +2,15 @@
 $producto_id = wp_get_post_parent_id( $cliente->producto_id );
 $canasta = function_exists('getCostoVariationID') ? getIdCanastaClube($cliente->club_id, $producto_id) : [];
 $ingredientesCanasta = function_exists('getIngredientesCanasta') ? getIngredientesCanasta($canasta) : [];
-$ingredientesAdicionales = function_exists('getIngredientesAdicionales') ? getIngredientesAdicionales($cliente->cliente_id) : [];
-$totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? $adicionalesAgregados['total_adicionales'] : 0;
-$variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : []; ?>
+$ingredientesAdicionales = function_exists('getIngredientesAdicionales') ? unserialize(getIngredientesAdicionales($cliente->cliente_id) ) : [];
+
+$totalAdicionales = isset($ingredientesAdicionales['total_adicionales']) ? $ingredientesAdicionales['total_adicionales'] : 0;
+$variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($cliente->producto_id) : [];
+$firstName = get_user_meta($user->ID, 'first_name', true);
+$lastName = get_user_meta($user->ID, 'last_name', true); ?>
 <div class="wrap content-cliente">
     <h1>
-        Cliente - <?php echo $user->user_login; ?>
+        Cliente - <?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?>
     </h1>
     <hr>
      <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=activos'; ?>">
@@ -79,7 +82,7 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 			$suspension = function_exists('getSuspensionCanastas') ? getSuspensionCanastas($cliente->cliente_id) : ''; ?>
 			<p>Las entregas al cliente estan suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension->temporalidad; ?> Semanas</strong></p>
 	        <p>Fecha suspensión: <strong> <?php echo getDateTransform($suspension->fechaSuspension); ?></strong>
-	        <br>Podras ver la próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
+	        <!-- <br>Podras ver la próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong> -->
 	        <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
 
 	        <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
@@ -92,33 +95,36 @@ $variationAttr = function_exists('getCostoVariationID') ? getCostoVariationID($c
 		<a href="<?php echo admin_url().'admin.php?page=historial_cliente&id_cliente='.$cliente->cliente_id; ?>" class="button-primary">Historial de canastas</a>
 	</div>
 	<br>
-	<hr>
-	<h3>Historial de actualizaciones de saldo por el administrador</h3>
-	<?php if(!empty($historySaldo)): ?>
-		<table class="wp-list-table widefat fixed striped users">
-			<thead>
-				<tr>
-					<th scope="col" class="manage-column column-primary"><span>Fecha actualización</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Lo actualizó</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Saldo Anterior</span></th>
-					<th scope="col" class="manage-column column-primary"><span>Saldo Actualizado</span></th>
-				</tr>
-			</thead>
+	<br>
+	<div style="position: relative;overflow: hidden;width: 100%;">
+		<hr>
+		<h3>Historial de actualizaciones de saldo por el administrador</h3>
+		<?php if(!empty($historySaldo)): ?>
+			<table class="wp-list-table widefat fixed striped users">
+				<thead>
+					<tr>
+						<th scope="col" class="manage-column column-primary"><span>Fecha actualización</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Lo actualizó</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Anterior</span></th>
+						<th scope="col" class="manage-column column-primary"><span>Saldo Actualizado</span></th>
+					</tr>
+				</thead>
 
-			<tbody id="the-list">
-				
-					<?php foreach ($historySaldo as $history):
-						$user = get_user_by( 'ID', $history->user_id ); ?>
-						<tr>
-							<td><?php echo $history->fecha; ?></td>
-							<td><?php echo $user->user_login; ?></td>
-							<td><?php echo $history->saldo_anterior; ?></td>
-							<td><?php echo $history->saldo_agregado; ?></td>
-						</tr>
-					<?php endforeach; ?>
-			</tbody>
+				<tbody id="the-list">
+					
+						<?php foreach ($historySaldo as $history):
+							$user = get_user_by( 'ID', $history->user_id ); ?>
+							<tr>
+								<td><?php echo $history->fecha; ?></td>
+								<td><?php echo $user->user_login; ?></td>
+								<td><?php echo $history->saldo_anterior; ?></td>
+								<td><?php echo $history->saldo_agregado; ?></td>
+							</tr>
+						<?php endforeach; ?>
+				</tbody>
 
-		</table>
+			</table>
+		</div>
 	<?php else: ?>
 		<p class="color-primar">No existen actualizaciones por el Administrador</p>
 	<?php endif; ?>

@@ -167,6 +167,15 @@ function getIngredientesCanasta($canastaID){
 }
 
 
+function getIngredienteAdicionalCanasta($canastaID, $ingredienteId){
+	global $wpdb;
+	return $wpdb->get_row( "SELECT ingrediente_id, cantidad FROM {$wpdb->prefix}actualizaciones_canasta as ac
+		INNER JOIN {$wpdb->prefix}canasta_relationships as cr
+		ON ac.id = cr.actualizacion_id
+		WHERE canasta_id = $canastaID AND ingrediente_id = $ingredienteId AND status = 1;
+	");
+}
+
 function getIngredientesAdicionales($clienteId){
 	global $wpdb;
 	return $wpdb->get_var("SELECT adicionales FROM {$wpdb->prefix}adicionales_cliente

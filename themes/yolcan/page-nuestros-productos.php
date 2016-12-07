@@ -64,7 +64,7 @@ the_post(); ?>
                                         <?php if (!empty($variations)):
                                         $count = 1;
                                             foreach($variations as $variation):
-                                                $name = getNameVariation($variation['variation_id']);
+                                                $name = getNameOriginVariation($variation['variation_id']);
                                                 $check = $count == 1 ? 'checked' : '';
                                                 $nombreVariacion = getNameOriginVariation($variation['variation_id']);
                                                 $cansatSemanal = getCostoCanastaTemporalidad($nombreVariacion, $variation['display_price']);
@@ -98,10 +98,10 @@ the_post(); ?>
                                             <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]">$<?php echo number_format($costoTotal) ?></span>
                                         </div>
                                         <div class="[ price-table__set ][ clearfix ]">
-                                            <span class="[ price-table__text ]">Precio por canasta:</span>
+                                            <!-- <span class="[ price-table__text ]">Precio por canasta:</span>
                                             <span class="[ price-table__value ][ precio-semanal-check-<?php echo get_the_ID(); ?> ]">
                                                 $<?php echo $costoVariationSemanal ?>
-                                            </span>
+                                            </span> -->
                                         </div>
                                     </div>
                                     <button type="button"  data-producto="<?php echo get_the_ID(); ?>" class="[ btn btn-link ][ width-100 block ] [ btn-ingredientes-producto ]">Ver ingredientes</button>

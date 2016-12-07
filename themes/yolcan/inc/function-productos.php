@@ -1,29 +1,12 @@
 <?php
 
-function getNameVariation($variationId){
-	$variation = wc_get_product($variationId);
-	$format = $variation->get_formatted_name();
-	$porciones = explode(" ", $format);
-	
-	switch ($porciones[6]) {
-	    case 'Mensual':
-	        return "1 mes";
-	        break;
-	    case 'Trimestral':
-	        return "3 meses";
-	        break;
-	    case 'Semestral':
-	        return "6 meses";
-	        break;
-	}
-}
 
 function getNameOriginVariation($variationId){
-	$variation = wc_get_product($variationId);
-	$format = $variation->get_formatted_name();
-	$porciones = explode(" ", $format);
+	$variation = new WC_Product_Variation($variationId);
+	$title_slug = current($variation->get_variation_attributes());
+	$variation_attr = get_term_by( 'slug', $title_slug, 'pa_temporalidad' );
 	
-	return $porciones[6];
+	return isset($variation_attr->name) ? $variation_attr->name : '';
 }
 
 /**
@@ -76,7 +59,6 @@ function getHtmlIngredientes($ingredientes, $producto_id){
 		if (!empty($variations)):
         $count = 1;
             foreach($variations as $variation):
-                $name = getNameVariation($variation['variation_id']);
                 $check = $count == 1 ? 'checked' : '';
                 $nombreVariacion = getNameOriginVariation($variation['variation_id']);
                 $cansatSemanal = getCostoCanastaTemporalidad($nombreVariacion, $variation['display_price']);
@@ -97,7 +79,7 @@ function getHtmlIngredientes($ingredientes, $producto_id){
                         $html .= 'name="variaciones-00'.$producto_id.'"';
                         $html .= 'value="c9"';
                         $html .= $check;
-                    $html .= '>'. $name;
+                    $html .= '>'. $nombreVariacion;
                 $html .= '</label>';
                 $count++; 
             endforeach;
