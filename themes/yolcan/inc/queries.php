@@ -155,3 +155,11 @@ function storeCorteClientes(){
 
 	return $wpdb->insert_id;
 }
+
+function getVisitasAgendadas(){
+	global $wpdb;
+
+	$fecha = date('Y-m-d');
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}sitas_agendadas 
+		WHERE fecha >= '$fecha' ORDER BY fecha ASC;", OBJECT );
+}
