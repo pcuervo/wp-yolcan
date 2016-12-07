@@ -201,6 +201,12 @@ add_filter( 'sanitize_file_name', function ($filename) {
 
 // HELPER METHODS AND FUNCTIONS //////////////////////////////////////////////////////
 
+add_filter('woocommerce_login_redirect', 'wc_login_redirect');
+ 
+function wc_login_redirect( $redirect_to ) {
+     $redirect_to = site_url('mi-cuenta');
+     return $redirect_to;
+}
 
 
 /**
