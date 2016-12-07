@@ -48,7 +48,11 @@ function setIngredienteAdicional($data){
 	$adicionales = getIngredientesAdicionales($current_user->ID);
 	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
 	
-	return editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+	editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+
+	$url = site_url().'/mi-cuenta/#productos-canasta';
+	wp_redirect( $url );
+	exit;
 }
 
 
