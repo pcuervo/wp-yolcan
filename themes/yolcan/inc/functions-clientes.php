@@ -32,7 +32,7 @@ function setNuevoCliente($data){
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id); 
-		    wp_safe_redirect( site_url('/mi-cuenta') );
+		    wp_safe_redirect( site_url('/nuestros-productos') );
    			exit();
 		}
 	} else {
