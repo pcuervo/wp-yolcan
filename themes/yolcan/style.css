@@ -7943,6 +7943,12 @@ a:hover {
 .border-bottom--primary--medium {
   border-bottom: 2px solid #3ac6b1;
 }
+.border-top--danger--medium {
+  border-top: 2px solid #b14464;
+}
+.border-bottom--danger--medium {
+  border-bottom: 2px solid #b14464;
+}
 .box-hover {
   text-align: center!important;
   color: #fff;

@@ -82,6 +82,7 @@
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
+
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom--large ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
 								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
@@ -91,7 +92,7 @@
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa en tu cuenta de <span class=" [ text-uppercase ]">yolcan</span></p>
 									<?php if(isset($_GET['login_error'])): ?>
-										<p class="text-danger">El <strong>Email</strong> o <strong>Contraseña</strong> son incorrectos.</p>
+										<p class="color-light text-center [ border-top--danger--medium border-bottom--danger--medium ][ margin-bottom ][ padding--top-bottom ]">El <strong>Email</strong> o <strong>Contraseña</strong> son incorrectos.</p>
 									<?php endif; ?>
 									<form method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
 										<?php do_action( 'woocommerce_login_form_start' ); ?>
@@ -133,11 +134,11 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
-		
-		<!-- modal unete -->	
+
+		<!-- modal unete -->
 		<div id="unete" class="[ modal fade ]" role="dialog">
 			<?php $nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
-			$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
+			$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
@@ -195,10 +196,10 @@
 							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
 						<div id="content-ingredientes-canasta">
-							
-							
+
+
 						</div>
-						
+
 					</div><!-- end modal-body -->
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
