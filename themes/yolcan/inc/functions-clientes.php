@@ -23,10 +23,11 @@ if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoClie
 function setNuevoCliente($data){
 	global $procesoRegistro;
 	extract($data);
-	$user_id = username_exists( $emailCliente );
-	if ( !$user_id and email_exists($emailCliente) == false ) {
+
+	if ( !username_exists( $nombreCliente ) and !email_exists($emailCliente) ) {
 		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+
 		if(!is_wp_error($user_id)){
 			$wp_user = get_user_by( 'id', $user_id );
 			$wp_user->set_role( 'customer' );
@@ -35,8 +36,11 @@ function setNuevoCliente($data){
 		    wp_safe_redirect( site_url('/nuestros-productos') );
    			exit();
 		}
-	} else {
-		$procesoRegistro['error'] = 'El email ya esta en uso';
+
+	}elseif(username_exists( $nombreCliente )) {
+		$procesoRegistro['error'] = 'El nombre '.$nombreCliente.' ya esta en uso';
+	}elseif( email_exists($emailCliente) ){
+		$procesoRegistro['error'] = 'El email '.$emailCliente.' ya esta en uso';
 	}
 }
 

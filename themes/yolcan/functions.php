@@ -201,13 +201,22 @@ add_filter( 'sanitize_file_name', function ($filename) {
 
 // HELPER METHODS AND FUNCTIONS //////////////////////////////////////////////////////
 
+/**
+ * 	REDIRECT LOGIN USER MI CUENTA
+ */
 add_filter('woocommerce_login_redirect', 'wc_login_redirect');
- 
 function wc_login_redirect( $redirect_to ) {
      $redirect_to = site_url('mi-cuenta');
      return $redirect_to;
 }
 
+add_action( 'wp_login_failed', 'my_login_fail' );  // hook failed login
+function my_login_fail( $username ) {
+	
+    //redirect to custom login page and append login error flag
+    wp_redirect("?login_error" );  
+    exit;
+}
 
 /**
  * Print the <title> tag based on what is being viewed.
