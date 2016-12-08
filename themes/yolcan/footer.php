@@ -1,4 +1,4 @@
-<?php global $procesoRegistro;?>
+<?php global $procesoRegistro; ?>
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
 				<section class="[ row ]">
@@ -90,6 +90,9 @@
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa en tu cuenta de <span class=" [ text-uppercase ]">yolcan</span></p>
+									<?php if(isset($_GET['login_error'])): ?>
+										<p class="text-danger">El <strong>Email</strong> o <strong>Contraseña</strong> son incorrectos.</p>
+									<?php endif; ?>
 									<form method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
 										<?php do_action( 'woocommerce_login_form_start' ); ?>
 
@@ -131,14 +134,10 @@
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
 		
-		<!-- modal unete -->
-		<?php if(isset($procesoRegistro['error'])): ?>
-			<div id="unete" class="[ modal fade ] in" role="dialog" aria-hidden="false" style="display: block;">
-		<?php else: ?>	
-			<div id="unete" class="[ modal fade ]" role="dialog">
-		<?php endif; 
-		$nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
-		$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
+		<!-- modal unete -->	
+		<div id="unete" class="[ modal fade ]" role="dialog">
+			<?php $nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
+			$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
@@ -151,7 +150,7 @@
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
 									<?php if(isset($procesoRegistro['error'])): ?>
-										<p class="text-danger">El <strong>Email</strong> <?php echo $emailCliente; ?> ya esta en uso.</p>
+										<p class="text-danger"><?php echo $procesoRegistro['error']; ?></p>
 									<?php endif; ?>
 									<form id="form-unete" method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
@@ -251,6 +250,8 @@
 			</div>
 		</div>
 
-		<?php wp_footer(); ?>
+		<?php wp_footer();
+		if(isset($_GET['login_error'])) echo "<script> jQuery('#ingresa').modal('show'); </script>";
+		if(isset($procesoRegistro['error'])) echo "<script> jQuery('#unete').modal('show'); </script>"; ?>
 	</body>
 </html>

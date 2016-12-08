@@ -144,7 +144,7 @@
 					</div>
 				</div> -->
 			</article>
-			<article class="[ col-xs-12 col-md-8 ]">
+			<article id="content-recetas-grid" class="[ col-xs-12 col-md-8 ]">
 				<?php
 				if (isset($_GET['ingrediente']) AND $_GET['ingrediente'] != ''):
 					get_template_part('templates/recetas', 'ingrediente');

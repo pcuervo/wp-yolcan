@@ -597,22 +597,36 @@
 		});
 
 		/** FILTER **/
+		$('#content-recetas-grid').imagesLoaded( function() {
+		  	var $grid = $('.grid').isotope({
+			  	itemSelector: '.element-item',
+			  	layoutMode: 'fitRows'
+			});
 
-		var $grid = $('.grid').isotope({
-		  	itemSelector: '.element-item',
-		  	layoutMode: 'fitRows'
-		});
+			$('.filter-ingrediente').on('click', function() {
+				if($(this).hasClass('active-ing')){
+					$(this).removeClass('active-ing');
+				}else{
+			  		$(this).addClass('active-ing');
+				}
 
+				getFilterCombo();
 
-		$('.filter-ingrediente').on('click', function() {
-			if($(this).hasClass('active-ing')){
-				$(this).removeClass('active-ing');
-			}else{
-		  		$(this).addClass('active-ing');
+			});
+
+			function getFilterCombo(){
+				var ingredientes = $('.active-ing');
+				var filters = '';
+				$.each(ingredientes, function( index, value ) {
+				  	if(index == 0){
+				  		filters += value.getAttribute('data-filter');
+				  	}else{
+				  		filters += ', '+value.getAttribute('data-filter');
+				  	}
+				});
+				$grid.isotope({ filter: filters });
+				console.log(filters);
 			}
-
-			getFilterCombo();
-
 		});
 
 		function getFilterCombo(){
@@ -639,7 +653,6 @@
 			     $( ".box-review" ).animate({ "top": "200px" }, 200 );
 			}
 		}
-
 	});
 
 })(jQuery);

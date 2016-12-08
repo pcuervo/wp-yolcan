@@ -1,6 +1,7 @@
 <?php global $opCliente;
 global $clubCanasta;
 global $procesoRegistro;
+
 add_action('get_header', function() {
 	global $current_user;
 	if(isset($_POST['action']) AND $_POST['action'] == 'suspender-canasta') suspenderCanastaTemporal($_POST, $current_user->ID);
@@ -22,20 +23,24 @@ if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoClie
 function setNuevoCliente($data){
 	global $procesoRegistro;
 	extract($data);
-	$user_id = username_exists( $emailCliente );
-	if ( !$user_id and email_exists($emailCliente) == false ) {
+
+	if ( !username_exists( $nombreCliente ) and !email_exists($emailCliente) ) {
 		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+
 		if(!is_wp_error($user_id)){
 			$wp_user = get_user_by( 'id', $user_id );
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id); 
-		    wp_safe_redirect( site_url('/mi-cuenta') );
+		    wp_safe_redirect( site_url('/nuestros-productos') );
    			exit();
 		}
-	} else {
-		$procesoRegistro['error'] = 'El email ya esta en uso';
+
+	}elseif(username_exists( $nombreCliente )) {
+		$procesoRegistro['error'] = 'El nombre '.$nombreCliente.' ya esta en uso';
+	}elseif( email_exists($emailCliente) ){
+		$procesoRegistro['error'] = 'El email '.$emailCliente.' ya esta en uso';
 	}
 }
 
@@ -47,7 +52,11 @@ function setIngredienteAdicional($data){
 	$adicionales = getIngredientesAdicionales($current_user->ID);
 	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
 	
-	return editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+	editIngredientesAdicionales($current_user->ID, $data, $adicionales);
+
+	$url = site_url().'/mi-cuenta/#productos-canasta';
+	wp_redirect( $url );
+	exit;
 }
 
 
@@ -70,6 +79,9 @@ function deleteIngredienteAdicional($data){
  * GUARDA LOS ADICIONALES DEL CLIENTE
  */
 function storeIngredientesAdicionales($clienteId, $data){
+	$cliente = getCliente($clienteId);
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+	$cantidad = $aditionalAttr->cantidad * $data['adicional-numero-productos'];
 	$newArr = [];
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 	$newArr['total_adicionales'] = $total;
@@ -77,7 +89,7 @@ function storeIngredientesAdicionales($clienteId, $data){
 		'ingredienteID' => $data['adicional-id'],
 		'costo_unitario' => $data['adicional-costo'],
 		'total' => $total,
-		'cantidad' => $data['adicional-numero-productos'],
+		'cantidad' => $cantidad,
 		'periodo' => $data['adicional-periodo'],
 		'toca-quincenal' => 1
 	];
@@ -87,15 +99,18 @@ function storeIngredientesAdicionales($clienteId, $data){
 
 
 function editIngredientesAdicionales($clienteId, $data, $adicionales){
+	$cliente = getCliente($clienteId);
 	$adicionales = unserialize($adicionales);
 	$total = $data['adicional-costo'] * $data['adicional-numero-productos'];
 
 	$adicionales['total_adicionales'] = $adicionales['total_adicionales'] + $total;
 
+	$aditionalAttr = getIngredienteAdicionalCanasta($cliente->clubId.'1', $data['adicional-id']);
+
 	$totalOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['total'] : 0;
 	$cantidadOld = isset($adicionales['ingredientes'][$data['adicional-id']]) ? $adicionales['ingredientes'][$data['adicional-id']]['cantidad'] : 0;
 	$totalIngrediente = $totalOld + $total;
-	$cantidadIngrediente = $cantidadOld + $data['adicional-numero-productos'];
+	$cantidadIngrediente = $cantidadOld + ($data['adicional-numero-productos'] * $aditionalAttr->cantidad);
 	$tocaQuinsenal = isset($adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal']) ? $adicionales['ingredientes'][$data['adicional-id']]['toca-quincenal'] : 1;
 	$adicionales['ingredientes'][$data['adicional-id']] = [
 		'ingredienteID' => $data['adicional-id'],
