@@ -26,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="[ container ][ margin-bottom ]">
 	<!-- foto usuario -->
-	<div class="[ col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-2 ][ margin-top-bottom ]">
-		<img class="[ img-user img-responsive ]" src="img/profile.png">
+	<div class="[ col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 ][ margin-top-bottom ]">
+		<img class="[ img-user img-responsive ]" src="<?php echo THEMEPATH; ?>images/profile.png">
 	</div>
 
 	<div class="[ col-xs-12 col-sm-6 col-sm-offset-3 ]">
@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</p>
 			</fieldset>
 		</div>
-		
+
 		<div class="clear"></div>
 
 		<?php do_action( 'woocommerce_edit_account_form' ); ?>
