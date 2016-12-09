@@ -135,7 +135,16 @@ if( isset( $result['success'] ) ): ?>
 						<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 					</div>
 					<div class="[ margin-bottom--large ][ text-center ]">
-						<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
+						<h4>
+							<?php $clubes = getClubesDeConsumo(); 
+							if (!empty($clubes)):
+								$total = count($clubes) - 1;
+								foreach ($clubes as $key => $club) :
+									echo $total == $key ? $club->post_title : $club->post_title.' - ';
+								endforeach;
+							endif;?>
+							
+						</h4>
 					</div>
 					<div class="[ text-center ]">
 						<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
