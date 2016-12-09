@@ -36,7 +36,7 @@
 					$user = get_userdata( $corte->user_id );  ?>
 					<tr>
 						<td><?php echo $corte->fecha_corte; ?></td>
-						<td><?php echo $user->user_login; ?></td>
+						<td><?php echo isset($user->user_login) ? $user->user_login : ''; ?></td>
 						
 					</tr>
 				<?php endforeach;

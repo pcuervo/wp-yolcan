@@ -1,7 +1,7 @@
 <div class="wrap">
 	<h1><?php echo $titulo; ?></h1>
 	<h3>
-        <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
+        <?php echo ($idClub >= 1 && $idClub <= 5) ? 'Canastas base '.$idClub : 'Club - '.get_the_title($idClub); ?>
     </h3>
 	
 	<hr>

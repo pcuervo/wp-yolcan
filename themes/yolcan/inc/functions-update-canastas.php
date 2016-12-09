@@ -128,17 +128,20 @@ function nuevasCanastasSemanales(){
 			
 		}
 
-		$actualizacionId = $canasta->storeCanasta(1, 1, '0000-00-00');
-		if(isset($canastas[1]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
-			
-			foreach ($canastas[1] as $key => $ingrediente) {
-				$canastaID = $ingrediente->canasta_id;
-				$ingredienteId = $ingrediente->ingrediente_id;
-				$cantidad = $ingrediente->cantidad;
-				$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
-			}
+		for ($i=1; $i < 6; $i++) { 
+			$actualizacionId = $canasta->storeCanasta($i, 1, '0000-00-00');
+			if(isset($canastas[$i]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+				
+				foreach ($canastas[$i] as $key => $ingrediente) {
+					$canastaID = $ingrediente->canasta_id;
+					$ingredienteId = $ingrediente->ingrediente_id;
+					$cantidad = $ingrediente->cantidad;
+					$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+				}
 
+			}
 		}
+		
 
 	}
 }

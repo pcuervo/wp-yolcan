@@ -44,6 +44,7 @@
             </tbody>
         </table>
         <input type="hidden" name="clubes[0]" value="0">
+        <input type="hidden" name="cb" value="<?php echo $cb; ?>">
         <input class="button button-primary" type="submit" name="" id="" value="Guardar configuración">
     </form>
 </div>

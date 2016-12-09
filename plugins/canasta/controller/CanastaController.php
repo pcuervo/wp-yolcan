@@ -227,8 +227,11 @@ class CanastaController {
 	public function configCanastaBase()
 	{
 		if(! empty($this->dataPost)) $this->updateConfigCanastaBase($this->dataPost);
+
+		$cb = isset($_GET['cb']) ? $_GET['cb'] : 0;
 		return view('config-canasta-base', [
-			'titulo' => 'Configuración canasta base',
+			'titulo' => 'Configuración canasta base '.$cb,
+			'cb' => $cb,
 			'clubes' => CanastaModel::clubes(),
 			'clubesBase' => isset($this->dataPost['clubes']) ? $this->dataPost['clubes'] : [],
 			'clubesAplica' => get_option('clubes_usan_canasta_base'),
@@ -243,11 +246,14 @@ class CanastaController {
 	public function updateConfigCanastaBase($dataPost)
 	{
 		$mCanasta = model('CanastaModel');
-		$optionName = 'clubes_usan_canasta_base';
+		$cb = $dataPost['cb'];
+		$optionName = 'clubes_usan_canasta_base_'.$cb;
 		$clubes = $dataPost['clubes'];
+		
+
 		$newValue = [];
 
-		$this->updateCanastaClubesWithBase($clubes);
+		$this->updateCanastaClubesWithBase($clubes, $cb);
 
 		if (get_option( $optionName ) !== false){
 		    update_option( $optionName, $newValue );
@@ -258,13 +264,13 @@ class CanastaController {
 		}
 	}
 
-	private function updateCanastaClubesWithBase($clubes)
+	private function updateCanastaClubesWithBase($clubes, $cb)
 	{
 		if (!empty($clubes)) {
 			// 1.- IR POR INGREDIENTES CANASRTA BASE
 			$mCanasta = model('CanastaModel');
-			$ingredientesCanastaBase = getGroupCanastas($mCanasta->getCanastasClub(1));
-			
+			$ingredientesCanastaBase = getGroupCanastas($mCanasta->getCanastasClub($cb));
+
 			foreach ($clubes as $key => $club) {
 				if ($club != 0) {
 					// 2.- IR POR ID ACTUALIZACION CLUBE
@@ -276,7 +282,7 @@ class CanastaController {
 						$idActualizacion = $mCanasta->storeCanasta($club, 1, '0000-00-00');
 					}
 
-					$this->setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $club);
+					$this->setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $club, $cb);
 
 					$mCanasta->updateDateEditCanasta($idActualizacion, '0000-00-00');
 
@@ -289,13 +295,13 @@ class CanastaController {
 	}
 
 
-	private function setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $idClub)
+	private function setCanastasClubWithBase($idActualizacion, $canastaClub, $ingredientesCanastaBase, $idClub, $cb)
 	{
 		$productos = model('ProductosModel');
 		$productos = array_merge($productos->productos(), getObjetAdicionales() );
 		if (!empty($productos)) {
 			foreach ($productos as $producto) {
-				$idCanastaBase = '1'.$producto->ID;
+				$idCanastaBase = $cb.$producto->ID;
 				$idCanasta = $idClub.$producto->ID;
 
 				// 3.- BORRAR INGREDIENTES DE LA ACTUALIZACION DEL CLUBE
