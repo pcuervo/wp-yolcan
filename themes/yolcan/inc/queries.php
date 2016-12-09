@@ -177,3 +177,10 @@ function getVisitasAgendadas(){
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}sitas_agendadas 
 		WHERE fecha >= '$fecha' ORDER BY fecha ASC;", OBJECT );
 }
+
+function getCreaTuClub(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}creates_a_club_of_consumption
+	 	ORDER BY id DESC;", OBJECT );
+}
