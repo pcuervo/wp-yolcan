@@ -17,6 +17,8 @@ add_action('add_meta_boxes', function(){
     add_meta_box( 'meta-box-precio_ingrediente', 'Valor producto adicional restaurante', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-productor_ingrediente', 'Productor', 'show_metabox_productor_ingrediente', 'ingredientes', 'side', 'high');
 	add_meta_box( 'meta-box-info_extra', 'Información extra', 'show_metabox_info_extra', 'clubes-de-consumo');
+	add_meta_box( 'meta-box-info_extra_product', 'Información extra', 'show_metabox_info_extra_product', 'product', 'side', 'high');
+
 
 	if ($post->post_name == 'visitanos'){
 		add_meta_box( 'meta-box-datos_visita', 'Datos visitas', 'show_metabox_datos_visita', 'page', 'side', 'high');
@@ -213,6 +215,18 @@ function show_metabox_info_extra($post){
 
 }
 
+
+function show_metabox_info_extra_product($post){
+	wp_nonce_field(__FILE__, '_info_extra_product_nonce');
+
+	$approximate_weight = get_post_meta($post->ID, 'approximate_weight', true);
+
+
+	echo "<label for='approximate_weight' class='label-paquetes'>Peso a proximado: </label><br><br>";
+	echo "<input type='text' class='widefat' id='approximate_weight' name='approximate_weight' value='$approximate_weight' placeholder='3-4.5 KG' />";
+
+}
+
 function show_metabox_informacion_ingrediente($post){
 	wp_nonce_field(__FILE__, '_info_ingrediente_nonce');
 
@@ -320,6 +334,10 @@ add_action('save_post', function($post_id){
 		update_post_meta($post_id, 'capacidad-del-club', $_POST['capacidad_del_club']);
 		update_post_meta($post_id, 'puede-dejar-efectivo', $_POST['puede_dejar_efectivo']);
 		update_post_meta($post_id, 'dias-de-recoleccion-a', $_POST['dias_de_recoleccion_a']);
+	}
+
+	if ( isset($_POST['approximate_weight']) and check_admin_referer(__FILE__, '_info_extra_product_nonce') ){
+		update_post_meta($post_id, 'approximate_weight', $_POST['approximate_weight']);
 	}
 
 	if ( isset($_POST['valor_en_puntos']) and check_admin_referer(__FILE__, '_info_ingrediente_nonce') ){

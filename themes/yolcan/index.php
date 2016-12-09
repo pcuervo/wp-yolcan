@@ -169,8 +169,8 @@ if( isset( $result['success'] ) ): ?>
 								<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
 									<div class="[ card__header ]">
 										<h4 class="[ text-center ][ color-primary ]"><?php the_title(); ?></h4>
-										<p class="[ no-margin ]">3-4.5 KG /** esto no se podría saber aquí creo que dependería del club **/</p>
-										<p>Ensalada Gourmet (200 gr.)/** esto no se podría saber depende del club **/ </p>
+										<p class="[ no-margin ]"><?php echo get_post_meta($post->ID, 'approximate_weight', true); ?></p>
+										<?php echo $post->post_excerpt; ?>
 									</div>
 								</div>
 							<?php endwhile;
