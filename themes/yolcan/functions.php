@@ -1,5 +1,6 @@
 <?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
+if (isset($_POST['action']) AND $_POST['action'] == 'form-create-club') setCrearClub($_POST);
 
 global $result;
 
@@ -368,6 +369,36 @@ function setAgendaVisita($data){
 	);
 
 	$result['success'] = 'Se envío el mensaje con exito';
+
+	return true;
+}
+
+/**
+ * FORM CREAR CLUB
+ */
+function setCrearClub($data){
+	global $result;
+	global $wpdb;
+
+	$wpdb->insert(
+		$wpdb->prefix.'creates_a_club_of_consumption',
+		array(
+			'nombre'   => $data['form-crear-club-name'],
+			'correo'   => $data['form-crear-club-email'],
+			'telefono' => $data['form-crear-club-telefono'],
+			'ubicacion'  => $data['form-crear-club-ubicacion'],
+			'mensaje' => $data['form-crear-club-mensaje']
+		),
+		array(
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s'
+		)
+	);
+
+	$result['success'] = 'Se guardarón los datos con exito';
 
 	return true;
 }

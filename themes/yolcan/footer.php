@@ -218,28 +218,29 @@
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">¿Te interesa crear un club de consumo? Déjanos tus datos y te contactaremos </p>
-									<form id="form-club" class="[ text-left ]" data-parsley-validate>
+									<form id="form-club" method="POST" class="[ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+											<input type="text" name="form-crear-club-name" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+											<input type="email" name="form-crear-club-email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+											<input type="text" name="form-crear-club-telefono" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Ubicación del club a crear</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
+											<input type="text" name="form-crear-club-ubicacion" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Mensaje</label>
-											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
+											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" name="form-crear-club-mensaje" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
 										</div>
 										<div class="[ text-center ]">
+											<input type="hidden" name="action" value="form-create-club">
 											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ]">enviar</button>
 										</div>
 									</form>

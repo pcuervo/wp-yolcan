@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php get_header(); 
+
+if( isset( $result['success'] ) ): ?>
+	<br>
+	<br>
+	<br>
+	<div class="[ bg-success btn-lg text-center ]"><?php echo $result['success']; ?></div>
+<?php endif;  ?>
 
 	<div class="[ container ]">
 		<!-- video	-->
