@@ -157,30 +157,28 @@ if( isset( $result['success'] ) ): ?>
 						<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
 					</div>
 					<div class="[ row ]">
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
-								<p class="[ no-margin ]">3-4.5 KG</p>
-								<p>Ensalada Gourmet (200 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$250</strong> semanales</p>
-							</div>
-						</div>
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
-								<p class="[ no-margin ]">4.5-6.5 KG</p>
-								<p>Ensalada Gourmet (300 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$375</strong> semanales</p>
-							</div>
-						</div>
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
-								<p class="[ no-margin ]">6.5-8.5 KG</p>
-								<p>Ensalada Gourmet (500 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$500</strong> semanales</p>
-							</div>
-						</div>
+						<?php $args = array(
+	                        'post_type' => 'product',
+	                        'posts_per_page' => 12
+	                    );
+                		$productos = new WP_Query( $args );
+
+		                if ( $productos->have_posts() ):
+
+		                    while ( $productos->have_posts() ) : $productos->the_post(); ?>
+								<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
+									<div class="[ card__header ]">
+										<h4 class="[ text-center ][ color-primary ]"><?php the_title(); ?></h4>
+										<p class="[ no-margin ]">3-4.5 KG /** esto no se podría saber aquí creo que dependería del club **/</p>
+										<p>Ensalada Gourmet (200 gr.)/** esto no se podría saber depende del club **/ </p>
+									</div>
+								</div>
+							<?php endwhile;
+
+		                else:
+		                        echo __( 'No hay canastas' );
+		                endif;
+		                wp_reset_postdata();?>
 					</div>
 				</div>
 				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
