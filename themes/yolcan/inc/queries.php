@@ -15,6 +15,20 @@ add_action('init', function() use (&$wpdb){
 
 add_action('init', function() use (&$wpdb){
 	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."creates_a_club_of_consumption (
+			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			nombre text COLLATE utf8mb4_unicode_ci NOT NULL,
+			correo text COLLATE utf8mb4_unicode_ci NOT NULL,
+			telefono text COLLATE utf8mb4_unicode_ci NOT NULL,
+			ubicacion varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			mensaje varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			PRIMARY KEY (id)
+		) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8;"
+	);
+});
+
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
 		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."ingredients_relationships (
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 			receta_id BIGINT(20) NOT NULL,
