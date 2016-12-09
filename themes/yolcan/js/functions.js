@@ -4,7 +4,7 @@
 
 	$(function(){
 
-		jQuery('#fecha_visita').datepicker({
+		$('.datepicker').datepicker({
 	        dateFormat : 'yy-mm-dd'
 	    });
 

@@ -3285,9 +3285,6 @@ input[type="radio"]:checked + label span {
   border: solid 5px #3ac6b1;
   background-color: #3ac6b1;
 }
-.ui-datepicker {
-  display: none!important;
-}
 #billing_consumer_club_field {
   width: 47%;
   float: right;
