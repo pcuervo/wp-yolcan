@@ -3,11 +3,11 @@
 /**
  * FEED INSTAGRAM
  */
-function feedInstagram($tag = 'yolcan'){
+function feedInstagram($tag = 'yolcan', $count = 3){
 
   $token = '1490790081.113bc44.f051d1732c774cc89e88710fb54a2289';
   $client_id = "113bc4484f5945cf979169f9a640dd6f";
-  $url = 'https://api.instagram.com/v1/tags/yolcan/media/recent?access_token='.$token.'&count=10&client_id='.$client_id;
+  $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?access_token='.$token.'&count='.$count.'&client_id='.$client_id;
   $decoded_results = processURL($url);
 
   $new_arr = array();

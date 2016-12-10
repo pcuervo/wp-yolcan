@@ -195,6 +195,28 @@ if( isset( $result['success'] ) ): ?>
 	<section class="[ container ]">
 		<div class="row">
 			<div class="[ col-xs-12 ]">
+				<h2>Instagram</h2>
+			</div>
+			<div class="[ col-xs-12 ]">
+				<div class="row">
+					<?php $feed = feedInstagram('yolcan', 3); 
+					if (!empty($feed)):
+						foreach ($feed as $key => $data): ?>
+							<div class="[ col-sm-3 ]">
+								<img src="<?php echo $data['media']; ?>" alt="" class="img-thumbnail">
+								<p class="autor">Por: <?php echo $data['user_name']; ?></p>
+								<p><?php echo $data['text']; ?></p>
+							</div>
+						<?php endforeach;
+					endif; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="[ container ]">
+		<div class="row">
+			<div class="[ col-xs-12 ]">
 				<h2>Clubes de consumo</h2>
 			</div>
 			<div class="[ col-xs-12 col-sm-5 ]">
