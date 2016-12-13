@@ -3,7 +3,7 @@
         <?php echo $titulo; ?>
     </h1>
 
-    <h3 class=""><?php echo ($clubId >= 1 && $clubId <= 5) ? 'Canastas base '.$clubId : 'Club - '.get_the_title($clubId); ?></h3>
+    <h3 class=""><?php echo ($clubId >= 1 && $clubId <= 5) ? getNameCanastaBase($clubId) : 'Club - '.get_the_title($clubId); ?></h3>
     <a class="button-primary"  href="<?php echo admin_url().'admin.php?page=canastas_club&id_club='.$clubId; ?>">
         << Regresar
     </a>

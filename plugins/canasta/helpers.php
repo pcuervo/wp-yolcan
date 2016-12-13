@@ -115,3 +115,23 @@ function getCorteCanasta($fecha_creacion){
 	
 	return getDateTransformFormat($proximo_viernes);
 }
+
+/**
+ * REGRESAEL NOMBRE DE LAS CANASTAS BASE
+ */
+function getNameCanastaBase($canastaId){
+	switch ($canastaId) {
+		case 1:
+			return 'Canastas base día Lunes';
+		case 2:
+			return 'Canastas base día Martes';
+		case 3:
+			return 'Canastas base día Miercoles';
+		case 4:
+			return 'Canastas base día Jueves';
+		case 5:
+			return 'Canastas base día Viernes';
+	}
+
+	return 'No name';
+}

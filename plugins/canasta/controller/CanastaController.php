@@ -230,7 +230,7 @@ class CanastaController {
 
 		$cb = isset($_GET['cb']) ? $_GET['cb'] : 0;
 		return view('config-canasta-base', [
-			'titulo' => 'Configuración canasta base '.$cb,
+			'titulo' => 'Configuración - '.getNameCanastaBase($cb),
 			'cb' => $cb,
 			'clubes' => CanastaModel::clubes(),
 			'clubesBase' => isset($this->dataPost['clubes']) ? $this->dataPost['clubes'] : [],
