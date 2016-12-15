@@ -222,11 +222,11 @@ function show_metabox_info_extra_product($post){
 	wp_nonce_field(__FILE__, '_info_extra_product_nonce');
 
 	$approximate_weight = get_post_meta($post->ID, 'approximate_weight', true);
+	$puede_dejar_efectivo = get_post_meta( $post->ID, 'puede-dejar-efectivo', true );
 
 
 	echo "<label for='approximate_weight' class='label-paquetes'>Peso a proximado: </label><br><br>";
 	echo "<input type='text' class='widefat' id='approximate_weight' name='approximate_weight' value='$approximate_weight' placeholder='3-4.5 KG' />";
-
 }
 
 function show_metabox_informacion_ingrediente($post){
@@ -367,8 +367,8 @@ add_action('save_post', function($post_id){
 		update_post_meta($post_id, 'precio_ingrediente_restaurante', $_POST['precio_ingrediente_restaurante']);
 	}
 
-	if ( isset($_POST['existencias_ingrediente']) and check_admin_referer(__FILE__, '_existencias_ingrediente_nonce') ){
-		update_post_meta($post_id, 'existencias_ingrediente', $_POST['existencias_ingrediente']);
+	if ( isset($_POST['precio_ingrediente_restaurante']) and check_admin_referer(__FILE__, '_existencias_ingrediente_nonce') ){
+		update_post_meta($post_id, 'precio_ingrediente_restaurante', $_POST['precio_ingrediente_restaurante']);
 	}
 
 	if ( isset($_POST['productor_ingrediente']) and check_admin_referer(__FILE__, '_productor_ingrediente_nonce') ){

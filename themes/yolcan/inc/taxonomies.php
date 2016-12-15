@@ -70,6 +70,21 @@
 		
 	}
 
+	function wpse_insert_term()
+	{
+		// CATEGORY PRODUCT
+		$termsProd = termsProduct();
+		foreach ($termsProd as $slug => $term) {
+		
+			if ( ! term_exists( $slug, 'product_cat' ) ){
+				
+				wp_insert_term( $term, 'product_cat', array('slug' => $slug) );
+			}
+		}
+	   
+	}
+	add_action('init', 'wpse_insert_term');
+
 	/**
 	 * TERMS OF TAXONOMY UNIDADES
 	 * @return [array] [terms names]
@@ -81,4 +96,11 @@
 				'lt' => 'Lt',
 				'pz' => 'Pza'
 			);
+	}
+
+	function termsProduct(){
+		return array(
+			'canastas' => 'Canastas',
+			'puntos' => 'Puntos'
+		);	
 	}
