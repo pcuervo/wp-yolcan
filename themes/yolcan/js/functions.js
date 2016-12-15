@@ -459,7 +459,7 @@
 		 */
 
 		if (is_home == 1) {
-			// initialize();
+			initialize();
 		};
 
 
