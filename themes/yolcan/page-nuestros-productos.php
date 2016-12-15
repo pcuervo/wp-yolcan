@@ -30,10 +30,17 @@ the_post(); ?>
 		<div class="[ container ]">
 			<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 			<div class="[ row ][ margin-bottom--large ]">
-                 <?php $args = array(
-                        'post_type' => 'product',
-                        'posts_per_page' => 12
-                        );
+                <?php $args = array(
+                    'post_type' => 'product',
+                    'posts_per_page' => 12,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'product_cat',
+                            'field'    => 'slug',
+                            'terms'    => 'canastas',
+                        ),
+                    )
+                );
                 $productos = new WP_Query( $args );
 
                 if ( $productos->have_posts() ):
