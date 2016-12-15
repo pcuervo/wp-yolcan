@@ -753,13 +753,24 @@ function call_restaurant($order_id) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			getClientUpdateClub($user_id, $club);
 			$opCliente = getOpcionesCliente($user_id);
-			$saldoAbonar = get_post_meta( $item['variation_id'], '_saldo_a_abonar_field', true );
-			$costoSemanal = getCostoVariationID($item['variation_id']);
+			
+			if ($item['variation_id'] == 0) {
+				$saldoAbonar = isset($item['line_total']) ? $item['line_total'] : 0;
+				$variationId = isset($opCliente->producto_id) ? $opCliente->producto_id : 0;
+				$costoSemanal = isset($opCliente->costo_semanal_canasta) ? $opCliente->costo_semanal_canasta : 0;
+
+			}else{
+				$saldoAbonar = get_post_meta( $item['variation_id'], '_saldo_a_abonar_field', true );
+				$variationId = $item['variation_id'];
+				$costoSemanal = getCostoVariationID($item['variation_id']);
+				$costoSemanal = $costoSemanal->costoSemanal;
+			}
+			
 	    	if (!empty($opCliente)) {
 	    		$total = $saldoAbonar + $opCliente->saldo;
-	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
+	    		updateOpcionesCliente($club, $variationId, $total, $costoSemanal, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $saldoAbonar, $costoSemanal->costoSemanal, $user_id);
+	    		setOpcionesCliente($club, $variationId, $saldoAbonar, $costoSemanal, $user_id);
 	    	}
 
 		}
