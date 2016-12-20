@@ -195,12 +195,6 @@ if( isset( $result['success'] ) ): ?>
 	<section class="[ container ]">
 
 		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
-			<!-- Indicators -->
-			<!-- <ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-			</ol> -->
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
@@ -210,12 +204,8 @@ if( isset( $result['success'] ) ): ?>
 				</div>
 				<div class="item active">
 					<div class="embed-responsive embed-responsive-4by3">
-						<!-- <iframe id="video-slider" class="embed-responsive-item" src="https://www.youtube.com/embed/HCj_EUKAis4"></iframe>
-						<div id="play-video-slider"></div> -->
-
-
-						<iframe id="video-slider" width="420" height="315" src="//www.youtube.com/embed/9B7te184ZpQ?rel=0" frameborder="0" allowfullscreen></iframe>
-						<a id="play-video" href="#">Play Video</a>
+						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
+						<a id="play-video" href="#"></a>
 					</div>
 				</div>
 			</div>
