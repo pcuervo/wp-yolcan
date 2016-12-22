@@ -1,4 +1,4 @@
-<section class="[ bg-primary-darken ][ margin-bottom ]">
+<section class="[ bg-primary-darken ]">
 	<div class="[ container ]">
 		<div class="[ row ][ color-light ]">
 			<article class="[ col-xs-12 ]">
