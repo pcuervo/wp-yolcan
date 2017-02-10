@@ -315,10 +315,11 @@ function getClientesDesactivarSuspension($fecha = ''){
  * CLIENTES ACTIVOS
  * @return [type] [description]
  */
-function getClientesActivos(){
+function getClientesActivos($clubes){
+	$clubes = getClubesSeparadoComas($clubes);
 	global $wpdb;
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}opciones_clientes 
-		WHERE suspendido = 0 AND status = 1;
+		WHERE suspendido = 0 AND status = 1 AND club_id IN ($clubes);
 	", OBJECT );
 }
 

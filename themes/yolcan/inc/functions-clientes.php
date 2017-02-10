@@ -413,6 +413,14 @@ function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 	}
 }
 
+/**
+ * REGRESA LOS CLUBES SEPARADOS POR COMAS EXTRAIDOS DE UN ARREGLO
+ * @return [type] [description]
+ */
+function getClubesSeparadoComas($clubes){
+	return implode(',',$clubes);
+}
+
 
 /**
  * PROXIMO CORTE PARA TODAS LAS CANASRTAS

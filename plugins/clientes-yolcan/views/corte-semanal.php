@@ -15,6 +15,36 @@
 	<?php endif; ?>
 	<br>
 	<form id="form-corte" action="" method="post">
+		<table class="table-clubes-config-cb" style="width: 600px;">
+	        <thead>
+	            <tr>
+	                <th></th>
+	                <th width='200'>Club</th>
+	                <th width='200'>Historial de cortes</th>
+	                <th width='200'>Ultimo corte</th>
+
+	            </tr>
+	        </thead>
+	        <tbody>
+	             <?php if(!empty($clubes)): 
+	                foreach ($clubes as $key => $club): ?>
+	                    <tr>
+	                        <td class="ingrediente">
+	                            <input type="checkbox" name="clubes[<?php echo $club->ID; ?>]" value="<?php echo $club->ID; ?>">
+	                        </td>
+	                        <td>
+	                            <?php echo $club->post_title; ?>
+	                        </td>
+	                        <td>
+	                        </td>
+	                        <td>
+	                        </td>
+	                    </tr>
+	                <?php endforeach;
+	            endif; ?>
+	        </tbody>
+	    </table>
+	
 		<input type="hidden" name="action" value="realizar-corte">
 	</form>
 	<a class="button-primary bt-corte"  href="">Realizar corte</a>

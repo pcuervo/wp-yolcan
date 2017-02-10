@@ -6,7 +6,7 @@
 
 		$('.bt-corte').on('click', function(event){
 			event.preventDefault();
-			var response = confirm("Esta seguro de generar el corte");
+			var response = confirm("Esta seguro de generar el corte, para los club´s de consumo seleccionados.");
 			if (response == true) {
 			   	$('#form-corte').submit();
 			}
