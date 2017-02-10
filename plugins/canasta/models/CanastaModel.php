@@ -96,11 +96,12 @@ class CanastaModel {
 	}
 
 
-	static function desactivarCanastas(){
+	static function desactivarCanastas($clubes){
 		global $wpdb;
+		$clubes = getClubesSeparadoComas($clubes);
 		$wpdb->query("UPDATE {$wpdb->prefix}actualizaciones_canasta 
 			SET status = 0
-			WHERE status = 1"
+			WHERE status = 1 AND club_id IN ($clubes)"
 		);
 	}
 

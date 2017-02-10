@@ -306,7 +306,7 @@ function getClientesDesactivarSuspension($fecha = ''){
 	return $wpdb->get_results( "SELECT oc.cliente_id FROM {$wpdb->prefix}opciones_clientes as oc
 		INNER JOIN {$wpdb->prefix}suspension_entregas as se
 		ON oc.id_suspension = se.id
-		WHERE oc.suspendido = 1 AND fecha_fin_suspension = '$fecha';
+		WHERE oc.suspendido = 1 AND fecha_fin_suspension <= '$fecha';
 	", OBJECT );
 	
 }

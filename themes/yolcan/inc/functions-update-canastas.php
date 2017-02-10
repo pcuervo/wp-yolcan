@@ -13,10 +13,10 @@
  * @return [type] [description]
  */
 function getClientUpdate($clubes){
-	// descontarSaldoClientes($clubes);
+	descontarSaldoClientes($clubes);
 	nuevasCanastasSemanales($clubes);
-	// cambioStatusSuspenciones();
-	// storeCorteClientes();
+	cambioStatusSuspenciones();
+	storeCorteClientes($clubes);
 }
 
 
@@ -104,47 +104,45 @@ function cambioStatusSuspenciones(){
 function nuevasCanastasSemanales($clubes){
 	$canastas =  method_exists("CanastaModel", "canastasActivas") ? CanastaModel::canastasActivas() : [];
 	$canastas = canastasPorClub($canastas);
-	// if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas();
+	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas($clubes);
 	
-	// $clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubesByID($clubes) : [];
-	
+	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubesByID($clubes) : [];
 
-	// if (!empty($clubes) AND method_exists("CanastaModel", "storeCanasta")) {
-	// 	$canasta = new CanastaModel;
-	// 	$modelIngredientes = function_exists('model') ? model('IngredientesModel') : [];
+	if (!empty($clubes) AND method_exists("CanastaModel", "storeCanasta")) {
+		$canasta = new CanastaModel;
+		$modelIngredientes = function_exists('model') ? model('IngredientesModel') : [];
 		
-	// 	foreach ($clubes as $key => $club) {
+		foreach ($clubes as $key => $club) {
 			
-	// 		$actualizacionId = $canasta->storeCanasta($club->ID, 1, '0000-00-00');
-	// 		if(isset($canastas[$club->ID]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+			$actualizacionId = $canasta->storeCanasta($club->ID, 1, '0000-00-00');
+			if(isset($canastas[$club->ID]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
 			
-	// 			foreach ($canastas[$club->ID] as $key => $ingrediente) {
-	// 				$canastaID = $ingrediente->canasta_id;
-	// 				$ingredienteId = $ingrediente->ingrediente_id;
-	// 				$cantidad = $ingrediente->cantidad;
-	// 				$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
-	// 			}
+				foreach ($canastas[$club->ID] as $key => $ingrediente) {
+					$canastaID = $ingrediente->canasta_id;
+					$ingredienteId = $ingrediente->ingrediente_id;
+					$cantidad = $ingrediente->cantidad;
+					$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+				}
 
-	// 		}
+			}
 			
-	// 	}
+		}
 
-	// 	for ($i=1; $i < 6; $i++) { 
-	// 		$actualizacionId = $canasta->storeCanasta($i, 1, '0000-00-00');
-	// 		if(isset($canastas[$i]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+		for ($i=1; $i < 6; $i++) { 
+			$actualizacionId = $canasta->storeCanasta($i, 1, '0000-00-00');
+			if(isset($canastas[$i]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
 				
-	// 			foreach ($canastas[$i] as $key => $ingrediente) {
-	// 				$canastaID = $ingrediente->canasta_id;
-	// 				$ingredienteId = $ingrediente->ingrediente_id;
-	// 				$cantidad = $ingrediente->cantidad;
-	// 				$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
-	// 			}
+				foreach ($canastas[$i] as $key => $ingrediente) {
+					$canastaID = $ingrediente->canasta_id;
+					$ingredienteId = $ingrediente->ingrediente_id;
+					$cantidad = $ingrediente->cantidad;
+					$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+				}
 
-	// 		}
-	// 	}
-		
+			}
+		}
 
-	// }
+	}
 }
 
 function getTotalAdicionalesSemana($adicionales){
