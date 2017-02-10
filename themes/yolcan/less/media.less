@@ -64,3 +64,43 @@
   padding-left: 0;
   list-style: none;
 }
+
+
+#home-slider {
+  height: 470px;
+  overflow: hidden;
+  @media(max-width:768px){height: 300px;}
+  @media(max-width:480px){height: 190px;}
+  .item {
+    max-height: 470px;
+    // &.item-image {
+    //   display: flex;
+    //   align-items: center;
+    // }
+    @media(max-width:768px){height: 300px;}
+    @media(max-width:480px){height: 190px;}
+    // display: flex;
+    // align-items: center;
+    img { width: 100%; }
+    iframe {
+      height: 470px;
+      @media(max-width:768px){height: 300px;}
+      @media(max-width:480px){height: 190px;}
+    }
+    #play-video {
+      width: 100%;
+      height: 420px;
+      @media(max-width:768px){height: 250px;}
+      @media(max-width:480px){height: 140px;}
+      position: absolute;
+    }
+  }
+  a.carousel-control {
+    width: 50px;
+    .svg {
+      margin-top: 220px;
+      @media(max-width:768px){margin-top: 140px;}
+      @media(max-width:480px){margin-top: 80px;}
+    }
+  }
+}

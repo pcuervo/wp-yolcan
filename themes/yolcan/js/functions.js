@@ -57,6 +57,22 @@
 			//       column: "mi-img"
 			// });
 
+			var video = $("#video-slider").attr("src");
+
+			 $('.carousel-control').click(function(){
+				$("#video-slider").attr("src","");
+				$("#video-slider").attr("src",video);
+				$('#play-video').removeClass('hide');
+				console.log('video stop');
+			});
+
+			$('#play-video').on('click', function(ev) {
+				$("#video-slider")[0].src += "&autoplay=1";
+				$('#home-slider').carousel('pause');
+				$('#play-video').addClass('hide');
+				console.log('slider stop');
+				ev.preventDefault();
+			});
 
 		};
 

@@ -1,4 +1,4 @@
-<?php get_header(); 
+<?php get_header();
 
 if( isset( $result['success'] ) ): ?>
 	<br>
@@ -136,14 +136,14 @@ if( isset( $result['success'] ) ): ?>
 					</div>
 					<div class="[ margin-bottom--large ][ text-center ]">
 						<h4>
-							<?php $clubes = getClubesDeConsumo(); 
+							<?php $clubes = getClubesDeConsumo();
 							if (!empty($clubes)):
 								$total = count($clubes) - 1;
 								foreach ($clubes as $key => $club) :
 									echo $total == $key ? $club->post_title : $club->post_title.' - ';
 								endforeach;
 							endif;?>
-							
+
 						</h4>
 					</div>
 					<div class="[ text-center ]">
@@ -193,13 +193,43 @@ if( isset( $result['success'] ) ): ?>
 	</section>
 
 	<section class="[ container ]">
+
+		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
+				</div>
+				<div class="item active">
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
+						<a id="play-video" href="#"></a>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg">
+			</a>
+			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg">
+			</a>
+		</div>
+
+
+
+
 		<div class="row">
 			<div class="[ col-xs-12 ]">
 				<h2>Instagram</h2>
 			</div>
 			<div class="[ col-xs-12 ]">
 				<div class="row">
-					<?php $feed = feedInstagram('yolcan', 3); 
+					<?php $feed = feedInstagram('yolcan', 3);
 					if (!empty($feed)):
 						foreach ($feed as $key => $data): ?>
 							<div class="[ col-sm-3 ]">
@@ -237,7 +267,7 @@ if( isset( $result['success'] ) ): ?>
 			</div>
 			<div class="[ col-xs-12 col-sm-7 ]">
 				<div id="map_canvas" class="mapping" style="width: 100%; height: 215px;"></div>
-				
+
 			<div class="[ col-xs-12 ][ visible-xs ]">
 				<?php if ( ! is_user_logged_in() ){ ?>
 					<div class="[ text-center ]">
