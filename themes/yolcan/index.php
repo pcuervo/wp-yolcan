@@ -159,7 +159,14 @@ if( isset( $result['success'] ) ): ?>
 					<div class="[ row ]">
 						<?php $args = array(
 	                        'post_type' => 'product',
-	                        'posts_per_page' => 12
+	                        'posts_per_page' => 12,
+	                        'tax_query' => array(
+		                        array(
+		                            'taxonomy' => 'product_cat',
+		                            'field'    => 'slug',
+		                            'terms'    => 'canastas',
+		                        ),
+		                    )
 	                    );
                 		$productos = new WP_Query( $args );
 
