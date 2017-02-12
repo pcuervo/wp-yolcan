@@ -18,10 +18,9 @@
 		<table class="table-clubes-config-cb" style="width: 600px;">
 	        <thead>
 	            <tr>
-	                <th></th>
+	                <th width='30'></th>
 	                <th width='200'>Club</th>
-	                <th width='200'>Historial de cortes</th>
-	                <th width='200'>Ultimo corte</th>
+	                <!-- <th width='200'>Ultimo corte</th> -->
 
 	            </tr>
 	        </thead>
@@ -35,10 +34,8 @@
 	                        <td>
 	                            <?php echo $club->post_title; ?>
 	                        </td>
-	                        <td>
-	                        </td>
-	                        <td>
-	                        </td>
+	                        <!-- <td>
+	                        </td> -->
 	                    </tr>
 	                <?php endforeach;
 	            endif; ?>
@@ -54,9 +51,9 @@
 	<table class="wp-list-table widefat fixed striped users">
 		<thead>
 			<tr>
-				<th scope="col" class="manage-column column-primary"><span>Fecha de corte</span></th>
-				<th scope="col" class="manage-column"><span>Usuario genero el corte</span></th>
-				
+				<th width='180' scope="col" class="manage-column column-primary"><span>Fecha de corte</span></th>
+				<th width='180' scope="col" class="manage-column"><span>Usuario genero el corte</span></th>
+				<th scope="col" class="manage-column"><span>Se genero el corte para</span></th>
 			</tr>
 		</thead>
 
@@ -67,7 +64,13 @@
 					<tr>
 						<td><?php echo $corte->fecha_corte; ?></td>
 						<td><?php echo isset($user->user_login) ? $user->user_login : ''; ?></td>
-						
+						<td>
+							<?php if (!empty(unserialize($corte->clubes))) :
+								foreach (unserialize($corte->clubes) as $key => $clube):
+									echo '** '.get_the_title($clube).'  '; 
+								endforeach;
+							endif; ?>
+						</td>
 					</tr>
 				<?php endforeach;
 			endif; ?>
