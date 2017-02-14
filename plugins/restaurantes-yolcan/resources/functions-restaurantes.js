@@ -56,6 +56,10 @@
 			$('#saldo-disponible').html(saldo_libre);
 		});	
 
+		$('.date-piker-reports').datepicker({
+	        dateFormat : 'yy-mm-dd',
+	        maxDate: 'today'
+	    });
 	});
 
 })(jQuery);
