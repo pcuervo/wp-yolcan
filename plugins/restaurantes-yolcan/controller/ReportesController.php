@@ -28,11 +28,43 @@ class ReportesController {
 	 */
 	public function reporteDiario()
 	{
+		$results = isset($this->dataGet['resporte_del']) ? $this->modelRestaurantes->getComprasRestaurantes($this->dataGet['resporte_del']) : [];
+
+		if (isset($this->dataGet['generate']) AND $this->dataGet['generate'] == 'pdf') {
+			$this->generaPdfReporteDiario($this->dataGet['resporte_del'], $results);
+		}
+
 		return viewRestaurantes('reportes/diario', [
 			'search' => isset($this->dataGet['reporteDiario']) ? 'si' : 'no',
-			'results' => isset($this->dataGet['resporte_del']) ? $this->modelRestaurantes->getComprasRestaurantes($this->dataGet['resporte_del']) : [],
+			'results' => $results,
 			'date' => isset($this->dataGet['resporte_del']) ? $this->dataGet['resporte_del'] : '',
 		]);
+	}
+
+	/**
+	 * GENERA EL PDF DEL REPORTE DIARIO
+	 */
+	public function generaPdfReporteDiario($resporte_del, $results)
+	{
+		require_once(PATH_RESTAURANTES."/inc/dompdf/dompdf_config.inc.php");
+
+		ob_start();
+		include PATH_RESTAURANTES.'/views/reportes/htmlPdfDiario.php';
+
+	  	$html = ob_get_clean();
+		// echo $html;
+		$mipdf = new DOMPDF();
+		 
+		$mipdf->set_paper("A4", "portrait");
+		 
+		$mipdf->load_html( utf8_decode( utf8_encode($html) ) );
+		 
+		$mipdf->render();
+
+		header('Content-type: application/pdf');
+		
+		$mipdf->stream('reporteDiarioRestaurantes-'.$resporte_del.'pdf', array("Attachment" => 0) );
+		echo $mipdf->output();
 	}
 
 }
