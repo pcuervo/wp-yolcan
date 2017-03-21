@@ -15,6 +15,33 @@
 	<?php endif; ?>
 	<br>
 	<form id="form-corte" action="" method="post">
+		<table class="table-clubes-config-cb" style="width: 600px;">
+	        <thead>
+	            <tr>
+	                <th width='30'></th>
+	                <th width='200'>Club</th>
+	                <!-- <th width='200'>Ultimo corte</th> -->
+
+	            </tr>
+	        </thead>
+	        <tbody>
+	             <?php if(!empty($clubes)): 
+	                foreach ($clubes as $key => $club): ?>
+	                    <tr>
+	                        <td class="ingrediente">
+	                            <input type="checkbox" name="clubes[<?php echo $club->ID; ?>]" value="<?php echo $club->ID; ?>">
+	                        </td>
+	                        <td>
+	                            <?php echo $club->post_title; ?>
+	                        </td>
+	                        <!-- <td>
+	                        </td> -->
+	                    </tr>
+	                <?php endforeach;
+	            endif; ?>
+	        </tbody>
+	    </table>
+	
 		<input type="hidden" name="action" value="realizar-corte">
 	</form>
 	<a class="button-primary bt-corte"  href="">Realizar corte</a>
@@ -24,9 +51,9 @@
 	<table class="wp-list-table widefat fixed striped users">
 		<thead>
 			<tr>
-				<th scope="col" class="manage-column column-primary"><span>Fecha de corte</span></th>
-				<th scope="col" class="manage-column"><span>Usuario genero el corte</span></th>
-				
+				<th width='180' scope="col" class="manage-column column-primary"><span>Fecha de corte</span></th>
+				<th width='180' scope="col" class="manage-column"><span>Usuario genero el corte</span></th>
+				<th scope="col" class="manage-column"><span>Se genero el corte para</span></th>
 			</tr>
 		</thead>
 
@@ -37,7 +64,13 @@
 					<tr>
 						<td><?php echo $corte->fecha_corte; ?></td>
 						<td><?php echo isset($user->user_login) ? $user->user_login : ''; ?></td>
-						
+						<td>
+							<?php if (!empty(unserialize($corte->clubes))) :
+								foreach (unserialize($corte->clubes) as $key => $clube):
+									echo '** '.get_the_title($clube).'  '; 
+								endforeach;
+							endif; ?>
+						</td>
 					</tr>
 				<?php endforeach;
 			endif; ?>

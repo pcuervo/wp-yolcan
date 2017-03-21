@@ -232,16 +232,20 @@ class ClientesController {
 	{
 		if (isset($this->dataPost['action']) AND $this->dataPost['action'] == 'realizar-corte') {
 			
-			if (function_exists('getClientUpdate')) {
-				getClientUpdate();
+			if (function_exists('getClientUpdate') aND isset($this->dataPost['clubes'])) {
+				$return = getClientUpdate($this->dataPost['clubes']);
 
-				$urlRedirect = admin_url().'admin.php?page=corte_semanal&corte=ok';
-				wp_redirect($urlRedirect);
-				exit;
+				// if ($return == true) {
+				// 	$urlRedirect = admin_url().'admin.php?page=corte_semanal&corte=ok';
+				// 	wp_redirect($urlRedirect);
+				// 	exit;
+				// }
+
 			}
 		}
 		
 		return viewCliente('corte-semanal', [
+			'clubes' => method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [],
 			'cortes' => $this->modelClientes->getHistorialCortes(),
 		]);
 	}

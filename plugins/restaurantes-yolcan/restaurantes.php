@@ -25,6 +25,7 @@ add_action( 'admin_enqueue_scripts', function(){
 
 require(PATH_RESTAURANTES."/helpers.php");
 require(PATH_RESTAURANTES."/controller/RestaurantesController.php");
+require(PATH_RESTAURANTES."/controller/ReportesController.php");
 require(PATH_RESTAURANTES."/models/RestaurantesModel.php");
 
 register_activation_hook( __FILE__, array( 'RestaurantesModel', 'install' ) );
@@ -64,3 +65,5 @@ if (isset($_GET['page']) AND $_GET['page'] == 'historial_restaurante'){
 if (isset($_GET['page']) AND $_GET['page'] == 'compra_restaurante'){
 	add_action( 'admin_menu', create_function( '', 'RestaurantesController::index("compraRestaurante", "Historial compras", "compra_restaurante");' ) );
 }
+
+add_action( 'admin_menu', create_function( '', 'ReportesController::index("reporteDiario", "Reporte Diario", "reporte_diario");' ) );
