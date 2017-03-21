@@ -11,9 +11,9 @@
 		imgToSvg();
 		init_masonry('#content', '.box-content');
 		footerBottom();
-		scrollCheckout();
+		//scrollCheckout();
 
-		$(window).scroll(function(){ scrollCheckout(); });
+		//$(window).scroll(function(){ scrollCheckout(); });
 
 		/**
 		 * Triggered events
