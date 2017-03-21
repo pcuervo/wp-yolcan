@@ -8639,6 +8639,16 @@ footer {
 footer h3 {
   margin-bottom: 20px;
 }
+footer a {
+  text-decoration: none!important;
+}
+footer a:hover {
+  color: #3ac6b1!important;
+}
+footer a:focus,
+footer a:visited {
+  color: #fff;
+}
 .social-media span {
   word-wrap: break-word;
 }
