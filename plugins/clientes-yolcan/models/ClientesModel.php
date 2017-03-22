@@ -43,7 +43,7 @@ class ClientesModel {
 		return $this->_wpdb->get_results( "SELECT user_id as cliente_id FROM {$this->_prefix}usermeta as um
 			INNER JOIN  {$this->_prefix}users as u
 			ON um.user_id = u.ID
-			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%' AND user_id NOT IN (SELECT cliente_id FROM {$this->_prefix}opciones_clientes)", 
+			WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%customer%' AND user_id NOT IN (SELECT cliente_id FROM {$this->_prefix}opciones_clientes WHERE producto_id > 0)", 
 	 	 OBJECT );
 	}
 

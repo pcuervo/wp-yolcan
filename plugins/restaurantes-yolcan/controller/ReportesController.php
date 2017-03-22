@@ -62,8 +62,8 @@ class ReportesController {
 		$mipdf->render();
 
 		header('Content-type: application/pdf');
-		
-		$mipdf->stream('reporteDiarioRestaurantes-'.$resporte_del.'pdf', array("Attachment" => 0) );
+
+		$mipdf->stream('reporteDiarioRestaurantes-'.$resporte_del.'.pdf', array("Attachment" => 0) );
 		echo $mipdf->output();
 	}
 
