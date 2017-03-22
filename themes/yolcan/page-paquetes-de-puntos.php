@@ -50,10 +50,11 @@ the_post(); ?>
                         $addToCart = site_url('/mi-carrito/?add-to-cart=').get_the_ID(); ?>
                         <article class="[ col-xs-12 col-sm-4 ]">
                             <div class="[ card ]">
-                                <div class="[ card__header ]">
-                                    <h3 class="[ card__title ]"><?php the_title(); ?></h3>
+                                <div class="[ card__header ][ no-padding--bottom ]">
+                                    <img class="[ img-responsive margin-auto ][ margin-bottom ]" src="<?php echo THEMEPATH; ?>images/coins-1.png">
+                                    <h3 class="[ card__title ][ no-margin ]"><?php the_title(); ?></h3>
                                 </div>
-                               
+
                                 <div class="[ card__footer ]">
                                     <?php if ( $product->is_in_stock() ) : ?>
                                     <div class="text-center">

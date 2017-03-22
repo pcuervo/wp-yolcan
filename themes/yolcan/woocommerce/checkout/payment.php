@@ -24,7 +24,7 @@ if ( ! is_ajax() ) {
 ?>
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
-		<h4 class="[ text-center ][ margin-top ]">Selecciona tu metodo de pago:</h4>
+		<h4 class="[ text-center ][ margin-top--large ]">Selecciona tu metodo de pago:</h4>
 			<ul class="wc_payment_methods payment_methods methods [ no-border ]">
 			<?php
 				if ( ! empty( $available_gateways ) ) {

@@ -209,7 +209,7 @@ if( isset( $result['success'] ) ): ?>
 				<div class="item">
 					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
 				</div>
-				<div class="item active">
+				<div class="item">
 					<div class="embed-responsive embed-responsive-4by3">
 						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
 						<a id="play-video" href="#"></a>
