@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1>
-        <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
+        <?php echo ($idClub >= 1 && $idClub <= 5) ? getNameCanastaBase($idClub) : 'Club - '.get_the_title($idClub); ?>
     </h1>
     <?php if (!isset($historial)): ?>
         <h3>Canastas Activas</h3>

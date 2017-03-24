@@ -14,7 +14,9 @@
 		 **************************************************/
 
 
-		window.AppIdVive = 303514379772160;//alex
+		// window.AppIdVive = 303514379772160;//alex
+		window.AppIdVive = 266024863813028;//produccion
+
 
 		window.Yolcan_fb = {
 			Settings: {
@@ -92,8 +94,11 @@
 				action   : 'ajax_info_yolcan_fb_login'
 			}, 'json')
 			.done(function (data){
+				console.log(data);
 				if (data == 'creado') {
 					location.replace(site_url+"mi-cuenta");
+				}else{
+					alert('Disculpa ya existe un usuario con el mismo correo');
 				}
 
 			});

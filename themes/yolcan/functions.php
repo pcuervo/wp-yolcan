@@ -1,5 +1,6 @@
 <?php if (isset($_POST['action']) AND $_POST['action'] == 'set-agenda-visita') setAgendaVisita($_POST);
 if (isset($_POST['action']) AND $_POST['action'] == 'set-contacto') setContacto($_POST);
+if (isset($_POST['action']) AND $_POST['action'] == 'form-create-club') setCrearClub($_POST);
 
 global $result;
 
@@ -156,6 +157,11 @@ require_once('inc/function-productos.php');
 
 require_once('inc/usuarios.php');
 
+require_once('inc/functions-instagram.php');
+
+require_once('inc/pages-admin.php');
+
+
 
 
 // MODIFICAR EL MAIN QUERY ///////////////////////////////////////////////////////////
@@ -196,7 +202,22 @@ add_filter( 'sanitize_file_name', function ($filename) {
 
 // HELPER METHODS AND FUNCTIONS //////////////////////////////////////////////////////
 
+/**
+ * 	REDIRECT LOGIN USER MI CUENTA
+ */
+add_filter('woocommerce_login_redirect', 'wc_login_redirect');
+function wc_login_redirect( $redirect_to ) {
+     $redirect_to = site_url('mi-cuenta');
+     return $redirect_to;
+}
 
+add_action( 'wp_login_failed', 'my_login_fail' );  // hook failed login
+function my_login_fail( $username ) {
+	
+    //redirect to custom login page and append login error flag
+    wp_redirect("?login_error" );  
+    exit;
+}
 
 /**
  * Print the <title> tag based on what is being viewed.
@@ -348,6 +369,36 @@ function setAgendaVisita($data){
 	);
 
 	$result['success'] = 'Se envío el mensaje con exito';
+
+	return true;
+}
+
+/**
+ * FORM CREAR CLUB
+ */
+function setCrearClub($data){
+	global $result;
+	global $wpdb;
+
+	$wpdb->insert(
+		$wpdb->prefix.'creates_a_club_of_consumption',
+		array(
+			'nombre'   => $data['form-crear-club-name'],
+			'correo'   => $data['form-crear-club-email'],
+			'telefono' => $data['form-crear-club-telefono'],
+			'ubicacion'  => $data['form-crear-club-ubicacion'],
+			'mensaje' => $data['form-crear-club-mensaje']
+		),
+		array(
+			'%s',
+			'%s',
+			'%s',
+			'%s',
+			'%s'
+		)
+	);
+
+	$result['success'] = 'Se guardarón los datos con exito';
 
 	return true;
 }
@@ -702,13 +753,24 @@ function call_restaurant($order_id) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			getClientUpdateClub($user_id, $club);
 			$opCliente = getOpcionesCliente($user_id);
-			$saldoAbonar = get_post_meta( $item['variation_id'], '_saldo_a_abonar_field', true );
-			$costoSemanal = getCostoVariationID($item['variation_id']);
+			
+			if ($item['variation_id'] == 0) {
+				$saldoAbonar = isset($item['line_total']) ? $item['line_total'] : 0;
+				$variationId = isset($opCliente->producto_id) ? $opCliente->producto_id : 0;
+				$costoSemanal = isset($opCliente->costo_semanal_canasta) ? $opCliente->costo_semanal_canasta : 0;
+
+			}else{
+				$saldoAbonar = get_post_meta( $item['variation_id'], '_saldo_a_abonar_field', true );
+				$variationId = $item['variation_id'];
+				$costoSemanal = getCostoVariationID($item['variation_id']);
+				$costoSemanal = $costoSemanal->costoSemanal;
+			}
+			
 	    	if (!empty($opCliente)) {
 	    		$total = $saldoAbonar + $opCliente->saldo;
-	    		updateOpcionesCliente($club, $item['variation_id'], $total, $costoSemanal->costoSemanal, $user_id);
+	    		updateOpcionesCliente($club, $variationId, $total, $costoSemanal, $user_id);
 	    	}else{
-	    		setOpcionesCliente($club, $item['variation_id'], $saldoAbonar, $costoSemanal->costoSemanal, $user_id);
+	    		setOpcionesCliente($club, $variationId, $saldoAbonar, $costoSemanal, $user_id);
 	    	}
 
 		}
@@ -735,6 +797,17 @@ function variation_settings_fields( $loop, $variation_data, $variation ) {
 		)
 	);
 
+	woocommerce_wp_text_input(
+		array(
+			'id'          => '_semanas_field[' . $variation->ID . ']',
+			'label'       => __( 'Semanas', 'woocommerce' ),
+			'placeholder' => '',
+			'desc_tip'    => 'true',
+			'description' => __( 'IMPORTANTE: ingresar numero de semanas.', 'woocommerce' ),
+			'value'       => get_post_meta( $variation->ID, '_semanas_field', true )
+		)
+	);
+
 }
 
 // Save Variation Settings
@@ -748,6 +821,11 @@ function save_variation_settings_fields( $post_id ) {
 	$saldo_abonar = $_POST['_saldo_a_abonar_field'][ $post_id ];
 	if( ! empty( $saldo_abonar ) ) {
 		update_post_meta( $post_id, '_saldo_a_abonar_field', esc_attr( $saldo_abonar ) );
+	}
+
+	$saldo_abonar = $_POST['_semanas_field'][ $post_id ];
+	if( ! empty( $saldo_abonar ) ) {
+		update_post_meta( $post_id, '_semanas_field', esc_attr( $saldo_abonar ) );
 	}
 
 }

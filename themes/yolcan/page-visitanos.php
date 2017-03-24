@@ -61,7 +61,7 @@ if( isset( $result['success'] ) ): ?>
 							</div>
 							<div class="[ col-xs-6 padding--left--small ][ form-group ][ color-gray-xlight ]">
 								<label>Fecha</label>
-								<input name="fecha_visita" id="fecha_visita" type="text" class="[ form-control bg-gray no-border-radius color-gray-xlight ]" placeholder="yyyy/mm/dd">
+								<input name="fecha_visita" id="fecha_visita" type="text" class="[ form-control bg-gray no-border-radius color-gray-xlight ] datepicker" placeholder="yyyy-mm-dd">
 							</div>
 						</div>
 						<input type="hidden" name="action" value="set-agenda-visita">

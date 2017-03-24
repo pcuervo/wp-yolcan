@@ -5878,6 +5878,80 @@ a.thumbnail.active {
   padding-left: 0;
   list-style: none;
 }
+#home-slider {
+  height: 470px;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  #home-slider {
+    height: 300px;
+  }
+}
+@media (max-width: 480px) {
+  #home-slider {
+    height: 190px;
+  }
+}
+#home-slider .item {
+  max-height: 470px;
+}
+@media (max-width: 768px) {
+  #home-slider .item {
+    height: 300px;
+  }
+}
+@media (max-width: 480px) {
+  #home-slider .item {
+    height: 190px;
+  }
+}
+#home-slider .item img {
+  width: 100%;
+}
+#home-slider .item iframe {
+  height: 470px;
+}
+@media (max-width: 768px) {
+  #home-slider .item iframe {
+    height: 300px;
+  }
+}
+@media (max-width: 480px) {
+  #home-slider .item iframe {
+    height: 190px;
+  }
+}
+#home-slider .item #play-video {
+  width: 100%;
+  height: 420px;
+  position: absolute;
+}
+@media (max-width: 768px) {
+  #home-slider .item #play-video {
+    height: 250px;
+  }
+}
+@media (max-width: 480px) {
+  #home-slider .item #play-video {
+    height: 140px;
+  }
+}
+#home-slider a.carousel-control {
+  width: 50px;
+}
+#home-slider a.carousel-control .svg {
+  margin-top: 220px;
+}
+@media (max-width: 768px) {
+  #home-slider a.carousel-control .svg {
+    margin-top: 140px;
+  }
+}
+@media (max-width: 480px) {
+  #home-slider a.carousel-control .svg {
+    margin-top: 80px;
+  }
+}
 .bg-image {
   background-size: cover;
   background-repeat: no-repeat;
@@ -7414,6 +7488,9 @@ a:hover {
 .left-14 {
   left: 14px;
 }
+.top-90 {
+  top: 90px;
+}
 .top-23 {
   top: 23px;
 }
@@ -7939,6 +8016,12 @@ a:hover {
 }
 .border-bottom--primary--medium {
   border-bottom: 2px solid #3ac6b1;
+}
+.border-top--danger--medium {
+  border-top: 2px solid #b14464;
+}
+.border-bottom--danger--medium {
+  border-bottom: 2px solid #b14464;
 }
 .box-hover {
   text-align: center!important;
@@ -8741,5 +8824,16 @@ footer h3 {
 .woocommerce form.login {
   padding: 0;
   margin: 0;
+}
+.woocommerce-checkout #billing_postcode_field,
+.woocommerce-checkout #billing_phone_field {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .box-review {
+    position: fixed;
+    z-index: 1;
+    width: 40%;
+  }
 }
 /*# sourceMappingURL=bootstrap.css.map */

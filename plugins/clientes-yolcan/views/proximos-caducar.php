@@ -24,9 +24,15 @@
 			<?php if(!empty($clientes)):
 				foreach ($clientes as $cliente): 
 					$user = get_user_by( 'id', $cliente->cliente_id );
-					$producto_id = wp_get_post_parent_id( $cliente->producto_id ); ?>
+					$producto_id = wp_get_post_parent_id( $cliente->producto_id );
+					$firstName = get_user_meta($user->ID, 'first_name', true);
+                    $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 					<tr>
-						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $user->user_login; ?></a></td>
+						<td>
+							<a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"> 
+								<?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?>
+							</a>
+						</td>
 						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo $user->user_email; ?></a></td>
 						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo get_the_title($cliente->club_id); ?></a></td>
 						<td><a href="<?php echo admin_url().'admin.php?page=cliente&id_cliente='.$cliente->cliente_id; ?>"><?php echo get_the_title($producto_id); ?></a></td>

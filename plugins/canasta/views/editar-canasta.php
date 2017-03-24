@@ -1,7 +1,7 @@
 <div class="wrap">
 	<h1><?php echo $titulo; ?></h1>
 	<h3>
-        <?php echo $idClub != 1 ? 'Club - '.get_the_title($idClub) : 'Canastas base'; ?>
+        <?php echo ($idClub >= 1 && $idClub <= 5) ? getNameCanastaBase($idClub) : 'Club - '.get_the_title($idClub); ?>
     </h3>
 	
 	<hr>
@@ -45,9 +45,9 @@
 			      	  	  				<input type="checkbox" name="ingredientes_canastas[ingredientes][<?php echo $idCanasta; ?>][]" value="<?php echo $ingrediente['ID']; ?>" <?php echo $check; ?>>
 
 			      	  	  				<?php if($producto->ID != 1): ?>
-			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="cantidad">
 										<?php else: ?>
-			      	  	  					<input type="hidden" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="unidades">
+			      	  	  					<input type="text" name="ingredientes_canastas[unidades][<?php echo $idCanasta; ?>][<?php echo $ingrediente['ID']; ?>]" value="<?php echo $unidad; ?>" placeholder="cantidad">
 			      	  	  				<?php endif; ?>
 			      	  	  			</td>
 			      	  	  			

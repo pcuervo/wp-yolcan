@@ -5,3 +5,4 @@
 .content-cliente p{font-size: 14px;}
 .side-cliente{position: relative;overflow: hidden;width: 300px;padding-right: 10px;float: left;}
 .body-cliente{position: relative;overflow: hidden;width: 600px;padding-right: 10px;}
+.mensaje-susses{border-left: 4px solid green;}

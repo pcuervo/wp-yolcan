@@ -30,10 +30,17 @@ the_post(); ?>
 		<div class="[ container ]">
 			<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 			<div class="[ row ][ margin-bottom--large ]">
-                 <?php $args = array(
-                        'post_type' => 'product',
-                        'posts_per_page' => 12
-                        );
+                <?php $args = array(
+                    'post_type' => 'product',
+                    'posts_per_page' => 12,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'product_cat',
+                            'field'    => 'slug',
+                            'terms'    => 'canastas',
+                        ),
+                    )
+                );
                 $productos = new WP_Query( $args );
 
                 if ( $productos->have_posts() ):
@@ -50,7 +57,6 @@ the_post(); ?>
                             <div class="[ card ]">
                                 <div class="[ card__header ]">
                                         <h3 class="[ card__title ]"><?php the_title(); ?></h3>
-                                        <h5 class="[ card__subtitle ][ hidden ]">para 1 persona</h5>
                                 </div>
                                 <div class="[ card__image ]">
                                         <img class="[ img-responsive ]" src="<?php echo $imagen; ?>">
@@ -64,7 +70,7 @@ the_post(); ?>
                                         <?php if (!empty($variations)):
                                         $count = 1;
                                             foreach($variations as $variation):
-                                                $name = getNameVariation($variation['variation_id']);
+                                                $name = getNameOriginVariation($variation['variation_id']);
                                                 $check = $count == 1 ? 'checked' : '';
                                                 $nombreVariacion = getNameOriginVariation($variation['variation_id']);
                                                 $cansatSemanal = getCostoCanastaTemporalidad($nombreVariacion, $variation['display_price']);
@@ -98,10 +104,10 @@ the_post(); ?>
                                             <span class="[ price-table__value ][ precio-producto-check-<?php echo get_the_ID(); ?> ]">$<?php echo number_format($costoTotal) ?></span>
                                         </div>
                                         <div class="[ price-table__set ][ clearfix ]">
-                                            <span class="[ price-table__text ]">Precio por canasta:</span>
+                                            <!-- <span class="[ price-table__text ]">Precio por canasta:</span>
                                             <span class="[ price-table__value ][ precio-semanal-check-<?php echo get_the_ID(); ?> ]">
                                                 $<?php echo $costoVariationSemanal ?>
-                                            </span>
+                                            </span> -->
                                         </div>
                                     </div>
                                     <button type="button"  data-producto="<?php echo get_the_ID(); ?>" class="[ btn btn-link ][ width-100 block ] [ btn-ingredientes-producto ]">Ver ingredientes</button>

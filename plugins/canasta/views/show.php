@@ -1,21 +1,26 @@
 <div class="wrap">
     <h1>Canastas Actuales</h1>
     <hr>
-    <h3>Clubs de consumo</h3>
-    <p>** Los Clubes en rojo usan la canasta base - ( Para dejar de usar la canasta base cambiar en la configuracion de la misma ).</p>
-    <?php if (! empty($clubes)) : ?>
-        <ul class="ul-clubes">
+    <h3>Canastas base</h3>
+    <!-- <p>** Los Clubes en rojo usan la canasta base - ( Para dejar de usar la canasta base cambiar en la configuracion de la misma ).</p> -->
+    <ul class="ul-clubes">
+        <?php for ($i=1; $i < 6; $i++) { ?>
             <li class="text-center">
-                <h3>Canastas Base</h3>
-                <a href="<?php echo admin_url().'admin.php?page=canastas_club&id_club=1'; ?>">
+                <h3><?php echo getNameCanastaBase($i); ?></h3>
+                <a href="<?php echo admin_url().'admin.php?page=canastas_club&id_club='.$i; ?>">
                     Ver Canastas
                 </a>
                 |
-                <a href="<?php echo admin_url().'admin.php?page=configuaracion_canasta_base'; ?>">
+                <a href="<?php echo admin_url().'admin.php?page=configuaracion_canasta_base&cb='.$i; ?>">
                     Configuración
                 </a>
             </li>
-
+        <?php } ?>
+    </ul>
+    <hr>
+    <h3>Clubs de consumo</h3>
+    <?php if (! empty($clubes)) : ?>
+        <ul class="ul-clubes">
             <?php foreach ($clubes as $key => $club):
                 $class = isset($clubesCanastaBase[$club->ID]) ? 'danger-club' : ''; ?>
                 

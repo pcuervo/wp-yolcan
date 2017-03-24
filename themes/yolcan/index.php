@@ -1,4 +1,11 @@
-<?php get_header(); ?>
+<?php get_header();
+
+if( isset( $result['success'] ) ): ?>
+	<br>
+	<br>
+	<br>
+	<div class="[ bg-success btn-lg text-center ]"><?php echo $result['success']; ?></div>
+<?php endif;  ?>
 
 	<div class="[ container ]">
 		<!-- video	-->
@@ -128,7 +135,16 @@
 						<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 					</div>
 					<div class="[ margin-bottom--large ][ text-center ]">
-						<h4>Las Lomas - Condesa - Roma - San Miguel Chapultepec - Bosques - Anzures - Polanco - Jardines del Pedregal</h4>
+						<h4>
+							<?php $clubes = getClubesDeConsumo();
+							if (!empty($clubes)):
+								$total = count($clubes) - 1;
+								foreach ($clubes as $key => $club) :
+									echo $total == $key ? $club->post_title : $club->post_title.' - ';
+								endforeach;
+							endif;?>
+
+						</h4>
 					</div>
 					<div class="[ text-center ]">
 						<h3 class="[ color-secondary ]">O crea uno en tu casa u oficina</h3>
@@ -141,30 +157,28 @@
 						<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
 					</div>
 					<div class="[ row ]">
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Media Canasta</h4>
-								<p class="[ no-margin ]">3-4.5 KG</p>
-								<p>Ensalada Gourmet (200 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$250</strong> semanales</p>
-							</div>
-						</div>
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Canasta Completa</h4>
-								<p class="[ no-margin ]">4.5-6.5 KG</p>
-								<p>Ensalada Gourmet (300 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$375</strong> semanales</p>
-							</div>
-						</div>
-						<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
-							<div class="[ card__header ]">
-								<h4 class="[ text-center ][ color-primary ]">Canasta Familiar</h4>
-								<p class="[ no-margin ]">6.5-8.5 KG</p>
-								<p>Ensalada Gourmet (500 gr.)</p>
-								<p class="[ no-margin ]"><strong class="[ color-primary ]">$500</strong> semanales</p>
-							</div>
-						</div>
+						<?php $args = array(
+	                        'post_type' => 'product',
+	                        'posts_per_page' => 12
+	                    );
+                		$productos = new WP_Query( $args );
+
+		                if ( $productos->have_posts() ):
+
+		                    while ( $productos->have_posts() ) : $productos->the_post(); ?>
+								<div class="[ card ][ col-xs-12 ][ margin-bottom ]">
+									<div class="[ card__header ]">
+										<h4 class="[ text-center ][ color-primary ]"><?php the_title(); ?></h4>
+										<p class="[ no-margin ]"><?php echo get_post_meta($post->ID, 'approximate_weight', true); ?></p>
+										<?php echo $post->post_excerpt; ?>
+									</div>
+								</div>
+							<?php endwhile;
+
+		                else:
+		                        echo __( 'No hay canastas' );
+		                endif;
+		                wp_reset_postdata();?>
 					</div>
 				</div>
 				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
@@ -173,6 +187,58 @@
 						<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
 						<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
 					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="[ container ]">
+
+		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
+				</div>
+				<div class="item active">
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
+						<a id="play-video" href="#"></a>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg">
+			</a>
+			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg">
+			</a>
+		</div>
+
+
+
+
+		<div class="row">
+			<div class="[ col-xs-12 ]">
+				<h2>Instagram</h2>
+			</div>
+			<div class="[ col-xs-12 ]">
+				<div class="row">
+					<?php $feed = feedInstagram('yolcan', 3);
+					if (!empty($feed)):
+						foreach ($feed as $key => $data): ?>
+							<div class="[ col-sm-3 ]">
+								<img src="<?php echo $data['media']; ?>" alt="" class="img-thumbnail">
+								<p class="autor">Por: <?php echo $data['user_name']; ?></p>
+								<p><?php echo $data['text']; ?></p>
+							</div>
+						<?php endforeach;
+					endif; ?>
 				</div>
 			</div>
 		</div>
@@ -200,12 +266,8 @@
 				</div>
 			</div>
 			<div class="[ col-xs-12 col-sm-7 ]">
-				<!-- <div id="map_canvas" class="mapping" style="width: 100%; height: 215px;"></div> -->
-				<div class="map-wrap">
-					<div class="overlay" onClick="style.pointerEvents='none'"></div><!-- wrap map iframe to turn off mouse scroll and turn it back on on click -->
-					<iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120545.72417001169!2d-99.15076015455304!3d19.23648343297052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce038c6de8dea3%3A0x9b79f71fdabd5384!2sXochimilco%2C+D.F.!5e0!3m2!1ses!2smx!4v1450738593739" width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen></iframe>
-				</div>
-				</div>
+				<div id="map_canvas" class="mapping" style="width: 100%; height: 215px;"></div>
+
 			<div class="[ col-xs-12 ][ visible-xs ]">
 				<?php if ( ! is_user_logged_in() ){ ?>
 					<div class="[ text-center ]">

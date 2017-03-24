@@ -15,6 +15,20 @@ add_action('init', function() use (&$wpdb){
 
 add_action('init', function() use (&$wpdb){
 	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."creates_a_club_of_consumption (
+			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			nombre text COLLATE utf8mb4_unicode_ci NOT NULL,
+			correo text COLLATE utf8mb4_unicode_ci NOT NULL,
+			telefono text COLLATE utf8mb4_unicode_ci NOT NULL,
+			ubicacion varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			mensaje varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			PRIMARY KEY (id)
+		) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8;"
+	);
+});
+
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
 		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."ingredients_relationships (
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 			receta_id BIGINT(20) NOT NULL,
@@ -23,6 +37,18 @@ add_action('init', function() use (&$wpdb){
 		) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8;"
 	);
 });
+
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}corte_general_clientes (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			user_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			fecha_corte datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			UNIQUE KEY `id` (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+	);
+});
+
 
 /**
  * REGRESA LOS INGREDIENTES DE LA RECETA
@@ -121,4 +147,40 @@ function recipesBySearchCount($search, $post_page){
 
 	return ceil($pages);
 
+}
+
+/**
+ * GUARDA LOS DATOS DEL CORTE, FECHA Y USUARIO QUE GENERO EL CORTE
+ */
+function storeCorteClientes(){
+	global $wpdb;
+	global $current_user;
+	$wpdb->insert(
+		$wpdb->prefix.'corte_general_clientes',
+		array(
+			'user_id' => $current_user->ID,
+			'fecha_corte' => date('Y-m-d h:i:s'),
+		),
+		array(
+			'%d',
+			'%s'
+		)
+	);
+
+	return $wpdb->insert_id;
+}
+
+function getVisitasAgendadas(){
+	global $wpdb;
+
+	$fecha = date('Y-m-d');
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}sitas_agendadas 
+		WHERE fecha >= '$fecha' ORDER BY fecha ASC;", OBJECT );
+}
+
+function getCreaTuClub(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}creates_a_club_of_consumption
+	 	ORDER BY id DESC;", OBJECT );
 }

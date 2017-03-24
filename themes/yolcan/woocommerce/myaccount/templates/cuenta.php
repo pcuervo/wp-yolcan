@@ -6,10 +6,7 @@ global $clubCanasta; ?>
     <p>
         <?php echo "Tu saldo es de <strong>$ ".$opCliente->saldo." </strong>"; ?>
     </p>
-    <?php if ($opCliente->suspendido != 1 AND $opCliente->saldo != 0): ?>
-        <p>Fecha próximo corte: <strong> <?php echo getDateTransform(getProximoCorte()); ?></strong></p>
-     <?php endif ?>
-	<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
+	<a href="<?php echo site_url('paquetes-de-puntos/'); ?>" class="[ btn btn-secondary btn-small ]">Agrega saldo a tu cuenta</a>
 
 </article>
 
@@ -45,8 +42,9 @@ global $clubCanasta; ?>
             $suspension = $clubCanasta->suspension; ?>
             <p>Tus entregas estan suspendidas por: <strong class="[ color-primary ]"><?php echo $suspension->temporalidad; ?> Semanas</strong></p>
             <p>Fecha suspensión: <strong> <?php echo getDateTransform($suspension->fechaSuspension); ?></strong>
-            <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
-            <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong></p>
+            <!-- <br>Podras ver tu próxima canasta hasta <strong> <?php echo getDateTransform($suspension->fechaFin); ?></strong>
+            <br>Fecha próximo corte: <strong> <?php echo getDateTransform($suspension->FechaProximoDescuento); ?></strong> -->
+        </p>
 
             <p class="[ margin-top--large ]">Desea <strong>renudar</strong> sus entregas?</p>
             <form method="post" action="">
