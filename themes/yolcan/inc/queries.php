@@ -187,3 +187,18 @@ function getCreaTuClub(){
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}creates_a_club_of_consumption
 	 	ORDER BY id DESC;", OBJECT );
 }
+
+/**
+ * INGREDIENTES RELACIONADOS A UNA RECETA
+ * @return [type] [description]
+ */
+function getIngredientesRecetas(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT ingrediente_id as ID FROM {$wpdb->prefix}ingredients_relationships ip
+		INNER JOIN {$wpdb->prefix}posts as p
+		ON ip.receta_id = p.ID
+		WHERE p.post_status = 'publish'
+		GROUP BY ingrediente_id;", OBJECT );
+			
+}
