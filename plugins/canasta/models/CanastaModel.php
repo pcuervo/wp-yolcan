@@ -59,6 +59,19 @@ class CanastaModel {
 		", OBJECT );
 	}
 
+	/**
+	 * CLUBES DE CONSUMO 
+	 */
+	static function clubesByID($clubes)
+	{
+		$clubes = getClubesSeparadoComas($clubes);
+
+		global $wpdb;
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
+			WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo' AND ID IN ($clubes);
+		", OBJECT );
+	}
+
 		
 	static function ingredientes()
 	{
@@ -83,11 +96,12 @@ class CanastaModel {
 	}
 
 
-	static function desactivarCanastas(){
+	static function desactivarCanastas($clubes){
 		global $wpdb;
+		$clubes = getClubesSeparadoComas($clubes);
 		$wpdb->query("UPDATE {$wpdb->prefix}actualizaciones_canasta 
 			SET status = 0
-			WHERE status = 1"
+			WHERE status = 1 AND club_id IN ($clubes)"
 		);
 	}
 

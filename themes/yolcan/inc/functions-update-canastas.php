@@ -12,11 +12,11 @@
  * UPDATE CANASTAS
  * @return [type] [description]
  */
-function getClientUpdate(){
-	descontarSaldoClientes();
-	nuevasCanastasSemanales();
+function getClientUpdate($clubes){
+	descontarSaldoClientes($clubes);
+	nuevasCanastasSemanales($clubes);
 	cambioStatusSuspenciones();
-	storeCorteClientes();
+	storeCorteClientes($clubes);
 }
 
 
@@ -24,8 +24,8 @@ function getClientUpdate(){
  * DESCONTAR SALDO A LOS CLIENTES ACTIVOS.
  * @return [type] [description]
  */
-function descontarSaldoClientes(){
-	$clientes = getClientesActivos();
+function descontarSaldoClientes($clubes){
+	$clientes = getClientesActivos($clubes);
 	
 	if (!empty($clientes)) {
 		foreach ($clientes as $key => $cliente) {
@@ -101,12 +101,12 @@ function cambioStatusSuspenciones(){
 }
 
 
-function nuevasCanastasSemanales(){
+function nuevasCanastasSemanales($clubes){
 	$canastas =  method_exists("CanastaModel", "canastasActivas") ? CanastaModel::canastasActivas() : [];
 	$canastas = canastasPorClub($canastas);
-	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas();
+	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas($clubes);
 	
-	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [];
+	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubesByID($clubes) : [];
 
 	if (!empty($clubes) AND method_exists("CanastaModel", "storeCanasta")) {
 		$canasta = new CanastaModel;
@@ -141,7 +141,6 @@ function nuevasCanastasSemanales(){
 
 			}
 		}
-		
 
 	}
 }

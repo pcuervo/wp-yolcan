@@ -136,7 +136,7 @@ the_post(); ?>
 							<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">
 								<img class="[ svg ][ icon icon--iconed--large icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 							</div>
-							<span class="[ feature__text ]">Envio a domicilio semanal gratuito</span>
+							<span class="[ feature__text ]">Envío a domicilio</span>
 						</div>
 						<div class="[ col-xs-4 ][ feature ]">
 							<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">

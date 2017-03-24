@@ -66,6 +66,46 @@
     line-height: 14px;
 }
 
+.container-restaurant-report{
+	position: relative;	
+	overflow: hidden;
+	float: left;
+	width: 43%;
+	min-height: 120px;
+	border-radius: 10px;
+	border: 2px solid;
+	margin-bottom: 15px;
+	margin-right: 2%;
+	padding: 15px 1.5%;
+}
+
+.container-restaurant-report h3{
+	margin-top: 0px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid;
+}
+.container-restaurant-report .ingrediente{
+	position: relative;
+	overflow: hidden;
+	width: 48%;
+	min-height: 20px;
+	float: left;
+	padding: 0 1%;
+}
+
+.container-restaurant-report .ingrediente .cantidad{
+	position: absolute;
+	overflow: hidden;
+	width: 50px;
+	float: left;
+}
+
+.container-restaurant-report .ingrediente .nombre{
+	position: relative;
+	overflow: hidden;
+	padding-left: 55px;
+}
+
 @media only screen and (max-width: 1240px){
 	.content-ingredientes-restaurante .caja-ingrediente{
 		width: 48%;

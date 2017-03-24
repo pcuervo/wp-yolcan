@@ -263,4 +263,17 @@ class RestaurantesModel {
 	 	 OBJECT );
 	}
 
+	/**
+	 * REPORTE DE COMPRA RESTAURANTES POR DIA
+	 */
+	public function getComprasRestaurantes($date)
+	{
+		$dateA = $date.' 00:00:00';
+		$dateB = $date.' 23:59:59';
+
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}historial_cortes_restaurantes 
+			WHERE fecha_corte >= '$dateA' AND fecha_corte <= '$dateB' ORDER BY id DESC ;", 
+	 	 OBJECT );
+	}
+
 }

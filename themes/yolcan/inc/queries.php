@@ -44,6 +44,7 @@ add_action('init', function() use (&$wpdb){
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			fecha_corte datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			clubes longtext COLLATE utf8mb4_unicode_ci,
 			UNIQUE KEY `id` (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 	);
@@ -152,7 +153,7 @@ function recipesBySearchCount($search, $post_page){
 /**
  * GUARDA LOS DATOS DEL CORTE, FECHA Y USUARIO QUE GENERO EL CORTE
  */
-function storeCorteClientes(){
+function storeCorteClientes($clubes){
 	global $wpdb;
 	global $current_user;
 	$wpdb->insert(
@@ -160,9 +161,11 @@ function storeCorteClientes(){
 		array(
 			'user_id' => $current_user->ID,
 			'fecha_corte' => date('Y-m-d h:i:s'),
+			'clubes' => serialize($clubes)
 		),
 		array(
 			'%d',
+			'%s',
 			'%s'
 		)
 	);
@@ -183,4 +186,19 @@ function getCreaTuClub(){
 
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}creates_a_club_of_consumption
 	 	ORDER BY id DESC;", OBJECT );
+}
+
+/**
+ * INGREDIENTES RELACIONADOS A UNA RECETA
+ * @return [type] [description]
+ */
+function getIngredientesRecetas(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT ingrediente_id as ID FROM {$wpdb->prefix}ingredients_relationships ip
+		INNER JOIN {$wpdb->prefix}posts as p
+		ON ip.receta_id = p.ID
+		WHERE p.post_status = 'publish'
+		GROUP BY ingrediente_id;", OBJECT );
+			
 }

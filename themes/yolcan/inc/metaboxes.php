@@ -15,6 +15,8 @@ add_action('add_meta_boxes', function(){
 	add_meta_box( 'meta-box-informacion_ingrediente', 'Valor producto adicional', 'show_metabox_informacion_ingrediente', 'ingredientes', 'side', 'high' );
     // add_meta_box( 'meta-box-cantidad_ingrediente', 'Peso', 'show_metabox_cantidad_ingrediente', 'ingredientes', 'side', 'high');
     add_meta_box( 'meta-box-precio_ingrediente', 'Valor producto adicional restaurante', 'show_metabox_precio_ingrediente', 'ingredientes', 'side', 'high');
+    add_meta_box( 'meta-box-costo_normal_ingrediente', 'Costo normal del producto', 'show_metabox_costo_normal_ingrediente', 'ingredientes', 'side', 'high');
+
     add_meta_box( 'meta-box-existencias', 'Existencia', 'show_metabox_existencias', 'ingredientes', 'side', 'high');
 
     add_meta_box( 'meta-box-productor_ingrediente', 'Productor', 'show_metabox_productor_ingrediente', 'ingredientes', 'side', 'high');
@@ -261,6 +263,14 @@ function show_metabox_precio_ingrediente($post){
 	echo "<input type='text' class='widefat' id='precio_ingrediente_restaurante' name='precio_ingrediente_restaurante' value='$precio_ingrediente_restaurante'/><br><br>";
 }
 
+function show_metabox_costo_normal_ingrediente($post){
+	wp_nonce_field(__FILE__, '_precio_normal_ingrediente_nonce');
+
+	$precio_normal_ingrediente = get_post_meta($post->ID, 'precio_normal_ingrediente', true);
+
+	echo "<input type='text' class='widefat' id='precio_normal_ingrediente' name='precio_normal_ingrediente' value='$precio_normal_ingrediente'/><br><br>";
+}
+
 function show_metabox_existencias($post){
 	wp_nonce_field(__FILE__, '_existencias_ingrediente_nonce');
 
@@ -367,8 +377,12 @@ add_action('save_post', function($post_id){
 		update_post_meta($post_id, 'precio_ingrediente_restaurante', $_POST['precio_ingrediente_restaurante']);
 	}
 
-	if ( isset($_POST['precio_ingrediente_restaurante']) and check_admin_referer(__FILE__, '_existencias_ingrediente_nonce') ){
-		update_post_meta($post_id, 'precio_ingrediente_restaurante', $_POST['precio_ingrediente_restaurante']);
+	if ( isset($_POST['precio_normal_ingrediente']) and check_admin_referer(__FILE__, '_precio_normal_ingrediente_nonce') ){
+		update_post_meta($post_id, 'precio_normal_ingrediente', $_POST['precio_normal_ingrediente']);
+	}
+
+	if ( isset($_POST['existencias_ingrediente']) and check_admin_referer(__FILE__, '_existencias_ingrediente_nonce') ){
+		update_post_meta($post_id, 'existencias_ingrediente', $_POST['existencias_ingrediente']);
 	}
 
 	if ( isset($_POST['productor_ingrediente']) and check_admin_referer(__FILE__, '_productor_ingrediente_nonce') ){

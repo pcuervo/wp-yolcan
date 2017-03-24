@@ -306,7 +306,7 @@ function getClientesDesactivarSuspension($fecha = ''){
 	return $wpdb->get_results( "SELECT oc.cliente_id FROM {$wpdb->prefix}opciones_clientes as oc
 		INNER JOIN {$wpdb->prefix}suspension_entregas as se
 		ON oc.id_suspension = se.id
-		WHERE oc.suspendido = 1 AND fecha_fin_suspension = '$fecha';
+		WHERE oc.suspendido = 1 AND fecha_fin_suspension <= '$fecha';
 	", OBJECT );
 	
 }
@@ -315,10 +315,11 @@ function getClientesDesactivarSuspension($fecha = ''){
  * CLIENTES ACTIVOS
  * @return [type] [description]
  */
-function getClientesActivos(){
+function getClientesActivos($clubes){
+	$clubes = getClubesSeparadoComas($clubes);
 	global $wpdb;
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}opciones_clientes 
-		WHERE suspendido = 0 AND status = 1;
+		WHERE suspendido = 0 AND status = 1 AND club_id IN ($clubes);
 	", OBJECT );
 }
 
