@@ -82,6 +82,30 @@ class CanastaModel {
 	}
 
 	/**
+	 * GET CANASTAS
+	 * @return [type] [description]
+	 */
+	static function getCanastas(){
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => 'canastas',
+                ),
+            )
+        );
+        $canastas = new WP_Query( $args );
+        if (!empty($canastas->posts)) {
+        	return $canastas->posts;
+        }
+
+        return [];
+	}
+
+	/**
 	 * REGRESA TODAS LAS CANASTAS ACTIVAS CON SUS INGREDIENTES
 	 * @return [type] [description]
 	 */
@@ -197,6 +221,45 @@ class CanastaModel {
 			ORDER BY id DESC
 			LIMIT $limit;", 
 	 	OBJECT );
+	}
+
+	/**
+	 * RETURN RESULTS REPORT
+	 * @return [type] [description]
+	 */
+	public function getReport($data)
+	{
+		$select = 'SELECT * FROM '.$this->_prefix.'corte_canastas';
+		$where = '';
+		if ($data['club'] != 'all') {
+			$where .= ' club_id = '.$data['club'];
+		}
+
+		if ($data['canasta'] != 'all') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' canasta_id_real = '.$data['canasta'];
+		}
+
+		if ($data['resporte_del'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' fecha_corte >= "'.$data['resporte_del'].'"';
+		}
+
+		if ($data['resporte_a'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' fecha_corte <= "'.$data['resporte_a'].'"';
+		}
+
+		if ($data['cliente'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' cliente_id = "'.$data['cliente'].'"';
+		}
+		
+		if ($where != '') {
+			$select .= ' WHERE '.$where;
+		}
+
+		return $this->_wpdb->get_results( $select, OBJECT );
 	}
 
 

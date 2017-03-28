@@ -58,7 +58,8 @@ function storeCanastaAlCorteCliente($cliente, $variacion, $adicionales){
 		'adicionales' => serialize($adicionales),
 		'fecha_corte' => date('Y-m-d'),
 		'actualizacion_id' => $actualizacionId,
-		'canasta_id' => $canasta
+		'canasta_id' => $canasta,
+		'canasta_id_real' => $producto
 	];
 
 	saveCanastaAlCorteCliente($arr);

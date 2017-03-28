@@ -56,6 +56,7 @@
 			$('#saldo-disponible').html(saldo_libre);
 		});	
 
+		console.log('asdsdsasd');
 		$('.date-piker-reports').datepicker({
 	        dateFormat : 'yy-mm-dd',
 	        maxDate: 'today'
