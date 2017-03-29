@@ -1,18 +1,19 @@
 <?php $club = $data['club'] != 'all' ? get_the_title($data['club']) : 'Todos';
-$canasta = $data['canasta'] != 'all' ? get_the_title($data['canasta']) : 'Todas'; ?>
+$canasta = $data['canasta'] != 'all' ? get_the_title($data['canasta']) : 'Todas';
+$url = admin_url()."admin.php?page=reporte_canastas&club=".$data['club']."&canasta=".$data['canasta']."&reporte_del=".$data['reporte_del']."&reporte_a=".$data['reporte_a']."&cliente=".$data['cliente']."&generate=pdf"; ?>
 <div class="wrap">
     <h1>
-        Reporte  de ventas
+        Reporte  de ventas <a href="<?php echo $url; ?>">Generar PDF</a>
     </h1>
     <hr>
     <p>
         <strong>Club:</strong> <?php echo $club; ?>, 
         <strong>Canasta:</strong> <?php echo $canasta; ?>,
-        <?php if ($data['resporte_del'] != ''): ?>
-            <strong>Del:</strong> <?php echo $data['resporte_del']; ?>,
+        <?php if ($data['reporte_del'] != ''): ?>
+            <strong>Del:</strong> <?php echo $data['reporte_del']; ?>,
         <?php endif; ?>
-        <?php if ($data['resporte_a'] != ''): ?>
-            <strong>A:</strong> <?php echo $data['resporte_a']; ?>,
+        <?php if ($data['reporte_a'] != ''): ?>
+            <strong>A:</strong> <?php echo $data['reporte_a']; ?>,
         <?php endif; ?>
         <?php if ($data['cliente'] != ''): ?>
             <strong>Cliente:</strong> <?php echo $data['cliente']; ?>,
@@ -64,8 +65,6 @@ $canasta = $data['canasta'] != 'all' ? get_the_title($data['canasta']) : 'Todas'
             <?php endforeach;
             echo '<hr>';
         endforeach; 
-    endif; ?>
-    
-                
+    endif; ?> 
         
 </div>

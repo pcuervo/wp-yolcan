@@ -32,11 +32,11 @@
         </div>
         <div>
             <label for="reporte-de">Fecha de inicio</label><br>
-            <input id="reporte-de" type="text" class="date-piker-reports" name="resporte_del">
+            <input id="reporte-de" type="text" class="date-piker-reports" name="reporte_del">
         </div>
         <div>
             <label for="reporte-a">Fecha final</label><br>
-            <input id="reporte-a" type="text" class="date-piker-reports" name="resporte_a">
+            <input id="reporte-a" type="text" class="date-piker-reports" name="reporte_a">
         </div>
          <div>
             <label for="cliente">Cliente ID</label><br>

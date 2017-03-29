@@ -46,7 +46,9 @@ class ReportesController {
 	 */
 	public function generaPdfReporteDiario($resporte_del, $results)
 	{
-		require_once(PATH_RESTAURANTES."/inc/dompdf/dompdf_config.inc.php");
+		if (!class_exists('DOMPDF')) {
+			require_once(PATH_RESTAURANTES."/inc/dompdf/dompdf_config.inc.php");
+		}
 
 		ob_start();
 		include PATH_RESTAURANTES.'/views/reportes/htmlPdfDiario.php';

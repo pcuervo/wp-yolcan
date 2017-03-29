@@ -240,14 +240,14 @@ class CanastaModel {
 			$where .= ' canasta_id_real = '.$data['canasta'];
 		}
 
-		if ($data['resporte_del'] != '') {
+		if ($data['reporte_del'] != '') {
 			if ($where != '') $where .= ' AND';
-			$where .= ' fecha_corte >= "'.$data['resporte_del'].'"';
+			$where .= ' fecha_corte >= "'.$data['reporte_del'].'"';
 		}
 
-		if ($data['resporte_a'] != '') {
+		if ($data['reporte_a'] != '') {
 			if ($where != '') $where .= ' AND';
-			$where .= ' fecha_corte <= "'.$data['resporte_a'].'"';
+			$where .= ' fecha_corte <= "'.$data['reporte_a'].'"';
 		}
 
 		if ($data['cliente'] != '') {

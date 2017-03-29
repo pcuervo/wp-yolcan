@@ -1,0 +1,29 @@
+* { box-sizing: border-box; }
+@page { margin: 30px 0px 5px 30px; }
+body{ margin:0;}
+
+.container-reporte-cliente{
+	position: relative; 
+	overflow: hidden; 
+	padding: 0 15px 15px 15px; 
+	border: 2px solid #000; 
+	border-radius: 15px;
+	width: 700px;
+}
+.container-reporte-cliente p{
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	width: 40%;
+	margin-bottom: 0;
+	height: 30px;
+}
+
+.container-reporte-cliente div{
+	height: 30px;
+	vertical-align: top;
+}
+
+.container-reporte-cliente .top-d{
+	padding-top: 15px;
+}

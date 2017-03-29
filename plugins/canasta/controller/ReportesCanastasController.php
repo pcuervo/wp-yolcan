@@ -42,6 +42,10 @@ class ReportesCanastasController
 		$results = $mCanasta->getReport($this->dataGet);
 
 		$ventas = $this->getGroupResults($results);
+
+		if (isset($this->dataGet['generate']) AND $this->dataGet['generate'] == 'pdf') {
+			$this->generaPdf($this->dataGet, $ventas);
+		}
 		
 		return view('reportes/index', [
 			'data' => $this->dataGet,
@@ -59,5 +63,33 @@ class ReportesCanastasController
 		}
 
 		return $newArr;
+	}
+
+	/**
+	 * GENERA EL PDF DEL REPORTE DIARIO
+	 */
+	public function generaPdf($data, $ventas)
+	{
+		if (!class_exists('DOMPDF')) {
+			require_once(PATH_CANASTA."/inc/dompdf/dompdf_config.inc.php");
+		}
+
+		ob_start();
+		include PATH_CANASTA.'/views/reportes/htmlPdf.php';
+
+	  	$html = ob_get_clean();
+		// echo $html;
+		$mipdf = new DOMPDF();
+		 
+		$mipdf->set_paper("A4", "portrait");
+		 
+		$mipdf->load_html( utf8_decode( utf8_encode($html) ) );
+		 
+		$mipdf->render();
+
+		header('Content-type: application/pdf');
+
+		$mipdf->stream('reporteVentasClientes-'.date('Y-m-d').'.pdf', array("Attachment" => 0) );
+		echo $mipdf->output();
 	}
 }
