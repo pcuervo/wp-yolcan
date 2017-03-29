@@ -180,4 +180,16 @@
 			);
 			wp_insert_post( $page, true );
 		}
+		// Aviso de Privacidad
+		
+		if( ! get_page_by_path('aviso-de-privacidad') ){
+			$page = array(
+				'post_author' => 1,
+				'post_status' => 'publish',
+				'post_title'  => 'Aviso de Privacidad',
+				'post_name'   => 'aviso-de-privacidad',
+				'post_type'   => 'page'
+			);
+			wp_insert_post( $page, true );
+		}
 	});

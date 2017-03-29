@@ -5,13 +5,15 @@
         <link rel="stylesheet" href="<?php echo PATH_CANASTA; ?>/resources/style-pdf.css" type="text/css"/>
     </head>
     <body>
-        <center>
-            <h3>Reporte ventas clientes</h3>
-        </center>
+        
         <?php if (!empty($ventas)): 
-        foreach ($ventas as $key => $club): 
-            foreach ($club as $key_C => $canasta) : ?>
-                <h2><?php echo get_the_title($key).' - '.get_the_title($key_C); ?></h2>
+        foreach ($ventas as $key => $club): ?>
+            <center>
+                <h2>Reporte ventas clientes - <?php echo get_the_title($key); ?></h2>
+            </center>
+            <?php foreach ($club as $key_C => $canasta) : ?>
+                
+                <h3><?php echo get_the_title($key).' - '.get_the_title($key_C); ?></h3>
                 <div class="container-reporte-cliente">
                     <?php foreach ($canasta as $venta) : 
                         $user = get_user_by( 'id', $venta->cliente_id ); ?>
