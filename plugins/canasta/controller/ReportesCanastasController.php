@@ -40,8 +40,24 @@ class ReportesCanastasController
 	{
 		$mCanasta = model('CanastaModel');
 		$results = $mCanasta->getReport($this->dataGet);
-		echo '<pre>';
-		print_r($results);
-		echo '</pre>';
+
+		$ventas = $this->getGroupResults($results);
+		
+		return view('reportes/index', [
+			'data' => $this->dataGet,
+			'ventas' => $ventas
+		]);
+	}
+
+	private function getGroupResults($results)
+	{
+		$newArr = [];
+		if (!empty($results)) {
+			foreach ($results as $key => $result) {
+				$newArr[$result->club_id][$result->canasta_id_real][] = $result;
+			}
+		}
+
+		return $newArr;
 	}
 }

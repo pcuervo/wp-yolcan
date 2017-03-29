@@ -28,7 +28,7 @@
             </select>
         </div>
         <div>
-            <p>Selecciona un rango de fechas *</p>
+            <p>Selecciona un rango de fechas del corte *</p>
         </div>
         <div>
             <label for="reporte-de">Fecha de inicio</label><br>
