@@ -72,7 +72,7 @@
 						</div>
 					</article>
 				</section>
-				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
+				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved. | <a href="<?php echo site_url('/aviso-de-privacidad/') ?>">Aviso de Privacidad</a></p>
 			</div>
 		</footer>
 	</div><!-- end main -->
