@@ -44,3 +44,11 @@ body{font-family: 'Roboto'; font-weight: 500; margin:0;}
 	overflow: hidden;
 	padding-left: 55px;
 }
+
+.total-corte{
+    text-align: right;
+    padding-top: 10px;
+    clear: both;
+    margin-bottom: 0;
+    font-weight: bold;
+}

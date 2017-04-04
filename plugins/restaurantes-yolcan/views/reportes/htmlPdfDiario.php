@@ -25,13 +25,14 @@
 									$terms = wp_get_post_terms( $ingrediente['id'], 'unidades' );
 		                			$unidad = isset($terms[0]) ? $terms[0]->name : ''; ?>
 		                			
-							    	<td width="240px">(<?php echo $ingrediente['cantidad']; ?> <strong><?php echo $unidad ?></strong>) <?php echo get_the_title($ingrediente['id']); ?></td>
+							    	<td width="240px">(<?php echo $ingrediente['cantidad']; ?> <strong><?php echo $unidad ?></strong>) <?php echo get_the_title($ingrediente['id']); ?> ($<?php echo $ingrediente['costo']; ?>)</td>
 							
 								<?php endforeach;
 								echo '</tr>';
 							endforeach;
 						endif;  ?>
 					</table>
+					<p class="total-corte">Total del corte: $<?php echo $restaurante->total_corte; ?></p>
 				</div>
 			<?php endforeach;
 		else:
