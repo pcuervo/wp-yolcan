@@ -106,6 +106,15 @@
 	padding-left: 55px;
 }
 
+.total-corte{
+	position: relative;
+    overflow: hidden;
+    text-align: right;
+    padding-top: 10px;
+    clear: both;
+    margin-bottom: 0;
+    font-weight: bold;
+}
 @media only screen and (max-width: 1240px){
 	.content-ingredientes-restaurante .caja-ingrediente{
 		width: 48%;

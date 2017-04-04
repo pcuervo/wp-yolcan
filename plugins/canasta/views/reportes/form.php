@@ -6,8 +6,8 @@
     <form action="<?php echo admin_url().'admin.php'; ?>" method="get">
         <input type="hidden" name="page" value="reporte_canastas">
         <div>
-            <label for="club">Selecciona un club</label>
-            <select name="club" class="widefat">
+            <label for="club">Selecciona un club</label><br>
+            <select name="club" >
                 <option value="all" >Todos</option>
                 <?php if (!empty($clubes)): 
                     foreach ($clubes as $key => $club): ?>
@@ -17,8 +17,8 @@
             </select>
         </div>
         <div>
-            <label for="canasta">Selecciona una canasta</label>
-            <select name="canasta" class="widefat">
+            <label for="canasta">Selecciona una canasta</label><br>
+            <select name="canasta" >
                 <option value="all" >Todas</option>
                 <?php if (!empty($canastas)): 
                     foreach ($canastas as $key => $canasta): ?>
