@@ -30,7 +30,7 @@ add_action( 'wp_enqueue_scripts', function(){
 	// scripts
 	wp_enqueue_script('jquery-ui-datepicker');
 	wp_enqueue_script( 'plugins', JSPATH.'plugins.js', array('jquery'), '1.0', true );
-	wp_enqueue_script( 'api-google', 'http://maps.googleapis.com/maps/api/js', array('jquery'), '1.0', true );
+	wp_enqueue_script( 'api-google', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCVy25Nhnhvke_SACTHr43psTkbKXbyN8o&callback=initMap', array('jquery'), '1.1', true );
 	wp_enqueue_script( 'bootstrap', 'http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js', array('jquery'), '1.0', true );
 	wp_enqueue_script( 'chart', JSPATH.'Chart.js', array('jquery'), '1.0', false );
 	wp_enqueue_script( 'functions', JSPATH.'functions.js', array('plugins'), '1.0', true );
