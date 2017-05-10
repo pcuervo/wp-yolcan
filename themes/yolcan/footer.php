@@ -8,29 +8,29 @@
 						<?php $contactanos = get_page_by_path('contactanos');
 						$telefono = get_post_meta($contactanos->ID, 'telefono_c', true);
 						$whatsapp = get_post_meta($contactanos->ID, 'whatsapp_c', true);?>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]"  href="tel:+525552555555">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="tel:+<?php echo $telefono; ?>5">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $telefono; ?></span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $telefono; ?></span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola --><!-- href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" -->
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola -->
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $whatsapp; ?></span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $whatsapp; ?></span>
 						</a>
 						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="mailto:contacto@yolcan.com">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/email.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">contacto@yolcan.com</span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/Yolcan-190099034343351/">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/yolcanmexico/">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">/yolcan</span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">/yolcanmexico</span>
 						</a>
 						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://twitter.com/michinampa">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/twitter.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@michinampa</span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan/">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan_mx/">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan_mx</span>
 						</a>
 					</article>
 					<article class="[ col-sm-4 col-md-3 ]">
