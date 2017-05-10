@@ -8,7 +8,7 @@
 						<?php $contactanos = get_page_by_path('contactanos');
 						$telefono = get_post_meta($contactanos->ID, 'telefono_c', true);
 						$whatsapp = get_post_meta($contactanos->ID, 'whatsapp_c', true);?>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="tel:+<?php echo $telefono; ?>5">
+						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="tel:+<?php echo $telefono; ?>5">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg" alt="icono redes">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $telefono; ?></span>
 						</a>
@@ -37,9 +37,9 @@
 						<h3><em>Únete</em></h3>
 						<div class="[ margin-bottom ]">
 							<?php if ( ! is_user_logged_in() ){ ?>
-								<a data-toggle="modal" data-target="#unete" class="[ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+								<span data-toggle="modal" data-target="#unete" class="[ cursor-pointer ][ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</span>
 							<?php } ?>
-							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
+							<span href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ cursor-pointer ][ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</span>
 						</div>
 					</article>
 					<article class="[ col-sm-2 col-md-3 ]">
@@ -121,7 +121,7 @@
 											<a class="[ link-light ][ color-light ][ small ]" href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
 										</p>
 										<p class="[ text-center ]">
-											<a data-toggle="modal" data-target="#unete" class="[ margin-bottom--small ][ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</a>
+											<span data-toggle="modal" data-target="#unete" class="[ cursor-pointer ][ margin-bottom--small ][ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</span>
 										</p>
 
 										<?php do_action( 'woocommerce_login_form_end' ); ?>

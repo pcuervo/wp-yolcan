@@ -5936,19 +5936,19 @@ a.thumbnail.active {
     height: 140px;
   }
 }
-#home-slider a.carousel-control {
+#home-slider .carousel-control {
   width: 50px;
 }
-#home-slider a.carousel-control .svg {
+#home-slider .carousel-control .svg {
   margin-top: 220px;
 }
 @media (max-width: 768px) {
-  #home-slider a.carousel-control .svg {
+  #home-slider .carousel-control .svg {
     margin-top: 140px;
   }
 }
 @media (max-width: 480px) {
-  #home-slider a.carousel-control .svg {
+  #home-slider .carousel-control .svg {
     margin-top: 80px;
   }
 }

@@ -63,9 +63,9 @@
 					</div>
 					<div class="[ col-xs-6 inherit ][ visible-xs ][ margin-top--small ][ text-right ]">
 						<div class="[ inline-block ]">
-							<a data-toggle="modal" data-target="#menu-info">
+							<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#menu-info">
 								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg"  alt="icono info">
-							</a>
+							</span>
 							<div id="menu-info" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 
@@ -91,9 +91,9 @@
 							</div>
 						</div>
 						<div class="[ inline-block relative top-3 ][ margin-left--xsmall ]">
-							<a data-toggle="modal" data-target="#main-menu">
+							<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#main-menu">
 								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/navigation.svg" alt="icono navegación">
-							</a>
+							</span>
 							<div id="main-menu" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 									<div class="[ modal-content height-auto ][ color-light ]">
@@ -121,7 +121,7 @@
 						<?php if ( ! empty($user->ID) ): ?>
 							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a>
 						<?php else: ?>
-							<a class="[ color-primary-darken ][ info-menu ]" data-toggle="modal" data-target="#ingresa">ingresa</a>
+							<span class="[ color-primary-darken ][ info-menu ][ cursor-pointer ]" data-toggle="modal" data-target="#ingresa">ingresa</span>
 						<?php endif; ?>
 
 

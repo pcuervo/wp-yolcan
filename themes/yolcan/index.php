@@ -20,20 +20,36 @@ if( isset( $result['success'] ) ): ?>
 				<div class="item">
 					<div class="embed-responsive embed-responsive-4by3">
 						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
-						<a id="play-video" href="#"></a>
+						<div id="play-video" ></div>
 					</div>
 				</div>
 			</div>
 
 
 			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+			<span class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
 				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg" alt="icono izquierda">
-			</a>
-			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+			</span>
+			<span class="right carousel-control" href="#home-slider" role="button" data-slide="next">
 				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg" alt="derecha">
-			</a>
+			</span>
 		</div>
+
+		<!-- <section class="[ row ]">
+			<?php
+				$video = get_page_by_title( 'Video Home' );
+				$videoContent = $video->post_content;
+				$videoURL = wp_extract_urls( $videoContent ); //https://www.youtube.com/embed/HCj_EUKAis4
+			?>
+			<div class="[ col-xs-12 ][ margin-bottom--large ]">
+				<div class="[ js-video-wrapper ]">
+					<iframe class="[ embed-responsive-item ]" src="<?php echo ( empty($videoURL[0]) ) ? 'https://www.youtube.com/embed/HCj_EUKAis4' : $videoURL[0]; ?>" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+			<div class="[ col-xs-12 ]">
+				<h2 class="[ text-center ][ no-margin ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
+			</div>
+		</section> -->
 
 		<section class="[ row ]">
 
@@ -59,7 +75,7 @@ if( isset( $result['success'] ) ): ?>
 					<div class="[ btn-absolute-bottom ]">
 						<div class="[ text-center ]" >
 							<?php if ( ! is_user_logged_in() ){ ?>
-								<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></a>
+								<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ]">únete</button></span>
 							<?php } ?>
 							<a href="<?php echo site_url('/conocenos/') ?>" ><button class="[ btn btn-primary-darken ]">¿cómo funciona?</button></a>
 						</div>
@@ -246,11 +262,11 @@ if( isset( $result['success'] ) ): ?>
 				<div class="[  ][ hidden-xs ]">
 					<?php if ( ! is_user_logged_in() ){ ?>
 						<div class="[ text-center ]">
-							<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom padding ]">únete</button></a>
+							<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom padding ]">únete</button></span>
 						</div>
 					<?php } ?>
 					<p>Si quieres armar un nuevo club de consumo, haz
-						<a data-toggle="modal" data-target="#club-consumo"  class="[ color-primary-darken ]"><i><u>click aquí</u></i></a>
+						<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#club-consumo"  class="[ color-primary-darken ]"><i><u>click aquí</u></i></span>
 					</p>
 				</div>
 			</div>
@@ -260,11 +276,11 @@ if( isset( $result['success'] ) ): ?>
 			<div class="[ col-xs-12 ][ visible-xs ]">
 				<?php if ( ! is_user_logged_in() ){ ?>
 					<div class="[ text-center ]">
-						<a data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom ]">únete</button></a>
+						<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#unete" ><button class="[ btn btn-secondary ][ margin-top-bottom ]">únete</button></span>
 					</div>
 				<?php } ?>
 				<p class="[ color-gray-xlight ]">Si quieres armar un nuevo club de consumo, haz
-					<a data-toggle="modal" data-target="#club-consumo" class="[ color-gray-xlight ]"><i><u>click aquí</u></i></a>
+					<span class="[ cursor-pointer ]" data-toggle="modal" data-target="#club-consumo" class="[ color-gray-xlight ]"><i><u>click aquí</u></i></span>
 				</p>
 			</div>
 		</div>
