@@ -28,7 +28,7 @@ $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 			<?php if(!empty($variationAttr)):  ?>
 				<strong>Temporalidad:</strong>  <?php echo $variationAttr->temporalidad; ?><br>
 				<strong>Precio:</strong>  $<?php echo $variationAttr->costo; ?><br>
-				<strong>Precio por canasta:</strong>  $<?php echo $variationAttr->costoSemanal; ?><br>
+				<strong>Precio por canasta:</strong>  $<?php echo round($variationAttr->costoSemanal); ?><br>
 			<?php endif; ?>
 		</p>
 		<a href="<?php echo admin_url().'admin.php?page=editar_cliente&id_cliente='.$cliente->cliente_id; ?>" class="button-primary">Editar Cliente</a>
@@ -37,7 +37,7 @@ $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 		<h3>Próxima canasta
 			<span>
 				$<?php if(!empty($variationAttr)): 
-					echo $variationAttr->costoSemanal; ?>
+					echo round($variationAttr->costoSemanal); ?>
 				<?php endif; ?>
 			</span>
 		</h3>
@@ -74,7 +74,7 @@ $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 			</ul>
 			<h3>Total Próximo corte: 
 				<?php if(!empty($variationAttr)): ?>
-					$<?php echo $variationAttr->costoSemanal + $totalAdicionales; ?>
+					$<?php echo round($variationAttr->costoSemanal + $totalAdicionales); ?>
 				<?php endif; ?>
 
 			</h3>

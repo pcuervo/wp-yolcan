@@ -30,10 +30,17 @@ the_post(); ?>
 		<div class="[ container ]">
 			<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
 			<div class="[ row ][ margin-bottom--large ]">
-                 <?php $args = array(
-                        'post_type' => 'product',
-                        'posts_per_page' => 12
-                        );
+                <?php $args = array(
+                    'post_type' => 'product',
+                    'posts_per_page' => 12,
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'product_cat',
+                            'field'    => 'slug',
+                            'terms'    => 'canastas',
+                        ),
+                    )
+                );
                 $productos = new WP_Query( $args );
 
                 if ( $productos->have_posts() ):
@@ -50,7 +57,6 @@ the_post(); ?>
                             <div class="[ card ]">
                                 <div class="[ card__header ]">
                                         <h3 class="[ card__title ]"><?php the_title(); ?></h3>
-                                        <h5 class="[ card__subtitle ][ hidden ]">para 1 persona</h5>
                                 </div>
                                 <div class="[ card__image ]">
                                         <img class="[ img-responsive ]" src="<?php echo $imagen; ?>">
@@ -130,7 +136,7 @@ the_post(); ?>
 							<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">
 								<img class="[ svg ][ icon icon--iconed--large icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
 							</div>
-							<span class="[ feature__text ]">Envio a domicilio semanal gratuito</span>
+							<span class="[ feature__text ]">Envío a domicilio</span>
 						</div>
 						<div class="[ col-xs-4 ][ feature ]">
 							<div class="[ feature__icon ][ icon--iconed--xxlarge icon--rounded ][ color-secondary ][ text-center ]">

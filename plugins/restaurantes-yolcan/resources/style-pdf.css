@@ -1,0 +1,54 @@
+* { box-sizing: border-box; }
+@page { margin: 30px 0px 5px 30px; }
+body{font-family: 'Roboto'; font-weight: 500; margin:0;}
+.container-restaurant-report{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	width:700px;
+	min-height: 120px;
+	border: 1px solid;
+	margin-bottom: 15px;
+	padding: 15px 15px;
+}
+
+.content-ingredientes{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height:30px;
+}
+.container-restaurant-report h3{
+	margin-top: 0px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid;
+}
+.container-restaurant-report .ingrediente{
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	width: 300px;
+	height: 20px;
+	padding: 0 15px;
+}
+
+.container-restaurant-report .ingrediente .cantidad{
+	position: absolute;
+	overflow: hidden;
+	width: 50px;
+	float: left;
+}
+
+.container-restaurant-report .ingrediente .nombre{
+	position: relative;
+	overflow: hidden;
+	padding-left: 55px;
+}
+
+.total-corte{
+    text-align: right;
+    padding-top: 10px;
+    clear: both;
+    margin-bottom: 0;
+    font-weight: bold;
+}

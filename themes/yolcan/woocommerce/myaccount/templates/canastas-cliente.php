@@ -1,4 +1,4 @@
-<?php global $current_user; 
+<?php global $current_user;
 global $opCliente;
 global $clubCanasta;
 
@@ -15,7 +15,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 	<h5>Ingredientes:</h5>
 	<ul class="[ list-style-none ][ padding--left ]">
 		<?php if (!empty($clubCanasta->ingredientes)):
-			foreach ($clubCanasta->ingredientes as $key => $ingrediente): 
+			foreach ($clubCanasta->ingredientes as $key => $ingrediente):
 				$terms = wp_get_post_terms( $ingrediente->ingrediente_id, 'unidades' );
 				$unidad = isset($terms[0]) ? $terms[0]->name : ''; ?>
 				<li>
@@ -26,19 +26,19 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 			echo '<p>Aun no hay ingredientes</p>';
 		endif; ?>
 	</ul>
-	
+
 	<!-- ADICIONALES AGREGADOS -->
 
 	<h5>Productos agregados: <span class="[ color-primary ]"> $<?php echo number_format($totalAdicionales, 2, ".", ","); ?></span> </h5>
-	
+
 	<ul class="[ list-style-none ][ padding--left ]">
-		<?php if (! empty($adicionalesAgregados)): 
-			foreach ($adicionalesAgregados['ingredientes'] as $key => $ingrediente): 
+		<?php if (! empty($adicionalesAgregados)):
+			foreach ($adicionalesAgregados['ingredientes'] as $key => $ingrediente):
 				$terms = wp_get_post_terms( $ingrediente['ingredienteID'], 'unidades' );
 				$unidad = isset($terms[0]) ? $terms[0]->name : '';
 				$entrega_adicional = $ingrediente['toca-quincenal'] == 0 ? 'En esta semana no se entrega este ingrediente hasta la próxima' : '';?>
 				<li>
-		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span> 
+		            - <?php echo get_the_title($ingrediente['ingredienteID']); ?> <strong> ( <?php echo $ingrediente['cantidad'].' '.$unidad; ?> )</strong> - $ <?php echo number_format($ingrediente['total']); ?> </span>
 		            <small>
 		            	<form action="" method="post" class="form-delete-aditional">
 		            		<input type="hidden" name="adicional_id" value="<?php echo $ingrediente['ingredienteID']; ?>">
@@ -53,7 +53,7 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 		else:
 			echo '<p>No hay ingredientes adicionales</p>';
 		endif; ?>
-		
+
 	</ul>
 	<h5>Total a descontar el proximo corte: <span class="[ color-danger ]">$<?php echo number_format($totalAdicionales + $costoSemanal, 2, ".", ","); ?></span>  </h5>
 
@@ -65,13 +65,13 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 <article class="">
 
 	<h4>Agrega productos</h4>
-	<?php if (!empty($clubCanasta->adicionales) AND $costoSemanal < $opCliente->saldo): 
+	<?php if (!empty($clubCanasta->adicionales) AND $costoSemanal < $opCliente->saldo):
 		$saldoDisponible = ( $opCliente->saldo - $costoSemanal ) - $totalAdicionales; ?>
 		<h5>Saldo disponible para adicionales <strong class="[ color-primary ]">$<?php echo number_format($saldoDisponible, 2, ".", ",");?></strong></h5>
 		<input type="hidden" id="saldo-libre" value="<?php echo $saldoDisponible; ?>">
-		
+
 		<p>Selecciona los productos que deseas agregar a tu canasta:</p>
-		<?php foreach($clubCanasta->adicionales as $adicional): 
+		<?php foreach($clubCanasta->adicionales as $adicional):
 			$precio = get_post_meta($adicional->ingrediente_id, 'valor_en_puntos', true);
 			if ($precio != ''):
 				$terms = wp_get_post_terms( $adicional->ingrediente_id, 'unidades' );
@@ -117,10 +117,10 @@ $totalAdicionales = isset($adicionalesAgregados['total_adicionales']) ? getTotal
 
             <?php endif;
 		endforeach; ?>
-		
+
 	<?php elseif($costoSemanal >= $opCliente->saldo): ?>
 		<p>No cuenta con el saldo sufuciente para agregar adicionales</p>
-	<?php else: ?> 
-		<p>El clube a un no cuenta con productos adicionales</p>
+	<?php else: ?>
+		<p>El club aún no cuenta con productos adicionales</p>
 	<?php endif; ?>
 </article> <!-- /forms -->

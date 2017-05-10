@@ -55,12 +55,11 @@ $clubTitle = $opCliente->clubId > 0 ? get_the_title($opCliente->clubId) : 'Aún 
 		
 		<?php if( $latitud_club ): ?>
 		    <div class="map-wrap iframe-cont [ margin-top-bottom--small ]">
-		        <div class="overlay" onClick="style.pointerEvents='none'"></div><!-- wrap map iframe to turn off mouse scroll and turn it back on on click -->
 		        <iframe class="map" width="100%" height="170" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=<?php echo $latitud_club; ?>,<?php echo $longitud_club; ?>&hl=es;z=14&amp;output=embed"></iframe>
 		    </div>
 		<?php endif; ?>
 	    <p><?php echo $direccion; ?></p>
-	    <?php echo $dias_de_recoleccion != '' ? '<p>Días de recolección '.$dias_de_recoleccion.'</p>' : '';
+	    <?php echo $dias_de_recoleccion != '' ? '<p>Días de recolección: '.$dias_de_recoleccion.'</p>' : '';
 	    echo $horarios_de_recoleccion != '' ? '<p>Horario de recolección: '.$horarios_de_recoleccion.'</p>' : '';
 	    echo $nombre_encargado_club != '' ? '<p>Encargado del Club: '.$nombre_encargado_club.'</p>' : '';
 	    echo $telefono_encargado_club != '' ? '<p>Teléfono del encargado: '.$telefono_encargado_club.'</p>' : '';

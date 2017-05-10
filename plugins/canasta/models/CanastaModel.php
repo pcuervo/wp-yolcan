@@ -59,6 +59,19 @@ class CanastaModel {
 		", OBJECT );
 	}
 
+	/**
+	 * CLUBES DE CONSUMO 
+	 */
+	static function clubesByID($clubes)
+	{
+		$clubes = getClubesSeparadoComas($clubes);
+
+		global $wpdb;
+		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
+			WHERE post_status = 'publish' AND post_type = 'clubes-de-consumo' AND ID IN ($clubes);
+		", OBJECT );
+	}
+
 		
 	static function ingredientes()
 	{
@@ -66,6 +79,30 @@ class CanastaModel {
 		return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
 			WHERE post_status = 'publish' AND post_type = 'ingredientes';
 		", OBJECT );
+	}
+
+	/**
+	 * GET CANASTAS
+	 * @return [type] [description]
+	 */
+	static function getCanastas(){
+		$args = array(
+            'post_type' => 'product',
+            'posts_per_page' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => 'canastas',
+                ),
+            )
+        );
+        $canastas = new WP_Query( $args );
+        if (!empty($canastas->posts)) {
+        	return $canastas->posts;
+        }
+
+        return [];
 	}
 
 	/**
@@ -83,11 +120,12 @@ class CanastaModel {
 	}
 
 
-	static function desactivarCanastas(){
+	static function desactivarCanastas($clubes){
 		global $wpdb;
+		$clubes = getClubesSeparadoComas($clubes);
 		$wpdb->query("UPDATE {$wpdb->prefix}actualizaciones_canasta 
 			SET status = 0
-			WHERE status = 1"
+			WHERE status = 1 AND club_id IN ($clubes)"
 		);
 	}
 
@@ -183,6 +221,45 @@ class CanastaModel {
 			ORDER BY id DESC
 			LIMIT $limit;", 
 	 	OBJECT );
+	}
+
+	/**
+	 * RETURN RESULTS REPORT
+	 * @return [type] [description]
+	 */
+	public function getReport($data)
+	{
+		$select = 'SELECT * FROM '.$this->_prefix.'corte_canastas';
+		$where = '';
+		if ($data['club'] != 'all') {
+			$where .= ' club_id = '.$data['club'];
+		}
+
+		if ($data['canasta'] != 'all') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' canasta_id_real = '.$data['canasta'];
+		}
+
+		if ($data['reporte_del'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' fecha_corte >= "'.$data['reporte_del'].'"';
+		}
+
+		if ($data['reporte_a'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' fecha_corte <= "'.$data['reporte_a'].'"';
+		}
+
+		if ($data['cliente'] != '') {
+			if ($where != '') $where .= ' AND';
+			$where .= ' cliente_id = "'.$data['cliente'].'"';
+		}
+		
+		if ($where != '') {
+			$select .= ' WHERE '.$where;
+		}
+
+		return $this->_wpdb->get_results( $select, OBJECT );
 	}
 
 

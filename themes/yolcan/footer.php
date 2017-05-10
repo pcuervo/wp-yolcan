@@ -1,4 +1,4 @@
-<?php global $procesoRegistro;?>
+<?php global $procesoRegistro; ?>
 		<footer class="[ bg-primary-darken ][ color-gray-xxlight ]">
 			<div class="[ container ]">
 				<section class="[ row ]">
@@ -8,27 +8,27 @@
 						<?php $contactanos = get_page_by_path('contactanos');
 						$telefono = get_post_meta($contactanos->ID, 'telefono_c', true);
 						$whatsapp = get_post_meta($contactanos->ID, 'whatsapp_c', true);?>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]"  href="tel:+525552555555">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]"  href="tel:+525552555555">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $telefono; ?></span>
 						</a>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola --><!-- href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" -->
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola --><!-- href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" -->
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $whatsapp; ?></span>
 						</a>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="mailto:contacto@yolcan.com">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="mailto:contacto@yolcan.com">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/email.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">contacto@yolcan.com</span>
 						</a>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/Yolcan-190099034343351/">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/Yolcan-190099034343351/">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">/yolcan</span>
 						</a>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://twitter.com/michinampa">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://twitter.com/michinampa">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/twitter.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
 						</a>
-						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan/">
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan/">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
 						</a>
@@ -72,7 +72,7 @@
 						</div>
 					</article>
 				</section>
-				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
+				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved. | <a href="<?php echo site_url('/aviso-de-privacidad/') ?>">Aviso de Privacidad</a></p>
 			</div>
 		</footer>
 	</div><!-- end main -->
@@ -82,6 +82,7 @@
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
+
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom--large ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
 								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
@@ -90,6 +91,9 @@
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa en tu cuenta de <span class=" [ text-uppercase ]">yolcan</span></p>
+									<?php if(isset($_GET['login_error'])): ?>
+										<p class="color-light text-center [ border-top--danger--medium border-bottom--danger--medium ][ margin-bottom ][ padding--top-bottom ]">El <strong>Email</strong> o <strong>Contraseña</strong> son incorrectos.</p>
+									<?php endif; ?>
 									<form method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]">
 										<?php do_action( 'woocommerce_login_form_start' ); ?>
 
@@ -130,15 +134,11 @@
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
 		</div><!-- end modal -->
-		
+
 		<!-- modal unete -->
-		<?php if(isset($procesoRegistro['error'])): ?>
-			<div id="unete" class="[ modal fade ] in" role="dialog" aria-hidden="false" style="display: block;">
-		<?php else: ?>	
-			<div id="unete" class="[ modal fade ]" role="dialog">
-		<?php endif; 
-		$nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
-		$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>	
+		<div id="unete" class="[ modal fade ]" role="dialog">
+			<?php $nombreCliente = isset($_POST['nombreCliente']) ? $_POST['nombreCliente'] : '';
+			$emailCliente = isset($_POST['emailCliente']) ? $_POST['emailCliente'] : ''; ?>
 			<div class="[ modal-dialog ]">
 				<div class="[ modal-content ]">
 					<div class="[ modal-body ][ color-light ]">
@@ -151,7 +151,7 @@
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa tus datos y comienza a formar parte de la comunidad <span class=" [ text-uppercase ]">yolcan</span></p>
 									<?php if(isset($procesoRegistro['error'])): ?>
-										<p class="text-danger">El <strong>Email</strong> <?php echo $emailCliente; ?> ya esta en uso.</p>
+										<p class="text-danger"><?php echo $procesoRegistro['error']; ?></p>
 									<?php endif; ?>
 									<form id="form-unete" method="post" class="[ border-bottom--primary--medium ][ margin-bottom ][ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
@@ -196,10 +196,10 @@
 							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
 						</button>
 						<div id="content-ingredientes-canasta">
-							
-							
+
+
 						</div>
-						
+
 					</div><!-- end modal-body -->
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->
@@ -218,28 +218,29 @@
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">¿Te interesa crear un club de consumo? Déjanos tus datos y te contactaremos </p>
-									<form id="form-club" class="[ text-left ]" data-parsley-validate>
+									<form id="form-club" method="POST" class="[ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+											<input type="text" name="form-crear-club-name" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+											<input type="email" name="form-crear-club-email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+											<input type="text" name="form-crear-club-telefono" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Ubicación del club a crear</label>
-											<input type="text" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
+											<input type="text" name="form-crear-club-ubicacion" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
 										</div>
 										<div class="[ form-group ]">
 											<label class="[ sans-serif ][ no-margin ]">Mensaje</label>
-											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
+											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" name="form-crear-club-mensaje" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
 										</div>
 										<div class="[ text-center ]">
+											<input type="hidden" name="action" value="form-create-club">
 											<button type="submit" href="#" class="[ btn btn-lg btn-secondary padding--top-bottom--xsmall ]">enviar</button>
 										</div>
 									</form>
@@ -251,6 +252,8 @@
 			</div>
 		</div>
 
-		<?php wp_footer(); ?>
+		<?php wp_footer();
+		if(isset($_GET['login_error'])) echo "<script> jQuery('#ingresa').modal('show'); </script>";
+		if(isset($procesoRegistro['error'])) echo "<script> jQuery('#unete').modal('show'); </script>"; ?>
 	</body>
 </html>

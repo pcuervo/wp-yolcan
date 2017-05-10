@@ -6,7 +6,7 @@ global $clubCanasta; ?>
     <p>
         <?php echo "Tu saldo es de <strong>$ ".$opCliente->saldo." </strong>"; ?>
     </p>
-	<a href="<?php echo site_url('nuestros-productos/'); ?>" class="[ btn btn-secondary btn-small ]">agrega saldo a tu cuenta</a>
+	<a href="<?php echo site_url('paquetes-de-puntos/'); ?>" class="[ btn btn-secondary btn-small ]">Agrega saldo a tu cuenta</a>
 
 </article>
 

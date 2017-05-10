@@ -83,9 +83,13 @@ class RestaurantesModel {
 	 */
 	public function getActivos()
 	{
-		return $this->_wpdb->get_results( "SELECT sc.* FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%restaurante%') as um
+		return $this->_wpdb->get_results( "SELECT sc.*, c.ultimo_corte, s.ultima_carga_saldo FROM (SELECT * FROM {$this->_prefix}usermeta WHERE meta_key = '{$this->_prefix}capabilities' AND meta_value LIKE '%restaurante%') as um
 			INNER JOIN {$this->_prefix}saldo_restaurantes as sc
 			ON um.user_id = sc.restaurante_id
+			LEFT JOIN (SELECT restaurante_id, max(fecha_corte) as ultimo_corte FROM {$this->_prefix}historial_cortes_restaurantes GROUP BY restaurante_id) as c
+			ON sc.restaurante_id = c.restaurante_id
+			LEFT JOIN (SELECT restaurante_id, max(fecha) as ultima_carga_saldo FROM {$this->_prefix}historial_saldo_restaurantes GROUP BY restaurante_id) as s
+			ON sc.restaurante_id = s.restaurante_id
 			WHERE suspendido = 0 AND saldo > 0;", 
 	  OBJECT );
 	}
@@ -256,6 +260,19 @@ class RestaurantesModel {
 	public function getCompraRestaurantes($restauranteId, $compraId){
 		return $this->_wpdb->get_row( "SELECT * FROM {$this->_prefix}historial_cortes_restaurantes 
 			WHERE restaurante_id = $restauranteId AND id = $compraId;", 
+	 	 OBJECT );
+	}
+
+	/**
+	 * REPORTE DE COMPRA RESTAURANTES POR DIA
+	 */
+	public function getComprasRestaurantes($date)
+	{
+		$dateA = $date.' 00:00:00';
+		$dateB = $date.' 23:59:59';
+
+		return $this->_wpdb->get_results( "SELECT * FROM {$this->_prefix}historial_cortes_restaurantes 
+			WHERE fecha_corte >= '$dateA' AND fecha_corte <= '$dateB' ORDER BY id DESC ;", 
 	 	 OBJECT );
 	}
 

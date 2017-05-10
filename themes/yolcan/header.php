@@ -26,7 +26,7 @@
 
 		<?php wp_head(); ?>
 
-		<!-- Typekit 
+		<!-- Typekit
 		<script src="https://use.typekit.net/upn0scl.js"></script>
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>-->
 	</head>
@@ -127,4 +127,8 @@
 				<div class="[ clear ]"></div>
 			</div> <!-- /container -->
 		</header>
-		<div class="[ main ]"><!-- Fijar footer. Cierra en footer -->
+		<?php if ( is_page('paquetes-de-puntos') ) { ?>
+			<div class="[ main ][ main-gray ]"><!-- Fijar footer. Cierra en footer -->
+		<?php } else { ?>
+			<div class="[ main ]"><!-- Fijar footer. Cierra en footer -->
+		<?php } ?>

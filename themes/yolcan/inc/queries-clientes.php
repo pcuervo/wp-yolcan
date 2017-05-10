@@ -44,6 +44,7 @@ add_action('init', function() use (&$wpdb){
 			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			actualizacion_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			canasta_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			canasta_id_real bigint(20) unsigned NOT NULL DEFAULT '0',
 			adicionales longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
 			fecha_corte date NOT NULL DEFAULT '0000-00-00',
 			UNIQUE KEY `id` (`id`)
@@ -306,7 +307,7 @@ function getClientesDesactivarSuspension($fecha = ''){
 	return $wpdb->get_results( "SELECT oc.cliente_id FROM {$wpdb->prefix}opciones_clientes as oc
 		INNER JOIN {$wpdb->prefix}suspension_entregas as se
 		ON oc.id_suspension = se.id
-		WHERE oc.suspendido = 1 AND fecha_fin_suspension = '$fecha';
+		WHERE oc.suspendido = 1 AND fecha_fin_suspension <= '$fecha';
 	", OBJECT );
 	
 }
@@ -315,10 +316,11 @@ function getClientesDesactivarSuspension($fecha = ''){
  * CLIENTES ACTIVOS
  * @return [type] [description]
  */
-function getClientesActivos(){
+function getClientesActivos($clubes){
+	$clubes = getClubesSeparadoComas($clubes);
 	global $wpdb;
 	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}opciones_clientes 
-		WHERE suspendido = 0 AND status = 1;
+		WHERE suspendido = 0 AND status = 1 AND club_id IN ($clubes);
 	", OBJECT );
 }
 
@@ -352,7 +354,8 @@ function saveCanastaAlCorteCliente($data){
 			'adicionales' => $adicionales,
 			'fecha_corte' => $fecha_corte,
 			'actualizacion_id' => $actualizacion_id,
-			'canasta_id' => $canasta_id
+			'canasta_id' => $canasta_id,
+			'canasta_id_real' => $canasta_id_real
 		),
 		array(
 			'%d',
@@ -362,6 +365,7 @@ function saveCanastaAlCorteCliente($data){
 			'%d',
 			'%s',
 			'%s',
+			'%d',
 			'%d',
 			'%d'
 		)

@@ -4,13 +4,16 @@
 
 	$(function(){
 
-		jQuery('#fecha_visita').datepicker({
+		$('.datepicker').datepicker({
 	        dateFormat : 'yy-mm-dd'
 	    });
 
 		imgToSvg();
 		init_masonry('#content', '.box-content');
 		footerBottom();
+		//scrollCheckout();
+
+		//$(window).scroll(function(){ scrollCheckout(); });
 
 		/**
 		 * Triggered events
@@ -52,8 +55,24 @@
 			//       show: 'yolcan',
 			//       button: false,
 			//       column: "mi-img"
-			// }); 
+			// });
 
+			var video = $("#video-slider").attr("src");
+
+			 $('.carousel-control').click(function(){
+				$("#video-slider").attr("src","");
+				$("#video-slider").attr("src",video);
+				$('#play-video').removeClass('hide');
+				console.log('video stop');
+			});
+
+			$('#play-video').on('click', function(ev) {
+				$("#video-slider")[0].src += "&autoplay=1";
+				$('#home-slider').carousel('pause');
+				$('#play-video').addClass('hide');
+				console.log('slider stop');
+				ev.preventDefault();
+			});
 
 		};
 
@@ -456,7 +475,7 @@
 		 */
 
 		if (is_home == 1) {
-			// initialize();
+			initialize();
 		};
 
 
@@ -535,7 +554,7 @@
 		}// getFooterHeight
 
 		// ---- PRODUCTOS ----//
-		
+
 		$('.check-compra').on('click', function(){
 			var precio = $(this).data('costo');
 			var variacion = $(this).data('variacion');
@@ -547,7 +566,7 @@
 			$('.url-add-cart-product-'+producto).attr('href', url);
 			$('.precio-producto-check-'+producto).text('$' + precio);
 			$('.precio-semanal-check-'+producto).text('$' + semanal);
-			
+
 		});
 
 		$(document).on('click', '.check-compra-modal', function(){
@@ -560,9 +579,9 @@
 		});
 
 		// --- VALIDATE ADD PRODUCT ADDITIONAL ---- //
-		
+
 		$('.add-additional').on('submit', function(event){
-			
+
 			var id = $(this).children('#adicional-id').val();
 			var saldoLibre = $('#saldo-libre').val();
 			var adicionalCosto = $('#adicional-costo-'+id).val();
@@ -577,7 +596,7 @@
 				event.preventDefault();
 				alert('No cuenta con saldo suficiente para agregar el ingrediente');
 			}
-			
+
 		});
 
 		$('.btn-ingredientes-producto').on('click', function(){
@@ -594,22 +613,36 @@
 		});
 
 		/** FILTER **/
+		$('#content-recetas-grid').imagesLoaded( function() {
+		  	var $grid = $('.grid').isotope({
+			  	itemSelector: '.element-item',
+			  	layoutMode: 'fitRows'
+			});
 
-		var $grid = $('.grid').isotope({
-		  	itemSelector: '.element-item',
-		  	layoutMode: 'fitRows'
-		});
+			$('.filter-ingrediente').on('click', function() {
+				if($(this).hasClass('active-ing')){
+					$(this).removeClass('active-ing');
+				}else{
+			  		$(this).addClass('active-ing');
+				}
 
+				getFilterCombo();
 
-		$('.filter-ingrediente').on('click', function() {
-			if($(this).hasClass('active-ing')){
-				$(this).removeClass('active-ing');
-			}else{
-		  		$(this).addClass('active-ing');
+			});
+
+			function getFilterCombo(){
+				var ingredientes = $('.active-ing');
+				var filters = '';
+				$.each(ingredientes, function( index, value ) {
+				  	if(index == 0){
+				  		filters += value.getAttribute('data-filter');
+				  	}else{
+				  		filters += ', '+value.getAttribute('data-filter');
+				  	}
+				});
+				$grid.isotope({ filter: filters });
+				console.log(filters);
 			}
-
-			getFilterCombo();
-
 		});
 
 		function getFilterCombo(){
@@ -625,7 +658,18 @@
 			$grid.isotope({ filter: filters });
 			console.log(filters);
 		}
-		
+
+		function scrollCheckout() {
+			var ScrollTop = $("body").scrollTop();
+			// console.log(ScrollTop);
+			if (ScrollTop > 100){
+			     $( ".box-review" ).animate({ "top": "100px" }, 200 );
+			}
+			if (ScrollTop < 100){
+			     $( ".box-review" ).animate({ "top": "200px" }, 200 );
+			}
+		}
 	});
 
 })(jQuery);
+

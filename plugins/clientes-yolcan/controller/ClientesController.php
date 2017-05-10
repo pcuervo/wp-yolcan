@@ -135,6 +135,15 @@ class ClientesController {
 		]);
 	}
 
+	public function clienteNoActivo(){
+		return viewCliente('cliente-no-activo', [
+			'clienteID' => $this->clienteId,
+			'clubes' => method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [],
+			'cliente' => $this->modelClientes->getOpcionesClienteById($this->clienteId),
+			'historySaldo' => $this->modelClientes->getHistorySaldoClienteById($this->clienteId)
+		]);
+	}
+
 	/**
 	 * EDITAR EL CLIENTE
 	 * @return [type] [description]
@@ -172,6 +181,27 @@ class ClientesController {
 		}
 		
 		if (isset($this->dataPost['club']) AND function_exists('saveClubCliente')) {
+			if ($this->dataPost['club'] != $this->dataPost['club-anterior']) {
+				saveClubCliente($this->dataPost['club'], $this->clienteId, $urlRedirect);
+			}
+		}
+
+		wp_redirect($urlRedirect);
+	}
+
+	/**
+	 * UPDATE CLIENT NO ACTIVE
+	 * @return [type] [description]
+	 */
+	public function updateClienteNoActivo(){
+		$urlRedirect = admin_url().'admin.php?page=cliente_no_activo&id_cliente='.$this->clienteId;
+
+		if (isset($this->dataPost['saldo']) AND $this->dataPost['saldo'] > 0 AND function_exists('setOpcionesCliente')) {
+			setOpcionesCliente($this->dataPost['club'], 0, $this->dataPost['saldo'], NULL, $this->clienteId);
+			$this->modelClientes->storeHistoryUpdateSaldoAdmin($this->clienteId, $this->dataPost['saldo'], $this->dataPost['saldo-anterior']);
+		}
+
+		if (isset($this->dataPost['club']) AND $this->dataPost['saldo'] > 0 AND function_exists('saveClubCliente')) {
 			if ($this->dataPost['club'] != $this->dataPost['club-anterior']) {
 				saveClubCliente($this->dataPost['club'], $this->clienteId, $urlRedirect);
 			}
@@ -232,16 +262,20 @@ class ClientesController {
 	{
 		if (isset($this->dataPost['action']) AND $this->dataPost['action'] == 'realizar-corte') {
 			
-			if (function_exists('getClientUpdate')) {
-				getClientUpdate();
+			if (function_exists('getClientUpdate') aND isset($this->dataPost['clubes'])) {
+				$return = getClientUpdate($this->dataPost['clubes']);
 
-				$urlRedirect = admin_url().'admin.php?page=corte_semanal&corte=ok';
-				wp_redirect($urlRedirect);
-				exit;
+				// if ($return == true) {
+				// 	$urlRedirect = admin_url().'admin.php?page=corte_semanal&corte=ok';
+				// 	wp_redirect($urlRedirect);
+				// 	exit;
+				// }
+
 			}
 		}
 		
 		return viewCliente('corte-semanal', [
+			'clubes' => method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [],
 			'cortes' => $this->modelClientes->getHistorialCortes(),
 		]);
 	}

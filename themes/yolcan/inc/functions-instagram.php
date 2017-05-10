@@ -1,56 +1,46 @@
 <?php 
-
+// $result = feedInstagram();
 /**
  * FEED INSTAGRAM
  */
-function feedInstagram($tag = 'yolcan'){
+function feedInstagram($tag = 'yolcan', $count = 3){
 
-  $token = '1490790081.a1d3805.155714f6209241a9b0dffe474faa7ce3';
-  $client_id = "a1d380535cd44bc48a981f4740239281";
-  $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?access_token=1490790081.a1d3805.155714f6209241a9b0dffe474faa7ce3&count=10&client_id='.$client_id;
-  // $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.$client_id;
-  // $url = 'https://api.instagram.com/v1/tags/search?q='.$tag.'&access_token='.$token;
-  
-  $all_result = processURL($url);
-  
-  $decoded_results = json_decode($all_result, true);
+  $token = '1490790081.113bc44.f051d1732c774cc89e88710fb54a2289';
+  $client_id = "113bc4484f5945cf979169f9a640dd6f";
+  $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?access_token='.$token.'&count='.$count.'&client_id='.$client_id;
+  $decoded_results = processURL($url);
 
   $new_arr = array();
+  if(!empty($decoded_results->data) ):
+    foreach ($decoded_results->data as $key => $item):
 
-  // foreach ($decoded_results['data'] as $key => $item):
+        $time = $item->caption->created_time;
+        $new_arr[$time.'-'.$key]['user_name'] = $item->caption->from->username;
+        $new_arr[$time.'-'.$key]['user_image'] = $item->caption->from->profile_picture;
+        $new_arr[$time.'-'.$key]['text'] = $item->caption->text;
+        $new_arr[$time.'-'.$key]['tiempo_creacion_a'] = humanTiming($time);
+        $new_arr[$time.'-'.$key]['comments'] = $item->comments->count;
+        $new_arr[$time.'-'.$key]['favorite'] = $item->likes->count;
+        $new_arr[$time.'-'.$key]['media'] = $item->images->standard_resolution->url;
+        $new_arr[$time.'-'.$key]['url_user_profile'] = 'https://instagram.com/'.$item->caption->from->username;
 
-    // if ( $key <= 8):
-    //   $time = $item['caption']['created_time'];
-    //   $new_arr[$time.'-'.$key]['type_social'] = 'ins';
-    //   $new_arr[$time.'-'.$key]['user_name'] = $item['caption']['from']['username'];
-    //   $new_arr[$time.'-'.$key]['user_image'] = $item['caption']['from']['profile_picture'];
-    //   $new_arr[$time.'-'.$key]['text'] = $item['caption']['text'];
-    //   $new_arr[$time.'-'.$key]['tiempo_creacion_a'] = humanTiming($time);
-    //   $new_arr[$time.'-'.$key]['comments'] = $item['comments']['count'];
-    //   $new_arr[$time.'-'.$key]['favorite'] = $item['likes']['count'];
-    //   $new_arr[$time.'-'.$key]['media'] = $item['images']['standard_resolution']['url'];
-    //   $new_arr[$time.'-'.$key]['url_user_profile'] = 'https://instagram.com/'.$item['caption']['from']['username'];
-    // endif;
-  // end(array)dforeach;
+    endforeach;
+  endif;
 
   return $new_arr;
   
 }
 
 
-function processURL($url)
+function processURL($api_url)
 {
-    $ch = curl_init();
-    curl_setopt_array($ch, array(
-    CURLOPT_URL => $url,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_SSL_VERIFYPEER => false,
-    CURLOPT_SSL_VERIFYHOST => 2
-    ));
- 
-   $result = curl_exec($ch);
-   curl_close($ch);
-   return $result;
+    $connection_c = curl_init(); // initializing
+  curl_setopt( $connection_c, CURLOPT_URL, $api_url ); // API URL to connect
+  curl_setopt( $connection_c, CURLOPT_RETURNTRANSFER, 1 ); // return the result, do not print
+  curl_setopt( $connection_c, CURLOPT_TIMEOUT, 20 );
+  $json_return = curl_exec( $connection_c ); // connect and get json data
+  curl_close( $connection_c ); // close connection
+  return json_decode( $json_return ); // decode and return
 }
 
 /**

@@ -23,20 +23,24 @@ if(isset($_POST['action']) AND $_POST['action'] == 'create-client') setNuevoClie
 function setNuevoCliente($data){
 	global $procesoRegistro;
 	extract($data);
-	$user_id = username_exists( $emailCliente );
-	if ( !$user_id and email_exists($emailCliente) == false ) {
+
+	if ( !username_exists( $nombreCliente ) and !email_exists($emailCliente) ) {
 		$random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
+
 		if(!is_wp_error($user_id)){
 			$wp_user = get_user_by( 'id', $user_id );
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
 		    wp_set_auth_cookie($user_id); 
-		    wp_safe_redirect( site_url('/mi-cuenta') );
+		    wp_safe_redirect( site_url('/nuestros-productos') );
    			exit();
 		}
-	} else {
-		$procesoRegistro['error'] = 'El email ya esta en uso';
+
+	}elseif(username_exists( $nombreCliente )) {
+		$procesoRegistro['error'] = 'El nombre '.$nombreCliente.' ya esta en uso';
+	}elseif( email_exists($emailCliente) ){
+		$procesoRegistro['error'] = 'El email '.$emailCliente.' ya esta en uso';
 	}
 }
 
@@ -270,12 +274,13 @@ function getCostoVariationID($variant_id){
 	$temporalidad = get_post_meta( $variant_id, 'attribute_pa_temporalidad', true );
 	$regular_price = get_post_meta( $variant_id, '_regular_price', true );
 	$saldo_a_abonar = get_post_meta( $variant_id, '_saldo_a_abonar_field', true );
+	$semanas = get_post_meta( $variant_id, '_semanas_field', true );
 
-	$costo = getCostoCanastaTemporalidad($temporalidad, $saldo_a_abonar);
+	// $costo = getCostoCanastaTemporalidad($temporalidad, $saldo_a_abonar);
 	return (object) [
 		'temporalidad' => $temporalidad,
 		'costo' => $regular_price,
-		'costoSemanal' => $costo,
+		'costoSemanal' => $saldo_a_abonar / $semanas,
 		'saldoAbonar' => $saldo_a_abonar
 	];
 }
@@ -406,6 +411,14 @@ function getCostoCanastaTemporalidad( $temporalidad, $costo ){
 	        return $costo / 24;
 	        break;
 	}
+}
+
+/**
+ * REGRESA LOS CLUBES SEPARADOS POR COMAS EXTRAIDOS DE UN ARREGLO
+ * @return [type] [description]
+ */
+function getClubesSeparadoComas($clubes){
+	return implode(',',$clubes);
 }
 
 

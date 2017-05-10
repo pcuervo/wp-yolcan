@@ -15,6 +15,20 @@ add_action('init', function() use (&$wpdb){
 
 add_action('init', function() use (&$wpdb){
 	$wpdb->query(
+		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."creates_a_club_of_consumption (
+			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			nombre text COLLATE utf8mb4_unicode_ci NOT NULL,
+			correo text COLLATE utf8mb4_unicode_ci NOT NULL,
+			telefono text COLLATE utf8mb4_unicode_ci NOT NULL,
+			ubicacion varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			mensaje varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+			PRIMARY KEY (id)
+		) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8;"
+	);
+});
+
+add_action('init', function() use (&$wpdb){
+	$wpdb->query(
 		"CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."ingredients_relationships (
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 			receta_id BIGINT(20) NOT NULL,
@@ -30,6 +44,7 @@ add_action('init', function() use (&$wpdb){
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			user_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			fecha_corte datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+			clubes longtext COLLATE utf8mb4_unicode_ci,
 			UNIQUE KEY `id` (`id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 	);
@@ -138,7 +153,7 @@ function recipesBySearchCount($search, $post_page){
 /**
  * GUARDA LOS DATOS DEL CORTE, FECHA Y USUARIO QUE GENERO EL CORTE
  */
-function storeCorteClientes(){
+function storeCorteClientes($clubes){
 	global $wpdb;
 	global $current_user;
 	$wpdb->insert(
@@ -146,12 +161,44 @@ function storeCorteClientes(){
 		array(
 			'user_id' => $current_user->ID,
 			'fecha_corte' => date('Y-m-d h:i:s'),
+			'clubes' => serialize($clubes)
 		),
 		array(
 			'%d',
+			'%s',
 			'%s'
 		)
 	);
 
 	return $wpdb->insert_id;
+}
+
+function getVisitasAgendadas(){
+	global $wpdb;
+
+	$fecha = date('Y-m-d');
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}sitas_agendadas 
+		WHERE fecha >= '$fecha' ORDER BY fecha ASC;", OBJECT );
+}
+
+function getCreaTuClub(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}creates_a_club_of_consumption
+	 	ORDER BY id DESC;", OBJECT );
+}
+
+/**
+ * INGREDIENTES RELACIONADOS A UNA RECETA
+ * @return [type] [description]
+ */
+function getIngredientesRecetas(){
+	global $wpdb;
+
+	return $wpdb->get_results( "SELECT ingrediente_id as ID FROM {$wpdb->prefix}ingredients_relationships ip
+		INNER JOIN {$wpdb->prefix}posts as p
+		ON ip.receta_id = p.ID
+		WHERE p.post_status = 'publish'
+		GROUP BY ingrediente_id;", OBJECT );
+			
 }

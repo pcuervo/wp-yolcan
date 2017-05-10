@@ -12,11 +12,11 @@
  * UPDATE CANASTAS
  * @return [type] [description]
  */
-function getClientUpdate(){
-	descontarSaldoClientes();
-	nuevasCanastasSemanales();
+function getClientUpdate($clubes){
+	descontarSaldoClientes($clubes);
+	nuevasCanastasSemanales($clubes);
 	cambioStatusSuspenciones();
-	storeCorteClientes();
+	storeCorteClientes($clubes);
 }
 
 
@@ -24,8 +24,8 @@ function getClientUpdate(){
  * DESCONTAR SALDO A LOS CLIENTES ACTIVOS.
  * @return [type] [description]
  */
-function descontarSaldoClientes(){
-	$clientes = getClientesActivos();
+function descontarSaldoClientes($clubes){
+	$clientes = getClientesActivos($clubes);
 	
 	if (!empty($clientes)) {
 		foreach ($clientes as $key => $cliente) {
@@ -58,7 +58,8 @@ function storeCanastaAlCorteCliente($cliente, $variacion, $adicionales){
 		'adicionales' => serialize($adicionales),
 		'fecha_corte' => date('Y-m-d'),
 		'actualizacion_id' => $actualizacionId,
-		'canasta_id' => $canasta
+		'canasta_id' => $canasta,
+		'canasta_id_real' => $producto
 	];
 
 	saveCanastaAlCorteCliente($arr);
@@ -101,12 +102,12 @@ function cambioStatusSuspenciones(){
 }
 
 
-function nuevasCanastasSemanales(){
+function nuevasCanastasSemanales($clubes){
 	$canastas =  method_exists("CanastaModel", "canastasActivas") ? CanastaModel::canastasActivas() : [];
 	$canastas = canastasPorClub($canastas);
-	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas();
+	if ( method_exists("CanastaModel", "desactivarCanastas") ) CanastaModel::desactivarCanastas($clubes);
 	
-	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubes() : [];
+	$clubes = method_exists("CanastaModel", "clubes") ? CanastaModel::clubesByID($clubes) : [];
 
 	if (!empty($clubes) AND method_exists("CanastaModel", "storeCanasta")) {
 		$canasta = new CanastaModel;
@@ -128,16 +129,18 @@ function nuevasCanastasSemanales(){
 			
 		}
 
-		$actualizacionId = $canasta->storeCanasta(1, 1, '0000-00-00');
-		if(isset($canastas[1]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
-			
-			foreach ($canastas[1] as $key => $ingrediente) {
-				$canastaID = $ingrediente->canasta_id;
-				$ingredienteId = $ingrediente->ingrediente_id;
-				$cantidad = $ingrediente->cantidad;
-				$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
-			}
+		for ($i=1; $i < 6; $i++) { 
+			$actualizacionId = $canasta->storeCanasta($i, 1, '0000-00-00');
+			if(isset($canastas[$i]) AND method_exists("IngredientesModel", "storeIngredienteCanasta")){
+				
+				foreach ($canastas[$i] as $key => $ingrediente) {
+					$canastaID = $ingrediente->canasta_id;
+					$ingredienteId = $ingrediente->ingrediente_id;
+					$cantidad = $ingrediente->cantidad;
+					$modelIngredientes->storeIngredienteCanasta($canastaID, $actualizacionId, $ingredienteId, $cantidad);
+				}
 
+			}
 		}
 
 	}

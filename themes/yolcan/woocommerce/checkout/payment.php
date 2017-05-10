@@ -22,9 +22,9 @@ if ( ! is_ajax() ) {
 	do_action( 'woocommerce_review_order_before_payment' );
 }
 ?>
-<div id="payment" class="woocommerce-checkout-payment [ padding--top--small margin-bottom--large ][ bg-light ]">
+<div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
-		<h4 class="[ text-center ][ margin-top ]">Selecciona tu metodo de pago:</h4>
+		<h4 class="[ text-center ][ margin-top--large ]">Selecciona tu metodo de pago:</h4>
 			<ul class="wc_payment_methods payment_methods methods [ no-border ]">
 			<?php
 				if ( ! empty( $available_gateways ) ) {
@@ -37,7 +37,7 @@ if ( ! is_ajax() ) {
 			?>
 		</ul>
 	<?php endif; ?>
-	<div class="form-row place-order">
+	<div class="form-row place-order [ no-padding ]">
 		<noscript>
 			<?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?>
 			<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', 'woocommerce' ); ?>" />

@@ -14,10 +14,20 @@ class ProductosModel {
      */
     public function productos()
     {
-        global $wpdb;
-        return $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}posts
-            WHERE post_status = 'publish' AND post_type = 'product';
-        ", OBJECT );
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => 12,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field'    => 'slug',
+                    'terms'    => 'canastas',
+                ),
+            )
+        );
+        $productos = new WP_Query( $args );
+
+        return ! empty($productos->posts) ? $productos->posts : [];
     }
 
 }
