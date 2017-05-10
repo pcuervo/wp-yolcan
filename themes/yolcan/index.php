@@ -35,22 +35,6 @@ if( isset( $result['success'] ) ): ?>
 			</a>
 		</div>
 
-		<!-- <section class="[ row ]">
-			<?php
-				$video = get_page_by_title( 'Video Home' );
-				$videoContent = $video->post_content;
-				$videoURL = wp_extract_urls( $videoContent ); //https://www.youtube.com/embed/HCj_EUKAis4
-			?>
-			<div class="[ col-xs-12 ][ margin-bottom--large ]">
-				<div class="[ js-video-wrapper ]">
-					<iframe class="[ embed-responsive-item ]" src="<?php echo ( empty($videoURL[0]) ) ? 'https://www.youtube.com/embed/HCj_EUKAis4' : $videoURL[0]; ?>" frameborder="0" allowfullscreen></iframe>
-				</div>
-			</div>
-			<div class="[ col-xs-12 ]">
-				<h2 class="[ text-center ][ no-margin ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
-			</div>
-		</section> -->
-
 		<section class="[ row ]">
 
 			<?php

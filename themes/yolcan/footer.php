@@ -16,9 +16,9 @@
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg" alt="icono redes">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $whatsapp; ?></span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="mailto:contacto@yolcan.com">
+						<a class="[ social-media ][ color-light color-secondary--hover no-decoration ][ link-email ][ cursor-pointer ]">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/email.svg" alt="icono redes">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">contacto@yolcan.com</span>
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">contacto<span>@</span>yolcan.com</span>
 						</a>
 						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/yolcanmexico/">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg" alt="icono redes">
@@ -58,16 +58,20 @@
 							<p>Recibe las últimas noticias y ofertas antes que nadie, déjanos tu correo.</p>
 							<form class="[ margin-bottom ][ hidden-xs ] form-news">
 								<div class="[ form-group ]">
-									<input type="text" class="[ form-control ][ no-border-radius ][ margin-bottom--small ] mail-news">
-									<input class="[ btn btn-secondary ][ no-margin ]" type="submit" value="suscribirme">
+									<label class="[ hide ]" for="yolcan-news"></label>
+									<input id="yolcan-news" type="text" class="[ form-control ][ no-border-radius ][ margin-bottom--small ] mail-news">
+									<label class="[ hide ]" for="yolcan-news-send"></label>
+									<input id="yolcan-news-send" class="[ btn btn-secondary ][ no-margin ]" type="submit" value="suscribirme">
 								</div>
 							</form>
 						</div>
 						<!-- input inline -->
 						<div class="[ visible-xs ]">
 							<form class="[ input-group ] form-news-2">
+								<label class="[ hide ]" for="yolcan-news"></label>
 								<input type="text" class="[ form-control ][ no-border-radius ] mail-news">
 								<span class="[ input-group-btn ]">
+									<label class="[ hide ]" for="yolcan-news-send"></label>
 									<input class="[ input-search--button ][ btn btn-secondary ]" type="submit" value="suscribirme">
 								</span>
 							</form>
@@ -222,24 +226,24 @@
 									<p class="[ text-center ]">¿Te interesa crear un club de consumo? Déjanos tus datos y te contactaremos </p>
 									<form id="form-club" method="POST" class="[ text-left ]" data-parsley-validate>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Nombre</label>
-											<input type="text" name="form-crear-club-name" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
+											<label for="form-crear-club-name" class="[ sans-serif ][ no-margin ]">Nombre</label>
+											<input type="text" id="form-crear-club-name" name="form-crear-club-name" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="El nombre es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Correo</label>
-											<input type="email" name="form-crear-club-email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
+											<label for="form-crear-club-email" class="[ sans-serif ][ no-margin ]">Correo</label>
+											<input type="email" id="form-crear-club-email" name="form-crear-club-email" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type-message="La dirección de correo es inválida." data-parsley-required-message="El correo es obligatorio.">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Teléfono</label>
-											<input type="text" name="form-crear-club-telefono" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
+											<label for="form-crear-club-telefono" class="[ sans-serif ][ no-margin ]">Teléfono</label>
+											<input type="text" id="form-crear-club-telefono" name="form-crear-club-telefono" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-type="digits" data-parsley-required-message="El teléfono es obligatorio." data-parsley-type-message="Este campo debe ser númerico.">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Ubicación del club a crear</label>
-											<input type="text" name="form-crear-club-ubicacion" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
+											<label for="form-crear-club-ubicacion" class="[ sans-serif ][ no-margin ]">Ubicación del club a crear</label>
+											<input type="text" id="form-crear-club-ubicacion" name="form-crear-club-ubicacion" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-error-message="La ubicación es obligatoria.">
 										</div>
 										<div class="[ form-group ]">
-											<label class="[ sans-serif ][ no-margin ]">Mensaje</label>
-											<textarea class="[ form-control no-border-radius color-gray-xlight height-30 ]" name="form-crear-club-mensaje" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
+											<label for="form-crear-club-mensaje" class="[ sans-serif ][ no-margin ]">Mensaje</label>
+											<textarea id="form-crear-club-mensaje" name="form-crear-club-mensaje" class="[ form-control no-border-radius color-gray-xlight height-30 ]" required data-parsley-required-message="El mensaje es obligatorio."></textarea>
 										</div>
 										<div class="[ text-center ]">
 											<input type="hidden" name="action" value="form-create-club">

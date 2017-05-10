@@ -669,6 +669,12 @@
 			     $( ".box-review" ).animate({ "top": "200px" }, 200 );
 			}
 		}
+
+		$(".link-email").click(function() {
+			console.log('click');
+			$(this).attr('href', 'mailto:contacto@yolcan.com');
+		});
+
 	});
 
 })(jQuery);

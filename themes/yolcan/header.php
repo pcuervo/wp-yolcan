@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 	<head>
 		<meta charset="utf-8">
 		<title><?php print_title(); ?></title>
@@ -11,10 +11,38 @@
 		<!-- Compatibility -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="cleartype" content="on">
+
+		<!-- Facebook, Twitter metas -->
+		<meta property="og:title" content="<?php bloginfo('name'); ?>" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="<?php echo site_url(); ?>" />
+		<meta property="og:image" content="<?php echo THEMEPATH; ?>images/yolcanlogo.jpg">
+		<meta property="og:description" content="<?php bloginfo('description'); ?>" />
+		<meta name="twitter:description" content="<?php bloginfo('description'); ?>" />
+		<meta name="twitter:image" content="<?php echo THEMEPATH; ?>images/yolcanlogo.jpg" />
+		<meta name="twitter:title" content="<?php bloginfo('name'); ?>" />
+		<meta property="og:image:width" content="210" />
+		<meta property="og:image:height" content="110" />
+		<meta property="fb:app_id" content="1500307550020086" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@yolcan" />
+
+		<!-- Google+ -->
+		<link rel="publisher" href="https://plus.google.com/+yolcan">
+
+		<!-- Canonical URL -->
+		<link rel="canonical" href="<?php echo site_url(); ?>" />
+
+		<!-- Sitemap Google Verify -->
+		<meta name="google-site-verification" content="5yLQnTYKZzW5d_B60qC_FejwxvaZPfUQYRkVxnIP6ck" />
+
 		<!-- Favicon - generated with http://www.favicomatic.com/ -->
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
 		<!-- Google font(s) -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+
+		<!-- Noscript -->
+		<noscript>Tu navegador no soporta JavaScript!</noscript>
 
 		<?php wp_head(); ?>
 
