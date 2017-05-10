@@ -12,7 +12,7 @@
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg" alt="icono redes">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $telefono; ?></span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola -->
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="">
 							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg" alt="icono redes">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $whatsapp; ?></span>
 						</a>

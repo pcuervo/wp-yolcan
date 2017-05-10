@@ -15,20 +15,9 @@
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
 		<!-- Google font(s) -->
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
-		<!-- Font awesome -->
-		<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
-
-		<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
-		<!--[if lt IE 9]>
-			<script src="js/html5shiv.js"></script>
-			<script src="js/respond.min.js"></script>
-		<![endif]-->
 
 		<?php wp_head(); ?>
 
-		<!-- Typekit
-		<script src="https://use.typekit.net/upn0scl.js"></script>
-		<script>try{Typekit.load({ async: true });}catch(e){}</script>-->
 	</head>
 
 	<body>
@@ -40,14 +29,14 @@
 						<h1 class="[ no-margin-top-bottom ]">
 							<a title="Yolcan" href="<?php echo site_url('/'); ?>" id="logo">
 								<span class="[ hidden ]">Yolcan</span>
-								<img class="[ width-logo ]" alt="Yolcan" src="<?php echo THEMEPATH; ?>images/logo.svg">
+								<img class="[ width-logo ]" alt="Yolcan" src="<?php echo THEMEPATH; ?>images/logo.svg" alt="logo yolcan">
 							</a>
 						</h1>
 					</div>
 					<div class="[ col-xs-6 inherit ][ visible-xs ][ margin-top--small ][ text-right ]">
 						<div class="[ inline-block ]">
 							<a data-toggle="modal" data-target="#menu-info">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/infomation-circle.svg"  alt="icono info">
 							</a>
 							<div id="menu-info" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
@@ -55,19 +44,18 @@
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-55 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg"  alt="icono close">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
-											<ul class="[ no-padding ]">
+											<ul itemscope class="[ no-padding ]">
 												<?php if ( ! empty($user->ID) ): ?>
-													<li><a href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a></li>
+													<li itemprop="actionOption"><a href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a></li>
 												<?php else: ?>
-													<li><button data-toggle="modal" data-target="#ingresa">ingresa</button></li>
+													<li itemprop="actionOption"><button data-toggle="modal" data-target="#ingresa">ingresa</button></li>
 												<?php endif; ?>
-												<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
-												<li><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
-												<li><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
+												<li itemprop="actionOption"><a href="<?php echo site_url('/faq/'); ?>">faq</a></li>
+												<li itemprop="actionOption"><a href="<?php echo site_url('/blog/'); ?>">blog</a></li>
 											</ul>
 										</div>
 									</div>
@@ -76,23 +64,23 @@
 						</div>
 						<div class="[ inline-block relative top-3 ][ margin-left--xsmall ]">
 							<a data-toggle="modal" data-target="#main-menu">
-								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/navigation.svg">
+								<img class="[ svg ][ icon icon--iconed--large icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/navigation.svg" alt="icono navegación">
 							</a>
 							<div id="main-menu" class="[ modal fade ]" role="dialog">
 								<div class="[ modal-dialog ]">
 									<div class="[ modal-content height-auto ][ color-light ]">
 										<div class="modal-header">
 											<button type="button" class="[ close ][ relative top-23 right-14 ]" data-dismiss="modal">
-												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+												<img class="[ svg ][ icon icon--iconed--medium icon--stroke ][ color-primary ]" src="<?php echo THEMEPATH; ?>icons/close.svg" alt="icono close">
 											</button>
 										</div>
 										<div class="[ no-margin ][ modal-body ][ bg-ligth ][ padding--top--large ][ text-center ]">
-											<ul class="[ padding ]">
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--orange ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><strong>Productos</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="<?php echo site_url('/conocenos/'); ?>"><strong>Conócenos</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="<?php echo site_url('/recetas/'); ?>"><strong>Recetas</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--pink ]" href="<?php echo site_url('/visitanos/'); ?>"><strong>Visitas</strong></a></li>
-												<li><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="<?php echo site_url('/contactanos/'); ?>"><strong>Contáctanos</strong></a></li>
+											<ul class="[ padding ]" itemscope>
+												<li itemprop="actionOption"><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--orange ]" href="<?php echo site_url('/nuestros-productos/'); ?>"><strong>Productos</strong></a></li>
+												<li itemprop="actionOption"><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--green ]" href="<?php echo site_url('/conocenos/'); ?>"><strong>Conócenos</strong></a></li>
+												<li itemprop="actionOption"><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--blue ]" href="<?php echo site_url('/recetas/'); ?>"><strong>Recetas</strong></a></li>
+												<li itemprop="actionOption"><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--pink ]" href="<?php echo site_url('/visitanos/'); ?>"><strong>Visitas</strong></a></li>
+												<li itemprop="actionOption"><a class="[ margin-bottom ][ text-uppercase ][ border-bottom--secondary ]" href="<?php echo site_url('/contactanos/'); ?>"><strong>Contáctanos</strong></a></li>
 											</ul>
 										</div>
 									</div>
@@ -109,7 +97,6 @@
 						<?php endif; ?>
 
 
-						<!-- <li><a href="cuenta.html">tu suscripción</a></li> -->
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
 					</div>
