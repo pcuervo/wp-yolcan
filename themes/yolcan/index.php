@@ -9,8 +9,33 @@ if( isset( $result['success'] ) ): ?>
 
 	<div class="[ container ]">
 		<!-- video	-->
+		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
+						<a id="play-video" href="#"></a>
+					</div>
+				</div>
+			</div>
 
-		<section class="[ row ]">
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg">
+			</a>
+			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg">
+			</a>
+		</div>
+
+		<!-- <section class="[ row ]">
 			<?php
 				$video = get_page_by_title( 'Video Home' );
 				$videoContent = $video->post_content;
@@ -24,7 +49,7 @@ if( isset( $result['success'] ) ): ?>
 			<div class="[ col-xs-12 ]">
 				<h2 class="[ text-center ][ no-margin ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
 			</div>
-		</section>
+		</section> -->
 
 		<section class="[ row ]">
 
@@ -166,7 +191,9 @@ if( isset( $result['success'] ) ): ?>
 		                            'field'    => 'slug',
 		                            'terms'    => 'canastas',
 		                        ),
-		                    )
+		                    ),
+		                    'orderby' => 'date',
+	                        'order' => 'ASC'
 	                    );
                 		$productos = new WP_Query( $args );
 
@@ -200,35 +227,6 @@ if( isset( $result['success'] ) ): ?>
 	</section>
 
 	<section class="[ container ]">
-
-		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
-				</div>
-				<div class="item">
-					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
-				</div>
-				<div class="item">
-					<div class="embed-responsive embed-responsive-4by3">
-						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
-						<a id="play-video" href="#"></a>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
-				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg">
-			</a>
-			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
-				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg">
-			</a>
-		</div>
-
-
-
 
 		<div class="row">
 			<div class="[ col-xs-12 ]">
