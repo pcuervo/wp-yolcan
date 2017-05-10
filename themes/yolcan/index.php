@@ -9,8 +9,33 @@ if( isset( $result['success'] ) ): ?>
 
 	<div class="[ container ]">
 		<!-- video	-->
+		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
+				</div>
+				<div class="item">
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
+						<a id="play-video" href="#"></a>
+					</div>
+				</div>
+			</div>
 
-		<section class="[ row ]">
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg" alt="icono izquierda">
+			</a>
+			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
+				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg" alt="derecha">
+			</a>
+		</div>
+
+		<!-- <section class="[ row ]">
 			<?php
 				$video = get_page_by_title( 'Video Home' );
 				$videoContent = $video->post_content;
@@ -24,7 +49,7 @@ if( isset( $result['success'] ) ): ?>
 			<div class="[ col-xs-12 ]">
 				<h2 class="[ text-center ][ no-margin ][ ff-bree-serif ]"><em>Calidad de origen chinampero</em></h2>
 			</div>
-		</section>
+		</section> -->
 
 		<section class="[ row ]">
 
@@ -131,7 +156,7 @@ if( isset( $result['success'] ) ): ?>
 			<div class="[ row ]">
 				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--xlarge ]">
 					<div class="[ text-center ]">
-						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/tool-gardening.svg"  alt="icono jardinería">
 						<h3 class="[ color-secondary ]">Escoge el club más cercano</h3>
 					</div>
 					<div class="[ margin-bottom--large ][ text-center ]">
@@ -153,7 +178,7 @@ if( isset( $result['success'] ) ): ?>
 				</div>
 				<div class="[ col-xs-12 col-sm-6 ][ text-center ]">
 					<div class="">
-						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/basket.svg"  alt="icono canasta">
 						<h3 class="[ color-secondary ]">Escoge el tamaño de tu canasta</h3>
 					</div>
 					<div class="[ row ]">
@@ -166,7 +191,9 @@ if( isset( $result['success'] ) ): ?>
 		                            'field'    => 'slug',
 		                            'terms'    => 'canastas',
 		                        ),
-		                    )
+		                    ),
+		                    'orderby' => 'date',
+	                        'order' => 'ASC'
 	                    );
                 		$productos = new WP_Query( $args );
 
@@ -190,7 +217,7 @@ if( isset( $result['success'] ) ): ?>
 				</div>
 				<div class="[ col-xs-12 col-sm-3 ][ margin-bottom--large ]">
 					<div class="[ text-center ]">
-						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg">
+						<img class="[ margin-bottom--large ][ svg ][ icon icon--iconed--xxxlarge icon--stroke icon--thickness-1 ][ color-secondary ]" src="<?php echo THEMEPATH; ?>icons/box-1.svg"  alt="icono caja">
 						<h3 class="[ color-secondary ]">Recoge tu canasta y disfruta</h3>
 						<a  href="<?php echo site_url('/nuestros-productos/'); ?>" ><button class="[ btn btn-secondary ]">comprar ahora</button></a>
 					</div>
@@ -200,35 +227,6 @@ if( isset( $result['success'] ) ): ?>
 	</section>
 
 	<section class="[ container ]">
-
-		<div id="home-slider" class="carousel slide [ margin-bottom--large margin-top ]" data-ride="carousel" >
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<img src="<?php echo THEMEPATH; ?>images/4.jpeg" alt="imagen slider">
-				</div>
-				<div class="item">
-					<img src="<?php echo THEMEPATH; ?>images/2.jpg" alt="imagen slider">
-				</div>
-				<div class="item">
-					<div class="embed-responsive embed-responsive-4by3">
-						<iframe id="video-slider" src="//www.youtube.com/embed/HCj_EUKAis4?rel=0" frameborder="0" allowfullscreen></iframe>
-						<a id="play-video" href="#"></a>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- Left and right controls -->
-			<a class="left carousel-control" href="#home-slider" role="button" data-slide="prev">
-				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-left-12.svg">
-			</a>
-			<a class="right carousel-control" href="#home-slider" role="button" data-slide="next">
-				<img class="[ svg ][ icon icon--iconed icon--stroke icon--thickness-3 ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/arrow-right-12.svg">
-			</a>
-		</div>
-
-
-
 
 		<div class="row">
 			<div class="[ col-xs-12 ]">
@@ -240,7 +238,7 @@ if( isset( $result['success'] ) ): ?>
 					if (!empty($feed)):
 						foreach ($feed as $key => $data): ?>
 							<div class="[ col-sm-3 ]">
-								<img src="<?php echo $data['media']; ?>" alt="" class="img-thumbnail">
+								<img src="<?php echo $data['media']; ?>" alt="imagen destacada" class="img-thumbnail">
 								<p class="autor">Por: <?php echo $data['user_name']; ?></p>
 								<p><?php echo $data['text']; ?></p>
 							</div>
@@ -305,7 +303,7 @@ if( isset( $result['success'] ) ): ?>
 
 						<div class="[ col-xs-12 col-md-3 ][ margin-bottom ]">
 							<div class="[ text-center ]">
-								<img class="[ margin-top ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>">
+								<img class="[ margin-top ][ icon--stroke icon--iconed--xxxlarge icon--thickness-1 ][ color-light ]" src="<?php echo $url_img; ?>" alt="imagen destacada">
 								<h3 class="[ text-center fz-large ][ margin-top-bottom--xsmall ]"><i><?php the_title(); ?></i></h3>
 							</div>
 							<?php the_content(); ?>

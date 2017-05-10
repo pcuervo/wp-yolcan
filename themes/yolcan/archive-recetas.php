@@ -46,17 +46,16 @@
 				<div class="[ filter-ingredientes ]">
 					<h4><a class="[ text-center ]" data-filter="ingredientes">Ingredientes</a></h4>
 					<div class="[ row ] filters-ingredientes">
-						<?php $ingredientes = new WP_Query( array('posts_per_page' => -1, 'post_type' => array( 'ingredientes' ) ) );
+						<?php $ingredientes = getIngredientesRecetas();
 
-						if ( $ingredientes->have_posts() ) :
-							while ( $ingredientes->have_posts() ) :
-								$ingredientes->the_post(); ?>
+						if ( !empty($ingredientes) ) :
+							foreach ($ingredientes as $key => $ingrediente): ?>
 
 								<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
-									<input type="checkbox" class="" id="c<?php echo get_the_ID(); ?>" name="cc">
-									<label for="c<?php echo get_the_ID(); ?>" class="filter-ingrediente" data-filter=".ingrediente-<?php echo get_the_ID(); ?>"><span></span><?php echo the_title(); ?>  </label>
+									<input type="checkbox" class="" id="c<?php echo $ingrediente->ID; ?>" name="cc">
+									<label for="c<?php echo $ingrediente->ID; ?>" class="filter-ingrediente" data-filter=".ingrediente-<?php echo $ingrediente->ID; ?>"><span></span><?php echo get_the_title($ingrediente->ID); ?>  </label>
 								</div>
-							<?php endwhile;
+							<?php endforeach;
 						endif; ?>
 						
 					</div>

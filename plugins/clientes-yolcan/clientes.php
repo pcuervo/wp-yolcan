@@ -64,12 +64,20 @@ if (isset($_GET['page']) AND $_GET['page'] == 'cliente'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("cliente", "Cliente", "cliente");' ) );
 }
 
+if (isset($_GET['page']) AND $_GET['page'] == 'cliente_no_activo'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("clienteNoActivo", "Cliente no activo", "cliente_no_activo");' ) );
+}
+
 if (isset($_GET['page']) AND $_GET['page'] == 'editar_cliente'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("editarCliente", "Editar cliente", "editar_cliente");' ) );
 }
 
 if (isset($_GET['page']) AND $_GET['page'] == 'update_cliente'){
 	add_action( 'admin_menu', create_function( '', 'ClientesController::index("updateCliente", "Update cliente", "update_cliente");' ) );
+}
+
+if (isset($_GET['page']) AND $_GET['page'] == 'update_cliente_no_activo'){
+	add_action( 'admin_menu', create_function( '', 'ClientesController::index("updateClienteNoActivo", "Update cliente no activo", "update_cliente_no_activo");' ) );
 }
 
 if (isset($_GET['page']) AND $_GET['page'] == 'reanudar_entrega'){

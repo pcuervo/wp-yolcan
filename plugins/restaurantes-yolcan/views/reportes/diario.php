@@ -37,10 +37,14 @@
 	                			$unidad = isset($terms[0]) ? $terms[0]->name : ''; ?>
 								<div class="ingrediente">
 									<div class="cantidad"><?php echo $ingrediente['cantidad']; ?> <strong><?php echo $unidad ?></strong></div>
-									<div class="nombre"><strong><?php echo get_the_title($ingrediente['id']); ?></strong></div>
+									<div class="nombre"><strong><?php echo get_the_title($ingrediente['id']); ?> ($<?php echo $ingrediente['costo']; ?>)</strong></div>
 								</div>
 							<?php endforeach;
 						endif;  ?>
+						<br>
+						<p class="total-corte">
+							Total del corte: $<?php echo $restaurante->total_corte; ?>
+						</p>
 					</div>
 				<?php endforeach;
 				echo '</div>';

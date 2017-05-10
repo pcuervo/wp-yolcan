@@ -44,6 +44,7 @@ add_action('init', function() use (&$wpdb){
 			club_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			actualizacion_id bigint(20) unsigned NOT NULL DEFAULT '0',
 			canasta_id bigint(20) unsigned NOT NULL DEFAULT '0',
+			canasta_id_real bigint(20) unsigned NOT NULL DEFAULT '0',
 			adicionales longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
 			fecha_corte date NOT NULL DEFAULT '0000-00-00',
 			UNIQUE KEY `id` (`id`)
@@ -353,7 +354,8 @@ function saveCanastaAlCorteCliente($data){
 			'adicionales' => $adicionales,
 			'fecha_corte' => $fecha_corte,
 			'actualizacion_id' => $actualizacion_id,
-			'canasta_id' => $canasta_id
+			'canasta_id' => $canasta_id,
+			'canasta_id_real' => $canasta_id_real
 		),
 		array(
 			'%d',
@@ -363,6 +365,7 @@ function saveCanastaAlCorteCliente($data){
 			'%d',
 			'%s',
 			'%s',
+			'%d',
 			'%d',
 			'%d'
 		)

@@ -22,7 +22,11 @@
 					$firstName = get_user_meta($user->ID, 'first_name', true);
                     $lastName = get_user_meta($user->ID, 'last_name', true); ?>
 					<tr>
-						<td> <?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?></td>
+						<td> 
+							<a href="<?php echo admin_url().'admin.php?page=cliente_no_activo&id_cliente='.$cliente->cliente_id; ?>">
+								<?php echo $firstName != '' ? $firstName.' '.$lastName : $user->user_login; ?>
+							</a>
+						</td>
 						<td><?php echo $user->user_email; ?></td>
 					</tr>
 				<?php endforeach;

@@ -8,29 +8,29 @@
 						<?php $contactanos = get_page_by_path('contactanos');
 						$telefono = get_post_meta($contactanos->ID, 'telefono_c', true);
 						$whatsapp = get_post_meta($contactanos->ID, 'whatsapp_c', true);?>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]"  href="tel:+525552555555">
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $telefono; ?></span>
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="tel:+<?php echo $telefono; ?>5">
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/phone-5.svg" alt="icono redes">
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $telefono; ?></span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola --><!-- href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share" -->
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]"><?php echo $whatsapp; ?></span>
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href=""><!-- whatsapp://send?abid=username&text=Hola -->
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-whatsapp.svg" alt="icono redes">
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ][ color-light ]"><?php echo $whatsapp; ?></span>
 						</a>
 						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="mailto:contacto@yolcan.com">
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/email.svg">
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/email.svg" alt="icono redes">
 							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">contacto@yolcan.com</span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/Yolcan-190099034343351/">
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">/yolcan</span>
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.facebook.com/yolcanmexico/">
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg" alt="icono redes">
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">/yolcanmexico</span>
 						</a>
 						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://twitter.com/michinampa">
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/twitter.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/twitter.svg" alt="icono redes">
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@michinampa</span>
 						</a>
-						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan/">
-							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg">
-							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan</span>
+						<a target="_blank" class="[ social-media ][ color-light color-secondary--hover no-decoration ]" href="https://www.instagram.com/yolcan_mx/">
+							<img class="[ svg icon icon--iconed--xlarge icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/logo-instagram.svg" alt="icono redes">
+							<span class="[ hidden-xs ][ margin-left--small ][ inline-block align-middle ]">@yolcan_mx</span>
 						</a>
 					</article>
 					<article class="[ col-sm-4 col-md-3 ]">
@@ -45,10 +45,12 @@
 					<article class="[ col-sm-2 col-md-3 ]">
 						<h3><em>Métodos de pago</em></h3>
 						<div class="[ row ]">
-							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/visa.svg" alt="">
-							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/paypal.svg" alt="">
-							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/mastercard.svg" alt="">
+							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/visa.svg" alt="método de pago">
+							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/paypal.svg" alt="método de pago">
+							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/mastercard.svg" alt="método de pago">
 						</div>
+						<br />
+						<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=lBl12PcwCPqUVcodhdKf44j7WEgn1JdmzpFG9BANtnEgldPt5VzwCTknfCtJ"></script></span>
 					</article>
 					<article class="[ col-sm-3 ]">
 						<h3><em>Newsletter</em></h3>
@@ -72,7 +74,7 @@
 						</div>
 					</article>
 				</section>
-				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved.</p>
+				<p class="[ color-gray-xlight ][ text-center ]">Yolcan 2017. Todos los derechos reservados | <a class="[ color-light ]" href="<?php echo site_url('/aviso-de-privacidad/') ?>">Aviso de Privacidad</a></p>
 			</div>
 		</footer>
 	</div><!-- end main -->
@@ -85,7 +87,7 @@
 
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom--large ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg" alt="icono close">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
@@ -123,7 +125,7 @@
 									<div class="[ text-center ]">
 										<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
 										<button type="submit" class="bt-login-fb [ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
-											<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
+											<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg" alt="icono redes">
 											<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
 										</button>
 									</div>
@@ -144,7 +146,7 @@
 					<div class="[ modal-body ][ color-light ]">
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg"  alt="icono close">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 ]">
@@ -174,7 +176,7 @@
 									<div class="[ text-center ]">
 										<p class="[ small sans-serif  ][ color-light ][ inline-block align-middle no-margin ]">Ingresa con</p>
 										<button type="submit" class="bt-login-fb [ btn btn-facebook ][ inline-block align-middle margin-left--small ]">
-											<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg">
+											<img class="[ svg icon icon--iconed--normal icon--thickness-3 icon--fill ][ color-light ]" src="<?php echo THEMEPATH; ?>icons/facebook.svg"  alt="icono redes">
 											<span class="[ color-light ][ inline-block align-middle ]">Facebook</span>
 										</button>
 									</div>
@@ -193,7 +195,7 @@
 				<div class="[ modal-content ]">
 					<div class="[ modal-body modal--horizontal ][ bg-light ][ padding--top-bottom--xxlarge ][ color-light ]">
 						<button type="button" class="[ close ][ pull-right relative left--20 z-index--100 ]" data-dismiss="modal">
-							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+							<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg"  alt="icono close">
 						</button>
 						<div id="content-ingredientes-canasta">
 
@@ -212,7 +214,7 @@
 					<div class="[ modal-body ][ color-light ]">
 						<div class="[ bg-primary-darken width-bg margin-auto ][ padding--top-bottom ]">
 							<button type="button" class="[ close ][ pull-right relative left--20 z-index--100   ]" data-dismiss="modal">
-								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg">
+								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg"  alt="icono close">
 							</button>
 							<div class="[ row ]">
 								<div class="[ col-xs-10 col-xs-offset-1 ]">

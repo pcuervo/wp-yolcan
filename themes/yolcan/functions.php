@@ -213,9 +213,9 @@ function wc_login_redirect( $redirect_to ) {
 
 add_action( 'wp_login_failed', 'my_login_fail' );  // hook failed login
 function my_login_fail( $username ) {
-	
+
     //redirect to custom login page and append login error flag
-    wp_redirect("?login_error" );  
+    wp_redirect("?login_error" );
     exit;
 }
 
@@ -753,7 +753,7 @@ function call_restaurant($order_id) {
 			$club = get_user_meta($user_id,  'club_proximo', true );
 			getClientUpdateClub($user_id, $club);
 			$opCliente = getOpcionesCliente($user_id);
-			
+
 			if ($item['variation_id'] == 0) {
 				$saldoAbonar = isset($item['line_total']) ? $item['line_total'] : 0;
 				$variationId = isset($opCliente->producto_id) ? $opCliente->producto_id : 0;
@@ -765,7 +765,7 @@ function call_restaurant($order_id) {
 				$costoSemanal = getCostoVariationID($item['variation_id']);
 				$costoSemanal = $costoSemanal->costoSemanal;
 			}
-			
+
 	    	if (!empty($opCliente)) {
 	    		$total = $saldoAbonar + $opCliente->saldo;
 	    		updateOpcionesCliente($club, $variationId, $total, $costoSemanal, $user_id);
@@ -828,4 +828,16 @@ function save_variation_settings_fields( $post_id ) {
 		update_post_meta( $post_id, '_semanas_field', esc_attr( $saldo_abonar ) );
 	}
 
+}
+
+/**
+ * Analytics - Meta robots
+*/
+remove_action('wp_head','noindex',1);
+
+add_action('wp_head', 'my_no_follow', 1);
+function my_no_follow() {
+    if ( '0' == get_option('blog_public') ) {
+        echo "<meta name='robots' content='index,follow' />\n";
+    }
 }
