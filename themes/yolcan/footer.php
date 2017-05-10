@@ -49,6 +49,8 @@
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/paypal.svg" alt="">
 							<img class="[ icon icon--iconed--xxxlarge ][ margin-sides--small ]" src="<?php echo THEMEPATH; ?>icons/mastercard.svg" alt="">
 						</div>
+						<br />
+						<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=lBl12PcwCPqUVcodhdKf44j7WEgn1JdmzpFG9BANtnEgldPt5VzwCTknfCtJ"></script></span>
 					</article>
 					<article class="[ col-sm-3 ]">
 						<h3><em>Newsletter</em></h3>
@@ -72,7 +74,7 @@
 						</div>
 					</article>
 				</section>
-				<p class="[ color-gray-xlight ][ text-center ]">Content copyright 2015. Yolcan. All right reserved. | <a href="<?php echo site_url('/aviso-de-privacidad/') ?>">Aviso de Privacidad</a></p>
+				<p class="[ color-gray-xlight ][ text-center ]">Yolcan 2017. Todos los derechos reservados | <a class="[ color-light ]" href="<?php echo site_url('/aviso-de-privacidad/') ?>">Aviso de Privacidad</a></p>
 			</div>
 		</footer>
 	</div><!-- end main -->
