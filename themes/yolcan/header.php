@@ -39,7 +39,7 @@
 		<!-- Favicon - generated with http://www.favicomatic.com/ -->
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
 		<!-- Google font(s) -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
 		
 		<!-- Noscript -->
 		<noscript>Tu navegador no soporta JavaScript!</noscript>
