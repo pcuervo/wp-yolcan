@@ -71,7 +71,8 @@ the_post(); ?>
                                                     Entregas semanales durante:
                                             </div>
                                             <?php if (!empty($variations)):
-                                            $count = 1;
+                                                $variations = getOrderVariations($variations);
+                                                $count = 1;
                                                 foreach($variations as $variation):
                                                     $name = getNameOriginVariation($variation['variation_id']);
                                                     $check = $count == 1 ? 'checked' : '';

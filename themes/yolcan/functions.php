@@ -374,6 +374,18 @@ function setAgendaVisita($data){
 }
 
 /**
+ * ORDER VARIATIONS
+ */
+function getOrderVariations($variations){
+	$newArr = [];
+	foreach ($variations as $key => $variation) {
+		$newArr[$variation['display_price']] = $variation;
+	}
+	ksort($newArr);
+	return $newArr;
+}
+
+/**
  * FORM CREAR CLUB
  */
 function setCrearClub($data){
