@@ -44,10 +44,9 @@ if( isset( $result['success'] ) ): ?>
 					$latitud_contacto = get_post_meta($post->ID, 'latitud_contacto', true);
 					$longitud_contacto = get_post_meta($post->ID, 'longitud_contacto', true);
 					$direccion_contacto = get_post_meta($post->ID, 'direccion_contacto', true);
-
-					echo $direccion_contacto;
+					echo '<p>'.$direccion_contacto.'</p>';
 					?>
-					<iframe width="100%" height="215px" frameborder="0" style="border:0" allowfullscreen src="https://maps.google.com/maps?q=<?php echo $latitud_contacto ?>,<?php echo $longitud_contacto ?>&hl=es;z=14&amp;output=embed"></iframe>
+					<iframe width="100%" height="320" frameborder="0" style="border:0" allowfullscreen src="https://maps.google.com/maps?q=<?php echo $latitud_contacto ?>,<?php echo $longitud_contacto ?>&hl=es;z=14&amp;output=embed"></iframe>
 				</div>
 			</article>
 		</div>

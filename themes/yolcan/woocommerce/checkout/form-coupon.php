@@ -28,9 +28,9 @@ if ( ! WC()->cart->applied_coupons ) {
     wc_print_notice( $info_message, 'notice' );
 }
 ?>
-<div class="[ container padding--sides--xsm ]">
+<div class="[ container padding--sides--xsm ][ margin-bottom--small ]">
 	<div class="[ row ]">
-		<div class="[ col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 ]">
+		<div class="[ col-xs-12 ]">
 			<form class="checkout_coupon" method="post" style="display:none">
 
 				<p class="form-row form-row-first">

@@ -27,7 +27,7 @@ if ( ! $messages ){
 
 <?php foreach ( $messages as $message ) : ?>
 	<div class=" [ container ]">
-		<div class="woocommerce-info [ no-padding fz-16 align-top no-border bg-light ][ no-margin ]">
+		<div class="woocommerce-info [ fz-16 align-top no-border bg-light ][ no-margin ]">
 			<img class="[ inline-block align-middle ][ svg ][ icon icon--iconed--large icon--fill ][ color-secondary ][ margin-right ]" src="<?php echo THEMEPATH; ?>icons/coupon-discount.svg">
 			<div class="[ inline-block align-middle ]"><?php echo wp_kses_post( $message ); ?></div>
 		</div>

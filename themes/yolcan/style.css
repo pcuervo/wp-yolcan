@@ -3339,6 +3339,18 @@ input[name=suspension] {
 .bg-primary-darken form.login .parsley-required {
   color: #3ac6b1;
 }
+.woocommerce form.checkout_coupon {
+  padding: 0;
+  border: none;
+  margin: 1em 0;
+}
+.woocommerce form.checkout_coupon input {
+  width: 100%;
+  height: 40px;
+}
+.woocommerce form .form-row .required {
+  text-decoration: none;
+}
 .btn {
   display: inline-block;
   font-family: "proxima-nova", sans-serif;
@@ -7589,6 +7601,9 @@ a:hover {
 }
 .bg-primary-darken {
   background-color: #272c28;
+}
+.bg-primary-lighten {
+  background-color: #e0f0de;
 }
 .bg-secondary {
   background-color: #3ac6b1;

@@ -11,7 +11,7 @@
 						 	$url_img = attachment_image_url($post->ID, 'medium');
 						 	$open = $count == 1 ? 'in' : ''; ?>
 							<div class="[ margin-bottom ]">
-								<a data-toggle="collapse" href="#collapse<?php echo $count; ?>" class="[ no-decoration ][ color-dark ]"><h5 class="[ no-margin ][ color-primary-darken--hover ]"><span class="[ color-primary ]"><strong><?php echo $count; ?>.</strong></span><?php the_title(); ?></h5></a>
+								<a data-toggle="collapse" href="#collapse<?php echo $count; ?>" class="[ no-decoration ][ color-dark ]"><h3 class="[ no-margin ][ color-primary-darken--hover ]"><span class="[ color-primary ]"><strong><?php echo $count; ?>.</strong></span><?php the_title(); ?></h3></a>
 								<div id="collapse<?php echo $count; ?>" class="[ panel-collapse collapse <?php echo $open; ?> ][ padding--top--small ]"><?php the_content(); ?></div>
 							</div>
 							<?php $count++;

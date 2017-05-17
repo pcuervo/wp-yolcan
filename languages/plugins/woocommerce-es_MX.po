@@ -1891,7 +1891,7 @@ msgstr "Recordarme"
 
 #: templates/global/form-login.php:54 templates/myaccount/form-login.php:61
 msgid "Lost your password?"
-msgstr "¿Olvidaste la contraseña?"
+msgstr "¿Olvidaste tu contraseña?"
 
 #: templates/loop/no-products-found.php:23
 msgid "No products were found matching your selection."

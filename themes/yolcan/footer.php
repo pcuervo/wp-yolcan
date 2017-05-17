@@ -39,7 +39,7 @@
 							<?php if ( ! is_user_logged_in() ){ ?>
 								<span data-toggle="modal" data-target="#unete" class="[ cursor-pointer ][ inline-block align-middle ][ btn btn-secondary margin-top--small ]">registrate</span>
 							<?php } ?>
-							<span href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ cursor-pointer ][ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</span>
+							<a href="<?php echo site_url('/visitanos/'); ?>#agenda" class="[ cursor-pointer ][ inline-block align-middle ][ btn btn-secondary ][ margin-top--small ]">agenda una cita</a>
 						</div>
 					</article>
 					<article class="[ col-sm-2 col-md-3 ]">
@@ -94,7 +94,7 @@
 								<img class="[ svg ][ icon icon--iconed--normal icon--stroke icon--thickness-2 ][ color-secondary ][ absolute right-25 ]" src="<?php echo THEMEPATH; ?>icons/close.svg" alt="icono close">
 							</button>
 							<div class="[ row ]">
-								<div class="[ col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 ]">
+								<div class="[ col-xs-10 col-xs-offset-1 ]">
 									<h2 class="[ text-center ][ no-margin--top ]">¡Bienvenido!</h2>
 									<p class="[ text-center ]">Ingresa en tu cuenta de <span class=" [ text-uppercase ]">yolcan</span></p>
 									<?php if(isset($_GET['login_error'])): ?>
@@ -203,9 +203,7 @@
 						</button>
 						<div id="content-ingredientes-canasta">
 
-
 						</div>
-
 					</div><!-- end modal-body -->
 				</div><!-- end modal-content -->
 			</div><!-- end modal-dialog -->

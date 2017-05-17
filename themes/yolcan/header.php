@@ -38,12 +38,13 @@
 
 		<!-- Favicon - generated with http://www.favicomatic.com/ -->
 		<link rel="shortcut icon" href="<?php echo THEMEPATH; ?>images/favicon.ico">
-		<!-- Google font(s) -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
-		
+
+		<script src="https://use.typekit.net/upn0scl.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 		<!-- Noscript -->
 		<noscript>Tu navegador no soporta JavaScript!</noscript>
- 
+
 		<?php wp_head(); ?>
 
 	</head>
@@ -79,6 +80,7 @@
 											<ul itemscope class="[ no-padding ]">
 												<?php if ( ! empty($user->ID) ): ?>
 													<li itemprop="actionOption"><a href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a></li>
+													<li itemprop="actionOption"><a href="<?php echo site_url('mi-carrito') ?>">mi carrito</a></li>
 												<?php else: ?>
 													<li itemprop="actionOption"><button data-toggle="modal" data-target="#ingresa">ingresa</button></li>
 												<?php endif; ?>
@@ -120,11 +122,10 @@
 					<div class="[ pull-right ][ hidden-xs ][ margin-top ][ padding--sides--xsmall ]">
 						<?php if ( ! empty($user->ID) ): ?>
 							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-cuenta') ?>">mi cuenta</a>
+							<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('mi-carrito') ?>">mi carrito</a>
 						<?php else: ?>
 							<span class="[ color-primary-darken ][ info-menu ][ cursor-pointer ]" data-toggle="modal" data-target="#ingresa">ingresa</span>
 						<?php endif; ?>
-
-
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/faq/'); ?>">faq</a>
 						<a class="[ color-primary-darken ][ info-menu ]" href="<?php echo site_url('/blog/'); ?>">blog</a>
 					</div>
