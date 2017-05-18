@@ -32,26 +32,26 @@ function setNuevoCliente($data){
 			$wp_user = get_user_by( 'id', $user_id );
 			$wp_user->set_role( 'customer' );
 		    wp_set_current_user($user_id);
-		    wp_set_auth_cookie($user_id); 
+		    wp_set_auth_cookie($user_id);
 		    wp_safe_redirect( site_url('/nuestros-productos') );
    			exit();
 		}
 
 	}elseif(username_exists( $nombreCliente )) {
-		$procesoRegistro['error'] = 'El nombre '.$nombreCliente.' ya esta en uso';
+		$procesoRegistro['error'] = 'El nombre '.$nombreCliente.' ya está en uso';
 	}elseif( email_exists($emailCliente) ){
-		$procesoRegistro['error'] = 'El email '.$emailCliente.' ya esta en uso';
+		$procesoRegistro['error'] = 'El email '.$emailCliente.' ya está en uso';
 	}
 }
 
-/**	
+/**
  * ACTUALIZA LOS INGREDIENTES ADICIONALES DEL CLIENTE
  */
 function setIngredienteAdicional($data){
 	global $current_user;
 	$adicionales = getIngredientesAdicionales($current_user->ID);
 	if ($adicionales == '') return storeIngredientesAdicionales($current_user->ID, $data);
-	
+
 	editIngredientesAdicionales($current_user->ID, $data, $adicionales);
 
 	$url = site_url().'/mi-cuenta/#productos-canasta';
@@ -160,7 +160,7 @@ function saveClubCliente($clubId, $clienteID = '', $url_return = ''){
 	$clienteID = $clienteID == '' ? $current_user->ID : $clienteID;
 	$url_return = $url_return == '' ? site_url('/mi-cuenta') : $url_return;
 	$opCliente = getOpcionesCliente($clienteID);
-	
+
 	if (!empty($opCliente)) {
 		getClientUpdateClub($clienteID, $clubId);
 		updateOpcionesCliente($clubId, $opCliente->producto_id, $opCliente->saldo, $opCliente->costo_semanal_canasta, $clienteID);
@@ -170,7 +170,7 @@ function saveClubCliente($clubId, $clienteID = '', $url_return = ''){
 	exit;
 }
 
-/**	
+/**
  * REGRESA UN ARREGLO CON LOS CLUBES
  * @return [type] [description]
  */
@@ -180,7 +180,7 @@ function clubesDeConsumo(){
 	if (!empty($clubes)) {
 		foreach ($clubes as $key => $club) {
 			$capacidad_del_club = get_post_meta($club->ID, 'capacidad-del-club', true);
-			$cupo_actual = get_post_meta($club->ID, 'cupo-actual', true); 
+			$cupo_actual = get_post_meta($club->ID, 'cupo-actual', true);
             $cupo_actual = $cupo_actual != '' ? $cupo_actual : 0;
             if ($cupo_actual < $capacidad_del_club){
 				$newArr[$club->ID] = $club->post_title;
@@ -213,10 +213,10 @@ function getClubAndCanasta(){
 	}else{
 		$clubCanasta = (object) [];
 	}
-	
+
 }
 
-/**	
+/**
  * REGRESA EL ID DE LA CANASTA A UTILIZAR
  * @param  [int] $clubId   [id del club]
  * @param  [int] $producto [id del producto]
@@ -232,7 +232,7 @@ function getIdCanastaClube($clubId, $producto){
 	return $clubId.$producto;
 }
 
-/**	
+/**
  * REGRESA EL ID DE LA AaCTUALIZACION SEGUN LA CANASTA
  * @param  [int] $clubId   [id del club]
  * @param  [int] $producto [id del producto]
@@ -301,16 +301,16 @@ function suspenderCanastaTemporal($data, $clientId){
 
 		$fechaProximoCobro = getFechaProximoCobro($proximo_viernes, $suspension);
 		$fecha_fin = getFechaFinSuspension($fechaProximoCobro);
-	
+
 		$idSuspension = updateSuspensionCanasta($clientId, $suspension, $fecha_inicio, $fecha_fin, $fechaProximoCobro);
 
 		updateSuspensionOpcionesCliente($clientId, $idSuspension);
 	}
-	
+
 }
 
 
-/**	
+/**
  * SUSPENDE LA ENTREGA Y CORTE HASTA DESPUES DE LA FECHA INDICADA
  */
 function suspenderCanastaTemporalFecha($clientId, $data){
@@ -332,15 +332,15 @@ function dateDifference($date_1 , $date_2 , $differenceFormat = '%a' )
 {
     $datetime1 = date_create($date_1);
     $datetime2 = date_create($date_2);
-   
+
     $interval = date_diff($datetime1, $datetime2);
 
    	$dias = $interval->format($differenceFormat);
     return $dias / 7;
-   
+
 }
 
-/**	
+/**
  * REGRESA LA FECHA PROXIMO COBRO
  * @param  [date] $proximo_viernes [inicio suspencion]
  * @param  [int] $tiempoSuspension      [semans de suspencion]
@@ -351,7 +351,7 @@ function getFechaProximoCobro($proximo_viernes, $tiempoSuspension = 1){
 	return $fechaCobro;
 }
 
-/**	
+/**
  * REGRESA LA FECHA FIN DE LA SUSPENCION
  * @param  [date] $proximo_viernes [inicio suspencion]
  * @param  [int] $tiempoSuspension      [semans de suspencion]
@@ -363,7 +363,7 @@ function getFechaFinSuspension($proximo_cobro){
 }
 
 
-/**	
+/**
  * REGRESA UN ARREGLO CON LA INFORMACION DE LA SUSPENCION
  * @param  [type] $clineteId [description]
  * @return [type]            [description]
@@ -384,7 +384,7 @@ function reanudarCanasta($clienteId){
 	updateSuspensionOpcionesCliente($clienteId, 0, 0);
 }
 
-/**	
+/**
  * COSTO SEMANAL DE LA CANASTA SEGUN LA TEMPORALIDAD
  * @param  [int] $temporalidad [temporalidad de la compra]
  * @param  [int] $costo        [costo de la canasta]
@@ -441,7 +441,7 @@ function getClientUpdateClub($clienteId, $club_nuevo){
 		$crece_a = $cupo_actual + 1;
 		update_post_meta($club_nuevo, 'cupo-actual', $crece_a);
 	}elseif($club_actual != $club_nuevo){
-		
+
 		$cupo_actual = get_post_meta( $club_actual, 'cupo-actual', true );
 		$disminuye_a = $cupo_actual - 1;
 		update_post_meta($club_actual, 'cupo-actual', $disminuye_a);
@@ -475,7 +475,7 @@ function ajax_info_yolcan_fb_login(){
 			wp_set_current_user( $wpUser->ID );
 			wp_send_json('creado');
 		}
-		
+
   	}else{
 		$user_id = wp_create_user( $nombreCliente, $passwordCliente, $emailCliente );
 		if(!is_wp_error($user_id)){
@@ -486,9 +486,9 @@ function ajax_info_yolcan_fb_login(){
 		    wp_send_json('creado');
 		}
 		 wp_send_json($user_id);
-		
+
 	}
-	
+
 
 	wp_send_json('error');
 

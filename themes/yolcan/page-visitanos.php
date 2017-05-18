@@ -10,7 +10,7 @@ if( isset( $result['success'] ) ): ?>
 <?php endif;  ?>
 
 	<section class="[ container ]">
-		<h1 class="[ h2 text-center ]"><?php the_title(); ?></h1>
+		<h1 class="[ h2 text-center ]">Visítanos</h1>
 		<h3 class="[ text-center ]"><em>Vive la experiencia chinampera</em></h3>
 		<div class="[ user-content--visitas ]">
 			<?php

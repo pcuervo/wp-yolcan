@@ -83,6 +83,7 @@
 				#ON LOAD
 			\*------------------------------------*/
 			runMasonry('.results', '.result' );
+			runMasonry('.filters-ingredientes', '.js-filtro-ingrediente' );
 			setHeaderHeightPadding('.main-wrapper', 'top');
 
 			/*------------------------------------*\

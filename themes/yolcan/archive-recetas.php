@@ -50,14 +50,13 @@
 
 						if ( !empty($ingredientes) ) :
 							foreach ($ingredientes as $key => $ingrediente): ?>
-
-								<div class="[ col-xs-4 col-sm-3 col-md-6 ]">
+								<div class="[ col-xs-4 col-sm-3 col-md-6 ][ js-filtro-ingrediente ]">
 									<input type="checkbox" class="" id="c<?php echo $ingrediente->ID; ?>" name="cc">
 									<label for="c<?php echo $ingrediente->ID; ?>" class="filter-ingrediente" data-filter=".ingrediente-<?php echo $ingrediente->ID; ?>"><span></span><?php echo get_the_title($ingrediente->ID); ?>  </label>
 								</div>
 							<?php endforeach;
 						endif; ?>
-						
+
 					</div>
 				</div><!-- .filter-colecciones -->
 				<!-- <div class="[ filter-temporada ]">
