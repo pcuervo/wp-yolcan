@@ -8,7 +8,7 @@ require_once('MCAPI.class.php');
 function ajax_mail_send_newsletter(){
 
 	$email = isset($_POST['email']) ? $_POST['email'] : '';
-	$apikey = '148b26f8172e2d50df928c4eca4b46aa-us12';
+	$apikey = MAILCHIMP_API_KEY;
 	$listId = 'da8c08262c';
 
 	$apiUrl = 'http://api.mailchimp.com/1.3/';
